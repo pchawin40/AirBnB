@@ -21,7 +21,15 @@ const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Please provide a valid email.'),
+    .withMessage('Invalid email'),
+  // check first name is valid
+  check('firstName')
+    .exists({ checkFalsy: true })
+    .withMessage('First Name is required'),
+  // check last name is valid
+  check('lastName')
+    .exists({ checkFalsy: true })
+    .withMessage('Last Name is required'),
   // check that password is 6 characters or more
   check('password')
     .exists({ checkFalsy: true })
@@ -32,20 +40,38 @@ const validateSignup = [
 
 // TODO: POST router to sign up user and return JSON response with user information
 // Sign up
-router.post('/', validateSignup, async (req, res) => {
+router.post('/', validateSignup, async (req, res, next) => {
   // deconstruct credential and password from req.body
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
+
+  // TODO: cannot register user with already existing email
+  if (await User.getCurrentUserByEmail(email) !== null) {
+    const err = new Error("User already exists");
+    err.status = 403;
+    err.errors = {
+      email: "User with that email already exists"
+    };
+    return next(err);
+  }
 
   // call signup static method on User model
-  const user = await User.signup({ email, password });
+  const user = await User.signup({ firstName, lastName, email, password });
+
+  const getSignupUser = await User.scope('loginUser').findOne({
+    where: user,
+    attributes: {
+      include: 'token',
+      exclude: ['hashedPassword', 'createdAt', 'updatedAt']
+    }
+  })
 
   // set token user with signed-up user
   await setTokenCookie(res, user);
 
   // return the created user via json
-  return res.json({
-    user
-  });
+  return res.json(
+    getSignupUser
+  );
 });
 
 // export router

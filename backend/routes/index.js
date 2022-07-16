@@ -7,10 +7,14 @@ const router = express.Router();
 
 // TODO: Import routes/index.js file and connect it to router
 const apiRouter = require('./api');
+const apiUserRouter = require('./api/users');
+const apiSessionRouter = require('./api/session');
 const userRouter = require('./users');
 
 // TODO: Log in current user with valid credentials
-router.use(['/api', '/login'], apiRouter);
+router.use('/api', apiRouter);
+router.use('/login', apiSessionRouter);
+router.use('/signup', apiUserRouter);
 router.use('/users', userRouter);
 
 

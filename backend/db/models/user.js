@@ -26,6 +26,15 @@ module.exports = (sequelize, DataTypes) => {
       return User.scope('currentUser').findByPk(id);
     };
 
+    // TODO: static method that return User by email
+    static async getCurrentUserByEmail(email) {
+      return await User.scope('loginUser').findOne({
+        where: {
+          email: email
+        }
+      });
+    }
+
     // TODO: static method that search for one User with specified credential (email)
     static async login({ email, password }) {
       // import OP sequelize package
@@ -43,24 +52,25 @@ module.exports = (sequelize, DataTypes) => {
       // if user is found and password matches, return the current user information
       if (user && user.validatePassword(password)) {
         const getLoginUser = await User.scope('loginUser').findByPk(user.id);
-        console.log("GET GET GET", getLoginUser);
         return getLoginUser;
       }
     };
 
     // TODO: static method that create users with given email and password
-    static async signup({ email, password }) {
+    static async signup({ firstName, lastName, email, password }) {
       // hash password using bcryptjs package's hashSync method
       const hashedPassword = bcrypt.hashSync(password);
 
       // create user (with hashedPassword instead of password)
       const newUser = await User.create({
+        firstName,
+        lastName,
         email,
         hashedPassword
       });
 
       // return the newly created users using currentUser scope
-      return await User.scope('currentUser').findByPk(newUser.id);
+      return await User.scope('loginUser').findByPk(newUser.id);
     };
 
     /**
@@ -82,8 +92,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    firstName: DataTypes.STRING(255),
-    lastName: DataTypes.STRING(255),
+    firstName: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING(255),
       allowNull: false,
