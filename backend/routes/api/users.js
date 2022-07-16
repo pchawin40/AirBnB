@@ -60,9 +60,9 @@ router.post('/', validateSignup, async (req, res, next) => {
   const getSignupUser = await User.scope('currentUser').findOne({
     where: user,
     attributes: {
-      include: 'token',
+      include: 'token'
     }
-  })
+  });
 
   // set token user with signed-up user
   await setTokenCookie(res, user);
