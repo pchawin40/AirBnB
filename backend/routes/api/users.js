@@ -57,11 +57,10 @@ router.post('/', validateSignup, async (req, res, next) => {
   // call signup static method on User model
   const user = await User.signup({ firstName, lastName, email, password });
 
-  const getSignupUser = await User.scope('loginUser').findOne({
+  const getSignupUser = await User.scope('currentUser').findOne({
     where: user,
     attributes: {
       include: 'token',
-      exclude: ['hashedPassword', 'createdAt', 'updatedAt']
     }
   })
 
