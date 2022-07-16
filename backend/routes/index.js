@@ -4,10 +4,15 @@
 const express = require('express');
 const router = express.Router();
 
+
 // TODO: Import routes/index.js file and connect it to router
 const apiRouter = require('./api');
+const userRouter = require('./users');
 
-router.use('/api', apiRouter);
+// TODO: Log in current user with valid credentials
+router.use(['/api', '/login'], apiRouter);
+router.use('/users', userRouter);
+
 
 // TODO: Add a route to allow any developer to re-set CSRF token cookie
 router.get('/api/csrf/restore', (req, res) => {

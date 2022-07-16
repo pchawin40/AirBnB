@@ -18,38 +18,47 @@ const { handleValidationErrors } = require('../../utils/validation');
 const validateLogin = [
   // check whether or not credential and password are empty
   // if one or more is empty, return an error response
-  check('credential')
+  check('email')
     .exists({ checkFalsy: true })
-    .notEmpty()
-    .withMessage('Please provide a valid email or username.'),
+    .withMessage('Email is required'),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a password.'),
+    .withMessage('Password is required'),
   handleValidationErrors
 ];
 
+// const loginUser = 
+
 // Log in
 // TODO: add POST route to login user with given credential
-router.post('/', validateLogin, async (req, res, next) => {
+router.post(['/', '/login'], validateLogin, async (req, res, next) => {
   // deconstruct credential and password from request body
-  const { credential, password } = req.body;
+  const { email, password } = req.body;
 
   // log the given user in
-  const user = await User.login({ credential, password });
+  let user = await User.login({ email, password });
+
+  const getLoginUser = await User.scope('loginUser').findOne({
+    where: user,
+    attributes: {
+      include: 'token',
+      exclude: ['hashedPassword', 'createdAt', 'updatedAt']
+    }
+  });
 
   // if user does not exist, pass on to next errorware
   if (!user) {
-    const err = new Error('Login failed');
+    const err = new Error('Invalid credentials');
     err.status = 401;
-    err.title = 'Login failed';
-    err.errors = ['The provided credentials were invalid.'];
     return next(err);
   }
 
   // if user exist, set and return the user information
   await setTokenCookie(res, user);
 
-  return res.json({ user });
+  return res.json(
+    getLoginUser
+  );
 });
 
 // TODO: add DELETE route to delete user with given credential

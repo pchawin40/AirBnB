@@ -76,19 +76,20 @@ app.use((err, _req, _res, next) => {
     err.errors = err.errors.map(e => e.message);
     err.title = 'Validation error';
   }
+
   next(err);
 });
 
 // TODO: Error Formatter Error-Handler
 // Error formatter
 app.use((err, _req, res, _next) => {
-  res.status(err.status || 500);
+  const statusCode = err.status || 500;
+  res.status(statusCode);
   console.error(err);
   res.json({
-    title: err.title || 'Server Error',
     message: err.message,
-    errors: err.errors,
-    stack: isProduction ? null : err.stack
+    statusCode,
+    errors: err.errors
   });
 });
 
