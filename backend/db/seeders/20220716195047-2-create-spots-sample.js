@@ -15,7 +15,7 @@ const spots = [
     name: 'App Academy',
     description: 'Place where web developers are created',
     price: 123,
-    // avgStarRating: 4.5
+    avgStarRating: 4.5
   }
 ];
 
@@ -40,13 +40,11 @@ module.exports = {
         lng,
         name,
         description,
-        price
+        price,
+        avgStarRating
       } = spotInfo;
 
       const user = await User.findByPk(1);
-
-      // TODO: avgStarRating = Review score / numReviews
-      const avgStarRating = 4.5;
 
       await Spot.create({
         ownerId: user.id,

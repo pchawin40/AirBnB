@@ -27,8 +27,6 @@ const validateLogin = [
   handleValidationErrors
 ];
 
-// const loginUser = 
-
 // Log in
 // TODO: add POST route to login user with given credential
 router.post(['/', '/login'], validateLogin, async (req, res, next) => {
