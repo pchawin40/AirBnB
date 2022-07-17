@@ -59,17 +59,20 @@ router.post('/', validateSignup, async (req, res, next) => {
 
   const getSignupUser = await User.scope('currentUser').findOne({
     where: user,
-    attributes: {
-      include: 'token',
-    }
-  })
+    raw: true
+  });
 
   // set token user with signed-up user
   await setTokenCookie(res, user);
 
+  const { token } = req.cookies;
+
   // return the created user via json
   return res.json(
-    getSignupUser
+    {
+      ...getSignupUser,
+      token
+    }
   );
 });
 
