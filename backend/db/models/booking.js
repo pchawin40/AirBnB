@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // Booking has many Spot (1 to *)
-      Booking.hasMany(models.Spot, {
+      Booking.belongsTo(models.Spot, {
         foreignKey: 'spotId'
       });
 
@@ -23,8 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Booking.init({
-    spotId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
     startDate: DataTypes.DATE,
     endDate: DataTypes.DATE
   }, {

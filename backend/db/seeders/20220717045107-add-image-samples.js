@@ -1,7 +1,12 @@
 'use strict';
 
-// TODO: Import bcrypt
-const bcrypt = require('bcryptjs');
+const { Image, Spot } = require('../models');
+
+const images = [
+  {
+    url: "Image url"
+  }
+];
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -14,14 +19,22 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Users', [
-      {
-        firstName: 'John',
-        lastName: 'Smith',
-        email: 'john.smith@gmail.com',
-        hashedPassword: bcrypt.hashSync('secret password')
-      }
-    ]);
+    for (let imageInfo of images) {
+      const {
+        url
+      } = imageInfo;
+
+      const spot = await Spot.findOne({
+        order: [
+          ['createdAt', 'DESC']
+        ]
+      });
+
+      await Image.create({
+        imageableId: spot.id,
+        url
+      });
+    }
   },
 
   async down(queryInterface, Sequelize) {
@@ -31,6 +44,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users');
+    await queryInterface.bulkDelete('Images', null, {});
   }
 };
