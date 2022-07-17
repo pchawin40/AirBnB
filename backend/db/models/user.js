@@ -126,7 +126,6 @@ module.exports = (sequelize, DataTypes) => {
     defaultScope: {
       attributes: {
         exclude: ['hashedPassword', 'updatedAt', 'email', 'createdAt'],
-        include: 'token'
       }
     },
     scopes: {
@@ -141,13 +140,6 @@ module.exports = (sequelize, DataTypes) => {
       loginUser() {
         return {
           attributes: {}
-        }
-      },
-      noToken() {
-        return {
-          attributes: {
-            exclude: ['hashedPassword', 'updatedAt', 'email', 'createdAt'],
-          }
         }
       }
     }

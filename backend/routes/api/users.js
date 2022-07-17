@@ -67,6 +67,8 @@ router.post('/', validateSignup, async (req, res, next) => {
   // set token user with signed-up user
   await setTokenCookie(res, user);
 
+
+  
   // return the created user via json
   return res.json(
     getSignupUser
