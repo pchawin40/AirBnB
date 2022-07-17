@@ -46,13 +46,20 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL(2, 2),
     avgStarRating: DataTypes.DECIMAL(1, 1)
   }, {
-    sequelize,
-    modelName: 'Spot',
     defaultScope: {
       attributes: {
         exclude: ['avgStarRating']
       }
-    }
+    },
+    scopes: {
+      details() {
+        return {
+          attributes: {}
+        }
+      }
+    },
+    sequelize,
+    modelName: 'Spot'
   });
   return Spot;
 };

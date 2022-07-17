@@ -4,7 +4,7 @@ const { Image, Spot } = require('../models');
 
 const images = [
   {
-    url: "Image url"
+    url: "image url"
   }
 ];
 
