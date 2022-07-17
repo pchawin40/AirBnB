@@ -27,8 +27,6 @@ const validateLogin = [
   handleValidationErrors
 ];
 
-// const loginUser = 
-
 // Log in
 // TODO: add POST route to login user with given credential
 router.post(['/', '/login'], validateLogin, async (req, res, next) => {
@@ -41,9 +39,9 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
   const getLoginUser = await User.scope('loginUser').findOne({
     where: user,
     attributes: {
-      include: 'token',
       exclude: ['hashedPassword', 'createdAt', 'updatedAt']
-    }
+    },
+    raw: true
   });
 
   // if user does not exist, pass on to next errorware
@@ -56,9 +54,13 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
   // if user exist, set and return the user information
   await setTokenCookie(res, user);
 
-  return res.json(
-    getLoginUser
-  );
+  // TODO: Add token
+  const { token } = req.cookies;
+
+  return res.json({
+    ...getLoginUser,
+    token
+  });
 });
 
 // TODO: add DELETE route to delete user with given credential

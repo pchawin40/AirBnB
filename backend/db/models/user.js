@@ -43,7 +43,6 @@ module.exports = (sequelize, DataTypes) => {
       // if user is found and password matches, return the current user information
       if (user && user.validatePassword(password)) {
         const getLoginUser = await User.scope('loginUser').findByPk(user.id);
-        console.log("GET GET GET", getLoginUser);
         return getLoginUser;
       }
     };
@@ -110,7 +109,6 @@ module.exports = (sequelize, DataTypes) => {
     defaultScope: {
       attributes: {
         exclude: ['hashedPassword', 'updatedAt', 'email', 'createdAt'],
-        include: 'token'
       }
     },
     scopes: {
