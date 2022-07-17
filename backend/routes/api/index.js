@@ -10,8 +10,16 @@ const { restoreUser } = require('../../utils/auth.js');
 router.use(restoreUser);
 
 // TODO: Connect all routers exported from session.js and users.js
-router.use(['/session', ''], sessionRouter);
+router.use(['/session', '/'], sessionRouter);
 router.use('/users', usersRouter);
+
+// restore user
+router.get(
+  '/restore-user',
+  (req, res) => {
+    return res.json(req.user);
+  }
+);
 
 // testing /test router with POST method
 router.post('/test', (req, res) => {

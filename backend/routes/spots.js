@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
   });
 
   res.json({
-    'Spots': spots
+    "Spots": spots
   });
 });
 
@@ -165,6 +165,65 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
   // return spot created
   res.status(201);
   res.json(postSpot);
+});
+
+// TODO: Edit a Spot
+// Updates and returns an existing spot
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
+  // router.get('/test/:spotId', async (req, res) => {
+  // deconstruct spotId
+  const { spotId } = req.params;
+
+  // modify spot with given body
+  const {
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  } = req.body;
+
+  // get the current user info
+  const currentUser = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+  // find all spots with current user id
+  const spot = await Spot.findOne({
+    where: {
+      id: spotId,
+      ownerId: currentUser.id
+    }
+  });
+
+  // TODO: Couldn't find a Spot with the specified id
+  if (!spot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  // update spot with deconstructed request body
+  const updateSpot = await spot.update({
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  });
+
+  // TODO: Successful response: return spot in response via json format
+  return res.json(updateSpot);
 });
 
 module.exports = router;

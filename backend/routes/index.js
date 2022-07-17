@@ -11,6 +11,11 @@ const apiSessionRouter = require('./api/session');
 const userRouter = require('./users');
 const spotRouter = require('./spots');
 
+const { restoreUser } = require('../utils/auth');
+
+// restore current user
+router.use(restoreUser);
+
 // TODO: Log in current user with valid credentials
 router.use('/api', apiRouter);
 router.use('/login', apiSessionRouter);
