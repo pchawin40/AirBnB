@@ -34,18 +34,55 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Spot.init({
-    ownerId: DataTypes.INTEGER,
-    address: DataTypes.STRING(255),
-    city: DataTypes.STRING(50),
-    state: DataTypes.STRING(50),
-    country: DataTypes.STRING(50),
-    lat: DataTypes.DECIMAL(2, 7),
-    lng: DataTypes.DECIMAL(2, 7),
-    name: DataTypes.STRING(255),
-    description: DataTypes.STRING(255),
-    price: DataTypes.DECIMAL(2, 2),
-    avgStarRating: DataTypes.DECIMAL(1, 1),
-    ownerId: DataTypes.INTEGER
+    ownerId: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    address: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    state: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    country: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    lat: {
+      type: DataTypes.DECIMAL(2, 7),
+      allowNull: false
+    },
+    lng: {
+      type: DataTypes.DECIMAL(2, 7),
+      allowNull: false
+    },
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.DECIMAL(2, 2),
+      validate: {
+        isNumeric: {
+          args: true,
+          msg: "Price must be numeric"
+        }
+      }
+    },
+    avgStarRating: {
+      type: DataTypes.DECIMAL(1, 1),
+      allowNull: true
+    }
   }, {
     defaultScope: {
       attributes: {
