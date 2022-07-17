@@ -76,6 +76,7 @@ router.get('/', async (req, res) => {
   });
 });
 
+// TODO: Get details of a Spot from an id
 // Return the details of a spot specified by its id
 router.get('/:spotId', async (req, res, next) => {
   // deconstruct spotId from req.params
@@ -115,7 +116,7 @@ router.get('/:spotId', async (req, res, next) => {
   });
 
   // TODO: Owner from getSpot id
-  const getOwner = await User.scope('noToken').findByPk(getSpot.ownerId);
+  const getOwner = await User.findByPk(getSpot.ownerId);
 
   const spotDetail = {
     ...getSpot,
@@ -145,8 +146,12 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     price
   } = req.body;
 
-  // get current user id
-  const user = await User.findByPk(1);
+  // get the current user info
+  const user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
 
   // create spot
   const postSpot = await Spot.create({
