@@ -125,7 +125,7 @@ module.exports = (sequelize, DataTypes) => {
     // TODO: default query that should not return credentials
     defaultScope: {
       attributes: {
-        exclude: ['hashedPassword', 'updatedAt', 'email', 'createdAt'],
+        exclude: ['hashedPassword', 'updatedAt', 'email', 'createdAt']
       }
     },
     scopes: {
