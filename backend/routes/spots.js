@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   const spots = await Spot.findAll({
     attributes: [
       '*',
-      [Sequelize.literal('"Images"."url"'), 'previewImage']
+      [Sequelize.literal('Images.url'), 'previewImage']
     ],
     include: {
       model: Image,
