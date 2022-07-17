@@ -12,28 +12,29 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association 
       // Image has many Spots (1 - *)
-      Image.hasMany(models.Spot,
+      Image.belongsTo(models.Spot,
         {
           foreignKey: 'imageableId'
         }
       );
 
       // Image has many Reviews (1 - *)
-      Image.hasMany(models.Review, {
+      Image.belongsTo(models.Review, {
         foreignKey: 'imageableId'
       });
     }
   }
   Image.init({
-    imageableId: {
-      type: DataTypes.INTEGER
-    },
-    url: {
-      type: DataTypes.STRING(255)
-    }
+    imageableId: DataTypes.INTEGER,
+    url: DataTypes.STRING(255)
   }, {
     sequelize,
     modelName: 'Image',
+    defaultScope: {
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
+    }
   });
   return Image;
 };

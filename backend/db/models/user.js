@@ -142,6 +142,13 @@ module.exports = (sequelize, DataTypes) => {
         return {
           attributes: {}
         }
+      },
+      noToken() {
+        return {
+          attributes: {
+            exclude: ['hashedPassword', 'updatedAt', 'email', 'createdAt'],
+          }
+        }
       }
     }
   });
