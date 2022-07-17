@@ -44,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING(255),
     description: DataTypes.STRING(255),
     price: DataTypes.DECIMAL(2, 2),
-    avgStarRating: DataTypes.DECIMAL(1, 1)
+    avgStarRating: DataTypes.DECIMAL(1, 1),
+    ownerId: DataTypes.INTEGER
   }, {
     defaultScope: {
       attributes: {
