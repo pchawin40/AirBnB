@@ -57,22 +57,36 @@ const validateSpot = [
   handleValidationErrors
 ];
 
-// Return all spots
-router.get('/', async (req, res) => {
-  const spots = await Spot.findAll({
-    attributes: [
-      '*',
-      [Sequelize.literal('Images.url'), 'previewImage']
-    ],
-    include: {
-      model: Image,
-      attributes: [],
+// TODO: Get all Reviews by a Spot's id
+// Returns all the reviews that belong to a spot specified by its id
+router.get('/:spotId/reviews', async (req, res, next) => {
+  // deconstruct spotId
+  const { spotId } = req.params;
+
+  // get reviews
+  const reviews = await Review.findAll({
+    where: {
+      spotId
     },
-    raw: true
+    include: [
+      {
+        model: User
+      },
+      {
+        model: Image
+      }
+    ]
   });
 
+  // TODO: Error response: Couldn't find a Spot with the specified id
+  if (!reviews.length) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
   res.json({
-    "Spots": spots
+    Reviews: reviews
   });
 });
 
@@ -115,6 +129,7 @@ router.get('/:spotId', async (req, res, next) => {
     }
   });
 
+
   // TODO: Owner from getSpot id
   const getOwner = await User.findByPk(getSpot.ownerId);
 
@@ -128,6 +143,25 @@ router.get('/:spotId', async (req, res, next) => {
 
   // successful response
   res.json(spotDetail)
+});
+
+// Return all spots
+router.get('/', async (req, res) => {
+  const spots = await Spot.findAll({
+    attributes: [
+      '*',
+      [Sequelize.literal('Images.url'), 'previewImage']
+    ],
+    include: {
+      model: Image,
+      attributes: [],
+    },
+    raw: true
+  });
+
+  res.json({
+    "Spots": spots
+  });
 });
 
 // TODO: Create a Spot
