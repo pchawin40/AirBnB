@@ -3,7 +3,7 @@ const express = require('express');
 
 const { Sequelize } = require('sequelize');
 
-// TODO: Import spot model
+// TODO: 
 const { Spot, Image, Review, User } = require('../db/models');
 const router = express.Router();
 
@@ -54,6 +54,17 @@ const validateSpot = [
   check('price')
     .exists({ checkFalsy: true })
     .withMessage('Price per day is required'),
+  handleValidationErrors
+];
+
+const validateReview = [
+  // check if review is valid
+  check('review')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .isFloat({ min: 1, max: 5 })
+    .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
 ];
 
@@ -162,6 +173,61 @@ router.get('/', async (req, res) => {
   res.json({
     "Spots": spots
   });
+});
+
+// TODO: Create a Review for a Spot based on the Spot's id
+// Create and return a new review for a spot specified by id
+router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, next) => {
+  // deconstruct spotId
+  const { spotId } = req.params;
+
+  // deconstruct request body
+  const { review, stars } = req.body;
+
+  // get the current user info
+  const user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+
+  // get spot by spotId
+  const spot = await Spot.findByPk(spotId);
+
+  // TODO: Error response: Couldn't find a Spot with the specified id
+  if (!spot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  // get user by current user id
+  const getReview = await Review.findOne({
+    where: {
+      userId: user.id
+    }
+  });
+
+  // TODO: Error response: Review from the current user already exists for the Spot
+  if (getReview) {
+    const err = Error("User already has a review for this spot");
+    err.status = 403;
+    return next(err);
+  }
+
+  // create review by spot id
+  const spotReview = await Review.create({
+    userId: user.id,
+    spotId,
+    review,
+    stars
+  });
+
+  // successful response
+  res.json(
+    spotReview
+  );
 });
 
 // TODO: Create a Spot

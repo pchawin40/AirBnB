@@ -16,6 +16,16 @@ const spots = [
     description: 'Place where web developers are created',
     price: 123,
     avgStarRating: 4.5
+  },
+  {
+    address: 'P.O. Box 1303',
+    city: 'Charlotte',
+    state: 'North Carolina',
+    country: 'United States of America',
+    lat: 120.2310045,
+    lng: -50.2341234,
+    name: 'Internal Revenue Services',
+    description: "World's most efficient tax administrators"
   }
 ];
 
