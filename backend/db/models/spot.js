@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       // Spot belongs to Image (* to 1)
       Spot.hasMany(models.Image, {
-        foreignKey: 'imageableId'
+        foreignKey: 'imageableId',
+        constraints: false
       });
 
       // Spot belongs to Booking (* to 1)
@@ -93,6 +94,13 @@ module.exports = (sequelize, DataTypes) => {
       details() {
         return {
           attributes: {}
+        }
+      },
+      byReviews() {
+        return {
+          attributes: {
+            exclude: ['description', 'avgStarRating', 'createdAt', 'updatedAt']
+          }
         }
       }
     },

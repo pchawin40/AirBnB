@@ -14,13 +14,15 @@ module.exports = (sequelize, DataTypes) => {
       // Image has many Spots (1 - *)
       Image.belongsTo(models.Spot,
         {
-          foreignKey: 'imageableId'
+          foreignKey: 'imageableId',
+          constraints: false
         }
       );
 
       // Image has many Reviews (1 - *)
       Image.belongsTo(models.Review, {
-        foreignKey: 'imageableId'
+        foreignKey: 'imageableId',
+        constraints: false
       });
     }
   }
