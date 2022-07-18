@@ -64,4 +64,42 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
   res.json(updateReview);
 });
 
+// TODO: Delete a Review
+// Delete an existing review
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+  // deconstruct spotId
+  const { spotId } = req.params;
+
+  // get the current user info
+  const currentUser = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+  // find review to delete
+  const reviewToDestroy = await Review.findOne({
+    where: {
+      id: spotId,
+      userId: currentUser.id
+    }
+  });
+
+  // TODO: Error response: Couldn't find a Review with the specified id
+  if (!reviewToDestroy) {
+    const err = Error("Review couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  // Delete an existing review
+  reviewToDestroy.destroy();
+
+  // TODO: Successful response
+  res.json({
+    message: "Successfully deleted",
+    statusCode: res.status
+  });
+});
+
 module.exports = router;
