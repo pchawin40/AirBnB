@@ -18,7 +18,7 @@ router.get('/:userId/reviews', requireAuth, async (req, res) => {
   // get review of given user id
   const reviews = await Review.findAll({
     where: {
-      id: userId
+      userId
     },
     include: [
       {
