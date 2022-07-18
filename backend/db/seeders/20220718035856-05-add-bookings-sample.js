@@ -1,27 +1,16 @@
 'use strict';
 
-const { Review, User, Spot } = require('../models');
+const { Booking, User, Spot } = require('../models');
 
-const reviews = [
+// Today's date
+const moment = require('moment-timezone');
+const today = moment.utc().format('YYYY-MM-DD HH:mm:ss');
+// new Date().toISOString().slice(0, 10).format('YYYY-MM-DD HH:mm:ss');
+
+const bookings = [
   {
-    review: "This was an awesome spot!",
-    stars: 5
-  },
-  {
-    review: "Review 2",
-    stars: 4
-  },
-  {
-    review: "Review 3",
-    stars: 4
-  },
-  {
-    review: "Review 4",
-    stars: 5
-  },
-  {
-    review: "Review 5",
-    stars: 5
+    startDate: today,
+    endDate: today
   }
 ];
 
@@ -36,11 +25,11 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    for (let reviewInfo of reviews) {
+    for (let bookingInfo of bookings) {
       const {
-        review,
-        stars
-      } = reviewInfo;
+        startDate,
+        endDate
+      } = bookingInfo;
 
       // userId
       const user = await User.findByPk(1);
@@ -48,11 +37,12 @@ module.exports = {
       // spotId
       const spot = await Spot.findByPk(1);
 
-      await Review.create({
-        review,
-        stars,
+      // create booking
+      await Booking.create({
+        spotId: spot.id,
         userId: user.id,
-        spotId: spot.id
+        startDate,
+        endDate
       });
     }
   },
@@ -64,6 +54,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Reviews');
+    await queryInterface.bulkDelete('Bookings');
   }
 };

@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
           email: email
         }
       });
-    }
+    };
 
     // TODO: static method that search for one User with specified credential (email)
     static async login({ email, password }) {

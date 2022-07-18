@@ -24,11 +24,7 @@ module.exports = {
         url
       } = imageInfo;
 
-      const spot = await Spot.findOne({
-        order: [
-          ['createdAt', 'DESC']
-        ]
-      });
+      const spot = await Spot.findOne();
 
       await Image.create({
         imageableId: spot.id,
@@ -44,6 +40,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Images', null, {});
+    await queryInterface.bulkDelete('Images');
   }
 };
