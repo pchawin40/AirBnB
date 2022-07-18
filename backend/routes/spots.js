@@ -3,7 +3,7 @@ const express = require('express');
 
 const { Sequelize } = require('sequelize');
 
-// TODO: 
+// TODO: Import model
 const { Spot, Image, Review, User } = require('../db/models');
 const router = express.Router();
 
