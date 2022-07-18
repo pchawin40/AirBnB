@@ -4,7 +4,7 @@ const express = require('express');
 const { Sequelize } = require('sequelize');
 
 // TODO: Import model
-const { Spot, Image, Review, User } = require('../db/models');
+const { Spot, Image, Review, User, Booking } = require('../db/models');
 const router = express.Router();
 
 const { requireAuth } = require('../utils/auth');
@@ -67,6 +67,62 @@ const validateReview = [
     .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
 ];
+
+// TODO: Get all Bookings for a Spot based on the Spot's id
+// Returns all the bookings for a spot specified by id
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+  // deconstruct spotId
+  const { spotId } = req.params;
+
+  // get the current user info
+  const user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+  // get spot from current user id
+  const spotOwner = await Spot.findOne({
+    where: {
+      ownerId: user.id
+    }
+  });
+
+  // TODO: Couldn't find a Spot with the specified id
+  const findSpot = await Spot.findByPk(spotId);
+
+  if (!findSpot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  let booking;
+
+  // TODO: Successful Response: If you ARE NOT the owner of the spot.
+  // if booking does not include current user id
+  if (!spotOwner) {
+    booking = await Booking.scope('notOwner').findAll({
+      where: {
+        spotId
+      }
+    });
+  } else {
+    // TODO: If you ARE the owner of the spot.
+    booking = await Booking.findAll({
+      where: {
+        spotId
+      },
+      include: {
+        model: User
+      }
+    });
+  }
+
+  res.json({
+    Bookings: booking
+  });
+});
 
 // TODO: Get all Reviews by a Spot's id
 // Returns all the reviews that belong to a spot specified by its id

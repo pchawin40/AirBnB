@@ -23,11 +23,27 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Booking.init({
+    spotId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     startDate: DataTypes.DATE,
     endDate: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Booking',
+    scopes: {
+      notOwner() {
+        return {
+          attributes: {
+            exclude: [
+              'id',
+              'createdAt',
+              'updatedAt',
+              'userId'
+            ]
+          }
+        };
+      }
+    }
   });
   return Booking;
 };
