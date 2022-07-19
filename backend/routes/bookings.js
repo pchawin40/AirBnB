@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 // TODO: Import model
-const { Booking, User } = require('../db/models');
+const { Booking, User, Spot } = require('../db/models');
 
 // TODO: Import authenticator
 const { requireAuth } = require('../utils/auth');
@@ -85,6 +85,62 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
   });
 
   res.json(updateBooking);
+});
+
+// TODO: Delete a Booking
+// Delete an existing booking
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
+  // deconstruct bookingId
+  const { bookingId } = req.params;
+
+  // TODO: Require proper authorization: Booking must belong to the
+  // TODO: current user or the Spot must belong to the current user
+  // get the current user info
+  const user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+  // Spot must belong to the current user
+  const spot = await Spot.findOne({
+    where: {
+      ownerId: user.id
+    }
+  });
+
+  // Booking must belong to the current user
+  const booking = await Booking.findOne({
+    where: {
+      id: bookingId,
+      userId: user.id
+    }
+  });
+
+  if (!booking || !spot) {
+    const err = Error("Booking couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  // TODO: Error response: Can't delete a booking that's past the start date
+  const startDateCompare = booking.startDate.toISOString().split('T')[0];
+  const dateNowCompare = new Date('05-05-2010').toISOString().split('T')[0];
+
+  if (startDateCompare < dateNowCompare) {
+    const err = Error("Bookings that have been started can't be deleted");
+    err.status = 403;
+    return next(err);
+  }
+
+  // delete booking if found
+  booking.destroy();
+
+  // TODO: Successful Response
+  res.json({
+    message: "Successfully deleted",
+    statusCode: res.statusCode
+  });
 });
 
 module.exports = router;
