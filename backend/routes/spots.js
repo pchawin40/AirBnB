@@ -1,11 +1,11 @@
 // backend/routes/spots
 const express = require('express');
+const router = express.Router();
 
 const { Sequelize } = require('sequelize');
 
 // TODO: Import model
 const { Spot, Image, Review, User, Booking } = require('../db/models');
-const router = express.Router();
 
 const { requireAuth } = require('../utils/auth');
 
