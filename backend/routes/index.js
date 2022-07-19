@@ -12,6 +12,7 @@ const userRouter = require('./users');
 const spotRouter = require('./spots');
 const reviewRouter = require('./reviews');
 const bookingRouter = require('./bookings');
+const imageRouter = require('./images');
 
 const { restoreUser } = require('../utils/auth');
 
@@ -26,6 +27,7 @@ router.use('/users', userRouter);
 router.use('/spots', spotRouter);
 router.use('/reviews', reviewRouter);
 router.use('/bookings', bookingRouter);
+router.use('/images', imageRouter);
 
 // TODO: Add a route to allow any developer to re-set CSRF token cookie
 router.get('/api/csrf/restore', (req, res) => {
