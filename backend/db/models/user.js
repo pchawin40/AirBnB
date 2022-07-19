@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       const user = await User.scope('loginUser').findOne({
         where: {
           [Op.or]: {
-            email: email
+            email
           }
         }
       });

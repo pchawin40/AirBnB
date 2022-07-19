@@ -27,7 +27,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Image.init({
-    imageableId: DataTypes.INTEGER,
+    imageableId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE'
+    },
     url: DataTypes.STRING(255)
   }, {
     sequelize,

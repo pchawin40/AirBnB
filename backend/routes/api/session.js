@@ -36,10 +36,9 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
   // log the given user in
   let user = await User.login({ email, password });
 
-  const getLoginUser = await User.scope('loginUser').findOne({
-    where: user,
-    attributes: {
-      exclude: ['hashedPassword', 'createdAt', 'updatedAt']
+  const getLoginUser = await User.scope('currentUser').findOne({
+    where: {
+      id: user.id
     },
     raw: true
   });
