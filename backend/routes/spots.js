@@ -246,6 +246,13 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
   // get spot
   const spot = await Spot.findByPk(spotId);
 
+  // TODO: Error response: Couldn't find a Spot with the specified id
+  if (!spot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
   // TODO: Require proper authorization: Spot must NOT belong to the current user
   // get the current user info
   const user = await User.findOne({
@@ -260,19 +267,12 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
   }
 
   // TODO: Error response: Body validation errors
-  if (endDate < startDate) {
+  if (endDate <= startDate) {
     const err = Error("Validation error");
     err.status = 400;
     err.errors = {
       endDate: "endDate cannot be on or before startDate"
     };
-    return next(err);
-  }
-
-  // TODO: Error response: Couldn't find a Spot with the specified id
-  if (!spot) {
-    const err = Error("Spot couldn't be found");
-    err.status = 404;
     return next(err);
   }
 
@@ -284,27 +284,29 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     }
   });
 
-  // set comparison start/end date variable for comparing with request body date
-  const startDateCompare = findBooking.startDate.toISOString().split('T')[0];
-  const endDateCompare = findBooking.endDate.toISOString().split('T')[0];
+  if (findBooking) {
+    // set comparison start/end date variable for comparing with request body date
+    const startDateCompare = findBooking.startDate.toISOString().split('T')[0];
+    const endDateCompare = findBooking.endDate.toISOString().split('T')[0];
 
-  // if booking start date or end date exist with given dates
-  if (startDateCompare === startDate || endDateCompare === endDate) {
-    const err = Error("Sorry, this spot is already booked for the specified dates");
-    err.status = 403;
-    err.errors = {};
+    // if booking start date or end date exist with given dates
+    if (startDateCompare === startDate || endDateCompare === endDate) {
+      const err = Error("Sorry, this spot is already booked for the specified dates");
+      err.status = 403;
+      err.errors = {};
 
-    // start date conflicts
-    if (startDateCompare === startDate) {
-      err.errors.startDate = "Start date conflicts with an existing booking";
+      // start date conflicts
+      if (startDateCompare === startDate) {
+        err.errors.startDate = "Start date conflicts with an existing booking";
+      }
+
+      // end date conflicts
+      if (endDateCompare === endDate) {
+        err.errors.endDate = "End date conflicts with an existing booking";
+      }
+
+      return next(err);
     }
-
-    // end date conflicts
-    if (endDateCompare === endDate) {
-      err.errors.endDate = "End date conflicts with an existing booking";
-    }
-
-    return next(err);
   }
 
   // create booking with given request time
