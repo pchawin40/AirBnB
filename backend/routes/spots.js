@@ -321,6 +321,47 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
   res.json(booking);
 });
 
+// TODO: Add an Image to a Spot based on the Spot's id
+// Create and return a new image for a spot specified by id.
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+  // deconstruct spotId
+  const { spotId } = req.params;
+
+  // deconstruct url
+  const { url } = req.body;
+
+  // get the current user info
+  const user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+  // TODO: Require proper authorization: Spot must belong to the current user
+  const spot = await Spot.findOne({
+    where: {
+      id: spotId,
+      ownerId: user.id
+    }
+  });
+
+  // TODO: Error response: Couldn't find a Spot with the specified id
+  if (!spot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  // TODO: Successful Response
+  const image = await spot.createImage({
+    url
+  });
+
+  const imageCreated = await Image.findByPk(image.id);
+
+  res.json(imageCreated);
+});
+
 // TODO: Create a Review for a Spot based on the Spot's id
 // Create and return a new review for a spot specified by id
 router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, next) => {
