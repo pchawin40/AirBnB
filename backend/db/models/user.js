@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
           email: email
         }
       });
-    }
+    };
 
     // TODO: static method that search for one User with specified credential (email)
     static async login({ email, password }) {
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       const user = await User.scope('loginUser').findOne({
         where: {
           [Op.or]: {
-            email: email
+            email
           }
         }
       });

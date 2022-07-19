@@ -23,11 +23,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Booking.init({
+    spotId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE'
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE'
+    },
     startDate: DataTypes.DATE,
     endDate: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Booking',
+    scopes: {
+      notOwner() {
+        return {
+          attributes: {
+            exclude: [
+              'id',
+              'createdAt',
+              'updatedAt',
+              'userId'
+            ]
+          }
+        };
+      }
+    }
   });
   return Booking;
 };

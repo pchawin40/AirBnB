@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       // Review belongs to Image (* to 1)
       Review.hasMany(models.Image, {
         foreignKey: 'imageableId',
-        constraints: false
+        constraints: false,
+        scope: {
+          imageableType: 'review'
+        }
       });
 
       // Review belongs to Spot (* to 1)
@@ -29,8 +32,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Review.init({
-    userId: DataTypes.INTEGER,
-    spotId: DataTypes.INTEGER,
+    userId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE'
+    },
+    spotId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE'
+    },
     review: DataTypes.STRING(255),
     stars: DataTypes.INTEGER
   }, {

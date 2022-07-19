@@ -4,10 +4,45 @@ const express = require('express');
 const { Sequelize } = require('sequelize');
 
 // TODO: Import User model
-const { User, Spot, Image, Review } = require('../db/models');
+const { User, Spot, Image, Review, Booking } = require('../db/models');
 const router = express.Router();
 
 const { requireAuth } = require('../utils/auth');
+
+// TODO: Get all of the Current User's Bookings
+// Return all the bookings that the current user has made
+router.get('/:userId/bookings', requireAuth, async (req, res, next) => {
+  // deconstruct userId from params
+  const { userId } = req.params;
+
+  // get bookings from user id
+  const bookings = await Booking.findAll({
+    where: {
+      userId
+    },
+    include: {
+      model: Spot,
+      attributes: [
+        'id',
+        'ownerId',
+        'address',
+        'city',
+        'state',
+        'country',
+        'lat',
+        'lng',
+        'name',
+        'price',
+        [Sequelize.literal('(SELECT url FROM Images)'), 'previewImage']
+      ]
+    }
+  });
+
+  // return successful response 
+  res.json(
+    { Bookings: bookings }
+  );
+});
 
 // TODO: Returns all the reviews written by the current user
 // returns all the reviews written by the current user

@@ -10,12 +10,7 @@ module.exports = {
      */
     await queryInterface.addColumn('Images', 'imageableId', {
       type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Spots', //'Reviews',
-        key: 'id'
-      },
-      onDelete: 'CASCADE'
+      allowNull: false
     });
   },
 

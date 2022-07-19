@@ -2,7 +2,7 @@
 const express = require('express');
 
 // TODO: Import model
-const { Review, User } = require('../db/models');
+const { Review, User, Image } = require('../db/models');
 const router = express.Router();
 
 // TODO: Import requireAuth from utils
@@ -22,6 +22,62 @@ const validateReview = [
     .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
 ];
+
+// TODO: Add an Image to a Review based on the Review's id
+// Create and return a new image for a review specified by id.
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+  // deconstruct reviewId
+  const { reviewId } = req.params;
+
+  // deconstruct url
+  const { url } = req.body;
+
+  // get the current user info
+  const user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+  // TODO: Require proper authorization: Review must belong to the current user
+  const review = await Review.findOne({
+    where: {
+      id: reviewId,
+      userId: user.id
+    }
+  });
+
+  // TODO: Error response: Couldn't find a Review with the specified id
+  if (!review) {
+    const err = Error("Review couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  // TODO: Error response: Cannot add any more images because there is a 
+  // TODO: maximum of 10 images per resource
+  const images = await Image.findAll({
+    where: {
+      imageableId: reviewId
+    }
+  });
+
+  // if there are more than 10 images for the current review
+  if (images.length >= 10) {
+    const err = Error("Maximum number of images for this resource was reached");
+    err.status = 400;
+    return next(err);
+  }
+
+  // TODO: Successful Response
+  const image = await review.createImage({
+    url
+  });
+
+  const imageCreated = await Image.findByPk(image.id);
+
+  res.json(imageCreated);
+});
 
 // TODO: Edit a Review
 // Update and return an existing review

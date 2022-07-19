@@ -54,10 +54,11 @@ module.exports = {
         avgStarRating
       } = spotInfo;
 
-      const user = await User.findByPk(1);
+      // get ownerId
+      const ownerId = spots.findIndex(spot => spot === spotInfo) + 1
 
       await Spot.create({
-        ownerId: user.id,
+        ownerId,
         address,
         city,
         state,
@@ -79,6 +80,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Spots', null, {});
+    await queryInterface.bulkDelete('Spots');
   }
 };
