@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       // Spot belongs to Image (* to 1)
       Spot.hasMany(models.Image, {
         foreignKey: 'imageableId',
-        constraints: false
+        constraints: false,
+        scope: {
+          imageableType: 'spot'
+        }
       });
 
       // Spot belongs to Booking (* to 1)

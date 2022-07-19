@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       // Review belongs to Image (* to 1)
       Review.hasMany(models.Image, {
         foreignKey: 'imageableId',
-        constraints: false
+        constraints: false,
+        scope: {
+          imageableType: 'review'
+        }
       });
 
       // Review belongs to Spot (* to 1)
