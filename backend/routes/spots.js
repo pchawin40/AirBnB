@@ -215,34 +215,35 @@ router.get('/:spotId', async (req, res, next) => {
 
   const spot = await Spot.findByPk(spotId);
 
-  const getReview = await spot.getReviews({
-    attributes: [
-      // include: [
-      [Sequelize.fn('COUNT', Sequelize.col('stars')), 'numReviews'],
-      [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgStarRating']
-      // ]
-    ],
-    require: true
-  });
-
-  return res.json(getReview);
-  // const getSpot = await Spot.findOne({
-  //   attributes: [
-  //     '*',
-  //     [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
-  //     [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
-  //   ],
-  //   where: {
-  //     id: spotId
+  // const getReview = await spot.getReviews({
+  //   attributes: {
+  //     include: [
+  //       [Sequelize.fn('COUNT', Sequelize.col('stars')), 'numReviews'],
+  //       [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgStarRating']
+  //     ]
   //   },
-  //   include: {
-  //     model: Review,
-  //     attributes: [],
-  //     raw: true
-  //   },
-  //   group: ['Spots.id'],
-  //   raw: true
+  //   require: true
   // });
+
+  // return res.json(getReview);
+  const getSpot = await Spot.findOne({
+    attributes: {
+      // '*',
+      include: [
+        [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
+        [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
+      ]
+    },
+    where: {
+      id: spotId
+    },
+    include: {
+      model: Review,
+      attributes: [],
+      raw: true
+    },
+    raw: true
+  });
 
   // Error response: Couldn't find a Spot with the specified id
   if (!getSpot) {
