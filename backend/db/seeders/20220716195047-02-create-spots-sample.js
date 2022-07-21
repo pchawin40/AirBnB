@@ -25,7 +25,8 @@ const spots = [
     lat: 120.2310045,
     lng: -50.2341234,
     name: 'Internal Revenue Services',
-    description: "World's most efficient tax administrators"
+    description: "World's most efficient tax administrators",
+    price: 500
   }
 ];
 

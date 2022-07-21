@@ -48,7 +48,7 @@ module.exports = {
       // spotId
       const spot = await Spot.findByPk(1);
 
-      await Review.create({
+      await user.createReview({
         review,
         stars,
         userId: user.id,

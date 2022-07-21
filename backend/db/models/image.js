@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Image.belongsTo(models.Spot,
         {
           foreignKey: 'imageableId',
-          constraints: false
+          constraints: false,
         }
       );
 
@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     imageableId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE'
+    },
+    imageableType: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     url: DataTypes.STRING(255)
   }, {

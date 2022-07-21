@@ -4,8 +4,15 @@ const { Image, Spot } = require('../models');
 
 const images = [
   {
-    url: "image url"
-  }
+    url: "image url",
+    imageableType: "Spot",
+    imageableId: 1
+  },
+  {
+    url: "image url 2",
+    imageableType: "Spot",
+    imageableId: 2
+  },
 ];
 
 module.exports = {
@@ -21,13 +28,14 @@ module.exports = {
     */
     for (let imageInfo of images) {
       const {
-        url
+        url,
+        imageableType,
+        imageableId
       } = imageInfo;
 
-      const spot = await Spot.findOne();
-
       await Image.create({
-        imageableId: spot.id,
+        imageableType,
+        imageableId,
         url
       });
     }
