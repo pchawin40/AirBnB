@@ -215,8 +215,7 @@ router.get('/:spotId', async (req, res, next) => {
 
   const getSpot = await Spot.findOne({
     attributes: [
-      // '*',
-      'id',
+      '*',
       [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
       [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
     ],
@@ -226,10 +225,8 @@ router.get('/:spotId', async (req, res, next) => {
     include: {
       model: Review,
       attributes: [],
-      required: true,
       raw: true
     },
-    group: ['Reviews.id'],
     raw: true
   });
 
