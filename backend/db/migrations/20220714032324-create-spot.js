@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING(255)
       },
       price: {
-        type: Sequelize.DECIMAL(4, 2)
+        type: Sequelize.DECIMAL
       },
       avgStarRating: {
         type: Sequelize.DECIMAL(2, 1)
