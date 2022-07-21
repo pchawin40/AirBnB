@@ -228,7 +228,7 @@ router.get('/:spotId', async (req, res, next) => {
       attributes: [],
       required: true
     },
-    group: ['Spots.id'],
+    group: ['Spots.id', 'Reviews.id', 'Reviews.stars'],
     raw: true
   });
 
