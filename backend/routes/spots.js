@@ -230,6 +230,7 @@ router.get('/:spotId', async (req, res, next) => {
     attributes: {
       // '*',
       include: [
+        '*',
         [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
         [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
       ]
@@ -239,8 +240,7 @@ router.get('/:spotId', async (req, res, next) => {
     },
     include: {
       model: Review,
-      attributes: [],
-      raw: true
+      attributes: []
     },
     raw: true
   });
