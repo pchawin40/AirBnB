@@ -216,13 +216,18 @@ router.get('/:spotId', async (req, res, next) => {
   const spot = await Spot.findByPk(spotId);
 
   const getReview = await spot.getReviews({
-    attributes: {
-      include: [
-        [Sequelize.fn('COUNT', Sequelize.col('stars')), 'numReviews'],
-        [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgStarRating']
-      ]
-    },
-    group: 'id',
+    attributes: [
+      [Sequelize.fn('COUNT', Sequelize.col('stars')), 'numReviews'],
+      [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgStarRating']
+    ],
+    group: ['stars'],
+    // attributes: {
+    //   include: [
+    //     [Sequelize.fn('DISTINCT', Sequelize.col('Reviews.id')), 'id'],
+    //     [Sequelize.fn('COUNT', Sequelize.col('stars')), 'numReviews'],
+    //     [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgStarRating']
+    //   ]
+    // },
     require: true
   });
 
