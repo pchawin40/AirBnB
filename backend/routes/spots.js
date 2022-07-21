@@ -11,6 +11,7 @@ const { requireAuth } = require('../utils/auth');
 
 // TODO: Import 'check' function from 'express-validator' and 'handleValidationError'
 const { check } = require('express-validator');
+const { query } = require('express-validator/check');
 const { handleValidationErrors } = require('../utils/validation');
 
 const validateSpot = [
@@ -65,6 +66,55 @@ const validateReview = [
   check('stars')
     .isFloat({ min: 1, max: 5 })
     .withMessage('Stars must be an integer from 1 to 5'),
+  handleValidationErrors
+];
+
+// TODO: Query Parameters
+/*
+* • page: integer, minimum: 0, maximum: 10, default: 0
+* • size: integer, minimum: 0, maximum: 20, default: 20
+* • minLat: decimal, optional
+* • maxLat: decimal, optional
+* • minLng: decimal, optional
+* • maxLng: decimal, optional
+* • minPrice: decimal, optional, minimum: 0
+* • maxPrice: decimal, optional, minimum: 0
+*/
+const validateQuery = [
+  query('page')
+    .isInt({ min: 0 })
+    .default(0)
+    .optional()
+    .withMessage('Page must be greater than or equal to 0'),
+  check('size')
+    .isInt({ min: 0 })
+    .default(20)
+    .optional()
+    .withMessage('Size must be greater than or equal to 0'),
+  check('minLat')
+    .isDecimal()
+    .optional()
+    .withMessage('Minimum latitude is invalid'),
+  check('maxLat')
+    .isDecimal()
+    .optional()
+    .withMessage('Maximum latitude is invalid'),
+  check('minLng')
+    .isDecimal()
+    .optional()
+    .withMessage('Minimum longitude is invalid'),
+  check('maxLng')
+    .isDecimal()
+    .optional()
+    .withMessage('Maximum longitude is invalid'),
+  check('minPrice')
+    .isFloat({ min: 0 })
+    .optional()
+    .withMessage('Minimum price must be greater than 0'),
+  check('maxPrice')
+    .isFloat({ min: 0 })
+    .optional()
+    .withMessage('Maximum price must be greater than 0'),
   handleValidationErrors
 ];
 
@@ -213,21 +263,74 @@ router.get('/:spotId', async (req, res, next) => {
 });
 
 // Return all spots
-router.get('/', async (req, res) => {
+router.get('/', validateQuery, async (req, res) => {
+  // import Op
+  const { Op } = require('sequelize');
+
+  // TODO: deconstruct query
+  // page and size
+  let page = Number(req.query.page);
+  let size = Number(req.query.size);
+
+  if (isNaN(page) || page <= 0) page = 0;
+  if (isNaN(size) || size < 0) size = 20;
+
+  if (page > 10) page = 0;
+  if (size > 20) size = 20;
+
+
   const spots = await Spot.findAll({
-    attributes: [
-      '*',
-      [Sequelize.literal('Images.url'), 'previewImage']
-    ],
+    // TODO: Add Query Filters to Get All Spots
+    where: {
+      // find between latitude
+      lat: {
+        [Op.between]:
+          [(req.query.minLat || -1000), (req.query.maxLat || 1000)]
+      },
+      // find between longitude
+      lng: {
+        [Op.between]:
+          [(req.query.minLng || -1000), (req.query.maxLng || 1000)]
+      },
+      // find between price
+      price: {
+        [Op.between]:
+          [(req.query.minPrice || 0), (req.query.maxPrice || 1000)]
+      },
+    },
+    // include Image to find its url
     include: {
       model: Image,
-      attributes: [],
+      attributes: [
+        'url'
+      ],
     },
+    // pagination
+    limit: size,
+    offset: size * (page - 1),
     raw: true
   });
 
+  // get all spot to delete id from
+  const deleteSpots = await Spot.findAll();
+
+  // for each spots
+  spots.forEach(spot => {
+    // delete spot image url and replace with previewImage
+    spot.previewImage = spot['Images.url'];
+    delete spot['Images.url'];
+
+    // delete spot id from attributes
+    deleteSpots.forEach(innerSpot => {
+      delete spot[`id:${innerSpot.id}`];
+    });
+  });
+
+  // TODO: Successful response
   res.json({
-    "Spots": spots
+    "Spots": spots,
+    page,
+    size
   });
 });
 
