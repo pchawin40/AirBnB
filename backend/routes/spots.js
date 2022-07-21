@@ -226,9 +226,10 @@ router.get('/:spotId', async (req, res, next) => {
     include: {
       model: Review,
       attributes: [],
-      required: true
+      required: true,
+      raw: true
     },
-    group: ['Spots.id', 'Reviews.id', 'Reviews.stars'],
+    group: ['Reviews.id'],
     raw: true
   });
 
