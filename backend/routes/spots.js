@@ -227,6 +227,7 @@ router.get('/:spotId', async (req, res, next) => {
       attributes: [],
       raw: true
     },
+    group: ['Spots.id'],
     raw: true
   });
 
