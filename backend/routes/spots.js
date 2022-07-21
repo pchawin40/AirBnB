@@ -239,7 +239,8 @@ router.get('/:spotId', async (req, res, next) => {
     },
     include: {
       model: Review,
-      attributes: []
+      attributes: [],
+      raw: true
     },
     raw: true
   });
