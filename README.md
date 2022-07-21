@@ -965,7 +965,14 @@ Create and return a new booking from a spot specified by id.
 * Request
   * Method: POST
   * URL: /spots/:spotId/bookings
-  * Body: none
+  * Body: 
+
+    ```json
+    {
+      "startDate": "2021-11-19",
+      "endDate": "2021-11-20"
+    }
+    ```
 
 * Successful Response
   * Status Code: 200
@@ -979,9 +986,24 @@ Create and return a new booking from a spot specified by id.
       "spotId": 1,
       "userId": 2,
       "startDate": "2021-11-19",
-      "endDate": "2021-11-19",
+      "endDate": "2021-11-20",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+* Error response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+    ```json
+    {
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "endDate": "endDate cannot be on or before startDate"
+      }
     }
     ```
 
@@ -1067,7 +1089,7 @@ Update and return an existing booking.
     ```
 
 * Error response: Can't edit a booking that's past the end date
-  * Status Code: 400
+  * Status Code: 403
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1075,7 +1097,7 @@ Update and return an existing booking.
     ```json
     {
       "message": "Past bookings can't be modified",
-      "statusCode": 400
+      "statusCode": 403
     }
     ```
 
@@ -1135,7 +1157,7 @@ Delete an existing booking.
     ```
 
 * Error response: Can't delete a booking that's past the start date
-  * Status Code: 400
+  * Status Code: 403
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1143,7 +1165,7 @@ Delete an existing booking.
     ```json
     {
       "message": "Bookings that have been started can't be deleted",
-      "statusCode": 400
+      "statusCode": 403
     }
     ```
 
@@ -1355,12 +1377,12 @@ Return spots filtered by query parameters.
       "errors": {
         "page": "Page must be greater than or equal to 0",
         "size": "Size must be greater than or equal to 0",
-        "maxLat": "Maximum latitude is invalid",
         "minLat": "Minimum latitude is invalid",
-        "minLng": "Maximum longitude is invalid",
-        "maxLng": "Minimum longitude is invalid",
-        "minPrice": "Maximum price must be greater than 0",
-        "maxPrice": "Minimum price must be greater than 0"
+        "maxLat": "Maximum latitude is invalid",
+        "minLng": "Minimum longitude is invalid",
+        "maxLng": "Maximum longitude is invalid",
+        "minPrice": "Minimum price must be greater than 0",
+        "maxPrice": "Maximum price must be greater than 0"
       }
     }
     ```

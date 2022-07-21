@@ -43,24 +43,17 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
     return next(err);
   }
 
-  const getLoginUser = await User.scope('loginUser').findOne({
-    where: user,
-    attributes: {
-      exclude: ['hashedPassword', 'createdAt', 'updatedAt']
-    },
-    raw: true
-  });
-
-  // if user exist, set and return the user information
-  setTokenCookie(res, user);
-
   // TODO: Add token
-  const { token } = req.cookies;
+  const token = setTokenCookie(res, user);
 
-  return res.json({
-    ...getLoginUser,
-    token
-  });
+  // return current user info
+  const loginUserInfo = await User.scope('currentUser').findOne({ where: user })
+  loginUserInfo.dataValues['token'] = token;
+
+  // TODO: Successful Response
+  return res.json(
+    loginUserInfo
+  );
 });
 
 // TODO: add DELETE route to delete user with given credential

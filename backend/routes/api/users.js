@@ -44,8 +44,9 @@ router.post('/', validateSignup, async (req, res, next) => {
   // deconstruct credential and password from req.body
   const { firstName, lastName, email, password } = req.body;
 
-  // TODO: cannot register user with already existing email
-  if (await User.getCurrentUserByEmail(email) !== null) {
+  const userExist = await User.getCurrentUserByEmail(email);
+
+  if (userExist) {
     const err = new Error("User already exists");
     err.status = 403;
     err.errors = {
@@ -54,25 +55,20 @@ router.post('/', validateSignup, async (req, res, next) => {
     return next(err);
   }
 
+  // TODO: cannot register user with already existing email
   // call signup static method on User model
   const user = await User.signup({ firstName, lastName, email, password });
 
-  const getSignupUser = await User.scope('currentUser').findOne({
-    where: user,
-    raw: true
-  });
-
   // set token user with signed-up user
-  await setTokenCookie(res, user);
+  const token = setTokenCookie(res, user);
 
-  const { token } = req.cookies;
+  // return current user info
+  const registerUserInfo = await User.scope('currentUser').findOne({ where: user });
+  registerUserInfo.dataValues['token'] = token;
 
   // return the created user via json
   return res.json(
-    {
-      ...getSignupUser,
-      token
-    }
+    registerUserInfo
   );
 });
 

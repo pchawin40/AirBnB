@@ -36,24 +36,28 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    for (let reviewInfo of reviews) {
-      const {
-        review,
-        stars
-      } = reviewInfo;
+    try {
+      for (let reviewInfo of reviews) {
+        const {
+          review,
+          stars
+        } = reviewInfo;
 
-      // userId
-      const user = await User.findByPk(1);
+        // userId
+        const user = await User.findByPk(1);
 
-      // spotId
-      const spot = await Spot.findByPk(1);
+        // spotId
+        const spot = await Spot.findByPk(1);
 
-      await user.createReview({
-        review,
-        stars,
-        userId: user.id,
-        spotId: spot.id
-      });
+        await user.createReview({
+          review,
+          stars,
+          userId: user.id,
+          spotId: spot.id
+        });
+      }
+    } catch (e) {
+      console.error("errors: ", e);
     }
   },
 
