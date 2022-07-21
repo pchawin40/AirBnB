@@ -36,6 +36,13 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
   // log the given user in
   let user = await User.login({ email, password });
 
+  // if user does not exist, pass on to next errorware
+  if (!user) {
+    const err = new Error('Invalid credentials');
+    err.status = 401;
+    return next(err);
+  }
+
   const getLoginUser = await User.scope('loginUser').findOne({
     where: user,
     attributes: {
@@ -43,13 +50,6 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
     },
     raw: true
   });
-
-  // if user does not exist, pass on to next errorware
-  if (!user) {
-    const err = new Error('Invalid credentials');
-    err.status = 401;
-    return next(err);
-  }
 
   // if user exist, set and return the user information
   await setTokenCookie(res, user);
