@@ -86,6 +86,12 @@ module.exports = (sequelize, DataTypes) => {
     avgStarRating: {
       type: DataTypes.DECIMAL(2, 1),
       allowNull: true
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
     }
   }, {
     defaultScope: {
