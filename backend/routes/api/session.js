@@ -36,13 +36,6 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
   // log the given user in
   let user = await User.login({ email, password });
 
-  const getLoginUser = await User.scope('currentUser').findOne({
-    where: {
-      id: user.id
-    },
-    raw: true
-  });
-
   // if user does not exist, pass on to next errorware
   if (!user) {
     const err = new Error('Invalid credentials');
@@ -50,8 +43,16 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
     return next(err);
   }
 
+  const getLoginUser = await User.scope('loginUser').findOne({
+    where: user,
+    attributes: {
+      exclude: ['hashedPassword', 'createdAt', 'updatedAt']
+    },
+    raw: true
+  });
+
   // if user exist, set and return the user information
-  await setTokenCookie(res, user);
+  setTokenCookie(res, user);
 
   // TODO: Add token
   const { token } = req.cookies;
