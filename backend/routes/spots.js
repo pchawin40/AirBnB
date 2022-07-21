@@ -222,6 +222,7 @@ router.get('/:spotId', async (req, res, next) => {
         [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgStarRating']
       ]
     },
+    group: 'id',
     require: true
   });
 
