@@ -213,8 +213,19 @@ router.get('/:spotId', async (req, res, next) => {
   // deconstruct spotId from req.params
   const { spotId } = req.params;
 
-  // find Spot by ID
-  const getSpot = await Spot.findByPk(spotId, {
+  const getSpot = await Spot.findOne({
+    attributes: [
+      '*',
+      [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
+      [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
+    ],
+    where: {
+      id: spotId
+    },
+    include: {
+      model: Review,
+      attributes: []
+    },
     raw: true
   });
 
@@ -225,20 +236,6 @@ router.get('/:spotId', async (req, res, next) => {
     return next(err);
   }
 
-  // TODO: numReviews = aggregate count
-  const numReviews = await Review.count();
-
-  // TODO: avgStarRating selected individually from getSpot
-  const avgStarRating = await Spot.findOne({
-    where: {
-      id: getSpot.id
-    },
-    attributes: [
-      Sequelize.col('avgStarRating')
-    ],
-    raw: true
-  });
-
   // TODO: Image from getSpot id
   const getImage = await Image.findAll({
     where: {
@@ -246,14 +243,11 @@ router.get('/:spotId', async (req, res, next) => {
     }
   });
 
-
   // TODO: Owner from getSpot id
   const getOwner = await User.findByPk(getSpot.ownerId);
 
   const spotDetail = {
     ...getSpot,
-    numReviews,
-    avgStarRating: avgStarRating.avgStarRating,
     Images: getImage,
     Owners: getOwner
   };
@@ -280,6 +274,9 @@ router.get('/', validateQuery, async (req, res) => {
 
 
   const spots = await Spot.findAll({
+    attributes: [
+      '*',
+    ],
     // TODO: Add Query Filters to Get All Spots
     where: {
       // find between latitude
@@ -334,9 +331,25 @@ router.get('/', validateQuery, async (req, res) => {
   });
 });
 
+
+// TODO: Require proper authorization: Spot must NOT belong to the current user
+// get the current user info
+
+let user;
+
+const authorization = async (req, res, next) => {
+  user = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+
+  next();
+}
+
 // TODO: Create a Booking from a Spot based on the Spot's id
 // Create and return a new booking from a spot specified by id.
-router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, next) => {
   // deconstruct spotId
   const { spotId } = req.params;
 
@@ -355,14 +368,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     err.status = 404;
     return next(err);
   }
-
-  // TODO: Require proper authorization: Spot must NOT belong to the current user
-  // get the current user info
-  const user = await User.findOne({
-    where: {
-      id: req.user.id
-    }
-  });
 
   if (spot.ownerId === user.id) {
     const err = Error("Spot must NOT belong to the current user");

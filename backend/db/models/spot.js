@@ -83,10 +83,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    avgStarRating: {
-      type: DataTypes.DECIMAL(2, 1),
-      allowNull: true
-    },
     createdAt: {
       type: DataTypes.DATE
     },
@@ -94,11 +90,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {
-    defaultScope: {
-      attributes: {
-        exclude: ['avgStarRating']
-      }
-    },
     scopes: {
       details() {
         return {
@@ -108,7 +99,7 @@ module.exports = (sequelize, DataTypes) => {
       byReviews() {
         return {
           attributes: {
-            exclude: ['description', 'avgStarRating', 'createdAt', 'updatedAt']
+            exclude: ['description', 'createdAt', 'updatedAt']
           }
         }
       }

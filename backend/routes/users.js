@@ -22,6 +22,13 @@ router.get('/:userId/bookings', requireAuth, async (req, res, next) => {
     },
     include: {
       model: Spot,
+      include: {
+        model: Image,
+        required: false,
+        attributes: [
+          ['url', 'previewImage']
+        ],
+      },
       attributes: [
         'id',
         'ownerId',
@@ -34,8 +41,9 @@ router.get('/:userId/bookings', requireAuth, async (req, res, next) => {
         'name',
         'price',
         [Sequelize.literal('(SELECT url FROM Images)'), 'previewImage']
-      ]
-    }
+      ],
+      raw: true
+    },
   });
 
   // return successful response 
@@ -86,7 +94,7 @@ router.get('/:userId/spots', requireAuth, async (req, res, next) => {
       id: req.user.id
     }
   });
-  
+
   // if userId is not the same as current user id, throw authorization error
   if (currentUserInfo.id !== userId) {
     const err = Error("Forbidden");

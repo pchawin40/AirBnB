@@ -39,9 +39,6 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
-      avgStarRating: {
-        type: Sequelize.DECIMAL(2, 1)
-      },
       ownerId: {
         type: Sequelize.INTEGER
       },
