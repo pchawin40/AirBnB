@@ -46,7 +46,7 @@ router.get('/:userId/bookings', requireAuth, async (req, res, next) => {
 
 // TODO: Returns all the reviews written by the current user
 // returns all the reviews written by the current user
-router.get('/:userId/reviews', requireAuth, async (req, res) => {
+router.get('/:userId/reviews', requireAuth, async (req, res, next) => {
   // deconstruct userId from params
   const { userId } = req.params;
 
@@ -76,9 +76,23 @@ router.get('/:userId/reviews', requireAuth, async (req, res) => {
 
 // TODO: Get all Spots owned by the Current User
 // return all spots owned (created) by the current user
-router.get('/:userId/spots', requireAuth, async (req, res) => {
+router.get('/:userId/spots', requireAuth, async (req, res, next) => {
   // deconstruct userId from params
-  const { userId } = req.params;
+  const userId = Number(req.params.userId);
+
+  // get the current user info
+  const currentUserInfo = await User.findOne({
+    where: {
+      id: req.user.id
+    }
+  });
+  
+  // if userId is not the same as current user id, throw authorization error
+  if (currentUserInfo.id !== userId) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    next(err);
+  }
 
   const getSpot = await Spot.findAll({
     where: {

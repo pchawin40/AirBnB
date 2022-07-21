@@ -59,11 +59,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     lat: {
-      type: DataTypes.DECIMAL(2, 7),
+      type: DataTypes.DECIMAL(9, 7),
       allowNull: false
     },
     lng: {
-      type: DataTypes.DECIMAL(2, 7),
+      type: DataTypes.DECIMAL(9, 7),
       allowNull: false
     },
     name: {
@@ -75,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     price: {
-      type: DataTypes.DECIMAL(2, 2),
+      type: DataTypes.DECIMAL(4, 2),
       validate: {
         isNumeric: {
           args: true,
@@ -84,7 +84,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     avgStarRating: {
-      type: DataTypes.DECIMAL(1, 1),
+      type: DataTypes.DECIMAL(2, 1),
       allowNull: true
     }
   }, {
