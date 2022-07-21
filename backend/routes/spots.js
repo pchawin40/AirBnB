@@ -215,7 +215,9 @@ router.get('/:spotId', async (req, res, next) => {
 
   const spot = await Spot.findByPk(spotId);
 
-  const getReview = await spot.getReviews();
+  const getReview = await spot.getReviews({
+    require: true
+  });
 
   return res.json(getReview);
   // const getSpot = await Spot.findOne({
