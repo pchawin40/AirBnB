@@ -213,23 +213,28 @@ router.get('/:spotId', async (req, res, next) => {
   // deconstruct spotId from req.params
   const { spotId } = req.params;
 
-  const getSpot = await Spot.findOne({
-    attributes: [
-      '*',
-      [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
-      [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
-    ],
-    where: {
-      id: spotId
-    },
-    include: {
-      model: Review,
-      attributes: [],
-      raw: true
-    },
-    group: ['Spots.id'],
-    raw: true
-  });
+  const spot = await Spot.findByPk(spotId);
+
+  const getReview = await spot.getReviews();
+
+  return res.json(getReview);
+  // const getSpot = await Spot.findOne({
+  //   attributes: [
+  //     '*',
+  //     [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
+  //     [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
+  //   ],
+  //   where: {
+  //     id: spotId
+  //   },
+  //   include: {
+  //     model: Review,
+  //     attributes: [],
+  //     raw: true
+  //   },
+  //   group: ['Spots.id'],
+  //   raw: true
+  // });
 
   // Error response: Couldn't find a Spot with the specified id
   if (!getSpot) {
