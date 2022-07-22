@@ -59,11 +59,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     lat: {
-      type: DataTypes.DECIMAL(10, 7),
+      type: DataTypes.FLOAT(10, 7),
       allowNull: false
     },
     lng: {
-      type: DataTypes.DECIMAL(10, 7),
+      type: DataTypes.FLOAT(10, 7),
       allowNull: false
     },
     name: {
@@ -75,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     price: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.FLOAT(7),
       validate: {
         isNumeric: {
           args: true,
