@@ -237,7 +237,7 @@ router.get('/:spotId', async (req, res, next) => {
   const getReview = await Review.findOne({
     attributes: [
       [Sequelize.fn('COUNT', Sequelize.col('stars')), 'numReviews'],
-      [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('stars')), 2), 'avgStarRating']
+      [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('stars')), 1), 'avgStarRating']
     ],
     raw: true
   });
