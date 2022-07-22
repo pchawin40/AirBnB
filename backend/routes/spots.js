@@ -230,7 +230,8 @@ router.get('/:spotId', async (req, res, next) => {
       raw: true
     },
     raw: true,
-    subQuery: false
+    subQuery: false,
+    group: ['Reviews.stars']
   });
 
   // Error response: Couldn't find a Spot with the specified id
