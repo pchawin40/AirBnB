@@ -44,7 +44,7 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
   }
 
   // TODO: Add token
-  const token = setTokenCookie(res, user);
+  const token = req.cookies.token;
 
   // return current user info
   const loginUserInfo = await User.scope('currentUser').findOne({ where: user })
