@@ -218,20 +218,28 @@ router.get('/:spotId', async (req, res, next) => {
   const getSpot = await Spot.findOne({
     attributes: [
       '*',
-      [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
-      [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
+      // [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
+      // [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
     ],
     where: {
       id: spotId
     },
-    include: {
-      model: Review,
-      attributes: [],
-      raw: true
-    },
+    // include: {
+    //   model: Review,
+    //   attributes: [],
+    //   raw: true
+    // },
     raw: true,
     subQuery: false,
-    group: ['Reviews.stars']
+    // group: ['Reviews.stars']
+  });
+
+  const getReview = await Review.findOne({
+    attributes: [
+      [Sequelize.fn('COUNT', Sequelize.col('stars')), 'numReviews'],
+      [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgStarRating']
+    ],
+    raw: true
   });
 
   // Error response: Couldn't find a Spot with the specified id
@@ -258,6 +266,7 @@ router.get('/:spotId', async (req, res, next) => {
 
   const spotDetail = {
     ...getSpot,
+    ...getReview,
     Images: getImage,
     Owners: getOwner
   };
