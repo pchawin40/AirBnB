@@ -312,7 +312,7 @@ router.get('/', validateQuery, async (req, res) => {
   if (size > 20) size = 20;
 
   const limit = size;
-  const offset = !size ? 0 : size * (page - 1);
+  const offset = size * (page - 1) >= 0 ? size * (page - 1) : 0;
 
   /** 
    * Search parameter:
