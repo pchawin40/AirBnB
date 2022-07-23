@@ -63,7 +63,7 @@ router.post('/', validateSignup, async (req, res, next) => {
   const token = setTokenCookie(res, user);
 
   // return current user info
-  const registerUserInfo = await User.scope('currentUser').findOne({ where: user });
+  const registerUserInfo = await User.scope('currentUser').findByPk(user.id);
   registerUserInfo.dataValues['token'] = token;
 
   // return the created user via json
