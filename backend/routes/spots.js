@@ -672,8 +672,10 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     price
   });
 
+  const spotReturn = await Spot.scope('hideImage').findByPk(updateSpot.id);
+
   // TODO: Successful response: return spot in response via json format
-  return res.json(updateSpot);
+  return res.json(spotReturn);
 });
 
 // TODO: Delete a Spot
