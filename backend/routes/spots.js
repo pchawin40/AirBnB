@@ -326,12 +326,12 @@ router.get('/', validateQuery, async (req, res) => {
   const where = {};
 
   const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
-  if (minLat) where.lat = { [Op.lte]: Number(minLat) };
-  if (maxLat) where.lat = { [Op.gte]: Number(maxLat) };
-  if (minLng) where.lng = { [Op.lte]: Number(minLng) };
-  if (maxLng) where.lng = { [Op.gte]: Number(maxLng) };
-  if (minPrice) where.price = { [Op.lte]: Number(minPrice) };
-  if (maxPrice) where.price = { [Op.gte]: Number(maxPrice) };
+  if (minLat) where.lat = { [Op.gte]: Number(minLat) };
+  if (maxLat) where.lat = { [Op.lte]: Number(maxLat) };
+  if (minLng) where.lng = { [Op.gte]: Number(minLng) };
+  if (maxLng) where.lng = { [Op.lte]: Number(maxLng) };
+  if (minPrice) where.price = { [Op.gte]: Number(minPrice) };
+  if (maxPrice) where.price = { [Op.lte]: Number(maxPrice) };
 
   // find all with query and search parameter (if exists)
   const spots = await Spot.findAll({
