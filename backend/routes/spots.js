@@ -600,9 +600,11 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     price
   });
 
+  const spotReturn = Spot.scope('byReviews').findByPk(postSpot.id);
+
   // return spot created
   res.status(201);
-  res.json(postSpot);
+  res.json(spotReturn);
 });
 
 // TODO: Edit a Spot
