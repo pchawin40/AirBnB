@@ -47,6 +47,15 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     }
   });
 
+  // find review to authorize
+  const reviewAuthorize = await Review.findByPk(reviewId);
+
+  if (reviewAuthorize && reviewAuthorize.userId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
   // TODO: Error response: Couldn't find a Review with the specified id
   if (!review) {
     const err = Error("Review couldn't be found");
@@ -88,12 +97,21 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
   // deconstruct review and stars
   const { review, stars } = req.body;
 
-  // TODO: Require proper authorization: Must belong to current user
+  // get current user
   const currentUser = await User.findOne({
     where: {
       id: req.user.id
     }
   });
+
+  const reviewExist = await Review.findByPk(reviewId);
+
+  // TODO: Error response: Couldn't find a Review with the specified id
+  if (!reviewExist) {
+    const err = Error("Review couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
 
   // find review to update bsaed on reviewId and current user id
   const getReview = await Review.findOne({
@@ -103,10 +121,10 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
     }
   });
 
-  // TODO: Error response: Couldn't find a Review with the specified id
+  // TODO: Require proper authorization: Review must belong to the current user
   if (!getReview) {
-    const err = Error("Review couldn't be found");
-    err.status = 404;
+    const err = Error("Forbidden");
+    err.status = 403;
     return next(err);
   }
 
@@ -122,9 +140,9 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
 
 // TODO: Delete a Review
 // Delete an existing review
-router.delete('/:spotId', requireAuth, async (req, res, next) => {
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
   // deconstruct spotId
-  const { spotId } = req.params;
+  const { reviewId } = req.params;
 
   // get the current user info
   const currentUser = await User.findOne({
@@ -133,10 +151,20 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     }
   });
 
+  // find review to authorize
+  const reviewAuthorize = await Review.findByPk(reviewId);
+
+  // if reviewId does not belong to the current user, throw authorization error
+  if (reviewAuthorize && reviewAuthorize.userId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
   // find review to delete
   const reviewToDestroy = await Review.findOne({
     where: {
-      id: spotId,
+      id: reviewId,
       userId: currentUser.id
     }
   });
@@ -154,7 +182,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
   // TODO: Successful response
   res.json({
     message: "Successfully deleted",
-    statusCode: res.status
+    statusCode: res.statusCode
   });
 });
 

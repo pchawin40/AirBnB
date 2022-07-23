@@ -28,6 +28,15 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     }
   });
 
+  // find booking to authorize
+  const bookingAuthorize = await Booking.findByPk(bookingId);
+
+  if (bookingAuthorize && bookingAuthorize.userId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
   // TODO: Error response: Couldn't find a Booking with the specified id
   const booking = await Booking.findOne({
     where: {
@@ -102,6 +111,15 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     }
   });
 
+  // find booking to authorize
+  const bookingAuthorize = await Booking.findByPk(bookingId);
+
+  if (bookingAuthorize && bookingAuthorize.userId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
   // Spot must belong to the current user
   const spot = await Spot.findOne({
     where: {
@@ -125,7 +143,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
 
   // TODO: Error response: Can't delete a booking that's past the start date
   const startDateCompare = booking.startDate.toISOString().split('T')[0];
-  const dateNowCompare = new Date('05-05-2010').toISOString().split('T')[0];
+  const dateNowCompare = new Date().toISOString().split('T')[0];
 
   if (startDateCompare < dateNowCompare) {
     const err = Error("Bookings that have been started can't be deleted");
@@ -134,7 +152,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
   }
 
   // delete booking if found
-  booking.destroy();
+  // booking.destroy();
 
   // TODO: Successful Response
   res.json({

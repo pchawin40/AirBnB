@@ -21,28 +21,7 @@ router.get('/:userId/bookings', requireAuth, async (req, res, next) => {
       userId
     },
     include: {
-      model: Spot,
-      include: {
-        model: Image,
-        required: false,
-        attributes: [
-          ['url', 'previewImage']
-        ],
-      },
-      attributes: [
-        'id',
-        'ownerId',
-        'address',
-        'city',
-        'state',
-        'country',
-        'lat',
-        'lng',
-        'name',
-        'price',
-        [Sequelize.literal('(SELECT url FROM Images)'), 'previewImage']
-      ],
-      raw: true
+      model: Spot.scope('byBookings')
     },
   });
 
@@ -69,12 +48,32 @@ router.get('/:userId/reviews', requireAuth, async (req, res, next) => {
       },
       {
         model: Spot.scope('byReviews'),
-      },
-      {
-        model: Image
       }
     ]
   });
+
+
+
+  // get array of images for current review 
+  // reviews.map(async review => {
+  for (const review of reviews) {
+    // for all images per review
+    const images = await Image.findAll({ where: { imageableId: review.id } });
+
+    // put it into review images to be placed in reviews
+    const reviewImages = [];
+
+    // for each image in found images
+    images.map(image => {
+      // push all its attribute into here
+      const currentImage = {
+        ...image.dataValues
+      };
+      reviewImages.push(currentImage);
+    });
+
+    review.dataValues['Images'] = reviewImages;
+  }
 
   // return successful response 
   res.json({
@@ -99,7 +98,7 @@ router.get('/:userId/spots', requireAuth, async (req, res, next) => {
   if (currentUserInfo.id !== userId) {
     const err = Error("Forbidden");
     err.status = 403;
-    next(err);
+    return next(err);
   }
 
   const getSpot = await Spot.findAll({

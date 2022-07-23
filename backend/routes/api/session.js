@@ -44,10 +44,11 @@ router.post(['/', '/login'], validateLogin, async (req, res, next) => {
   }
 
   // TODO: Add token
-  const token = req.cookies.token;
+  // const token = res.cookies.token || "";
+  const token = setTokenCookie(res, user);
 
   // return current user info
-  const loginUserInfo = await User.scope('currentUser').findOne({ where: user })
+  const loginUserInfo = await User.scope('currentUser').findByPk(user.id)
   loginUserInfo.dataValues['token'] = token;
 
   // TODO: Successful Response

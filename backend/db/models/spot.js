@@ -105,6 +105,13 @@ module.exports = (sequelize, DataTypes) => {
       byReviews() {
         return {
           attributes: {
+            exclude: ['previewImage', 'description', 'createdAt', 'updatedAt']
+          }
+        }
+      },
+      byBookings() {
+        return {
+          attributes: {
             exclude: ['description', 'createdAt', 'updatedAt']
           }
         }

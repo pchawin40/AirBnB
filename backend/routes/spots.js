@@ -42,7 +42,7 @@ const validateSpot = [
   // check if name is valid
   check('name')
     .exists({ checkFalsy: true })
-    .withMessage('Name is required'),
+    .withMessage('Name must be less than 50 characters'),
   // check that name is no longer than 50 characters
   check('name')
     .isLength({ max: 50 })
@@ -63,7 +63,9 @@ const validateReview = [
   check('review')
     .exists({ checkFalsy: true })
     .withMessage('Review text is required'),
+  // check if stars exists and is an integer from 1 to 5
   check('stars')
+    .exists({ checkFalsy: true })
     .isFloat({ min: 1, max: 5 })
     .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
@@ -188,9 +190,6 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     include: [
       {
         model: User
-      },
-      {
-        model: Image
       }
     ]
   });
@@ -200,6 +199,27 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     const err = Error("Spot couldn't be found");
     err.status = 404;
     return next(err);
+  }
+
+  // get array of images for current review 
+  // reviews.map(async review => {
+  for (const review of reviews) {
+    // for all images per review
+    const images = await Image.findAll({ where: { imageableId: review.id } });
+
+    // put it into review images to be placed in reviews
+    const reviewImages = [];
+
+    // for each image in found images
+    images.map(image => {
+      // push all its attribute into here
+      const currentImage = {
+        ...image.dataValues
+      };
+      reviewImages.push(currentImage);
+    });
+
+    review.dataValues['Images'] = reviewImages;
   }
 
   res.json({
@@ -291,55 +311,33 @@ router.get('/', validateQuery, async (req, res) => {
   if (page > 10) page = 0;
   if (size > 20) size = 20;
 
+  /** 
+   * Search parameter:
+   * - minLat
+   * - maxLat
+   * - minLng
+   * - maxLng
+   * - minPrice
+   * - maxPrice
+  */
+  const where = {};
 
+  const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+  minLat ? where.lat = { [Op.lte]: Number(minLat) } : "";
+  maxLat ? where.lat = { [Op.gte]: Number(maxLat) } : "";
+  minLng ? where.lng = { [Op.lte]: Number(minLng) } : "";
+  maxLng ? where.lng = { [Op.gte]: Number(maxLng) } : "";
+  minPrice ? where.price = { [Op.lte]: Number(minPrice) } : "";
+  maxPrice ? where.price = { [Op.gte]: Number(maxPrice) } : "";
+
+  // find all with query and search parameter (if exists)
   const spots = await Spot.findAll({
-    attributes: [
-      '*',
-    ],
-    // TODO: Add Query Filters to Get All Spots
-    where: {
-      // find between latitude
-      lat: {
-        [Op.between]:
-          [(req.query.minLat || -1000), (req.query.maxLat || 1000)]
-      },
-      // find between longitude
-      lng: {
-        [Op.between]:
-          [(req.query.minLng || -1000), (req.query.maxLng || 1000)]
-      },
-      // find between price
-      price: {
-        [Op.between]:
-          [(req.query.minPrice || 0), (req.query.maxPrice || 1000)]
-      },
-    },
-    // include Image to find its url
     include: {
       model: Image,
-      attributes: [
-        'url'
-      ],
+      attributes: []
     },
-    // pagination
-    limit: size,
-    offset: size * (page - 1),
-    raw: true
-  });
-
-  // get all spot to delete id from
-  const deleteSpots = await Spot.findAll();
-
-  // for each spots
-  spots.forEach(spot => {
-    // delete spot image url and replace with previewImage
-    spot.previewImage = spot['Images.url'];
-    delete spot['Images.url'];
-
-    // delete spot id from attributes
-    deleteSpots.forEach(innerSpot => {
-      delete spot[`id:${innerSpot.id}`];
-    });
+    where,
+    offset: size * (page - 1)
   });
 
   // TODO: Successful response
@@ -464,6 +462,15 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     }
   });
 
+  // find spot to authorize
+  const spotAuthorize = await Spot.findByPk(spotId);
+
+  if (spotAuthorize && spotAuthorize.ownerId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
   // TODO: Require proper authorization: Spot must belong to the current user
   const spot = await Spot.findOne({
     where: {
@@ -504,6 +511,15 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
       id: req.user.id
     }
   });
+
+  // find spot to authorize
+  const spotAuthorize = await Spot.findByPk(spotId);
+
+  if (spotAuthorize && spotAuthorize.ownerId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
 
   // get spot by spotId
   const spot = await Spot.findByPk(spotId);
@@ -656,6 +672,16 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
       id: req.user.id
     }
   });
+
+  // find spot to authorize
+  const spotAuthorize = await Spot.findByPk(spotId);
+
+  // if spotId does not belong to the current user, throw authorization error
+  if (spotAuthorize && spotAuthorize.ownerId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
 
   // find spot and delete
   const spotToDestroy = await Spot.findOne({
