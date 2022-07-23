@@ -52,8 +52,6 @@ router.get('/:userId/reviews', requireAuth, async (req, res, next) => {
     ]
   });
 
-
-
   // get array of images for current review 
   // reviews.map(async review => {
   for (const review of reviews) {
@@ -105,10 +103,6 @@ router.get('/:userId/spots', requireAuth, async (req, res, next) => {
     where: {
       ownerId: userId
     },
-    attributes: [
-      '*',
-      [Sequelize.literal('Images.url'), 'previewImage']
-    ],
     include: {
       model: Image,
       attributes: []
