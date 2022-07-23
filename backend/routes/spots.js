@@ -516,15 +516,6 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
     }
   });
 
-  // find spot to authorize
-  const spotAuthorize = await Spot.findByPk(spotId);
-
-  if (spotAuthorize && spotAuthorize.ownerId !== req.user.id) {
-    const err = Error("Forbidden");
-    err.status = 403;
-    return next(err);
-  }
-
   // get spot by spotId
   const spot = await Spot.findByPk(spotId);
 
