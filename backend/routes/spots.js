@@ -627,6 +627,16 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     price
   } = req.body;
 
+  // find spot to authorize
+  const spotAuthorize = await Spot.findByPk(spotId);
+
+  // if spotId does not belong to the current user, throw authorization error
+  if (spotAuthorize && spotAuthorize.ownerId !== req.user.id) {
+    const err = Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
   // get the current user info
   const currentUser = await User.findOne({
     where: {
