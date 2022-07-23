@@ -7,11 +7,11 @@ const { Sequelize } = require('sequelize');
 const { User, Spot, Image, Review, Booking } = require('../db/models');
 const router = express.Router();
 
-const { requireAuth } = require('../utils/auth');
+const { restoreUser, requireAuth } = require('../utils/auth');
 
 // TODO: Get all of the Current User's Bookings
 // Return all the bookings that the current user has made
-router.get('/:userId/bookings', requireAuth, async (req, res, next) => {
+router.get('/:userId/bookings', [restoreUser, requireAuth], async (req, res, next) => {
   // deconstruct userId from params
   const { userId } = req.params;
 
@@ -33,7 +33,7 @@ router.get('/:userId/bookings', requireAuth, async (req, res, next) => {
 
 // TODO: Returns all the reviews written by the current user
 // returns all the reviews written by the current user
-router.get('/:userId/reviews', requireAuth, async (req, res, next) => {
+router.get('/:userId/reviews', [restoreUser, requireAuth], async (req, res, next) => {
   // deconstruct userId from params
   const { userId } = req.params;
 
@@ -81,7 +81,7 @@ router.get('/:userId/reviews', requireAuth, async (req, res, next) => {
 
 // TODO: Get all Spots owned by the Current User
 // return all spots owned (created) by the current user
-router.get('/:userId/spots', requireAuth, async (req, res, next) => {
+router.get('/:userId/spots', [restoreUser, requireAuth], async (req, res, next) => {
   // deconstruct userId from params
   const userId = Number(req.params.userId);
 
@@ -114,7 +114,7 @@ router.get('/:userId/spots', requireAuth, async (req, res, next) => {
 });
 
 // TODO: GET route to get the current user and require authentication
-router.get('/:userId', requireAuth, async (req, res) => {
+router.get('/:userId', [restoreUser, requireAuth], async (req, res) => {
   // get current user from userId
   const { userId } = req.params;
 
