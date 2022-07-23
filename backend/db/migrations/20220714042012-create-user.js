@@ -1,6 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // Migration to add 'Users' table
     await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
@@ -37,6 +38,7 @@ module.exports = {
       }
     });
   },
+  // Migration to drop 'Users' table
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Users');
   }

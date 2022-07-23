@@ -3,10 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     * Migration to add 'spotId' to 'Bookings' table
      */
     await queryInterface.addColumn('Bookings', 'spotId', {
       type: Sequelize.INTEGER,
@@ -21,10 +18,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
+     * Migration to remove 'spotId' from 'Bookings' table
      */
     await queryInterface.removeColumn('Bookings', 'spotId');
   }

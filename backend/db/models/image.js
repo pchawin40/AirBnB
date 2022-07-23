@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association 
-      // Image has many Spots (1 - *)
+      // Image has many Spots
       Image.belongsTo(models.Spot,
         {
           foreignKey: 'imageableId',
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       );
 
-      // Image has many Reviews (1 - *)
+      // Image has many Reviews
       Image.belongsTo(models.Review, {
         foreignKey: 'imageableId',
         constraints: false

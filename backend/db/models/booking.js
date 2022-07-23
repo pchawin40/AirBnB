@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Booking has many Spot (1 to *)
+      // Booking belongs to Spot
       Booking.belongsTo(models.Spot, {
         foreignKey: 'spotId'
       });
 
-      // Booking belongs to User (* to 1)
+      // Booking belongs to User
       Booking.belongsTo(models.User, {
         foreignKey: 'userId'
       });

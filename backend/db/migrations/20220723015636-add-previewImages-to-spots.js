@@ -3,10 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     * Migration to add previewImage to 'Spots' table
      */
     await queryInterface.addColumn('Spots', 'previewImage', {
       type: Sequelize.STRING,
@@ -16,10 +13,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
+     * Migration to remove previewImage from 'Spots' table
      */
     await queryInterface.removeColumn('Spots', 'previewImage');
   }
