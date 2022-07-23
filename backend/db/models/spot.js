@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, Sequelize
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
@@ -59,11 +59,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     lat: {
-      type: DataTypes.FLOAT(10, 7),
+      type: DataTypes.DECIMAL(10, 7),
       allowNull: false
     },
     lng: {
-      type: DataTypes.FLOAT(10, 7),
+      type: DataTypes.DECIMAL(10, 7),
       allowNull: false
     },
     name: {
@@ -75,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     price: {
-      type: DataTypes.FLOAT(7),
+      type: DataTypes.DECIMAL,
       validate: {
         isNumeric: {
           args: true,
@@ -84,10 +84,16 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     createdAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false
     },
     updatedAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    previewImage: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     scopes: {

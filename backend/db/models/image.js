@@ -29,13 +29,17 @@ module.exports = (sequelize, DataTypes) => {
   Image.init({
     imageableId: {
       type: DataTypes.INTEGER,
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      allowNull: false
     },
     imageableType: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    url: DataTypes.STRING(255)
+    url: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'Image',

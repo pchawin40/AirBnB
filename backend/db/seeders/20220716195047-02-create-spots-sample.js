@@ -1,7 +1,7 @@
 'use strict';
 
 // Import Spot
-const { Spot, User, Review } = require('../models');
+const { Spot } = require('../models');
 
 // Spots sample
 const spots = [
@@ -14,7 +14,8 @@ const spots = [
     lng: -122.4730327,
     name: 'App Academy',
     description: 'Place where web developers are created',
-    price: 123
+    price: 123,
+    previewImage: "image url"
   },
   {
     address: 'P.O. Box 1303',
@@ -25,7 +26,8 @@ const spots = [
     lng: -50.2341234,
     name: 'Internal Revenue Services',
     description: "World's most efficient tax administrators",
-    price: 500
+    price: 500,
+    previewImage: "image url 2"
   }
 ];
 
@@ -50,7 +52,8 @@ module.exports = {
         lng,
         name,
         description,
-        price
+        price,
+        previewImage
       } = spotInfo;
 
       // get ownerId
@@ -66,7 +69,8 @@ module.exports = {
         lng,
         name,
         description,
-        price
+        price,
+        previewImage
       });
     }
   },
