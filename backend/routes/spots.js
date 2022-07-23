@@ -337,7 +337,7 @@ router.get('/', validateQuery, async (req, res) => {
       attributes: []
     },
     where,
-    offset: size * (page - 1)
+    offset: size * (page - 1) >= 0 ? size * (page - 1) >= 0 : 0
   });
 
   // TODO: Successful response
