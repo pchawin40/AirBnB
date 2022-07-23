@@ -83,6 +83,10 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    previewImage: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false
@@ -90,10 +94,6 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false
-    },
-    previewImage: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   }, {
     scopes: {
