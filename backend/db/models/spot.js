@@ -115,6 +115,13 @@ module.exports = (sequelize, DataTypes) => {
             exclude: ['description', 'createdAt', 'updatedAt']
           }
         }
+      },
+      hideImage() {
+        return {
+          attributes: {
+            exclude: ['previewImage']
+          }
+        }
       }
     },
     sequelize,
