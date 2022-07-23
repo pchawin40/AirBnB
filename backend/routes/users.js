@@ -11,14 +11,11 @@ const { restoreUser, requireAuth } = require('../utils/auth');
 
 // TODO: Get all of the Current User's Bookings
 // Return all the bookings that the current user has made
-router.get('/:userId/bookings', [restoreUser, requireAuth], async (req, res, next) => {
-  // deconstruct userId from params
-  const { userId } = req.params;
-
+router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
   // get bookings from user id
   const bookings = await Booking.findAll({
     where: {
-      userId
+      userId: req.user.id
     },
     include: {
       model: Spot.scope('byBookings')
@@ -33,14 +30,11 @@ router.get('/:userId/bookings', [restoreUser, requireAuth], async (req, res, nex
 
 // TODO: Returns all the reviews written by the current user
 // returns all the reviews written by the current user
-router.get('/:userId/reviews', [restoreUser, requireAuth], async (req, res, next) => {
-  // deconstruct userId from params
-  const { userId } = req.params;
-
+router.get('/reviews', [restoreUser, requireAuth], async (req, res, next) => {
   // get review of given user id
   const reviews = await Review.findAll({
     where: {
-      userId
+      userId: req.user.id
     },
     include: [
       {
@@ -81,10 +75,7 @@ router.get('/:userId/reviews', [restoreUser, requireAuth], async (req, res, next
 
 // TODO: Get all Spots owned by the Current User
 // return all spots owned (created) by the current user
-router.get('/:userId/spots', [restoreUser, requireAuth], async (req, res, next) => {
-  // deconstruct userId from params
-  const userId = Number(req.params.userId);
-
+router.get('/spots', [restoreUser, requireAuth], async (req, res, next) => {
   // get the current user info
   const currentUserInfo = await User.findOne({
     where: {
@@ -93,7 +84,7 @@ router.get('/:userId/spots', [restoreUser, requireAuth], async (req, res, next) 
   });
 
   // if userId is not the same as current user id, throw authorization error
-  if (currentUserInfo.id !== userId) {
+  if (currentUserInfo.id !== req.user.id) {
     const err = Error("Forbidden");
     err.status = 403;
     return next(err);
@@ -101,7 +92,7 @@ router.get('/:userId/spots', [restoreUser, requireAuth], async (req, res, next) 
 
   const getSpot = await Spot.findAll({
     where: {
-      ownerId: userId
+      ownerId: req.user.id
     },
     include: {
       model: Image,
@@ -114,11 +105,8 @@ router.get('/:userId/spots', [restoreUser, requireAuth], async (req, res, next) 
 });
 
 // TODO: GET route to get the current user and require authentication
-router.get('/:userId', [restoreUser, requireAuth], async (req, res) => {
-  // get current user from userId
-  const { userId } = req.params;
-
-  const getUser = await User.getCurrentUserById(userId);
+router.get('/', [restoreUser, requireAuth], async (req, res) => {
+  const getUser = await User.getCurrentUserById(req.user.id);
 
   return res.json(getUser);
 });
