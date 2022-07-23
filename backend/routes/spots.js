@@ -600,7 +600,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     price
   });
 
-  const spotReturn = Spot.scope('byReviews').findByPk(postSpot.id);
+  const spotReturn = await Spot.scope('byReviews').findByPk(postSpot.id);
 
   // return spot created
   res.status(201);
