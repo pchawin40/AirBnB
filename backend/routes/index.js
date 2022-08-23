@@ -20,7 +20,6 @@ const { restoreUser } = require('../utils/auth');
 router.use(restoreUser);
 
 // TODO: Log in current user with valid credentials
-router.use('/api', apiRouter);
 router.use('/login', apiSessionRouter);
 router.use('/signup', apiUserRouter);
 router.use('/users', userRouter);
@@ -28,6 +27,39 @@ router.use('/spots', spotRouter);
 router.use('/reviews', reviewRouter);
 router.use('/bookings', bookingRouter);
 router.use('/images', imageRouter);
+router.use('/api', apiRouter);
+
+// TODO: Restore XSRF-TOKEN Cookie
+// Serve React build files in production
+if (process.env.NODE_ENV === 'production') {
+  const path = require('path');
+
+  // Serve frontend index.html and any route that don't start w/ api
+  router.get('/', (req, res) => {
+    res.cookie('XSRF-TOKEN', req.csrfToken());
+    return res.sendFile(
+      path.resolve(__dirname, '../../frontend', 'build', 'index.html')
+    );
+  });
+
+  // serve static asset in frontend's build folder
+  router.use(express.static(path.resolve('../frontend/build')));
+
+  // serve frontend's index.html file at all other routes not starting w/ /api
+  router.get(/^(?!\/?api).*/, (req, res) => {
+    res.cookie('XSRF-TOKEN', req.csrfToken());
+    return res.sendFile(
+      path.resolve(__dirname, '../../frontend', 'build', 'index.html')
+    );
+  });
+  // else if in development (not in production)
+} else {
+  // get token from /api/csrf/restore file
+  router.get('/api/csrf/restore', (req, res) => {
+    res.cookie('XSRF-TOKEN', req.csrfToken());
+    return res.json({});
+  });
+}
 
 // TODO: Add a route to allow any developer to re-set CSRF token cookie
 router.get('/api/csrf/restore', (req, res) => {
@@ -41,6 +73,7 @@ router.get('/api/csrf/restore', (req, res) => {
     'XSRF-Token': csrfToken
   });
 });
+
 
 
 module.exports = router;
