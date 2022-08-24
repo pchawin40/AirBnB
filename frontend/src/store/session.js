@@ -56,6 +56,12 @@ export const login = user => async dispatch => {
   return res;
 }
 
+// log current user out by dispatching removeSessionUser
+export const logout = () => async dispatch => dispatch(removeSessionUser());
+
+/* --------- SELECTOR FUNCTIONS -------- */
+export const getSessionUser = state => state.session.user;
+
 /* --------- REDUCERS -------- */
 
 // if there is no session user, set null attribute to user key as default value
