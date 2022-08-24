@@ -36,7 +36,7 @@ const LoginFormPage = () => {
 
   //? Handle Submit
   // if there is current session user, redirect user to '/'
-  // if (currentUser) return <Redirect to='/' />;
+  if (currentUser) return <Redirect to='/' />;
 
   // function to handle form on submit
   const handleSubmit = e => {
@@ -54,14 +54,13 @@ const LoginFormPage = () => {
 
     // dispatch signup thunk action
     // handle and display errors if any
-    //! To fix login error, reference signup
     return dispatch(sessionActions.login(user)).catch(
       async res => {
         // parse error data
         const data = await res.json();
 
         // set any error data into validation errors
-        if (data.errors) setValidationErrors(Object.values(data.errors));
+        if (data) setValidationErrors(Object.values([data.message]));
       }
     );
   }
@@ -72,7 +71,7 @@ const LoginFormPage = () => {
       {/* //? Display Errors (if any) */}
       <ul>
         {
-          validationErrors.map(error => <li key={error}>{error}</li>)
+          validationErrors.map(error => <li key={error.id}>{error}</li>)
         }
       </ul>
 
