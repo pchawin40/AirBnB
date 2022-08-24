@@ -3,7 +3,8 @@
 // import csrfFetch
 import { csrfFetch } from "./csrf";
 
-// TODO: Phase 1: Login form page
+//?  Phase 1: Login form page
+// TODO: Phase 2: Signup form page
 
 /* --------- ACTIONS -------- */
 //? Action: Set session user
@@ -54,9 +55,6 @@ export const login = user => async dispatch => {
   return res;
 };
 
-// log current user out by dispatching removeSessionUser
-export const logout = () => async dispatch => dispatch(removeSessionUser());
-
 // TODO: Restore the session user
 //? Setting session user to user in response body
 export const restoreSessionUser = () => async dispatch => {
@@ -66,14 +64,41 @@ export const restoreSessionUser = () => async dispatch => {
   // parse JSON body of response
   const user = res.json();
 
-  console.log("user", user);
-
   // dispatch action for setting session user to user in response body
   dispatch(setSessionUser(user));
 
   // return response
   return res;
 };
+
+//? Signup Thunk action
+export const signup = user => async dispatch => {
+  // extract firstName, lastName, email, and password from given user
+  const { firstName, lastName, email, password } = user;
+
+  // hit signup backend route w/ username, email, and password inputs
+  const res = await csrfFetch('/api/users', {
+    method: 'POST',
+    body: JSON.stringify({
+      firstName,
+      lastName,
+      email,
+      password
+    })
+  });
+
+  // after receiving response, parse JSON body of response
+  const signupUser = res.json();
+
+  // dispatch action for setting session user to user in response's body
+  dispatch(setSessionUser(signupUser));
+
+  // return response
+  return res;
+};
+
+// log current user out by dispatching removeSessionUser
+export const logout = () => async dispatch => dispatch(removeSessionUser());
 
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getSessionUser = state => state.session.user;

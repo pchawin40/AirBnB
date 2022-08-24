@@ -1,6 +1,6 @@
 
 // import react-router-dom
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 // import react-redux
 import { useDispatch } from 'react-redux';
@@ -19,14 +19,14 @@ function App() {
   // invoke dispatch
   const dispatch = useDispatch();
   
-  // state: isLoaded
+  // state: isLoaded 
   const [isLoaded, setIsLoaded] = useState(false);
 
   // on load...
   useEffect(() => {
     // ... restore session user and set is loaded to true
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+  }, [isLoaded, dispatch]);
 
   return (
       isLoaded && (
@@ -35,7 +35,10 @@ function App() {
           <Route exact path='/'>
             <h1>
               Home Page
-            </h1>
+          </h1>
+          <button onClick={_ => sessionActions.logout()}>
+            Log Out
+          </button>
           </Route>
 
           {/* //? route: /login */}
