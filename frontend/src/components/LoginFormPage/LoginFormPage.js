@@ -23,8 +23,9 @@ const LoginFormPage = () => {
   // getSessionUser: get current session user
   const currentUser = useSelector(sessionActions.getSessionUser);
 
-  //? controlled input: 
   /**
+   * Controlled Inputs:
+   * ------------------
    * credential: Username or Email
    * password: User Password
    * validationErrors: Errors from inputs
@@ -35,7 +36,7 @@ const LoginFormPage = () => {
 
   //? Handle Submit
   // if there is current session user, redirect user to '/'
-  if (currentUser) return <Redirect to='/' />;
+  // if (currentUser) return <Redirect to='/' />;
 
   // function to handle form on submit
   const handleSubmit = e => {
@@ -51,27 +52,27 @@ const LoginFormPage = () => {
     // reset validation errors before dispatching
     setValidationErrors([]);
 
-    // dispatch login thunk action
+    // dispatch signup thunk action
     // handle and display errors if any
+    //! To fix login error, reference signup
     return dispatch(sessionActions.login(user)).catch(
       async res => {
+        // parse error data
         const data = await res.json();
-        
-        if (data) setValidationErrors([data]);
+
+        // set any error data into validation errors
+        if (data.errors) setValidationErrors(Object.values(data.errors));
       }
-    )
+    );
   }
 
   // return login form
   return (
     <form onSubmit={handleSubmit}>
-      
       {/* //? Display Errors (if any) */}
       <ul>
         {
-          validationErrors.map(error => 
-            <li key={error}>{error.message}</li>
-          )
+          validationErrors.map(error => <li key={error}>{error}</li>)
         }
       </ul>
 
@@ -94,10 +95,7 @@ const LoginFormPage = () => {
       />
 
       {/* //? Log In Button */}
-      <button
-        type="submit"
-        onClick={e => handleSubmit(e)}
-      >
+      <button type="submit">
         Log In
       </button>
     </form>
