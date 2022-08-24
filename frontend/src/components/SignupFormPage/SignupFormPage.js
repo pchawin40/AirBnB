@@ -60,8 +60,7 @@ const SignupFormPage = () => {
       firstName,
       lastName,
       email,
-      password,
-      confirmedPassword
+      password
     };
  
     // dispatch signup thunk action

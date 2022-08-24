@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 // import components
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
+import Navigation from './components/Navigation';
 
 // import session store 
 import * as sessionActions from './store/session';
@@ -32,27 +33,28 @@ function App() {
 
   return (
       isLoaded && (
-      <Switch>
-        {/* //? route: / */}
-        <Route exact path='/'>
-          <h1>
-            Home Page
-        </h1>
-        <button onClick={_ => sessionActions.logout()}>
-          Log Out
-        </button>
-        </Route>
-        {/* //? route: /login */}
-        <Route path='/login'>
-          {/* LoginFormPage component */}
-          <LoginFormPage />
-        </Route>
-      
-        <Route path="/signup">
-          {/* SignupFormPage component */}
-          <SignupFormPage />
-        </Route>
-      </Switch>
+      <>
+        {/* //? ProfileButton */}
+        <Navigation isLoaded={isLoaded} />
+        <Switch>
+          {/* //? route: / */}
+          <Route exact path='/'>
+            <h1>
+              Home Page
+            </h1>
+          </Route>
+          {/* //? route: /login */}
+          <Route path='/login'>
+            {/* LoginFormPage component */}
+            <LoginFormPage />
+          </Route>
+        
+          <Route path="/signup">
+            {/* SignupFormPage component */}
+            <SignupFormPage />
+          </Route>
+        </Switch>
+      </>
       )
   );
 }
