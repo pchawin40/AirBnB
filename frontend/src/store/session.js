@@ -3,8 +3,9 @@
 // import csrfFetch
 import { csrfFetch } from "./csrf";
 
-//?  Phase 1: Login form page
-// TODO: Phase 2: Signup form page
+//? Phase 1: Login form page
+//? Phase 2: Signup form page
+// TODO: Phase 3: Logout
 
 /* --------- ACTIONS -------- */
 //? Action: Set session user
@@ -97,8 +98,19 @@ export const signup = user => async dispatch => {
   return res;
 };
 
-// log current user out by dispatching removeSessionUser
-export const logout = () => async dispatch => dispatch(removeSessionUser());
+//? Logout Thunk action
+export const logout = () => async dispatch => {
+  // get response from DELETE method '/api/session'
+  const res = await csrfFetch('/api/session', {
+    method: 'DELETE'
+  });
+
+  // dispatch action for removing session user
+  dispatch(removeSessionUser(res));
+};
+
+// // log current user out by dispatching removeSessionUser
+// export const logout = () => async dispatch => dispatch(removeSessionUser());
 
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getSessionUser = state => state.session.user;
