@@ -56,9 +56,6 @@ const LoginFormPage = () => {
     return dispatch(sessionActions.login(user)).catch(
       async res => {
         const data = await res.json();
-        console.log("data", data);
-        //! Cannot get data.errors, returning undefined
-        //! 1. Tried just data and saying validationErrors.map is not a function
         
         if (data) setValidationErrors([data]);
       }
@@ -77,7 +74,7 @@ const LoginFormPage = () => {
           )
         }
       </ul>
-      
+
       {/* //? Username */}
       <input
         placeholder="Username or Email"

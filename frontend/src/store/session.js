@@ -47,17 +47,33 @@ export const login = user => async dispatch => {
   // parse res to JSON 
   const data = await res.json();
 
-  console.log("data.user", data);
-
   // dispatch action for setting session user
   dispatch(setSessionUser(data));
 
   // return response
   return res;
-}
+};
 
 // log current user out by dispatching removeSessionUser
 export const logout = () => async dispatch => dispatch(removeSessionUser());
+
+// TODO: Restore the session user
+//? Setting session user to user in response body
+export const restoreSessionUser = () => async dispatch => {
+  // call GET /api/session
+  const res = await csrfFetch('/api/session');
+
+  // parse JSON body of response
+  const user = res.json();
+
+  console.log("user", user);
+
+  // dispatch action for setting session user to user in response body
+  dispatch(setSessionUser(user));
+
+  // return response
+  return res;
+};
 
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getSessionUser = state => state.session.user;
@@ -92,6 +108,6 @@ const sessionReducer = (state = initialUser, action) => {
     default:
       return state;
   }
-}
+};
 
 export default sessionReducer;
