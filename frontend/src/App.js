@@ -7,11 +7,19 @@ import LoginFormPage from "./components/LoginFormPage";
 function App() {
   return (
     <>
-    <Switch>
-      <Route path='/login'>
-        {/* LoginFormPage component */}
-        <LoginFormPage />
-      </Route>
+      <Switch>
+        {/* //? route: / */}
+        <Route exact path='/'>
+          <h1>
+            Home Page
+          </h1>
+        </Route>
+
+        {/* //? route: /login */}
+        <Route path='/login'>
+          {/* LoginFormPage component */}
+          <LoginFormPage />
+        </Route>
     </Switch>
     </>
   );

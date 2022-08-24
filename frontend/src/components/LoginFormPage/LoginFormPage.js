@@ -68,17 +68,16 @@ const LoginFormPage = () => {
   // return login form
   return (
     <form onSubmit={handleSubmit}>
+      
       {/* //? Display Errors (if any) */}
       <ul>
         {
-          validationErrors.map(error => {
-            console.log("error", error);
-            return <li key={error}>{error.message}</li>
-          }
+          validationErrors.map(error => 
+            <li key={error}>{error.message}</li>
           )
         }
       </ul>
-
+      
       {/* //? Username */}
       <input
         placeholder="Username or Email"
