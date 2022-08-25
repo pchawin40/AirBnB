@@ -66,7 +66,7 @@ export const restoreSessionUser = () => async dispatch => {
   const user = await res.json();
 
   // dispatch action for setting session user to user in response body
-  dispatch(setSessionUser(user));
+  if(user.email) dispatch(setSessionUser(user));
 
   // return response
   return res;

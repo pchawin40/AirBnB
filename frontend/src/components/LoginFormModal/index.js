@@ -19,7 +19,7 @@ const LoginFormModal = () => {
   return (
     <>
       {/* // On click, set showModal to true */}
-      <button onClick={_ => setShowModal(true)}>
+      <button id="login-button" onClick={_ => setShowModal(true)}>
         Log In
       </button>
 
@@ -29,7 +29,7 @@ const LoginFormModal = () => {
         showModal
         &&
         // .... render LoginForm component
-        <Modal onClose={_ => showModal(false)}>
+        <Modal onClose={_ => setShowModal(false)}>
             <LoginForm />
         </Modal>
       }
