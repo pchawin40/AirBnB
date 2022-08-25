@@ -1,4 +1,4 @@
-// frontend/src/components/LoginFormPage/LoginFormPage.js
+// frontend/src/components/LoginFormPage/LoginForm.js
 
 // import react
 import { useState } from 'react';
@@ -15,7 +15,7 @@ import * as sessionActions from '../../store/session';
 
 // TODO: LoginFormPage component
 //? holds all the files for login form
-const LoginFormPage = () => {
+const LoginForm = () => {
 
   // dispatch
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const LoginFormPage = () => {
 
   //? Handle Submit
   // if there is current session user, redirect user to '/'
+  //! Login form modal: code for redirecting user if there is no session user can be removed
   if (currentUser) return <Redirect to='/' />;
 
   // function to handle form on submit
@@ -71,7 +72,7 @@ const LoginFormPage = () => {
       {/* //? Display Errors (if any) */}
       <ul>
         {
-          validationErrors.map(error => <li key={error.id}>{error}</li>)
+          validationErrors.map(error => <li key={error.id} className="error-list">{error}</li>)
         }
       </ul>
 
@@ -101,4 +102,4 @@ const LoginFormPage = () => {
   );
 };
 
-export default LoginFormPage;
+export default LoginForm;

@@ -91,8 +91,6 @@ export const signup = user => async dispatch => {
   // after receiving response, parse JSON body of response
   const newUser = await res.json();
 
-  console.log("newUser", newUser);
-
   // dispatch action for setting session user to user in response's body
   dispatch(setSessionUser(newUser));
 

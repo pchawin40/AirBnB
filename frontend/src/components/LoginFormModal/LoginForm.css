@@ -19,11 +19,8 @@ form > input, button {
 }
 
 /* errors list */
-li {
-	list-style-type: none;
+.error-list {
   color: red;
-  font-weight: bold;
-  text-align: center;
 } 
 
 ul{

@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 // import components
-import LoginFormPage from './components/LoginFormPage';
+import LoginFormModal from './components/LoginFormModal';
 import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
 
@@ -38,17 +38,6 @@ function App() {
         <Navigation isLoaded={isLoaded} />
         <Switch>
           {/* //? route: / */}
-          <Route exact path='/'>
-            <h1>
-              Home Page
-            </h1>
-          </Route>
-          {/* //? route: /login */}
-          <Route path='/login'>
-            {/* LoginFormPage component */}
-            <LoginFormPage />
-          </Route>
-        
           <Route path="/signup">
             {/* SignupFormPage component */}
             <SignupFormPage />

@@ -11,6 +11,7 @@ import * as sessionActions from '../../store/session';
 
 //? ProfileButton Component
 const ProfileButton = ({user}) => {
+  
   // invoke dispatch
   const dispatch = useDispatch();
 
@@ -23,7 +24,9 @@ const ProfileButton = ({user}) => {
 
   //? openMenu: toggle menu
   const openMenu = () => {
+    // if showMenu is true, keep showMenu state as is
     if (showMenu) return;
+    // otherwise, set to true
     setShowMenu(true);
   }
 
@@ -40,7 +43,7 @@ const ProfileButton = ({user}) => {
     // when user click outside menu, close it
     document.addEventListener('click', closeMenu);
 
-    // remove close menu after clicking to exit menu
+    // cleanup: remove close menu after clicking to exit menu
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu])
 
@@ -50,11 +53,15 @@ const ProfileButton = ({user}) => {
     dispatch(sessionActions.logout());
   }
 
+  // return ProfileButton component
   return (
-    <div>
-      <button onClick={openMenu}>
+    <div id="profile-button-container">
+      <button id="nav-button-container" onClick={openMenu}>
+        {/* represent menu icon */}
+        <i className="fa-solid fa-bars fa-lg"></i>
+
         {/* represent user profile button */}
-        <i class="fa-solid fa-user"></i>
+        <i id="user-profile-icon" className="fa-solid fa-circle-user fa-xl"></i>
       </button>
       {
         showMenu && (

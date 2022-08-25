@@ -18,6 +18,9 @@ import configureStore from './store';
 // import all session actions
 import * as sessionActions from './store/session';
 
+// import context
+import { ModalProvider } from './context/Modal';
+
 const store = configureStore();
 
 // if mode is not in production, expose window
@@ -35,9 +38,11 @@ if (process.env.NODE_ENV !== 'production') {
 const Root = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ModalProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+      </ModalProvider>
     </Provider>
   );
 }

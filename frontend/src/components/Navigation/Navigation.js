@@ -14,6 +14,7 @@ import * as sessionActions from '../../store/session';
 
 // import component
 import ProfileButton from './ProfileButton';
+import LoginFormModal from '../LoginFormModal';
 
 //? Navigation Component
 const Navigation = ({ isLoaded }) => {
@@ -30,7 +31,7 @@ const Navigation = ({ isLoaded }) => {
       // When no session user, contain links to login and sign up
       <>
         {/* //? Login link */}
-        <NavLink to='/login'>Log In</NavLink>
+        <LoginFormModal to='/login'>Log In</LoginFormModal>
         {/* //? Signup link */}
         <NavLink to='/signup'>Sign Up</NavLink>
       </>;
