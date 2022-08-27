@@ -13,7 +13,7 @@ import './Navigation.css';
 import * as sessionActions from '../../store/session';
 
 // import component
-import ProfileButton from './ProfileButton';
+import ProfileButton from './ProfileButton/ProfileButton';
 import LoginFormModal from '../UserLoginRegistration/LoginFormModal';
 import LogoContainer from './LogoContainer';
 import SearchBar from './SearchBar';
@@ -58,15 +58,13 @@ const Navigation = ({ isLoaded }) => {
       {/* // TODO: Render User Link */}
       {/* //? NavLink */}
       <ul>
-        <li>
+        <li id="nav-link-container">
           {/* //TODO: To make path */}
-          <NavLink exact to='/'>
-            {/* display hosting text links */}
-            {userHostLinks}
-          </NavLink>
+          {/* display hosting text links */}
+          {userHostLinks}
           
           {/* // TODO: Modal for Region Setting */}
-          <i class="fa-solid fa-globe"></i>
+          <i className="fa-solid fa-globe"></i>
           
           {/* //TODO: sessionLinks */}
           {isLoaded && sessionLinks}

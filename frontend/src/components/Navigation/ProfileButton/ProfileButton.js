@@ -1,4 +1,4 @@
-// frontend/src/Navigation/ProfileButton.js
+// frontend/src/Navigation/ProfileButton/ProfileButton.js
 
 // import react
 import { useState, useEffect } from 'react';
@@ -7,7 +7,10 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 // import session store 
-import * as sessionActions from '../../store/session';
+import * as sessionActions from '../../../store/session';
+
+// import css
+import './ProfileButton.css';
 
 //? ProfileButton Component
 const ProfileButton = ({user}) => {
@@ -65,7 +68,7 @@ const ProfileButton = ({user}) => {
       </button>
       {
         showMenu && (
-          <ul className='profile-dropdown'>
+          <ul id='profile-dropdown'>
             <li>Hello {user.firstName} {user.lastName}!</li>
             <li>{user.email}</li>
             <li>

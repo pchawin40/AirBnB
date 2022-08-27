@@ -91,11 +91,18 @@
 	padding: 0;
 	border: lightgray 1px solid;
 	border-radius: 1rem;
+	
+	/* styling */
 	background-color: white;
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
 }
 
 #nav-button-container:hover {
-	border: lightgray 2px solid;
+	-webkit-box-shadow: 0 10px 8px -6px #777;
+  -moz-box-shadow: 0 10px 8px -6px #777;
+  box-shadow: 0 10px 8px -6px #777;
 }
 
 i {
@@ -113,9 +120,22 @@ i {
 	padding-left: 0;
 }
 
+li{
+	display: flex;
+	align-items: center;
+}
+
+#login-button{
+	margin: 0;
+}
+
 /**************************
 ? 				Nav Link
 ***************************/
+#nav-link-container{
+	margin-right: 2rem;
+}
+
 a {
 	text-decoration: none;
 	color: black;
@@ -125,15 +145,22 @@ a:hover {
 	border-radius: 2px;
 }
 
-.user-host-links {
+.user-host-links, .fa-globe{
 	padding: 1rem;
+	margin-right: 0;
 }
 
-.user-host-links:hover {
+.user-host-links:hover, .fa-globe:hover {
 	border-radius: 1.25rem;
 	background-color: #f9f9f9;
+	cursor: pointer;
 }
 
 .fa-globe {
 	color: black;
+	margin-left: 0;
+}
+
+li > * {
+	margin: 1rem;
 }

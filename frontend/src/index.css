@@ -4,10 +4,6 @@
 		'Helvetica Neue', sans-serif;
 }
 
-body {
-	overflow-y: hidden;
-}
-
 /* list */
 li {
 	list-style-type: none;
