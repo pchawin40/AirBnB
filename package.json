@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/pchawin40/AirBnB#readme",
   "dependencies": {
+    "aws-sdk": "^2.1204.0",
     "heroku-cli": "^7.0.9",
+    "multer": "^1.4.5-lts.1",
     "postgresql": "^0.0.1",
     "sequelize": "^6.21.3",
     "sequelize-cli": "^6.4.1"

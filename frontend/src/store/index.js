@@ -8,12 +8,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 // import thunk
 import thunk from 'redux-thunk';
 
-// import sessionReducer in session.js
+// import reducer
 import sessionReducer from './session';
+import mapsReducer from './maps';
 
 //? rootReducer
 const rootReducer = combineReducers({
-	session: sessionReducer
+	session: sessionReducer,
+	maps: mapsReducer
 });
 
 // enhancer...

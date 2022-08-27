@@ -1,7 +1,7 @@
 // frontend/src/components/SignupFormPage/SignupFormPage.js
 
 // import react
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 // import react-redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,17 +22,33 @@ const SignupFormPage = () => {
    * email: new user's email
    * password: new user's password
    * confirmedPassword: new user's confirmed password
+   * image: new user's image
+   * images: new user's images
    * validationErrors: new user's validation errors
    */
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [confirmedPassword, setConfirmedPassword] = useState('');
+  // const [image, setImage] = useState(null);
+  const [firstName, setFirstName] = useState('john');
+  const [lastName, setLastName] = useState('smith');
+  const [email, setEmail] = useState('john.smith@gmail.com');
+  const [password, setPassword] = useState('secret password');
+  const [confirmedPassword, setConfirmedPassword] = useState('secret password');
+  const [image, setImage] = useState(null);
+
+  // for multiple image file upload
+  // const [images, setImages] = useState(null);
   const [validationErrors, setValidationErrors] = useState([]);
 
   // invoke useDispatch
   const dispatch = useDispatch();
+
+  //! to fix image and ref when invalid sign up [currently everything reset except for image (i.e. when ref reset, image does not)]
+  // invoke useRef
+  const ref = useRef();
 
   // get session user
   const sessionUser = useSelector(sessionActions.getSessionUser);
@@ -60,12 +76,24 @@ const SignupFormPage = () => {
       firstName,
       lastName,
       email,
-      password
+      password,
+      image
     };
  
+    // reset form data to default value after signing up
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setConfirmedPassword("");
+    setImage(ref);
+
+    // reset ref value
+    ref.current.value = "";
+
     // dispatch signup thunk action
     // handle and display errors if any
-    return dispatch(sessionActions.signup(user)).catch(
+    dispatch(sessionActions.signup(user)).catch(
       async res => {
         // parse error data
         const data = await res.json();
@@ -76,71 +104,112 @@ const SignupFormPage = () => {
     );
   };
 
+  //? updateFile: single file update function
+  const updateFile = e => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
+  }
+
+  //? updateFiles: multiple file update function
+  // const updateFiles = e => {
+  //   const files = e.target.files;
+  //   setImages(files);
+  // }
+
   // return rendered form
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       {/* //? Display Errors (if any) */}
-      <ul>
-        {
-          validationErrors.map(error => <li key={error}>{error}</li>)
-        }
-      </ul>
-      
-      {/* //? firstName */}
-      <input
-        placeholder="First name"
-        type='firstName'
-        onChange={e => setFirstName(e.target.value)}
-        required
-        value={firstName}
-      >
-      </input>
+      <h1>AWS S3 Express-React-Demo</h1>
+      <form onSubmit={handleSubmit}>
+        <ul>
+          {
+            validationErrors.map(error => <li key={error}>{error}</li>)
+          }
+        </ul>
+        
+        {/* //? firstName */}
+        <input
+          placeholder="First name"
+          type='firstName'
+          onChange={e => setFirstName(e.target.value)}
+          required
+          value={firstName}
+        >
+        </input>
 
-      {/* //? lastName */}
-      <input
-        placeholder="Last name"
-        type='lastName'
-        onChange={e => setLastName(e.target.value)}
-        required
-        value={lastName}
-      >
-      </input>
+        {/* //? lastName */}
+        <input
+          placeholder="Last name"
+          type='lastName'
+          onChange={e => setLastName(e.target.value)}
+          required
+          value={lastName}
+        >
+        </input>
 
-      {/* //? email */}
-      <input
-        placeholder="Email"
-        type='email'
-        onChange={e => setEmail(e.target.value)}
-        required
-        value={email}
-      >
-      </input>
+        {/* //? email */}
+        <input
+          placeholder="Email"
+          type='email'
+          onChange={e => setEmail(e.target.value)}
+          required
+          value={email}
+        >
+        </input>
 
-      {/* //? password */}
-      <input
-        placeholder="Password"
-        type='password'
-        onChange={e => setPassword(e.target.value)}
-        required
-        value={password}
-      >
-      </input>
+        {/* //? password */}
+        <input
+          placeholder="Password"
+          type='password'
+          onChange={e => setPassword(e.target.value)}
+          required
+          value={password}
+        >
+        </input>
 
-      {/* //? confirmedPassword */}
-      <input
-        placeholder="Confirm"
-        type='password'
-        onChange={e => setConfirmedPassword(e.target.value)}
-        required
-        value={confirmedPassword}
-      >
-      </input>
+        {/* //? confirmedPassword */}
+        <input
+          placeholder="Confirm"
+          type='password'
+          onChange={e => setConfirmedPassword(e.target.value)}
+          required
+          value={confirmedPassword}
+        >
+        </input>
+        
+        {/* //? Single File Upload */}
+        {/* //* putting ref clears file input upon invalid submission */}
+        <input type="file" onChange={updateFile} ref={ref} />
 
-      {/* //? Sign Up Button*/}
-      <button type="submit">
-        Sign Up
-      </button>
-    </form>
+        {/* //? Multiple File Upload */}
+        {/* <label>
+            Multiple Upload
+            <input
+              type="file"
+              multiple
+              onChange={updateFiles} />
+          </label> */}
+        
+        {/* //? Sign Up Button*/}
+        <button type="submit">
+          Sign Up
+        </button>
+      </form>
+
+    <div>
+        {sessionUser && (
+          <div>
+            <h1>{sessionUser.username}</h1>
+            <img
+              style={{ width: "150px" }}
+              src={sessionUser.profileImageUrl}
+              alt="profile"
+            />
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

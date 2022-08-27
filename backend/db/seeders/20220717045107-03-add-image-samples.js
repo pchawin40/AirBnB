@@ -1,6 +1,6 @@
 'use strict';
 
-const { Image, Spot } = require('../models');
+const { Image } = require('../models');
 
 const images = [
   {

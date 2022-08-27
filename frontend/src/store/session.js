@@ -53,7 +53,7 @@ export const login = user => async dispatch => {
   dispatch(setSessionUser(data));
 
   // return response
-  return res;
+  return data;
 };
 
 // TODO: Restore the session user
@@ -69,23 +69,38 @@ export const restoreSessionUser = () => async dispatch => {
   if(user.email) dispatch(setSessionUser(user));
 
   // return response
-  return res;
+  return user;
 };
 
 //? Signup Thunk action
 export const signup = user => async dispatch => {
   // extract firstName, lastName, email, and password from given user
-  const { firstName, lastName, email, password } = user;
+  const { images, image, firstName, lastName, email, password } = user;
+
+  //? defining formData
+  const formData = new FormData();
+  formData.append("firstName", firstName);
+  formData.append("lastName", lastName);
+  formData.append("email", email);
+  formData.append("password", password);
+
+  //* for multiple image files
+  if (images && images.length !== 0) {
+    for (let i = 0; i < images.length; i++){
+      formData.append("images", images[i]);
+    }
+  }
+
+  //* for single file
+  if (image) formData.append("image", image);
 
   // hit signup backend route w/ username, email, and password inputs
   const res = await csrfFetch('/api/users', {
     method: 'POST',
-    body: JSON.stringify({
-      firstName,
-      lastName,
-      email,
-      password
-    })
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    body: formData
   });
 
   // after receiving response, parse JSON body of response
@@ -95,7 +110,7 @@ export const signup = user => async dispatch => {
   dispatch(setSessionUser(newUser));
 
   // return response
-  return res;
+  return newUser;
 };
 
 //? Logout Thunk action

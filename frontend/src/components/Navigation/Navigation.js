@@ -15,6 +15,7 @@ import * as sessionActions from '../../store/session';
 // import component
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
+import MapContainer from '../Maps';
 
 //? Navigation Component
 const Navigation = ({ isLoaded }) => {
@@ -42,6 +43,7 @@ const Navigation = ({ isLoaded }) => {
     <ul>
       <li>
         <NavLink exact to='/'>
+          <MapContainer />
           Home
         </NavLink>
         {isLoaded && sessionLinks}

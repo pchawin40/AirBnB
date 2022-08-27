@@ -26,6 +26,7 @@ app.use(morgan('dev'));
 // TODO: Add 'cookie-parser' middleware (parse cookies)
 // TODO: Add 'express.json' middleware (parse JSON bodies)
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // TODO: Add middlewares

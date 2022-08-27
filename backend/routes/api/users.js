@@ -15,6 +15,9 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+//? import AWS S3 file
+const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
+
 // TODO: middleware to check and validate users keys 
 const validateSignup = [
   // check if email is valid
@@ -40,7 +43,7 @@ const validateSignup = [
 
 // TODO: POST router to sign up user and return JSON response with user information
 // Sign up
-router.post('/', validateSignup, async (req, res, next) => {
+router.post('/', singleMulterUpload("image"), validateSignup, async (req, res, next) => {
   // deconstruct credential and password from req.body
   const { firstName, lastName, email, password } = req.body;
 

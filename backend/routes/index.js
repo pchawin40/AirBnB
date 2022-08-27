@@ -56,8 +56,14 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // get token from /api/csrf/restore file
   router.get('/api/csrf/restore', (req, res) => {
-    res.cookie('XSRF-TOKEN', req.csrfToken());
-    return res.json({});
+    // setting cookie on response to csrfToken's method return
+    const csrfToken = req.csrfToken();
+    res.cookie('XSRF-TOKEN', csrfToken);
+    
+    // send token as response for easy retrieval
+    return res.status(200).json({
+      'XSRF-Token': csrfToken
+    });
   });
 }
 

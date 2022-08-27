@@ -237,24 +237,19 @@ router.get('/:spotId', async (req, res, next) => {
 
   const getSpot = await Spot.findOne({
     attributes: [
-      '*',
-      // [Sequelize.fn('COUNT', Sequelize.col('Reviews.stars')), 'numReviews'],
-      // [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
+      '*'
     ],
     where: {
       id: spotId
     },
-    // include: {
-    //   model: Review,
-    //   attributes: [],
-    //   raw: true
-    // },
     raw: true,
-    subQuery: false,
-    // group: ['Reviews.stars']
+    subQuery: false
   });
 
   const getReview = await Review.findOne({
+    where: {
+      spotId
+    },
     attributes: [
       [Sequelize.fn('COUNT', Sequelize.col('stars')), 'numReviews'],
       [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('stars')), 1), 'avgStarRating']
@@ -268,11 +263,6 @@ router.get('/:spotId', async (req, res, next) => {
     err.status = 404;
     return next(err);
   }
-
-  // TODO: numReviews
-  // const numReviews = await spot.count();
-
-  // TODO avgStarRating
 
   // TODO: Image from getSpot id
   const getImage = await Image.findAll({
