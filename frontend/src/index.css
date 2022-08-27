@@ -1,4 +1,9 @@
 /* TODO Add site wide styles */
+* {
+	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+		'Helvetica Neue', sans-serif;
+}
+
 body {
 	overflow-y: hidden;
 }
@@ -6,6 +11,5 @@ body {
 /* list */
 li {
 	list-style-type: none;
-	font-weight: bold;
 	text-align: center;
 }

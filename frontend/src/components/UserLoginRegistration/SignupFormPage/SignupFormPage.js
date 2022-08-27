@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 // import store
-import * as sessionActions from '../../store/session';
+import * as sessionActions from '../../../store/session';
 
 //? SignupFormPage Functional Component
 const SignupFormPage = () => {
@@ -26,17 +26,11 @@ const SignupFormPage = () => {
    * images: new user's images
    * validationErrors: new user's validation errors
    */
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [confirmedPassword, setConfirmedPassword] = useState('');
-  // const [image, setImage] = useState(null);
-  const [firstName, setFirstName] = useState('john');
-  const [lastName, setLastName] = useState('smith');
-  const [email, setEmail] = useState('john.smith@gmail.com');
-  const [password, setPassword] = useState('secret password');
-  const [confirmedPassword, setConfirmedPassword] = useState('secret password');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmedPassword, setConfirmedPassword] = useState('');
   const [image, setImage] = useState(null);
 
   // for multiple image file upload

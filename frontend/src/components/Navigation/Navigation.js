@@ -14,8 +14,9 @@ import * as sessionActions from '../../store/session';
 
 // import component
 import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal';
-import MapContainer from '../Maps';
+import LoginFormModal from '../UserLoginRegistration/LoginFormModal';
+import LogoContainer from './LogoContainer';
+import SearchBar from './SearchBar';
 
 //? Navigation Component
 const Navigation = ({ isLoaded }) => {
@@ -37,18 +38,41 @@ const Navigation = ({ isLoaded }) => {
         <NavLink to='/signup'>Sign Up</NavLink>
       </>;
     
+  const userHostLinks =
+    sessionUser ?
+      // Switch to hosting (if logged in)
+      <NavLink className="user-host-links" to="/host/homes">Switch to hosting</NavLink>
+      :
+      // Become a host (if not logged in)
+      <NavLink className="user-host-links" to="/hosting">Become a Host</NavLink>;
 
   //? Render Navigation Links and Logout button
   return (
-    <ul>
-      <li>
-        <NavLink exact to='/'>
-          <MapContainer />
-          Home
-        </NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <div id="navigation-bar">
+      {/* //? Render Logo Container */}
+      <LogoContainer/>
+
+      {/* //? Render Search Link */}
+      <SearchBar/>
+      
+      {/* // TODO: Render User Link */}
+      {/* //? NavLink */}
+      <ul>
+        <li>
+          {/* //TODO: To make path */}
+          <NavLink exact to='/'>
+            {/* display hosting text links */}
+            {userHostLinks}
+          </NavLink>
+          
+          {/* // TODO: Modal for Region Setting */}
+          <i class="fa-solid fa-globe"></i>
+          
+          {/* //TODO: sessionLinks */}
+          {isLoaded && sessionLinks}
+        </li>
+      </ul>
+    </div>
   );
 };
 

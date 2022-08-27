@@ -10,12 +10,14 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 // import components
-import LoginFormModal from './components/LoginFormModal';
-import SignupFormPage from './components/SignupFormPage';
+import LoginFormModal from './components/UserLoginRegistration/LoginFormModal'
+import SignupFormPage from './components/UserLoginRegistration/SignupFormPage';
 import Navigation from './components/Navigation';
 
 // import session store 
 import * as sessionActions from './store/session';
+import HomeFooterBar from './components/Navigation/HomeFooterBar';
+import MapContainer from './components/Maps';
 
 function App() {
 
@@ -34,8 +36,13 @@ function App() {
   return (
       isLoaded && (
       <>
-        {/* //? ProfileButton */}
+        <Route exact path="/test">
+          {/* HomeFooterBar */}
+          <HomeFooterBar/>
+        </Route>
+        {/* //? Navigation */}
         <Navigation isLoaded={isLoaded} />
+        <MapContainer />
         <Switch>
           {/* //? route: / */}
           <Route path="/signup">
