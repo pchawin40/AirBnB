@@ -28,7 +28,7 @@ const Maps = ({ apiKey }) => {
   });
 
   return (
-    <>
+    <div>
       {
         isLoaded && (
           // load google map if api is loaded
@@ -39,7 +39,7 @@ const Maps = ({ apiKey }) => {
           />
         )
       }
-    </>
+    </div>
   );
 };
 

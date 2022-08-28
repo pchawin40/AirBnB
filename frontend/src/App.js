@@ -9,15 +9,16 @@ import { useDispatch } from 'react-redux';
 // import react
 import { useEffect, useState } from 'react';
 
+// import session store 
+import * as sessionActions from './store/session';
+
 // import components
 import SignupFormPage from './components/UserLoginRegistration/SignupFormPage';
 import Navigation from './components/Navigation';
-
-// import session store 
-import * as sessionActions from './store/session';
 import MapContainer from './components/Maps';
 import Head from './components/Head';
 import HomeFooterBar from './components/HomeFooterBar/HomeFooterBar';
+
 
 function App() {
 
@@ -35,17 +36,18 @@ function App() {
 
   return (
       isLoaded && (
-      <>
+      <div>
         {/* //? Navigation */}
         <Navigation isLoaded={isLoaded} />
-        
-        {/* //? Head */}
-        <Head/>
-        
+
+        {/* //? Content */}
+        {/* //* Head */}
+        <Head />
+        {/* //* MapContainer */}
         <MapContainer />
         
         {/* //? HomeFooterBar */}
-        <HomeFooterBar />
+        <HomeFooterBar/>
         
         <Switch>
           {/* //? route: / */}
@@ -54,7 +56,7 @@ function App() {
             <SignupFormPage />
           </Route>
         </Switch>
-      </>
+      </div>
       )
   );
 }
