@@ -1,0 +1,57 @@
+/* frontend/src/Navigation/ProfileButton/ProfileButton.css */
+
+/******************************
+*   Profile Button Container
+*******************************/
+#nav-button-container{
+  margin: 0;
+}
+
+#profile-dropdown{
+  top: 6rem;
+  right: 3rem;
+  height: fit-content;
+  position: absolute;
+  border-radius: 2rem;
+  background-color: white;
+  border: 1px solid #EDEDED;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-container, .middle-container, .lower-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.top-container > a, .middle-container > a, .lower-container > a {
+  padding: 1rem;
+  text-align: start;
+  padding-right: 5rem;
+}
+
+.top-container > a:hover, .middle-container > a:hover, .lower-container > a:hover{
+  background-color: #EDEDED;
+}
+
+/******************************
+*       Top Container
+*******************************/
+.top-container{
+  padding-top: 1rem;
+}
+
+/******************************
+*       Middle Container
+*******************************/
+.middle-container{
+  border-top: 1px solid #EDEDED;
+  border-bottom: 1px solid #EDEDED;
+}
+
+/******************************
+*       Lower Container
+*******************************/
+.lower-container{
+  padding-bottom: 1rem;
+}

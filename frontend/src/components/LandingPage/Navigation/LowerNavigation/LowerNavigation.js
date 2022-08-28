@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ScrollMenu from 'react-horizontal-scroll-menu';
 import './LowerNavigation.css';
 
-import { propertyTypeList } from '../../../data/data';
+import { propertyTypeList } from '../../../../data/data';
 
 const list = propertyTypeList;
 

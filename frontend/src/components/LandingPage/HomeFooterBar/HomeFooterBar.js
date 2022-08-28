@@ -15,7 +15,7 @@ const HomeFooterBar = () => {
         <div id="DIV_MAP">
           <button id="inner_div_map_button">
             Show map
-            <i class="fa-solid fa-map"></i>
+            <i className="fa-solid fa-map"></i>
           </button>
         </div>
 
@@ -61,7 +61,7 @@ const HomeFooterBar = () => {
             <div id="inner_div_3">
               {/* Support & resources */}
               <span className="inner_div_3_content">Support & resources</span>
-              <i class="fa-solid fa-angle-up"></i>
+              <i className="fa-solid fa-angle-up"></i>
             </div>
           </div>
         </div>

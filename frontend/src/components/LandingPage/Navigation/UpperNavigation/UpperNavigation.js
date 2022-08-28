@@ -10,11 +10,11 @@ import { useSelector } from 'react-redux';
 import './UpperNavigation.css';
 
 // import session store
-import * as sessionActions from '../../../store/session';
+import * as sessionActions from '../../../../store/session';
 
 // import component
 import ProfileButton from './ProfileButton/ProfileButton';
-import LoginFormModal from '../../UserLoginRegistration/LoginFormModal';
+import LoginFormModal from '../../../UserLoginRegistration/LoginFormModal';
 import LogoContainer from './LogoContainer';
 import SearchBar from './SearchBar';
 

@@ -14,17 +14,13 @@ import * as sessionActions from './store/session';
 
 // import components
 import SignupFormPage from './components/UserLoginRegistration/SignupFormPage';
-import Navigation from './components/Navigation';
-import MapContainer from './components/Maps';
-import Head from './components/Head';
-import HomeFooterBar from './components/HomeFooterBar/HomeFooterBar';
-
+import LandingPage from './components/LandingPage';
 
 function App() {
 
   // invoke dispatch
   const dispatch = useDispatch();
-  
+
   // state: isLoaded 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -35,20 +31,11 @@ function App() {
   }, [isLoaded, dispatch]);
 
   return (
-      isLoaded && (
+    isLoaded && (
       <div>
-        {/* //? Navigation */}
-        <Navigation isLoaded={isLoaded} />
+        {/* //? Landing Page */}
+        <LandingPage isLoaded={isLoaded} />
 
-        {/* //? Content */}
-        {/* //* Head */}
-        <Head />
-        {/* //* MapContainer */}
-        <MapContainer />
-        
-        {/* //? HomeFooterBar */}
-        <HomeFooterBar/>
-        
         <Switch>
           {/* //? route: / */}
           <Route path="/signup">
@@ -57,7 +44,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-      )
+    )
   );
 }
 

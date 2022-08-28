@@ -6,8 +6,11 @@ import { useState, useEffect } from 'react';
 // import react-redux
 import { useDispatch } from 'react-redux';
 
+// import react-router-dom
+import { NavLink } from 'react-router-dom';
+
 // import session store 
-import * as sessionActions from '../../../../store/session';
+import * as sessionActions from '../../../../../store/session';
 
 // import css
 import './ProfileButton.css';
@@ -69,14 +72,54 @@ const ProfileButton = ({ user }) => {
       {
         showMenu && (
           <ul id='profile-dropdown'>
-            <button onClick={handleLogout}>
-              Logout
-            </button>
+            <div className="top-container">
+              {/* //? Messages */}
+              <NavLink to="/messages">
+                Messages
+              </NavLink>
 
-            {/* <li>Hello {user.firstName} {user.lastName}!</li>
-            <li>{user.email}</li>
-            <li> */}
-            {/* </li> */}
+              {/* //? Trips */}
+              <NavLink to="/trips">
+                Trips
+              </NavLink>
+
+              {/* //? Wishlist */}
+              <NavLink to="/wishlist">
+                Wishlists
+              </NavLink>
+            </div>
+            <div className="middle-container">
+              {/* //? Manage Listings */}
+              <NavLink to="/listings">
+                Manage Listings
+              </NavLink>
+
+              {/* //? Host an Experience */}
+              <NavLink to="/hostings">
+                Host an experience
+              </NavLink>
+
+              {/* //? Refer a Host */}
+              <NavLink to="/refer">
+                Refer a Host
+              </NavLink>
+
+              {/* //? Account */}
+              <NavLink to="/account">
+                Account
+              </NavLink>
+            </div>
+            <div className="lower-container">
+              {/* //? Help */}
+              <NavLink to="/help">
+                Help
+              </NavLink>
+
+              {/* //? Log out */}
+              <NavLink exact to="/logout" onClick={handleLogout}>
+                Logout
+              </NavLink>
+            </div>
           </ul>
         )
       }

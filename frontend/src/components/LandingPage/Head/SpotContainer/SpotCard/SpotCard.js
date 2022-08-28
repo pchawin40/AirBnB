@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"; 
 
 // import store
-import * as spotActions from '../../../../store/spots';
+import * as spotActions from '../../../../../store/spots';
 
 // import css
 import './SpotCard.css';

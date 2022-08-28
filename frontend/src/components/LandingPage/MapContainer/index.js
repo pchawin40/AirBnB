@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import store
-import { getKey, getMapKey } from '../../store/maps';
+import { getKey, getMapKey } from '../../../store/maps';
 
 // import component
 import Maps from "./Maps";
