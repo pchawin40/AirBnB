@@ -11,11 +11,13 @@ import thunk from 'redux-thunk';
 // import reducer
 import sessionReducer from './session';
 import mapsReducer from './maps';
+import spotsReducer from './spots';
 
 //? rootReducer
 const rootReducer = combineReducers({
 	session: sessionReducer,
-	maps: mapsReducer
+	maps: mapsReducer,
+	spots: spotsReducer
 });
 
 // enhancer...

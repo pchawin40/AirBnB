@@ -1,7 +1,7 @@
 // frontend/src/components/SignupFormPage/SignupFormPage.js
 
 // import react
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 // import react-redux
 import { useDispatch, useSelector } from 'react-redux';

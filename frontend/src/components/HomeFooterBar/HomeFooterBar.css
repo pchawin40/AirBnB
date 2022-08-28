@@ -1,0 +1,38 @@
+/******************************
+*   Outer-Footer-Container
+*******************************/
+.outer-footer-container {
+	/* display: flex; */
+	position: absolute;
+
+	margin: 0;
+	padding: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100vw;
+	background-color: red;
+}
+
+/******************************
+*   Footer-Content-Container
+*******************************/
+.footer-content-container {
+	height: 5rem;
+	display: grid;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/******************************
+*            DIV_1
+*******************************/
+#DIV_1 {
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem;
+} /*#DIV_1*/
+
+#DIV_1 > * {
+	font-size: large;
+}

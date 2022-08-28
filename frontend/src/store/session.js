@@ -5,7 +5,7 @@ import { csrfFetch } from "./csrf";
 
 //? Phase 1: Login form page
 //? Phase 2: Signup form page
-// TODO: Phase 3: Logout
+//? Phase 3: Logout
 
 /* --------- ACTIONS -------- */
 //? Action: Set session user

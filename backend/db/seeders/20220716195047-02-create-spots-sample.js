@@ -15,7 +15,7 @@ const spots = [
     name: 'App Academy',
     description: 'Place where web developers are created',
     price: 123,
-    previewImage: "image url"
+    previewImage: "https://rew-online.com/wp-content/uploads/2019/05/90-fifth-avenue-ny-ny.jpg"
   },
   {
     address: 'P.O. Box 1303',
@@ -27,7 +27,7 @@ const spots = [
     name: 'Internal Revenue Services',
     description: "World's most efficient tax administrators",
     price: 500,
-    previewImage: "image url 2"
+    previewImage: "https://federalnewsnetwork.com/wp-content/uploads/2018/04/IRS_Online_Payment_Glitch_88663.jpg"
   }
 ];
 

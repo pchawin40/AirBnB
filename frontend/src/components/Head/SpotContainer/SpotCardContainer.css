@@ -1,0 +1,8 @@
+/**********************
+*   Spot Card Container
+***********************/
+.spot-card-container{
+  display: flex;
+
+  margin-top: 1.5rem;
+}

@@ -17,6 +17,7 @@ import ProfileButton from './ProfileButton/ProfileButton';
 import LoginFormModal from '../UserLoginRegistration/LoginFormModal';
 import LogoContainer from './LogoContainer';
 import SearchBar from './SearchBar';
+import HomeFooterBar from '../HomeFooterBar/HomeFooterBar';
 
 //? Navigation Component
 const Navigation = ({ isLoaded }) => {

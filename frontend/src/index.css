@@ -4,8 +4,13 @@
 		'Helvetica Neue', sans-serif;
 }
 
+body{
+	margin: 0;
+}
+
 /* list */
 li {
 	list-style-type: none;
 	text-align: center;
 }
+

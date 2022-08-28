@@ -1,0 +1,58 @@
+/**********************
+*   Spot Card Content
+***********************/
+.spot-card-content{
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+
+  margin: 1rem;
+  padding: .5rem;
+}
+
+.spot-card-content:hover{
+  cursor: pointer;
+}
+
+/**********************
+*   Spot Card Info
+***********************/
+.spot-image-container{
+  position: relative;
+}
+
+.spot-image{
+  display: block;
+}
+
+.fa-heart{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: black;
+  opacity: .7;
+}
+
+.spot-name{
+  display: flex;
+  justify-content: space-between;
+}
+
+.fa-star{
+  color: black;
+}
+
+.spot-image{
+  width: 23em;
+  height: 18em;
+  object-fit: cover;
+
+  margin-bottom: 1.25rem;
+
+  border-radius: 1.25rem;
+}
+
+.spot-price > span, .spot-name{
+  font-weight: bold;
+}

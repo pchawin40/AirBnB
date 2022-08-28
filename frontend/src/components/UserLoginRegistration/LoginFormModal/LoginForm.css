@@ -37,6 +37,7 @@ ul{
 
 #login-button:hover{
   border: 3px solid rgb(42, 41, 41);
+  cursor: pointer;
 }
 
 li > a{

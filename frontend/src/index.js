@@ -17,8 +17,9 @@ import { restoreCSRF, csrfFetch } from './store/csrf';
 // import configureStore from store index
 import configureStore from './store';
 
-// import all session actions
+// import all store actions
 import * as sessionActions from './store/session';
+import * as spotActions from './store/spots';
 
 // import context
 import { ModalProvider } from './context/Modal';
@@ -34,6 +35,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.store = store;
   // Test Case: sessionActions.login({ user: { credential: "john.smith@gmail.com", password: "password"} });
   window.sessionActions = sessionActions;
+  window.spotActions = spotActions;
 }
 
 //? Root React functional component
