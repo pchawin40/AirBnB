@@ -1,0 +1,173 @@
+/**************************
+? 		Navigation Bar
+***************************/
+
+#navigation-bar {
+	border-bottom: 2px solid #f3f3f3;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+
+	width: 100vw;
+	height: fit-content;
+
+	top: 0;
+	left: 0;
+	right: 0;
+	position: sticky;
+
+	background-color: white;
+}
+
+/**************************
+? 		Logo Container
+***************************/
+
+.logo-container {
+	/* sizing */
+	height: 2rem;
+
+	/* layout */
+	padding: 2rem;
+}
+
+.airbnb-text {
+	/* sizing */
+	font-size: 1.5rem;
+
+	/* style */
+	font-family: 'EB Garamond', serif;
+	font-family: 'Lato', sans-serif;
+	font-family: 'Pacifico', cursive;
+	font-family: 'Poiret One', cursive;
+	font-weight: bolder;
+}
+
+.fa-airbnb,
+.airbnb-text {
+	color: #ff365a;
+}
+
+/**************************
+? 		Profile Drop Down
+***************************/
+
+.profile-dropdown {
+	/* display */
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 2rem;
+
+	position: relative;
+
+	/* sizing */
+	width: fit-content;
+	height: fit-content;
+
+	/* layout */
+	margin: 1rem;
+	border-radius: 1rem;
+	border: lightgray 1px solid;
+	background-color: white;
+}
+
+/**************************
+? 		Profile Button
+***************************/
+#profile-button-container {
+	/* display */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Nav Button Container */
+
+#nav-button-container {
+	/* display */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	/* sizing */
+	width: fit-content;
+	height: 2rem;
+
+	/* layout */
+	padding: 0;
+	border: lightgray 1px solid;
+	border-radius: 1rem;
+	
+	/* styling */
+	background-color: white;
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+}
+
+#nav-button-container:hover {
+	-webkit-box-shadow: 0 10px 8px -6px #777;
+  -moz-box-shadow: 0 10px 8px -6px #777;
+  box-shadow: 0 10px 8px -6px #777;
+}
+
+i {
+	/* display */
+	display: flex;
+	flex-direction: column;
+
+	/* layout */
+	padding: 0.5rem;
+
+	color: #717171;
+}
+
+#user-profile-icon {
+	padding-left: 0;
+}
+
+li{
+	display: flex;
+	align-items: center;
+}
+
+#login-button{
+	margin: 0;
+}
+
+/**************************
+? 				Nav Link
+***************************/
+#nav-link-container{
+	margin-right: 2rem;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	border-radius: 2px;
+}
+
+.user-host-links, .fa-globe{
+	padding: 1rem;
+	margin-right: 0;
+}
+
+.user-host-links:hover, #nav-link-fa-globe:hover {
+	border-radius: 1.25rem;
+	background-color: #f9f9f9;
+	cursor: pointer;
+}
+
+.fa-globe {
+	color: black;
+	margin-left: 0;
+}
+
+li > * {
+	margin: 1rem;
+}

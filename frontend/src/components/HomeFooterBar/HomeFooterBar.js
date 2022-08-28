@@ -11,7 +11,7 @@ const HomeFooterBar = () => {
   return (
     <div className="outer-footer-container">
       <div className="footer-content-container">
-        {/* map */}
+        {/* //? upper div container (map) */}
         <div id="DIV_MAP">
           <button id="inner_div_map_button">
             Show map
@@ -19,8 +19,10 @@ const HomeFooterBar = () => {
           </button>
         </div>
 
-
+        {/* //? lower div container (lower) */}
         <div className="lower_div_container">
+          
+          {/* //? outer lower div 1 */}
           <div id="DIV_1">
             <span className="inner_div_1_content" id="SPAN_2">© 2022 Airbnb, Inc.</span>
             <span className="inner_div_1_content" id="SPAN_3">·</span>
@@ -31,6 +33,7 @@ const HomeFooterBar = () => {
             <a href="" className="inner_div_1_content" id="A_8">Sitemap</a>
           </div>
 
+          {/* //? outer lower div 2 */}
           <div id="DIV_2">
             <div id="inner_div_1">
               <span className="inner_div_1_content">
@@ -54,6 +57,7 @@ const HomeFooterBar = () => {
               </span>
             </div>
 
+            {/* //? outer lower div 3 */}
             <div id="inner_div_3">
               {/* Support & resources */}
               <span className="inner_div_3_content">Support & resources</span>

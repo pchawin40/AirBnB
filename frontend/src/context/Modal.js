@@ -30,7 +30,7 @@ export const Modal = ({onClose, children }) => {
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(
-    <div id="modal">
+    <div id="modal" style={{ zIndex: 11 }}>
       {/* modal-background div */}
       {/* When clicked, invoke onClose */}
       <div id="modal-background" onClick={onClose}/>
