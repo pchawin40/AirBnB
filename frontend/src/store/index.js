@@ -12,12 +12,14 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import mapsReducer from './maps';
 import spotsReducer from './spots';
+import reviewsReducer from './reviews';
 
 //? rootReducer
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	maps: mapsReducer,
-	spots: spotsReducer
+	spots: spotsReducer,
+	reviews: reviewsReducer
 });
 
 // enhancer...

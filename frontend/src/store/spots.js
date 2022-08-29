@@ -9,7 +9,7 @@ import { csrfFetch } from './csrf';
 const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 
 // action creator: load spots data
-const loadSpots = spots => {
+export const loadSpots = spots => {
   return {
     type: LOAD_SPOTS,
     spots
@@ -21,10 +21,21 @@ const loadSpots = spots => {
 const ADD_SPOT = 'spots/ADD_SPOT';
 
 // action creator: add spot data
-const addSpot = spot => {
+export const addSpot = spot => {
   return {
     type: ADD_SPOT,
     spot
+  }
+}
+
+//? Action: Reset Spots
+// action 
+const RESET_SPOT = '/spots/RESET_SPOT';
+
+// action creator: reset spots data
+export const resetSpot = () => {
+  return {
+    type: RESET_SPOT
   }
 }
 
@@ -44,6 +55,18 @@ export const getSpots = () => async dispatch => {
   return spots;
 };
 
+export const getSpotBySpotId = spotId => async dispatch => {
+  const res = await csrfFetch(`/spots/${spotId}`);
+
+  if (res.ok) {
+    const spot = await res.json();
+
+    dispatch(loadSpots(spot));
+
+    return spot;
+  }
+};
+
 //? Thunk action to post spot
 export const addASpot = spotToAdd => async dispatch => {
   // fetch all spots using csrfFetch
@@ -52,18 +75,20 @@ export const addASpot = spotToAdd => async dispatch => {
     body: JSON.stringify(spotToAdd)
   });
 
+  // parsed res to json
   const spot = await res.json();
 
+  // dispatch addSpot w/ parsed spot
   dispatch(addSpot(spot));
 
+  // return spot
   return spot;
 }
-
 
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getAllSpots = state => Object.values(state.spots)[0];
 
-export const getSpotById = spotId => state => state.spots.Spots.find(spot => spot.id == spotId)
+// export const getSpotById = spotId => state => Object.values(state.spots.Spots).find(spot => spot.id == spotId);
 
 /* --------- REDUCERS -------- */
 const initialSpots = [];
@@ -76,6 +101,9 @@ const spotsReducer = (state = initialSpots, action) => {
     //? case: add a spot
     case ADD_SPOT:
       return Object.assign({}, newSpots, action.spot);
+    //? case: reset spot
+    case RESET_SPOT:
+      return state;
     //? default case
     default:
       return Object.assign({}, newSpots, action.spots);
