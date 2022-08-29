@@ -9,13 +9,16 @@ import { useParams } from 'react-router-dom';
 import * as spotActions from '../../../../store/spots';
 import * as reviewActions from '../../../../store/reviews';
 
+// import css
+import './Headline.css';
+
 //? Headline component
 const Headline = () => {
   const dispatch = useDispatch();
-  
+
   // get spot id
   const { spotId } = useParams();
-  
+
   // const spotState = useSelector(spotActions.getAllSpots);
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id == spotId) : null;
@@ -31,7 +34,7 @@ const Headline = () => {
 
   if (reviews) {
     let sumReviews = 0;
-    
+
     reviews.forEach(review => sumReviews += review.stars);
 
     avgReview = sumReviews / reviews.length;
@@ -46,28 +49,40 @@ const Headline = () => {
   // get spot by spot id
   return (
     // if spot is available, return spot
-    spot && reviews && 
-    <>
+    spot && reviews &&
+    <section className="headline-container">
+      {/* //? Headline Div 1 */}
       <div className="headline_div_1">
-        {spot.name}
+        <h1>{spot.name}</h1>
       </div>
-      <div className="headline_div_2">
-        <div className="div_2_inner_div_1">
-          {/* review by spot id */}
-          <h1>{avgReview}</h1>
 
-          {/* # of reviews */}
-          <h1>{reviews.length}</h1>
+      {/* //? Div 2 Inner Div 1 */}
+      <div className="div_2_inner_div_1">
+        {/* review by spot id */}
+        <span><i class="fa-solid fa-star"></i>{avgReview}</span>
 
-          {/* location */}
-        </div>
+        <span>•</span>
 
-        <div className="div_2_inner_div_2">
-          {/* share */}
-          {/* save */}
-        </div>
+        {/* # of reviews */}
+        <span className="review-length-text">{reviews.length} reviews</span>
+
+        {/* host type */}
+        <span><i class="fa-solid fa-medal"></i> Superhost </span>
+
+        <span>•</span>
+
+        {/* location */}
+        <span className="location-text">{`${spot.city}, ${spot.state}, ${spot.country}`}</span>
       </div>
-    </>
+
+      {/* //? Div 2 Inner Div 2 */}
+      <div className="div_2_inner_div_2">
+        {/* share */}
+        <span><i class="fa-solid fa-arrow-up-from-bracket"></i>Share</span>
+        {/* save */}
+        <span><i class="fa-regular fa-heart"></i>Share</span>
+      </div>
+    </section>
   );
 };
 

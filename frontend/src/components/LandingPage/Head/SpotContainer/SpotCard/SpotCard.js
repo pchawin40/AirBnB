@@ -67,7 +67,7 @@ const SpotCard = () => {
               <div className="spot-image-container">
                 {/* // TODO: Spot favorite toggle */}
                 <img className="spot-image card-info" src={spot.previewImage} alt={spot.name} />
-                <span><i className="fa-solid fa-heart fa-lg" style={{ zIndex: 2 }}></i></span>
+                <span><i className="fa-solid fa-heart fa-lg spot-card-heart" style={{ zIndex: 2 }}></i></span>
               </div>
 
               <div className="spot-name card-info">

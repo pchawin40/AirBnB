@@ -1,0 +1,70 @@
+/**************************
+*     Headline Container
+**************************/
+.headline-container{
+  display: grid;
+  width: 100vw;
+  justify-self: center;
+  align-self: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: 
+  "name name . . "
+  "info info . link";
+
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+/**************************
+*     Headline Div 1
+**************************/
+
+.headline_div_1{
+  grid-area: name;
+
+  margin-top: 1rem;
+}
+
+.headline_div_1 > h1 {
+  padding-left: 1rem;
+  margin-bottom: 0;
+  font-size: 1.5em;
+}
+
+/**************************
+*     Div 2 Inner Div 1
+**************************/
+
+.div_2_inner_div_1{
+  grid-area: info;
+
+  justify-content: start;
+}
+
+.review-length-text, .location-text {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/**************************
+*     Div 2 Inner Div 2
+**************************/
+
+.div_2_inner_div_2{
+  grid-area: link;
+
+  text-align: right;
+}
+
+.div_2_inner_div_1, .div_2_inner_div_2{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  font-size: .75em;
+}
+
+.div_2_inner_div_1 > span, .div_2_inner_div_2 > span{
+  padding: 0 .25rem;
+}
