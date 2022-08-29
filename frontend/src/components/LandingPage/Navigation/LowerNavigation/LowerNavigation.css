@@ -1,34 +1,29 @@
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+  display: none;
+}
 
-/************************
-*     Lower Nav Container
-*************************/
+.react-horizontal-scrolling-menu--scroll-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
+.react-horizontal-scrolling-menu--scroll-container  {
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
 
-/*********************
-*     Scroll Menu
-**********************/
-.menu-item {
-  padding: 0 40px;
-  margin: 5px 10px;
-  user-select: none;
-  cursor: pointer;
-  border: none;
-
+.card{
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding-bottom: 1rem;
-
-  border-bottom: 1px;
-  border-color: white;
-  border-bottom-style: solid;
+  padding: 1rem;
+  border-bottom: 1px solid white;
 }
 
-.menu-item:hover{
-  border-color:gray;
-}
-
-.scroll-menu-arrow {
-  padding: 20px;
+.card:hover{
+  border-bottom-color: gray;
   cursor: pointer;
 }
