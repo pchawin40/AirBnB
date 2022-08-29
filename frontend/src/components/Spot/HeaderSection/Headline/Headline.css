@@ -13,7 +13,6 @@
   "info info . link";
 
   margin-left: 4em;
-  margin-right: 4em;
 }
 
 /**************************
@@ -38,7 +37,6 @@
 
 .div_2_inner_div_1{
   grid-area: info;
-
   justify-content: start;
 }
 
@@ -55,6 +53,8 @@
   grid-area: link;
 
   text-align: right;
+  justify-content: end;
+  padding-right: 13em;
 }
 
 .div_2_inner_div_1, .div_2_inner_div_2{
@@ -67,4 +67,9 @@
 
 .div_2_inner_div_1 > span, .div_2_inner_div_2 > span{
   padding: 0 .25rem;
+}
+
+.div_2_inner_div_2 > span:not(i){
+  text-decoration: underline;
+  cursor: pointer;
 }

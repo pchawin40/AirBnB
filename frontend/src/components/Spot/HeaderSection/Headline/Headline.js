@@ -80,7 +80,7 @@ const Headline = () => {
         {/* share */}
         <span><i class="fa-solid fa-arrow-up-from-bracket"></i>Share</span>
         {/* save */}
-        <span><i class="fa-regular fa-heart"></i>Share</span>
+        <span><i class="fa-regular fa-heart"></i>Save</span>
       </div>
     </section>
   );

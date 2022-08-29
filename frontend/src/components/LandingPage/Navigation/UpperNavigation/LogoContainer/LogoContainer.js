@@ -1,6 +1,9 @@
 // import react-router-dom
 import { NavLink } from "react-router-dom";
 
+// import css
+import './LogoContainer.css';
+
 //? LogoContainer component
 const LogoContainer = () => {
   return (
