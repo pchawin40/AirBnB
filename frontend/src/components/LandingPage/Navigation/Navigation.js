@@ -1,6 +1,6 @@
 // import component
 import UpperNavigation from "./UpperNavigation";
-import LowerNavigation from "./LowerNavigation";
+// import LowerNavigation from "./LowerNavigation";
 
 //? Navigation component
 const Navigation = ({ isLoaded }) => {
