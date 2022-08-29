@@ -116,7 +116,7 @@ const ProfileButton = ({ user }) => {
               </NavLink>
 
               {/* //? Log out */}
-              <NavLink exact to="/logout" onClick={handleLogout}>
+              <NavLink exact to="/" onClick={handleLogout}>
                 Logout
               </NavLink>
             </div>

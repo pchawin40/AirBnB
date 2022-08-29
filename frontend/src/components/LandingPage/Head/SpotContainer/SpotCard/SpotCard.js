@@ -6,6 +6,9 @@ import { useEffect } from "react";
 // import react-redux
 import { useSelector, useDispatch } from "react-redux"; 
 
+// import react-router-dom
+import { useHistory } from 'react-router-dom';
+
 // import store
 import * as spotActions from '../../../../../store/spots';
 
@@ -17,16 +20,15 @@ const SpotCard = () => {
   // get spots data
   const spots = useSelector(spotActions.getAllSpots);
 
+  // invoke dispatch
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(spotActions.getSpots());
-
-  }, [dispatch]);
+  // invoke history
+  const history = useHistory();
 
   //! FIX BELOW
   // TODO: Fix to get all reviews by spot id
-  const getAllReviewsBySpotId = async spotId => {
+  // const getAllReviewsBySpotId = async spotId => {
   // fetch all reviews from spot id
     // const res = await csrfFetch(`/spots/${spotId}/reviews`).then(async () => {
     //     // parse res to reviews data
@@ -42,6 +44,13 @@ const SpotCard = () => {
     //     return reviews;
     // }).catch(error => console.error(error));
 
+  // };
+
+  //? handleCardClick component
+  const handleCardClick = spotId => {
+
+    // change url to spot id clicked on
+    return history.push(`/spots/${spotId}`);
   };
 
   // for each spot, put into card
@@ -54,7 +63,7 @@ const SpotCard = () => {
             // getAllReviewsBySpotId(spot.id);
 
             return (
-              <div className="spot-card-content" key={spot.id}>
+              <div className="spot-card-content" key={spot.id} onClick={e => handleCardClick(spot.id)}>
                 {/* img: image preview url */}
                 <div className="spot-image-container">
                   {/* // TODO: Spot favorite toggle */}

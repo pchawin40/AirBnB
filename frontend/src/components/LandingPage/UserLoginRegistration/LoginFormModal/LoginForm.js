@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 // import session store
-import * as sessionActions from '../../../store/session';
+import * as sessionActions from '../../../../store/session';
 
 
 // TODO: LoginFormPage component
@@ -52,7 +52,7 @@ const LoginForm = () => {
     // reset validation errors before dispatching
     setValidationErrors([]);
 
-    // dispatch signup thunk action
+    // dispatch login thunk action
     // handle and display errors if any
     return dispatch(sessionActions.login(user)).catch(
       async res => {

@@ -14,9 +14,10 @@ import * as sessionActions from '../../../../store/session';
 
 // import component
 import ProfileButton from './ProfileButton/ProfileButton';
-import LoginFormModal from '../../../UserLoginRegistration/LoginFormModal';
+import LoginFormModal from '../../UserLoginRegistration/LoginFormModal';
 import LogoContainer from './LogoContainer';
 import SearchBar from './SearchBar';
+import DemoUser from '../../UserLoginRegistration/DemoUser';
 
 //? UpperNavigation Component
 const UpperNavigation = ({ isLoaded }) => {
@@ -32,10 +33,12 @@ const UpperNavigation = ({ isLoaded }) => {
       :
       // When no session user, contain links to login and sign up
       <>
+        {/* //? Demo User */}
+        <DemoUser />
         {/* //? Login link */}
         <LoginFormModal to='/login'>Log In</LoginFormModal>
         {/* //? Signup link */}
-        <NavLink to='/signup'>Sign Up</NavLink>
+        <NavLink id="sign-up-button" to='/signup'>Sign Up</NavLink>
       </>;
     
   const userHostLinks =

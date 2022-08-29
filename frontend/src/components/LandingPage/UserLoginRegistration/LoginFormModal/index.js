@@ -2,7 +2,7 @@
 // import component
 import LoginForm from "./LoginForm";
 import './LoginForm.css';
-import { Modal } from "../../../context/Modal";
+import { Modal } from "../../../../context/Modal";
 
 // import react
 import { useState } from "react";

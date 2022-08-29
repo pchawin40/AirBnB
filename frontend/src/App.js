@@ -9,12 +9,14 @@ import { useDispatch } from 'react-redux';
 // import react
 import { useEffect, useState } from 'react';
 
-// import session store 
+// import store 
 import * as sessionActions from './store/session';
+import * as spotActions from './store/spots';
 
 // import components
-import SignupFormPage from './components/UserLoginRegistration/SignupFormPage';
+import SignupFormPage from './components/LandingPage/UserLoginRegistration/SignupFormPage/SignupFormPage';
 import LandingPage from './components/LandingPage';
+import Spot from './components/Spot';
 
 function App() {
 
@@ -28,23 +30,31 @@ function App() {
   useEffect(() => {
     // ... restore session user and set is loaded to true
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
+    dispatch(spotActions.getSpots());
   }, [isLoaded, dispatch]);
 
   return (
     isLoaded && (
       <div>
-        {/* //? Landing Page */}
-        <LandingPage isLoaded={isLoaded} />
 
         <Switch>
+          <Route exact path="/">
+            {/* //? Landing Page */}
+            <LandingPage isLoaded={isLoaded} />
+          </Route>
+          
           {/* //? route: / */}
           <Route path="/signup">
             {/* SignupFormPage component */}
             <SignupFormPage />
           </Route>
+
+          <Route path="/spots/:spotId">
+            <Spot isLoaded={isLoaded} />
+          </Route>
         </Switch>
       </div>
-    )
+    ) 
   );
 }
 

@@ -171,3 +171,13 @@ a:hover {
 li > * {
 	margin: 1rem;
 }
+
+#sign-up-button{
+	padding: 1rem;
+}
+
+#sign-up-button:hover{
+	border-radius: 1.25rem;
+	background-color: #f9f9f9;
+	cursor: pointer;
+}
