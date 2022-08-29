@@ -5,15 +5,13 @@ import HomeGallery from './HomeGallery';
 //? HeaderSection component
 const HeaderSection = () => {
   return (
-    <>
+    <section>
       {/* //? Headline */}
       <Headline/>
       
       {/* //? Home Gallery */}
-      <HomeGallery />
-      
-
-    </>
+      <HomeGallery/>
+    </section>
   );
 };
 

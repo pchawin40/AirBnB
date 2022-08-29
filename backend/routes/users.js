@@ -104,6 +104,21 @@ router.get('/spots', [restoreUser, requireAuth], async (req, res, next) => {
   res.json({ Spots: getSpot });
 });
 
+// TODO: GET route to get user by id
+router.get('/:userId', async (req, res) => {
+  const user = await User.findAll();
+
+  // if user is not found throw error
+  if (!user) {
+    const err = Error("Users not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  // return found user
+  return res.json(user);
+});
+
 // TODO: GET route to get the current user and require authentication
 router.get('/', [restoreUser, requireAuth], async (req, res) => {
   const getUser = await User.getCurrentUserById(req.user.id);

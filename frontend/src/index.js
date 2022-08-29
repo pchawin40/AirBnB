@@ -20,6 +20,8 @@ import configureStore from './store';
 // import all store actions
 import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
+import * as reviewActions from './store/reviews';
+import * as userActions from './store/users';
 
 // import context
 import { ModalProvider } from './context/Modal';
@@ -36,6 +38,8 @@ if (process.env.NODE_ENV !== 'production') {
   // Test Case: sessionActions.login({ user: { credential: "john.smith@gmail.com", password: "password"} });
   window.sessionActions = sessionActions;
   window.spotActions = spotActions;
+  window.reviewActions = reviewActions;
+  window.userActions = userActions;
 }
 
 //? Root React functional component

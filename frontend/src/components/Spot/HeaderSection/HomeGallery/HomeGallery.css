@@ -1,0 +1,20 @@
+/***************************
+* Gallery Image Container
+***************************/
+
+.gallery-image-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: fit-content;
+  width: auto;
+
+}
+
+.gallery-image-container > img {
+  height: 30em;
+  width: 35vw;
+
+  border-radius: 1rem;
+}

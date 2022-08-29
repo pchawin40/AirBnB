@@ -2,6 +2,7 @@
 import UpperNavigation from "../LandingPage/Navigation/UpperNavigation";
 // import HeaderSection from "./HeaderSection/HeaderSection";
 import HeaderSection from "./HeaderSection";
+import HomeContent from "./HomeContent";
 
 //? Spot component
 const Spot = ({ isLoaded }) => {
@@ -16,6 +17,9 @@ const Spot = ({ isLoaded }) => {
         <HeaderSection />
 
         {/* Home Content */}
+        <HomeContent/>
+        
+        {/* Review Content */}
 
         {/* Reserve Bar */}
 

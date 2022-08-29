@@ -19,7 +19,7 @@ const Headline = () => {
   // get spot id
   const { spotId } = useParams();
 
-  // const spotState = useSelector(spotActions.getAllSpots);
+  // get spot by spot id
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id == spotId) : null;
 
@@ -59,7 +59,7 @@ const Headline = () => {
       {/* //? Div 2 Inner Div 1 */}
       <div className="div_2_inner_div_1">
         {/* review by spot id */}
-        <span><i class="fa-solid fa-star"></i>{avgReview}</span>
+        <span><i className="fa-solid fa-star"></i>{isNaN(avgReview) ? 0 : avgReview}</span>
 
         <span>•</span>
 
@@ -67,7 +67,7 @@ const Headline = () => {
         <span className="review-length-text">{reviews.length} reviews</span>
 
         {/* host type */}
-        <span><i class="fa-solid fa-medal"></i> Superhost </span>
+        <span><i className="fa-solid fa-medal"></i> Superhost </span>
 
         <span>•</span>
 
@@ -78,9 +78,9 @@ const Headline = () => {
       {/* //? Div 2 Inner Div 2 */}
       <div className="div_2_inner_div_2">
         {/* share */}
-        <span><i class="fa-solid fa-arrow-up-from-bracket"></i>Share</span>
+        <span><i className="fa-solid fa-arrow-up-from-bracket"></i>Share</span>
         {/* save */}
-        <span><i class="fa-regular fa-heart"></i>Save</span>
+        <span><i className="fa-regular fa-heart"></i>Save</span>
       </div>
     </section>
   );

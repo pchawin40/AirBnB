@@ -1,0 +1,8 @@
+.home-content-section-container{
+  margin-left: 4rem;
+}
+
+.home-content-title-section > :first-child{
+  font-weight: bold;
+  font-size: 1.5em;
+}
