@@ -46,7 +46,6 @@ export const getSpots = () => async dispatch => {
 
 //? Thunk action to post spot
 export const addASpot = spotToAdd => async dispatch => {
-  console.log("something");
   // fetch all spots using csrfFetch
   const res = await csrfFetch('/spots', {
     method: 'POST',
@@ -63,6 +62,8 @@ export const addASpot = spotToAdd => async dispatch => {
 
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getAllSpots = state => Object.values(state.spots)[0];
+
+export const getSpotById = spotId => state => state.spots.Spots.find(spot => spot.id == spotId)
 
 /* --------- REDUCERS -------- */
 const initialSpots = [];

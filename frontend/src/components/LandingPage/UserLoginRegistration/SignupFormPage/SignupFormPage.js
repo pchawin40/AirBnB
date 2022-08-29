@@ -112,9 +112,9 @@ const SignupFormPage = () => {
 
   // return rendered form
   return (
-    <div>
+    <>
       {/* //? Display Errors (if any) */}
-      <h1>AWS S3 Express-React-Demo</h1>
+      <h1 id="sign-up-header">Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <ul>
           {
@@ -203,7 +203,7 @@ const SignupFormPage = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
 

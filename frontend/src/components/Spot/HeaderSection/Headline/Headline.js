@@ -1,5 +1,6 @@
 // import react-redux
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // import react-router-dom
 import { useParams } from 'react-router-dom';
@@ -9,16 +10,20 @@ import * as spotActions from '../../../../store/spots';
 
 //? Headline component
 const Headline = () => {
+  const dispatch = useDispatch();
+  
   // get spot id
   const { spotId } = useParams();
 
-  // const spot = useSelector(spotActions.getSpotById(spotId));
-  const spot = useSelector(spotActions.getAllSpots)[spotId];
+  // get spot by spot id
+  const spot = useSelector(spotActions.getSpotById(spotId));
 
-
+  
 
   // get spot by spot id
   return (
+    // if spot is available, return spot
+    spot &&
     <>
       <div className="headline_div_1">
         {spot.name}

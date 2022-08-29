@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { propertyTypeList } from '../../../../data/data';
-import Arrow from './Arrow.jsx'
+import Arrow from './Arrow.tsx'
 
 import './LowerNavigation.css';
 

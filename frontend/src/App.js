@@ -35,7 +35,7 @@ function App() {
 
   return (
     isLoaded && (
-      <div>
+      <section id="app-container">
 
         <Switch>
           <Route exact path="/">
@@ -53,7 +53,7 @@ function App() {
             <Spot isLoaded={isLoaded} />
           </Route>
         </Switch>
-      </div>
+      </section>
     ) 
   );
 }
