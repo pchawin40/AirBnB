@@ -7,7 +7,7 @@ const Navigation = ({ isLoaded }) => {
   return (
     <>
       <UpperNavigation isLoaded={isLoaded} />
-      <LowerNavigation/>
+      {/* <LowerNavigation/> */}
     </>
   );
 }
