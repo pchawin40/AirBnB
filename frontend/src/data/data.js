@@ -80,3 +80,46 @@ export const propertyTypeList = [
     iconImage: <i className="fa-solid fa-tree"></i>
   }
 ]
+
+export const offerList = [
+  {
+    offer: 'Waterfront',
+    offerImage: <i class="fa-solid fa-water-ladder"></i>
+  },
+  {
+    offer: 'Wifi',
+    offerImage: <i class="fa-solid fa-wifi"></i>
+  },
+  {
+    offer: 'Private hot tub',
+    offerImage: <i class="fa-solid fa-hot-tub-person"></i>
+  },
+  {
+    offer: 'Free washer - In unit',
+    offerImage: <i class="fa-solid fa-hands-bubbles"></i>
+  },
+  {
+    offer: ' Air conditioning',
+    offerImage: <i class="fa-solid fa-wind"></i>
+  },
+  {
+    offer: 'Kitchen',
+    offerImage: <i class="fa-solid fa-kitchen-set"></i>
+  },
+  {
+    offer: 'Free parking on premises',
+    offerImage: <i class="fa-solid fa-car"></i>
+  },
+  {
+    offer: 'Pets allowed',
+    offerImage: <i class="fa-solid fa-dog"></i>
+  },
+  {
+    offer: 'Free dryer - In unit',
+    offerImage: <i class="fa-solid fa-wind"></i>
+  },
+  {
+    offer: 'Private patio or balcony',
+    offerImage: <i class="fa-solid fa-tree"></i>
+  }
+]

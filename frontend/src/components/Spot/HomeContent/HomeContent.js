@@ -13,10 +13,14 @@ import { useParams } from 'react-router-dom';
 import './HomeContent.css';
 
 // import store
-import * as userActions from '../../../store/users';
-import * as spotActions from '../../../store/spots';
+import * as spotActions from '../../../store/spots'
 
-import { useState } from 'react';
+// import offerList data
+import { offerList } from '../../../data/data';
+
+// import component
+import SpotFooter from './SpotFooter';
+import ReviewInfo from './ReviewInfo';
 
 //? HomeContent component
 const HomeContent = () => {
@@ -44,18 +48,116 @@ const HomeContent = () => {
   }, [dispatch, spotId]);
 
   return (
-    spot && spotOwner &&
+    spot && 
     <>
-      {/* Title */}
       <section className="home-content-section-container">
+        {/* //? Home Content Title Section */}
         <section className="home-content-title-section">
-          <p>Home hosted by <span>{spotOwner.firstName} {spotOwner.lastName}</span></p>
+          {/* Title */}
+          <p className="title-text">Home hosted by <span>{spotOwner.firstName} {spotOwner.lastName}</span></p>
+
+          {/* Guests */}
+          <p className="guests-text">2 guests • 1 bed • 0 baths</p>
 
           {/* include user image */}
-
-
-          <p>2 guests • 1 bed • 0 baths</p>
+          <figure className="user-profile-pic-container">
+            <img className="user-profile-pic" src="https://xsgames.co/randomusers/avatar.php?g=male"></img>
+          </figure>
         </section>
+
+        {/* //? Home Content About Info */}
+        <section className="home-content-about-info">
+          {/* Spot Info */}
+          <p>{spot.description}</p>
+        </section>
+
+        {/* //? Home Content Sleep Info */}
+        <section className="home-content-sleep-info">
+          {/* Spot Info */}
+          <h3>Where you'll sleep</h3>
+
+          <section>
+            {/* card 1 */}
+            <figure className="home-content-card-1">
+              <i class="fa-solid fa-bed"></i>
+              <span>
+                Bedroom 1
+              </span>
+              <span>
+                1 queen bed
+              </span>
+            </figure>
+
+            {/* card 2 */}
+            <figure className="home-content-card-2">
+              <i class="fa-solid fa-bed"></i>
+              <span>
+                Bedroom 2
+              </span>
+              <span>
+                1 queen bed
+              </span>
+            </figure>
+          </section>
+        </section>
+
+        {/* //? Home Content Offer Info */}
+        <section className="home-content-offer-info">
+          {/* Offer Info */}
+          <h3>What this place offers</h3>
+
+          <section className="offer-list-container">
+            {/* get list of offers */}
+            {offerList.map(offer =>
+              <figure key={offer}>
+                {offer.offerImage}
+                <span>
+                  {offer.offer}
+                </span>
+              </figure>
+            )}
+          </section>
+        </section>
+
+        {/* //! TODO: Calendar API: for spot stay reserve */}
+
+        {/* //? Review */}
+        <section className="home-content-review-info">
+          <ReviewInfo/>
+
+        </section>
+
+        {/* //? Location Map */}
+        {/* <section className="home-content-location-info"> */}
+        {/* location header */}
+
+        {/* map */}
+
+        {/* location */}
+
+        {/* about location */}
+        {/* </section> */}
+
+        {/* //? Host Info */}
+        {/* <section className="home-content-host-info"> */}
+        {/* host header */}
+
+        {/* about host */}
+
+        {/* host contact info */}
+        {/* </section> */}
+
+        {/* //? Things to know */}
+        {/* <section className="home-content-know-info"> */}
+        {/* house rules */}
+
+        {/* health & safety */}
+
+        {/* cancellation policy */}
+        {/* </section> */}
+
+        {/* //? Lower Footer */}
+        <SpotFooter className="spot-footer-container" />
       </section>
     </>
   );
