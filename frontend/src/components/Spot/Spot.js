@@ -6,6 +6,7 @@ import HomeContent from "./HomeContent";
 
 //? Spot component
 const Spot = ({ isLoaded }) => {
+
   return (
     isLoaded && (
       <>

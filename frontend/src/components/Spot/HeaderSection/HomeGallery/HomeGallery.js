@@ -2,7 +2,7 @@
 
 
 // import react-redux
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // import react-router-dom
@@ -23,11 +23,11 @@ const HomeGallery = () => {
 
   // get spot by spot id
   const spots = useSelector(spotActions.getAllSpots);
-  const spot = spots !== undefined ? spots.find(spot => spot.id == spotId) : null;
+  const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : null;
 
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(spotId));
-  }, [dispatch]);
+  }, [dispatch, spotId]);
 
   return (
     spot && 

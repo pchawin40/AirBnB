@@ -45,14 +45,16 @@ export const getSpots = () => async dispatch => {
   // fetch all spots using csrfFetch
   const res = await csrfFetch('/spots');
 
-  // parse res to spots data
-  const spots = await res.json();
-
-  // dispatch load spots w/ fetched spots data 
-  dispatch(loadSpots(spots));
-
-  // return spots
-  return spots;
+  if (res.ok) {
+    // parse res to spots data
+    const spots = await res.json();
+  
+    // dispatch load spots w/ fetched spots data 
+    dispatch(loadSpots(spots));
+  
+    // return spots
+    return spots;
+  }
 };
 
 export const getSpotBySpotId = spotId => async dispatch => {
@@ -88,7 +90,9 @@ export const addASpot = spotToAdd => async dispatch => {
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getAllSpots = state => Object.values(state.spots)[0];
 
-// export const getSpotById = spotId => state => Object.values(state.spots.Spots).find(spot => spot.id == spotId);
+export const getSpotById = spotId => state => Object.values(state.spots.Spots).find(spot => spot.id == spotId);
+
+export const getSpotOwner = () => state => state.spots.Owners ? state.spots.Owners : state.spots;
 
 /* --------- REDUCERS -------- */
 const initialSpots = [];

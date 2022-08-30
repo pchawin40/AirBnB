@@ -52,6 +52,10 @@ function App() {
           <Route path="/spots/:spotId">
             <Spot isLoaded={isLoaded} />
           </Route>
+
+          <Route>
+            Resource not found: To be due
+          </Route>
         </Switch>
       </section>
     ) 

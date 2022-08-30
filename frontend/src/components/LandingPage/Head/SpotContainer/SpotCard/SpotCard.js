@@ -1,10 +1,7 @@
 // frontend/src/components/SpotCardContainer/SpotCard/SpotCard.js
 
-// import react
-import { useEffect } from "react";
-
 // import react-redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 // import react-router-dom
 import { useHistory } from 'react-router-dom';
@@ -19,9 +16,6 @@ import './SpotCard.css';
 const SpotCard = () => {
   // get spots data
   const spots = useSelector(spotActions.getAllSpots);
-
-  // invoke dispatch
-  const dispatch = useDispatch();
 
   // invoke history
   const history = useHistory();

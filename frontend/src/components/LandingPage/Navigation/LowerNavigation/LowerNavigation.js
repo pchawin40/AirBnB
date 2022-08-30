@@ -8,22 +8,7 @@ import './LowerNavigation.css';
 const getItems = () => propertyTypeList;
 
 function LowerNavigation() {
-  const [items, setItems] = React.useState(getItems);
-  const [selected, setSelected] = React.useState([]);
-
-  const isItemSelected = (id) => !!selected.find((el) => el === id);
-
-  const handleClick =
-    (id) =>
-      ({ getItemById, scrollToItem }) => {
-        const itemSelected = isItemSelected(id);
-
-        setSelected((currentSelected) =>
-          itemSelected
-            ? currentSelected.filter((el) => el !== id)
-            : currentSelected.concat(id)
-        );
-      };
+  const [items ] = React.useState(getItems);
 
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} className="scroll-menu-container">

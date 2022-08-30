@@ -3,14 +3,14 @@ import Headline from './Headline';
 import HomeGallery from './HomeGallery';
 
 //? HeaderSection component
-const HeaderSection = () => {
+const HeaderSection = ({ spot }) => {
   return (
     <section>
       {/* //? Headline */}
       <Headline/>
       
       {/* //? Home Gallery */}
-      <HomeGallery/>
+      <HomeGallery spot={spot} />
     </section>
   );
 };

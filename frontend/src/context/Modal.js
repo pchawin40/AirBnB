@@ -59,7 +59,7 @@ export function ModalProvider({ children }) {
 
   useEffect(() => {
     setValue(modalRef.current);
-  }, []);
+  }, [modalRef]);
 
   // render ModalContext.Provider
   return (

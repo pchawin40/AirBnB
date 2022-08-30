@@ -4,7 +4,7 @@
 import { useDispatch } from "react-redux";
 
 // import react-router-dom
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // import store
 import * as sessionActions from '../../../../store/session';

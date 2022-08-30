@@ -104,8 +104,11 @@ router.get('/spots', [restoreUser, requireAuth], async (req, res, next) => {
   res.json({ Spots: getSpot });
 });
 
-// TODO: GET route to get user by id
-router.get('/:userId', async (req, res) => {
+// TODO: GET route to get list of all users
+//? new as of frontend project
+router.get('/getAll', async (req, res, next) => {
+
+  // get user by user id
   const user = await User.findAll();
 
   // if user is not found throw error
@@ -118,6 +121,27 @@ router.get('/:userId', async (req, res) => {
   // return found user
   return res.json(user);
 });
+
+// TODO: GET route to get user by id
+//? new as of frontend project
+router.get('/:userId', async (req, res, next) => {
+  // get userId
+  const { userId } = req.params;
+  
+  // get user by user id
+  const user = await User.findByPk(userId);
+
+  // if user is not found, return error
+  if (!user) {
+    const err = Error(`User ${userId} not found`);
+    err.status = 404;
+    return next(err);
+  }
+
+  // return found user
+  return res.json(user);
+});
+
 
 // TODO: GET route to get the current user and require authentication
 router.get('/', [restoreUser, requireAuth], async (req, res) => {
