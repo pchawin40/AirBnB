@@ -4,23 +4,23 @@ const { Review, User, Spot } = require('../models');
 
 const reviews = [
   {
-    review: "This was an awesome spot!",
+    review: "You could waste your whole vacation time trying to figure out all the technical and wifi problems at the cabin.",
     stars: 5
   },
   {
-    review: "Review 2",
+    review: "Beautiful, simple, and thoughtfully designed cabin surrounded by stunning nature.",
     stars: 4
   },
   {
-    review: "Review 3",
+    review: "Peaceful, stylish, excellent record collection, perfect view! My husband and I booked this cabin for our anniversary and it was perfect. We plan to go back with friends this winter.",
     stars: 4
   },
   {
-    review: "Review 4",
+    review: "Wonderful place to get away from the city! The cabin is peaceful and cozy. Felt relaxing to work during the day from the deck, hearing the river, and the hot tub was great",
     stars: 5
   },
   {
-    review: "Review 5",
+    review: "I know this cabin is more geared to the winter season but we went in July and it is just as fun as summer getaway.",
     stars: 5
   }
 ];

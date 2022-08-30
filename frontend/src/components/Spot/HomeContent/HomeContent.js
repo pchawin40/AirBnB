@@ -18,10 +18,6 @@ import * as spotActions from '../../../store/spots'
 // import offerList data
 import { offerList } from '../../../data/data';
 
-// import component
-import SpotFooter from './SpotFooter';
-import ReviewInfo from './ReviewInfo';
-
 //? HomeContent component
 const HomeContent = () => {
 
@@ -61,7 +57,7 @@ const HomeContent = () => {
 
           {/* include user image */}
           <figure className="user-profile-pic-container">
-            <img className="user-profile-pic" src="https://xsgames.co/randomusers/avatar.php?g=male"></img>
+            <img className="user-profile-pic" src="https://xsgames.co/randomusers/avatar.php?g=female" alt="profile-pic" />
           </figure>
         </section>
 
@@ -79,7 +75,7 @@ const HomeContent = () => {
           <section>
             {/* card 1 */}
             <figure className="home-content-card-1">
-              <i class="fa-solid fa-bed"></i>
+              <i className="fa-solid fa-bed"></i>
               <span>
                 Bedroom 1
               </span>
@@ -90,7 +86,7 @@ const HomeContent = () => {
 
             {/* card 2 */}
             <figure className="home-content-card-2">
-              <i class="fa-solid fa-bed"></i>
+              <i className="fa-solid fa-bed"></i>
               <span>
                 Bedroom 2
               </span>
@@ -109,7 +105,7 @@ const HomeContent = () => {
           <section className="offer-list-container">
             {/* get list of offers */}
             {offerList.map(offer =>
-              <figure key={offer}>
+              <figure key={offer.offer}>
                 {offer.offerImage}
                 <span>
                   {offer.offer}
@@ -120,12 +116,6 @@ const HomeContent = () => {
         </section>
 
         {/* //! TODO: Calendar API: for spot stay reserve */}
-
-        {/* //? Review */}
-        <section className="home-content-review-info">
-          <ReviewInfo/>
-
-        </section>
 
         {/* //? Location Map */}
         {/* <section className="home-content-location-info"> */}
@@ -156,8 +146,6 @@ const HomeContent = () => {
         {/* cancellation policy */}
         {/* </section> */}
 
-        {/* //? Lower Footer */}
-        <SpotFooter className="spot-footer-container" />
       </section>
     </>
   );

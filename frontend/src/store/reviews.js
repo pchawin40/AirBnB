@@ -47,8 +47,6 @@ export const getReviewsBySpotId = spotId => async dispatch => {
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getAllReviews = state => Object.values(state.reviews)[0];
 
-// export const retrieveReviewsBySpotId = spotId => state => Object.values(state.reviews)[0].find(review => review.spotId == spotId);
-
 /* --------- REDUCERS -------- */
 const initialReviews = [];
 

@@ -37,9 +37,8 @@ const Headline = () => {
 
     reviews.forEach(review => sumReviews += review.stars);
 
-    avgReview = sumReviews / reviews.length;
+    avgReview = parseFloat(sumReviews / reviews.length).toFixed(2); 
   }
-
 
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(Number(spotId)));

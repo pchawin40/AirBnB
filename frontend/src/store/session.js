@@ -58,18 +58,11 @@ export const login = user => async dispatch => {
 
 // TODO: Restore the session user
 //? Setting session user to user in response body
-export const restoreSessionUser = () => async dispatch => {
-  // call GET /api/session
-  const res = await csrfFetch('/api/session');
-
-  // parse JSON body of response
-  const user = await res.json();
-
-  // dispatch action for setting session user to user in response body
-  if(user.email) dispatch(setSessionUser(user));
-
-  // return response
-  return user;
+export const restoreSessionUser = () => async (dispatch) => {
+  const response = await csrfFetch('/api/session');
+  const data = await response.json();
+  dispatch(setSessionUser(data.user));
+  return response;
 };
 
 //? Signup Thunk action
