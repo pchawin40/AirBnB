@@ -1,5 +1,5 @@
 // import react-redux
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // import react-router-dom
@@ -8,15 +8,22 @@ import { useParams } from 'react-router-dom';
 // import store
 import * as spotActions from '../../../store/spots';
 import * as reviewActions from '../../../store/reviews';
+import * as sessionActions from '../../../store/session';
 
 // import css
 import './ReviewInfo.css';
 
 // import component
 import ReviewTracker from './ReviewTracker';
+import ReviewModal from './ReviewModal';
+import { Modal } from "../../../context/Modal";
 
 //? ReviewInfo component
 const ReviewInfo = () => {
+  // state for review modal
+  const [showReviewModal, setShowReviewModal] = useState(false);
+
+  // invoke dispatch
   const dispatch = useDispatch();
 
   // get spot id
@@ -25,6 +32,9 @@ const ReviewInfo = () => {
   // get spots data
   const reviewState = useSelector(reviewActions.getAllReviews);
   const reviews = reviewState !== undefined ? reviewState.filter(review => review.spotId === Number(spotId)) : null;
+
+  // get current logged in user
+  const user = useSelector(sessionActions.getSessionUser);
 
   // get average of all reviews from review
   // total / #
@@ -43,7 +53,18 @@ const ReviewInfo = () => {
     dispatch(spotActions.getSpotBySpotId(Number(spotId)));
     dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
   }, [dispatch, spotId]);
+  
+  //? handleReviewRemove: remove review from database
+  const handleReviewRemove = review => {
+    dispatch(reviewActions.thunkRemoveReview(Number(review.id)));
+  };
 
+  {/* if review's user id is current logged in user's id, show button */ }
+  const showDeleteButton = review => {
+    if (review.userId === user.id) {
+      return <button className="delete-review-button" onClick={e => handleReviewRemove(review)}>Remove My Review</button>
+    }
+  }
 
   return (
     <section className="review-info">
@@ -67,28 +88,43 @@ const ReviewInfo = () => {
       {/* //? top reviews */}
       <section className="review-info-feature-container">
         {
-          reviews ? reviews.map(review =>
+          Array.isArray(reviews) ? reviews.map(review =>
             <li key={review.id}>
               <div>
-                <img src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`} />
+                <img className="review-profile-image" src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`} alt={review.id} />
+
+                {/* //? button to delete review, if available */}
+                {showDeleteButton(review)}
               </div>
-              {review.review}
+              <figcaption className="review-caption-container">
+                <p className="review-content">{review.review}</p>
+                <p className="review-author">{review.User.firstName + " " + review.User.lastName}</p>
+              </figcaption>
             </li>
           ) :
             <div id="no-review-button-container">
               <li>No reviews for this spot yet. Write one now!</li>
-              <button id="no-review-button"><i class="fa-solid fa-circle-plus"></i></button>
+              <button id="no-review-button"><i className="fa-solid fa-circle-plus"></i></button>
             </div>
         }
       </section>
 
       {/* //? Button to add more reviews */}
       <section className="review-info-review-button-container">
-        <button className="review-info-review-button">
-          <span><i class="fa-solid fa-plus"></i></span>
+        <button className="review-info-review-button" onClick={_ => setShowReviewModal(true)}>
+          <span><i className="fa-solid fa-plus"></i></span>
           Write a review
         </button>
       </section>
+
+      {
+        // Show Review Modal
+        showReviewModal
+        &&
+        <Modal onClose={_ => setShowReviewModal(false)}>
+          <ReviewModal />
+        </Modal>
+      }
     </section>
   );
 }

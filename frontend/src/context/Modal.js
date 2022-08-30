@@ -35,7 +35,7 @@ export const Modal = ({onClose, children }) => {
       {/* When clicked, invoke onClose */}
       <div id="modal-background" onClick={onClose}/>
       {/* modal-content div */}
-      <div id="modal-content">
+      <div id="modal-content" style={{zIndex: 10}}>
         {/* render children props */}
         {children}
       </div>

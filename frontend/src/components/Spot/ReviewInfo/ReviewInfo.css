@@ -8,13 +8,12 @@
   padding-bottom: 5rem;
   align-items: center;
   width: 100vw;
-  grid-template-columns: 5vw repeat(4, auto-fill);
   grid-template-rows: repeat(3, auto-fill);
   grid-template-areas: 
-  "header . feature feature "
-  "tracker tracker feature feature"
-  "tracker tracker feature feature"
-  "button . feature feature"
+  "header feature"
+  "tracker feature"
+  "tracker feature"
+  "button feature"
 }
 
 /*****************************************
@@ -61,11 +60,15 @@
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: auto-fill;
 
-  justify-self: center;
+  justify-self: start;
+
+  margin-left: 4rem;
+  margin-right: 10rem;
 }
 
 .review-info-feature-container > li{
   height: 5em;
+  margin-bottom: 5rem;
 }
 
 .review-info-feature-container > li > div {
@@ -74,12 +77,13 @@
   
 }
 
-.review-info-feature-container > li > div > img {
+.review-profile-image {
   height: 5rem;
   width: auto;
+  padding-bottom: 2rem;
 }
 
-.review-info-feature-container > li > div > img:hover{
+.review-profile-image:hover{
   cursor: pointer;
 }
 
@@ -95,7 +99,6 @@
   margin-right: 10rem;
 
   width: 50vw;
-  background-color: red;
 }
 
 .review-info-feature-container > *:hover{
@@ -111,6 +114,31 @@
 #no-review-button > i{
   color: #FF5A5F;
   font-size: 2rem;
+}
+
+.review-content{
+  font-style: italic;
+  text-align: left;
+}
+
+.review-author{
+  text-align: right;
+}
+
+.delete-review-button{
+  background-color: white;
+
+  margin-top: 2rem;
+  width: 5rem;
+  height: auto;
+
+  transition: all .1s ease-in-out;
+}
+
+.delete-review-button:hover{
+  cursor: pointer;
+
+  transform: scale(1.02);
 }
 
 /*****************************************

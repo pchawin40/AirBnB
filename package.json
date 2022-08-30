@@ -12,7 +12,7 @@
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
     "start": "npm start --prefix backend"
   },
-  "engines":{
+  "engines": {
     "node": "18.x"
   },
   "repository": {
@@ -31,6 +31,10 @@
     "heroku-cli": "^7.0.9",
     "multer": "^1.4.5-lts.1",
     "postgresql": "^0.0.1",
+    "react-ga": "^3.3.1",
+    "react-simple-star-rating": "^4.0.5",
+    "react-star-ratings": "^2.3.0",
+    "react-styled-clickable-progress-bar": "^1.0.11",
     "sequelize": "^6.21.3",
     "sequelize-cli": "^6.4.1"
   }

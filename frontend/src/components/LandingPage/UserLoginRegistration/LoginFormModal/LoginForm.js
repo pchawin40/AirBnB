@@ -54,7 +54,7 @@ const LoginForm = () => {
 
     // dispatch login thunk action
     // handle and display errors if any
-    return dispatch(sessionActions.login(user)).then(res => {sessionActions.restoreSessionUser()}).catch(
+    return dispatch(sessionActions.login(user)).catch(
       async res => {
         // parse error data
         const data = await res.json();

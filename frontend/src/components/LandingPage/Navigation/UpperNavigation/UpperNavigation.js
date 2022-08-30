@@ -4,13 +4,14 @@
 import { NavLink } from 'react-router-dom';
 
 // import react-redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import css
 import './UpperNavigation.css';
 
 // import session store
 import * as sessionActions from '../../../../store/session';
+import * as userActions from '../../../../store/users';
 
 // import component
 import ProfileButton from './ProfileButton/ProfileButton';
@@ -18,12 +19,26 @@ import LoginFormModal from '../../UserLoginRegistration/LoginFormModal';
 import LogoContainer from './LogoContainer';
 import SearchBar from './SearchBar';
 import DemoUser from '../../UserLoginRegistration/DemoUser';
+import { useEffect } from 'react';
 
 //? UpperNavigation Component
 const UpperNavigation = ({ isLoaded }) => {
+
   // get current session user
   // const sessionUser = undefined;
   const sessionUser = useSelector(sessionActions.getSessionUser);
+
+  // invoke dispatch
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (sessionUser) {
+      dispatch(userActions.thunkLoadUserById(sessionUser.id));
+    }
+  }, [dispatch]);
+
+  // get user's name
+  const user = useSelector(userActions.getAllUsers);
 
   const sessionLinks =
     // When have session user, contain link to log out current user
@@ -40,24 +55,28 @@ const UpperNavigation = ({ isLoaded }) => {
         {/* //? Signup link */}
         <NavLink id="sign-up-button" to='/signup'>Sign Up</NavLink>
       </>;
-    
+
+
   const userHostLinks =
     sessionUser ?
       // Switch to hosting (if logged in)
-      <NavLink className="user-host-links" to="/host/homes">Switch to hosting</NavLink>
+      <>
+        {user.firstName} {user.lastName}
+        <NavLink className="user-host-links" to="/host/homes">Host a Spot</NavLink>
+      </>
       :
       // Become a host (if not logged in)
       <NavLink className="user-host-links" to="/hosting">Become a Host</NavLink>;
 
   //? Render UpperNavigation Links and Logout button
   return (
-    <div id="navigation-bar" style={{zIndex: 10}}>
+    <div id="navigation-bar" style={{ zIndex: 10 }}>
       {/* //? Render Logo Container */}
-      <LogoContainer/>
+      <LogoContainer />
 
       {/* //? Render Search Link */}
-      <SearchBar/>
-      
+      <SearchBar />
+
       {/* // TODO: Render User Link */}
       {/* //? NavLink */}
       <ul>
@@ -65,12 +84,12 @@ const UpperNavigation = ({ isLoaded }) => {
           {/* //TODO: To make path */}
           {/* display hosting text links */}
           {userHostLinks}
-          
+
           {/* // TODO: Modal for Region Setting */}
           <i className="fa-solid fa-globe" id="nav-link-fa-globe"></i>
-          
+
           {/* //TODO: sessionLinks */}
-          {isLoaded && sessionLinks}
+          {isLoaded && user && sessionLinks}
         </li>
       </ul>
     </div>
