@@ -1,0 +1,149 @@
+/*****************************************
+*           Review Info
+*****************************************/
+.review-info{
+  display: grid;
+  margin: 5rem 5rem;
+  margin-top: 3rem;
+  padding-bottom: 5rem;
+  align-items: center;
+  width: 100vw;
+  grid-template-columns: 5vw repeat(4, auto-fill);
+  grid-template-rows: repeat(3, auto-fill);
+  grid-template-areas: 
+  "header . feature feature "
+  "tracker tracker feature feature"
+  "tracker tracker feature feature"
+  "button . feature feature"
+}
+
+/*****************************************
+*           Review Info Header
+******************************************/
+.review-info-header-container{
+  grid-area: header;
+
+  display: flex;
+  align-items: center;
+  
+  font-weight: bold;
+  font-size: larger;
+  width: 10vw;
+  min-width: fit-content;
+  justify-content: space-between;
+}
+
+.review-info-header > span {
+  padding: 0 .25rem;
+}
+
+/*****************************************
+*           Review Tracker
+******************************************/
+.review-info-tracker-container{
+  grid-area: tracker;
+
+  padding-left: .5rem;
+  padding-top: 2rem;
+
+  width: 20vw;
+
+  margin-top: 2rem;
+}
+
+/*****************************************
+*             Feature Review
+******************************************/
+.review-info-feature-container{
+  grid-area: feature;
+
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: auto-fill;
+
+  justify-self: center;
+}
+
+.review-info-feature-container > li{
+  height: 5em;
+}
+
+.review-info-feature-container > li > div {
+  display: flex;
+  align-items: start;
+  
+}
+
+.review-info-feature-container > li > div > img {
+  height: 5rem;
+  width: auto;
+}
+
+.review-info-feature-container > li > div > img:hover{
+  cursor: pointer;
+}
+
+#no-review-button-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-right: 5rem;
+  margin-right: 10rem;
+
+  width: 50vw;
+  background-color: red;
+}
+
+.review-info-feature-container > *:hover{
+  cursor: pointer;
+}
+
+#no-review-button{
+  background-color: white;
+  border: none;
+  font-size: larger;
+}
+
+#no-review-button > i{
+  color: #FF5A5F;
+  font-size: 2rem;
+}
+
+/*****************************************
+*          Review Button Container
+******************************************/
+.review-info-review-button-container{
+  grid-area: button;
+  padding-right: 5rem;
+}
+
+.review-info-review-button{
+  background-color: #FF5A5F;
+  border-style: none;
+  border-radius: 2rem;
+  padding: 1rem;
+  transition: all .3s ease-in-out;
+  transition: font-family .2s ease;
+  color: white;
+
+  margin-top: 10rem;
+}
+
+.review-info-review-button > span > i {
+  color: white;
+
+  font-weight: bold;
+}
+
+.review-info-review-button:hover{
+  cursor: pointer;
+  transform: scale(1.03);
+
+  font-weight: bold;
+
+  box-shadow: 0 8px 8px -4px black;
+}

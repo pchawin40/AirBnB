@@ -74,6 +74,10 @@
   float: right;
 }
 
+.user-profile-pic:hover{
+  cursor: pointer;
+}
+
 /**********************************
 *   Home Content About Info
 ***********************************/
