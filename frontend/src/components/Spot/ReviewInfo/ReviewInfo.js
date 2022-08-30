@@ -36,8 +36,7 @@ const ReviewInfo = () => {
   // get current logged in user
   const user = useSelector(sessionActions.getSessionUser);
 
-  // get average of all reviews from review
-  // total / #
+  //! To fix page reload when deleting by using state
 
   let avgReview = 0;
 
@@ -57,9 +56,11 @@ const ReviewInfo = () => {
   //? handleReviewRemove: remove review from database
   const handleReviewRemove = review => {
     dispatch(reviewActions.thunkRemoveReview(Number(review.id)));
+
+    window.location.reload(false);
   };
 
-  {/* if review's user id is current logged in user's id, show button */ }
+  // if review's user id is current logged in user's id, show button
   const showDeleteButton = review => {
     if (review.userId === user.id) {
       return <button className="delete-review-button" onClick={e => handleReviewRemove(review)}>Remove My Review</button>
@@ -104,7 +105,7 @@ const ReviewInfo = () => {
           ) :
             <div id="no-review-button-container">
               <li>No reviews for this spot yet. Write one now!</li>
-              <button id="no-review-button"><i className="fa-solid fa-circle-plus"></i></button>
+              <button id="no-review-button" onClick={_ => setShowReviewModal(true)}><i className="fa-solid fa-circle-plus"></i></button>
             </div>
         }
       </section>

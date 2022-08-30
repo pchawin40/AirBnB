@@ -74,7 +74,6 @@
 .review-info-feature-container > li > div {
   display: flex;
   align-items: start;
-  
 }
 
 .review-profile-image {
@@ -109,6 +108,12 @@
   background-color: white;
   border: none;
   font-size: larger;
+  cursor: pointer;
+  transition: all .1s ease-in-out;
+}
+
+#no-review-button:hover{
+  transform: scale(1.1);
 }
 
 #no-review-button > i{
