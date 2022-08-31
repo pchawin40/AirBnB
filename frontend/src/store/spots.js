@@ -77,14 +77,16 @@ export const addASpot = spotToAdd => async dispatch => {
     body: JSON.stringify(spotToAdd)
   });
 
-  // parsed res to json
-  const spot = await res.json();
-
-  // dispatch addSpot w/ parsed spot
-  dispatch(addSpot(spot));
-
-  // return spot
-  return spot;
+  if (res.ok) {
+    // parsed res to json
+    const spot = await res.json();
+  
+    // dispatch addSpot w/ parsed spot
+    dispatch(addSpot(spot));
+  
+    // return spot
+    return spot;
+  }
 }
 
 /* --------- SELECTOR FUNCTIONS -------- */

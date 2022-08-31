@@ -32,7 +32,7 @@ const HomeGallery = () => {
   return (
     spot && 
     <section className="gallery-image-container">
-      <img src={spot.previewImage} alt={spot.name} />
+        <img src={spot.previewImage ? spot.previewImage : "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} alt={spot.name} />
     </section>
   );
 };

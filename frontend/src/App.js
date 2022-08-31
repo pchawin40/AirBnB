@@ -17,6 +17,8 @@ import * as spotActions from './store/spots';
 import SignupFormPage from './components/LandingPage/UserLoginRegistration/SignupFormPage/SignupFormPage';
 import LandingPage from './components/LandingPage';
 import Spot from './components/Spot';
+import HostSpot from './components/HostSpot';
+import CreateSpot from './components/HostSpot/CreateSpot';
 
 function App() {
 
@@ -49,10 +51,23 @@ function App() {
             <SignupFormPage />
           </Route>
 
+          {/* //? spot detail */}
           <Route path="/spots/:spotId">
             <Spot isLoaded={isLoaded} />
           </Route>
 
+          {/* //? spot create welcome */}
+          <Route path="/host/homes">
+            <HostSpot/>
+          </Route>
+
+          {/* //? spot create */}
+          <Route path="/host/create-spot">
+            <CreateSpot/>
+          </Route>
+
+          
+          {/* //? resource not found */}
           <Route>
             Resource not found: To be due
           </Route>
