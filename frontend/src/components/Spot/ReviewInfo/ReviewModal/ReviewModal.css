@@ -1,0 +1,52 @@
+/******************************
+*       Modal Content
+******************************/
+#modal-content{
+  border-radius: 2rem;
+}
+
+/******************************
+*       Review Form
+******************************/
+
+#review-form{
+  height: fit-content;
+  padding: 2rem;
+}
+
+/******************************
+*       Spot's Review
+******************************/
+
+#spot-review-label{
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+#spot-review{
+  resize: none;
+  width: 80%;
+  height: 20em;
+  margin: 3rem;
+  margin-bottom: 1rem;
+}
+
+/******************************
+*       Submit Review 
+******************************/
+
+#submit-review-button{
+  padding: 1rem;
+  border-radius: 2rem;
+  background-color: white;
+  background-color: #ff365a;
+  color: white;
+  transition: all .2s ease-in-out;
+  font-weight: bold;
+  border: none;
+}
+
+#submit-review-button:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+}

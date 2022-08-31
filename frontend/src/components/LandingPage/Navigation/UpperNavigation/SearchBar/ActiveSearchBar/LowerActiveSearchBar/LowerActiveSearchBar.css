@@ -1,0 +1,160 @@
+/*******************************************
+*           Lower Search Nav
+*******************************************/
+
+.lower-search-nav{
+  display: flex;
+  position: absolute;
+  top: 6rem;
+  right: 28%;
+  height: 5rem;
+  width: fit-content;
+  z-index: 100;
+  border-radius: 4rem;
+}
+
+.lower-search-nav > div {
+  display: grid;
+  grid-template-columns: 30% 17% 17% auto;
+  justify-self: flex-start;
+  width: 50vw;
+  border-radius: 4rem;
+  background-color: #EBEBEB;
+}
+
+.lower-search-nav > div > button{
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-radius: 2rem;
+  border: none;
+  background-color: #EBEBEB;
+}
+
+.lower-search-nav > div > button:hover{
+  background-color: #DDDDDD;
+}
+
+.lower-search-nav > div > button:hover{
+  border-radius: 3rem;
+}
+
+.inner-lower-search-nav > button > p, .inner-lower-search-nav > button > section > p  {
+  margin: 0.3rem 0;
+}
+
+.where-inner-div, .check-in-button, .check-out-button {
+  justify-content: center;
+  flex-direction: column;
+}
+
+form > input, button{
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+}
+
+.inner-lower-search-nav > *{
+  font-size: medium;
+}
+
+/*******************************************
+*           Where Button
+*******************************************/
+.where-inner-div{
+  margin-top: 1rem;
+  margin-left: 1rem;
+  text-align: left;
+}
+
+.where-input{
+  width: 10rem;
+  border: none;
+  background-color: #EBEBEB;
+  all:unset;
+}
+
+/*******************************************
+*           Check Button
+*******************************************/
+.check-in-button, .check-out-button{
+  display: flex;
+  align-items: center;
+}
+
+#check-in-inner-div{
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  border-left: 1px solid #DDDDDD;
+}
+
+#check-out-inner-div{
+  display: flex;
+  flex-direction: column;
+  width: 7rem;
+}
+
+#check-in-inner-div, #check-out-inner-div{
+  border-right: 1px solid #DDDDDD;
+}
+
+.where-inner-div > p, #check-in-inner-div > p, #check-out-inner-div > p {
+  text-align: left;
+
+  margin: 0 auto;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding-right: 1rem;
+}
+
+
+
+/*******************************************
+*           Who Button
+*******************************************/
+
+.who-button {
+  flex-direction: row;
+  align-items: center;
+}
+
+.who-button-text-content{
+  text-align: left;
+
+  padding-left: 1rem;
+  width: 10rem;
+}
+
+.who-button > :nth-child(2){
+  background-color: #E41C5E;
+  
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding-right: 1rem;
+  
+  position: absolute;
+  right: .5rem;
+}
+
+.who-button-text-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border: none;
+  width: 8rem;
+  border-radius: 3rem;
+}
+
+.who-button-text-button, .who-guest-search-icon {
+  color: white;
+  font-size: larger;
+}
+
+.where-inner-div > p:first-child, .check-in-button > div > p:first-child, .check-out-button > div > p:first-child, .who-button-text-content > p:first-child{
+  font-weight: bold;
+}
+
+.lower-text{
+  color: #818181;
+}

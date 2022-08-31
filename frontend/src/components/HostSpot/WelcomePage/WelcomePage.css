@@ -1,0 +1,117 @@
+#welcome-page{
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 1fr;
+}
+
+/******************************
+*         Left Aside
+*******************************/
+#welcome-video{
+  width: 50vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+}
+
+#left-welcome-button{
+  font-weight: bold;
+  border-radius: 1rem;
+  padding: .25rem;
+  padding-right: 1rem;
+
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+}
+
+.welcome-button{
+  background-color: #222222;
+  border: none;
+  color: white;
+}
+
+.welcome-button:hover{
+  opacity: .6;
+  cursor: pointer;
+}
+
+#welcome-logo-icon{
+  position: absolute;
+
+  top: 50px;
+  left: 50px;
+  font-size: 2rem;
+  color: white;
+}
+
+#right-welcome-button{
+  position: absolute;
+  bottom: 0;
+  right: 50vw;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  width: fit-content;
+  padding: .25rem;
+  border-radius: 5rem;
+}
+
+.fa-play{
+  color: white;
+}
+
+/******************************
+*         Right Section
+*******************************/
+#welcome-right-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-bottom: 5px solid #232323;
+  margin-bottom: 6rem;
+}
+
+.welcome-right-text-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+#right-section-title-head{
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#right-section-title-caption{
+  color: white;
+  font-size: .8rem;
+}
+
+#right-section-exit-button{
+  position: absolute;
+  top: 25px;
+  right: 50px;
+  opacity: .98;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+}
+
+#right-section-enter-button{
+  position: absolute;
+  bottom: 25px;
+  right: 50px;
+  padding: 1rem;
+  background-color: #ff365a;
+  border: none;
+  border-radius: 1rem;
+  font-weight: bold;
+}

@@ -1,0 +1,88 @@
+#create-page{
+  width: 100vw;
+  height: 100vh;
+  background-color: wh;
+
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 1fr;
+}
+
+/******************************
+*         Left Aside
+*******************************/
+#create-left-aside{
+  color: white;
+  background: #8788E5;
+  background: -webkit-linear-gradient(bottom, #8788E5, #EA6594);
+  background: -moz-linear-gradient(bottom, #8788E5, #EA6594);
+  background: linear-gradient(to top, #8788E5, #EA6594);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-right: 5rem;
+}
+
+#create-logo-icon{
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  font-size: 2rem;
+  color: white;
+}
+
+#create-logo-icon:hover{
+  cursor: pointer;
+}
+
+#create-left-aside > h1{
+  font-size: 3rem;
+}
+
+/******************************
+*         Right Section
+*******************************/
+#create-right-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-bottom: 5px solid #232323;
+  margin-bottom: 6rem;
+
+  background-color: white;
+}
+
+#create-spot-form > input {
+  width: 60%;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgb(255, 255, 255);
+  min-width: fit-content;
+}
+
+.create-button-spot-back{
+  font-size: larger;
+  position: absolute;
+  bottom: 20px;
+  right: 43vw;
+  text-decoration: underline;
+}
+
+.create-button-spot-back:hover{
+  cursor: pointer;
+}
+
+.spot-exit{
+  border: none;
+}
+
+.spot-create{
+  color: white;
+}
+
+#right-section-exit-button:hover, #right-section-enter-button:hover{
+  cursor: pointer;
+}

@@ -1,0 +1,25 @@
+/***************************************
+*           Active Nav Bar
+***************************************/
+
+.active-nav-bar{
+  border-bottom: none !important;
+}
+
+/***************************************
+*        Upper Active Search Bar
+***************************************/
+.active-nav-bar-section{
+  display: flex;
+  flex-direction: row;
+}
+
+.active-nav-bar-li{
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+}
+
+.active-nav-bar-li:hover, .active-nav-bar-li:active{
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}
