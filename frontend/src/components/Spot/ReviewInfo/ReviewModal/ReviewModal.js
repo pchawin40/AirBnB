@@ -34,7 +34,7 @@ const ReviewModal = ({ reviewId }) => {
 
   // get existing review (if any)
   const reviewState = useSelector(reviewActions.getAllReviews);
-  const currentReview = reviewState.find(review => review.id === Number(reviewId));
+  const currentReview = Array.isArray(reviewState) ? reviewState.find(review => review.id === Number(reviewId)) : [];
 
   useEffect(() => {
     // restore review and rating
