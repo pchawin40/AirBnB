@@ -1,18 +1,18 @@
 import React from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { propertyTypeList } from '../../../../data/data';
-import Arrow from './Arrow.tsx'
+import Arrow from './Arrow.jsx'
 
 import './LowerNavigation.css';
 
 const getItems = () => propertyTypeList;
 
 function LowerNavigation() {
-  const [items ] = React.useState(getItems);
+  const [items] = React.useState(getItems);
 
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} className="scroll-menu-container">
-      {items.map(({name, iconImage}) => (
+      {items.map(({ name, iconImage }) => (
         <Card
           key={name}
           name={name}
