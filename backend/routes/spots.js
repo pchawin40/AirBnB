@@ -557,7 +557,8 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     lng,
     name,
     description,
-    price
+    price,
+    previewImage
   } = req.body;
 
   // get the current user info
@@ -578,10 +579,11 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     lng,
     name,
     description,
-    price
+    price,
+    previewImage
   });
 
-  const spotReturn = await Spot.scope('hideImage').findByPk(postSpot.id);
+  const spotReturn = await Spot.findByPk(postSpot.id);
 
   // return spot created
   res.status(201);
@@ -595,6 +597,8 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
   // deconstruct spotId
   const { spotId } = req.params;
 
+  console.log("SPOT ID HERE", spotId);
+
   // modify spot with given body
   const {
     address,
@@ -605,7 +609,8 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     lng,
     name,
     description,
-    price
+    price,
+    previewImage
   } = req.body;
 
   // find spot to authorize
@@ -639,7 +644,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     err.status = 404;
     return next(err);
   }
-
+  
   // update spot with deconstructed request body
   const updateSpot = await spot.update({
     address,
@@ -650,10 +655,11 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     lng,
     name,
     description,
-    price
+    price,
+    previewImage
   });
 
-  const spotReturn = await Spot.scope('hideImage').findByPk(updateSpot.id);
+  const spotReturn = await Spot.findByPk(updateSpot.id);
 
   // TODO: Successful response: return spot in response via json format
   return res.json(spotReturn);

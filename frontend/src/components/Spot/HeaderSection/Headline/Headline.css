@@ -7,12 +7,29 @@
   justify-self: center;
   align-self: center;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
   grid-template-areas: 
   "name name . . "
   "info info . link";
 
   margin-left: 4em;
+}
+
+.owner-button-spot-container > button {
+  background-color: #ff365a;
+  color: white;
+  font-weight: bold;
+  padding: 1rem;
+  margin: 3rem 1rem;
+  margin-bottom: 0;
+  border: 0;
+  border-radius: 1rem;
+  transition: all .2s ease-in-out;
+}
+
+.owner-button-spot-container > button:hover{
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 /**************************
@@ -38,6 +55,8 @@
 .div_2_inner_div_1{
   grid-area: info;
   justify-content: start;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .review-length-text, .location-text {

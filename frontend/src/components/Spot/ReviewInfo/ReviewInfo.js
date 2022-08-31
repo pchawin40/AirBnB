@@ -22,6 +22,7 @@ import { Modal } from "../../../context/Modal";
 const ReviewInfo = () => {
   // state for review modal
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [reviewId, setReviewId] = useState(null);
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const ReviewInfo = () => {
 
     avgReview = parseFloat(sumReviews / reviews.length).toFixed(2);
   }
-
+  
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(Number(spotId)));
     dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
@@ -62,8 +63,23 @@ const ReviewInfo = () => {
 
   // if review's user id is current logged in user's id, show button
   const showDeleteButton = review => {
-    if (review.userId === user.id) {
+    if (user && review.userId === user.id) {
       return <button className="delete-review-button" onClick={e => handleReviewRemove(review)}>Remove My Review</button>
+    }
+  }
+
+  const showEditButton = review => {
+    if (user && review.userId === user.id) {
+      return (<button
+        id={review.id}
+        className="edit-review-button"
+        onClick={e => {
+          setShowReviewModal(true)
+          setReviewId(e.target.id)
+        }}
+      >
+        Edit My Review
+      </button>)
     }
   }
 
@@ -91,10 +107,11 @@ const ReviewInfo = () => {
         {
           Array.isArray(reviews) ? reviews.map(review =>
             <li key={review.id}>
-              <div>
+              <div className="image-fig-caption-container">
                 <img className="review-profile-image" src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`} alt={review.id} />
 
                 {/* //? button to delete review, if available */}
+                {showEditButton(review)}
                 {showDeleteButton(review)}
               </div>
               <figcaption className="review-caption-container">
@@ -123,7 +140,7 @@ const ReviewInfo = () => {
         showReviewModal
         &&
         <Modal onClose={_ => setShowReviewModal(false)}>
-          <ReviewModal />
+            <ReviewModal reviewId={reviewId}/>
         </Modal>
       }
     </section>

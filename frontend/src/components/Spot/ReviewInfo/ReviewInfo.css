@@ -71,11 +71,6 @@
   margin-bottom: 5rem;
 }
 
-.review-info-feature-container > li > div {
-  display: flex;
-  align-items: start;
-}
-
 .review-profile-image {
   height: 5rem;
   width: auto;
@@ -100,9 +95,6 @@
   width: 50vw;
 }
 
-.review-info-feature-container > *:hover{
-  cursor: pointer;
-}
 
 #no-review-button{
   background-color: white;
@@ -131,20 +123,31 @@
 }
 
 .delete-review-button{
-  background-color: white;
-
-  margin-top: 2rem;
   width: 5rem;
   height: auto;
-
-  transition: all .1s ease-in-out;
 }
 
-.delete-review-button:hover{
+.edit-review-button, .delete-review-button{
+  margin: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: white;
+  transition: all .1s ease-in-out;
+  width: 5rem;
+  height: 5rem;
+}
+
+.delete-review-button:hover, .edit-review-button:hover{
   cursor: pointer;
 
   transform: scale(1.02);
 }
+
+.image-fig-caption-container{
+  display: flex;
+  align-items: center;
+}
+
 
 /*****************************************
 *          Review Button Container

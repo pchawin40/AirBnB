@@ -68,6 +68,26 @@ export const getReviewsBySpotId = spotId => async dispatch => {
   }
 };
 
+//? Thunk action to get a single review by spot id 
+export const thunkGetReview = (spotId, reviewId) => async dispatch => {
+
+  // fetch review by spot id
+  const res = await csrfFetch(`/spots/${spotId}/reviews`);
+
+  if (res.ok) {
+    // parse res to json
+    const reviews = await res.json();
+
+    // find review by review id
+    const review = reviews.find(review => review.id === Number(reviewId));
+
+    dispatch(loadReviews(review));
+
+    // return review
+    return review;
+  }
+}
+
 //? Thunk action to add review from user's input
 export const thunkAddReview = (review, spotId) => async dispatch => {
   // call csrfFetch to add review with given review data
@@ -88,6 +108,8 @@ export const thunkAddReview = (review, spotId) => async dispatch => {
   }
 }
 
+
+//? Thunk action to remove review
 export const thunkRemoveReview = reviewId => async dispatch => {
   // call csrfFetch to remove review with given reviewId
   const res = await csrfFetch(`/reviews/${reviewId}`, {
@@ -103,8 +125,30 @@ export const thunkRemoveReview = reviewId => async dispatch => {
   }
 }
 
+//? Thunk action to edit review
+export const thunkEditReview = (reviewToEdit, reviewId) => async dispatch => {
+  // fetch review using csrfFetch
+  const res = await csrfFetch(`/reviews/${reviewId}`, {
+    method: 'PUT',
+    body: JSON.stringify(reviewToEdit)
+  });
+
+  if (res.ok) {
+    // parse res to json
+    const review = await res.json();
+
+    // dispatch addSpot w/ parsed spot
+    dispatch(addReview(review));
+
+    // return review
+    return review;
+  }
+}
+
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getAllReviews = state => Object.values(state.reviews)[0];
+
+export const getReviewById = reviewId => state => state.reviews.Reviews[reviewId];
 
 /* --------- REDUCERS -------- */
 const initialReviews = [];

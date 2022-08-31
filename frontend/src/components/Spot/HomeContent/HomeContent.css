@@ -34,6 +34,8 @@
   
   padding-top: 1rem;
   padding-bottom: 6rem;
+
+  padding-right: 2.3rem;
 }
 
 .home-content-title-section > :first-child{
@@ -141,9 +143,9 @@
   display: flex;
   flex-direction: column;
 
-  width: 40vw;
+  width: 40rem;
 
-  padding-bottom: 20vw;
+  padding-bottom: 25rem;
 }
 
 .offer-list-container{

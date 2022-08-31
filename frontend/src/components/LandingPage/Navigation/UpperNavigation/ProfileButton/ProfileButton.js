@@ -74,44 +74,44 @@ const ProfileButton = ({ user }) => {
           <ul id='profile-dropdown'>
             <div className="top-container">
               {/* //? Messages */}
-              <NavLink to="/messages">
+              <NavLink to="/">
                 Messages
               </NavLink>
 
               {/* //? Trips */}
-              <NavLink to="/trips">
+              <NavLink to="/">
                 Trips
               </NavLink>
 
               {/* //? Wishlist */}
-              <NavLink to="/wishlist">
+              <NavLink to="/">
                 Wishlists
               </NavLink>
             </div>
             <div className="middle-container">
               {/* //? Manage Listings */}
-              <NavLink to="/listings">
+              <NavLink to="/">
                 Manage Listings
               </NavLink>
 
               {/* //? Host an Experience */}
-              <NavLink to="/hostings">
+              <NavLink to="/hostings/homes">
                 Host an experience
               </NavLink>
 
               {/* //? Refer a Host */}
-              <NavLink to="/refer">
+              <NavLink to="/">
                 Refer a Host
               </NavLink>
 
               {/* //? Account */}
-              <NavLink to="/account">
+              <NavLink to="/">
                 Account
               </NavLink>
             </div>
             <div className="lower-container">
               {/* //? Help */}
-              <NavLink to="/help">
+              <NavLink to="/">
                 Help
               </NavLink>
 
