@@ -14,8 +14,6 @@ const LandingPage = ({ isLoaded }) =>
     {/* //? Content */}
     {/* //* Head */}
     <Head />
-    {/* //* MapContainer */}
-    <MapContainer />
 
     {/* //? HomeFooterBar */}
     <HomeFooterBar />

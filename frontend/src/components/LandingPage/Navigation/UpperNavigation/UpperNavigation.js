@@ -20,6 +20,7 @@ import LogoContainer from './LogoContainer';
 import SearchBar from './SearchBar';
 import DemoUser from '../../UserLoginRegistration/DemoUser';
 import { useEffect } from 'react';
+import UpperRightNavLink from './UpperRightNavLink';
 
 //? UpperNavigation Component
 const UpperNavigation = ({ isLoaded }) => {
@@ -75,23 +76,11 @@ const UpperNavigation = ({ isLoaded }) => {
       <LogoContainer />
 
       {/* //? Render Search Link */}
-      <SearchBar />
+      <SearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
 
       {/* // TODO: Render User Link */}
-      {/* //? NavLink */}
-      <ul>
-        <li id="nav-link-container">
-          {/* //TODO: To make path */}
-          {/* display hosting text links */}
-          {userHostLinks}
-
-          {/* // TODO: Modal for Region Setting */}
-          <i className="fa-solid fa-globe" id="nav-link-fa-globe"></i>
-
-          {/* //TODO: sessionLinks */}
-          {isLoaded && user && sessionLinks}
-        </li>
-      </ul>
+      {/* //? UpperRightNavLink */}
+      <UpperRightNavLink userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
     </div>
   );
 };

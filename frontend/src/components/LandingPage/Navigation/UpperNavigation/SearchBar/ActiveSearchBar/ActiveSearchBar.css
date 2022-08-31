@@ -1,1 +1,10 @@
 /* frontend/src/components/SearchBar/ActiveSearchBar/index.js */
+.active-bar-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 12rem;
+  background-color: white;
+}

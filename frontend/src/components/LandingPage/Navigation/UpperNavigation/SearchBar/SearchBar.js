@@ -1,43 +1,62 @@
 // frontend/src/components/SearchBar/SearchBar.js
 
 // import css
-import './SearchBar.module.css';
-import style from './SearchBar.module.css';
+import './SearchBar.css';
+
+// import react
+import { useState } from 'react';
+
+// import context
+import { Modal } from '../../../../../context/Modal';
+
+// import component
+import ActiveSearchBar from './ActiveSearchBar';
 
 //? SearchBar component
-const SearchBar = () => {
+const SearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
+  // state for review modal
+  const [showActiveBarModal, setShowActiveBarModal] = useState(false);
+
   // TODO: Render bar that contain link
 
   // TODO: handle on click to pop up modal
 
   return (
-    <div className={`${style.searchBarContainer}`}>
+    <div className='searchBarContainer'>
       {/* //? Location */}
-      <button className={`${style.searchBarButtons} ${style.locationButton}`}>
+      <button className='searchBarButtons locationButton' onClick={_ => setShowActiveBarModal(true)}>
         <div>Anywhere</div>
 
         {/* span to divide */}
-        <span className={`${style.lineDivide}`}/>
+        <span className='lineDivide'/>
       </button>
       
       {/* //? Schedule */}
-      <button className={`${style.searchBarButtons} ${style.scheduleButton}`}>
+      <button className='searchBarButtons scheduleButton' onClick={_ => setShowActiveBarModal(true)}>
         <div>Any week</div>
 
         {/* span to divide */}
-        <span className={`${style.lineDivide}`}/>
+        <span className='lineDivide'/>
       </button>
       
       {/* //? Guests */}
-      <button className={`${style.searchBarButtons} ${style.guestsButton}`}>
+      <button className='searchBarButtons guestsButton' onClick={_ => setShowActiveBarModal(true)}>
         {/* add guests text */}
-        <div className={`${style.guestText}`}>Add guests</div>
+        <div className='guestText'>Add guests</div>
 
         {/* search icon */}
-        <div className={`${style.searchIcon}`}>
-          <i className={`fa-solid fa-magnifying-glass ${style.magnifyingGlass}`}></i>
+        <div className='searchIcon'>
+          <i className='fa-solid fa-magnifying-glass magnifyingGlass'></i>
         </div>
       </button>
+
+      {
+        showActiveBarModal
+        &&
+        <Modal onClose={_ => setShowActiveBarModal(false)}>
+            <ActiveSearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
+        </Modal>
+      }
     </div>
   );
 };

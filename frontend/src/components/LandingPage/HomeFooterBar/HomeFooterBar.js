@@ -1,20 +1,40 @@
 // frontend/src/components/HomeFooterBar/HomeFooterBar.js
 
+// import react
+import { useState } from 'react';
+
 // import css
 import './HomeFooterBar.css';
 
+// import context
+import { Modal } from '../../../context/Modal';
+
+// import component
+import MapModal from './MapModal';
+
 //? HomeFooterBar component
 const HomeFooterBar = () => {
+  // state for MapModal
+  const [showMapModal, setShowMapModal] = useState(false);
+
   return (
     <div className="outer-footer-container">
       <div className="footer-content-container">
         {/* //? upper div container (map) */}
         <div id="DIV_MAP">
-          <button id="inner_div_map_button">
+          <button id="inner_div_map_button" onClick={_ => setShowMapModal(true)}>
             Show map
             <i className="fa-solid fa-map"></i>
           </button>
         </div>
+        {
+          // Show Review Modal
+          showMapModal
+          &&
+          <Modal onClose={_ => setShowMapModal(false)}>
+            <MapModal />
+          </Modal>
+        }
 
         {/* //? lower div container (lower) */}
         <div className="lower_div_container">
