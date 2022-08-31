@@ -126,7 +126,10 @@ form > input, button{
 }
 
 .who-button > :nth-child(2){
-  background-color: #E41C5E;
+  background: #E96691;
+  background: -webkit-radial-gradient(center, #E96691, #E41C5E);
+  background: -moz-radial-gradient(center, #E96691, #E41C5E);
+  background: radial-gradient(ellipse at center, #E96691, #E41C5E);
   
   padding-top: .25rem;
   padding-bottom: .25rem;
@@ -144,6 +147,10 @@ form > input, button{
   border: none;
   width: 8rem;
   border-radius: 3rem;
+}
+
+.who-button-text-button:hover{
+  cursor: pointer;
 }
 
 .who-button-text-button, .who-guest-search-icon {
