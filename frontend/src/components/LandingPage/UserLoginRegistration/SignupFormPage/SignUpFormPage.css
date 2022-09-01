@@ -4,12 +4,11 @@
 .sign-up-form-page-container{
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100vh 150vh 100vh 30vh auto;
+  grid-template-rows: 100vh 100vh 110vh;
   grid-template-areas: 
   "header"
   "main"
-  "form"
-  "footer";
+  "form";
 }
 
 /****************************************
@@ -123,6 +122,8 @@
   flex-direction: column;
   align-items: center;
   padding-top: 5rem;
+
+  margin-bottom: 5rem;
 }
 
 .main-section-header{
@@ -144,37 +145,119 @@
 
 .main-pic-carousel{
   width: 100rem;
-  height: 50rem;
+  height: 40rem;
   margin-top: 15rem;
 }
 
 .inner-main-pic-carousel{
-  background-color: red;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .inner-main-pic-carousel > img {
-  width: 30rem;
-  height: 50rem; 
+  width: 32rem;
+  height: 40rem; 
   object-fit: fill;
+  border-radius: 1rem;
+  transition: all .2s ease-in-out;
+}
+
+.inner-main-pic-carousel > img:hover{
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 /****************************************
 *           Sign Up Form 
 ****************************************/
-.sign-up-form{
-  height: 100vh;
-  background-color: black;
-
+.sign-up-form-container{
+  background-color: #EBEBEB;
   grid-area: form;
+
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "left right";
 }
 
-/****************************************
-*           Spot Footer
-****************************************/
-.sign-up-footer{
-  background-color: gray;
+.sign-up-form-left{
+  grid-area: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  grid-area: footer;
+
+.sign-up-form{
+  padding-bottom: 5rem;
+}
+
+.sign-up-form > h2{
+  font-size: 64px;
+}
+
+.sign-up-form input:not(#form-image-upload) {
+  width: 80%;
+  height: 3rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 24px;  
+}
+
+.form-image-upload-container{
+  display: flex;
+  width: 100%;
+  margin: 1rem;
+  text-align: flex-start;
+  flex-direction: column;
+  margin-left: 12rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.form-image-upload-container > span{
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+#form-image-upload{
+  font-size: 1.5rem;
+}
+
+.sign-up-form > button{
+  padding: 2rem;
+  width: 85%;
+  font-size: 24px;
+  border-radius: 1rem;
+  color: white;
+  background-color: #ff365a;
+  border: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  transition: all .2s ease-in-out;
+  transition: font-weight .2s;
+}
+
+.sign-up-form > button:hover{
+  cursor: pointer;
+  font-weight: bold;
+  transform: scale(1.02);
+}
+
+
+.sign-up-form-right{
+  grid-area: right;
+  
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+
+.sign-up-form-right > img {
+  width: 50rem;
+  object-fit: fill;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
