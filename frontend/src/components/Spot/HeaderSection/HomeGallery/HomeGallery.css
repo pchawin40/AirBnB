@@ -14,7 +14,7 @@
 
 .gallery-image-container > img {
   height: 30em;
-  width: 25vw;
+  width: auto;
 
   border-radius: 1rem;
 }

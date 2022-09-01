@@ -33,6 +33,7 @@
 
 .lower-search-nav > div > button:hover{
   background-color: #DDDDDD;
+  cursor: pointer;
 }
 
 .lower-search-nav > div > button:hover{
@@ -147,10 +148,15 @@ form > input, button{
   border: none;
   width: 8rem;
   border-radius: 3rem;
+  transition: all 0s ease-in-out;
 }
 
 .who-button-text-button:hover{
   cursor: pointer;
+}
+
+.who-button-text-button:active{
+  transform: scale(1.03);
 }
 
 .who-button-text-button, .who-guest-search-icon {

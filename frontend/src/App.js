@@ -19,6 +19,7 @@ import LandingPage from './components/LandingPage';
 import Spot from './components/Spot';
 import HostSpot from './components/HostSpot';
 import CreateSpot from './components/HostSpot/CreateSpot';
+import ResourceNotFound from './components/ResourceNotFound';
 
 function App() {
 
@@ -69,7 +70,7 @@ function App() {
           
           {/* //? resource not found */}
           <Route>
-            Resource not found: To be due
+            <ResourceNotFound/>
           </Route>
         </Switch>
       </section>

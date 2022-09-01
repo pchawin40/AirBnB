@@ -62,7 +62,7 @@ const ProfileButton = ({ user }) => {
   // return ProfileButton component
   return (
     <div id="profile-button-container">
-      <button id="nav-button-container" onClick={openMenu}>
+      <button id="nav-button-container" onClick={openMenu} >
         {/* represent menu icon */}
         <i className="fa-solid fa-bars fa-lg"></i>
 
@@ -95,7 +95,7 @@ const ProfileButton = ({ user }) => {
               </NavLink>
 
               {/* //? Host an Experience */}
-              <NavLink to="/hostings/homes">
+              <NavLink to="/host/homes">
                 Host an experience
               </NavLink>
 

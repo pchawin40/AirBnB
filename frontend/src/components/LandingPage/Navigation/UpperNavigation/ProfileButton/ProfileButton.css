@@ -7,6 +7,10 @@
   margin: 0;
 }
 
+#nav-button-container:hover{
+  cursor: pointer;
+}
+
 #profile-dropdown{
   top: 6rem;
   right: 3rem;

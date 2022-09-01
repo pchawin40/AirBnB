@@ -27,20 +27,20 @@
 
 #DIV_1_home, #DIV_2_home{
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	padding: .25rem 1rem;
 }
 
 .lower_div_container_home{
 	grid-area: lower;
 
 	display: grid;
-	grid-template-columns: auto 40% auto;
+	grid-template-columns: repeat(3, auto);
 	grid-template-areas: "left . right";
 
 	border-top: 1px solid #EDEDED;
 	background-color: #FFFFFF;
+
+	height: 7vh;
 }
 
 /******************************
@@ -84,17 +84,31 @@
 *            DIV_1
 *******************************/
 #DIV_1_home{
-	padding-left: 5rem;
 	grid-area: left;
-} /*#DIV_1*/
+	margin-left: 5rem;
+	position: absolute;
+	left: 0;
+	bottom: 2vh;
+} 
+
+
+#DIV_1_home > div {
+	padding: 0 1vw;
+}
+
+#left_inner_div_1_home > *{
+	/* background-color: red; */
+	padding: 0 .25vw;
+}
 
 /******************************
 *            DIV_2
 *******************************/
 #DIV_2_home{
-	width: 1fr;
-	padding-right: 5rem;
 	grid-area: right;
+	position: absolute;
+	right: 0;
+	bottom: 1vh;
 }
 
 #inner_div_2_home{
@@ -102,11 +116,16 @@
 	justify-content: space-between;
 }
 
-.inner_div_2_content_a_home{
-	padding-right: .4rem;
+.inner_div_1_home, .inner_div_3_home{
+	display: flex;
+	flex-direction: row;
 }
 
 .inner_div_1_content_home:hover, #inner_div_2_home:hover, #inner_div_3_home:hover{
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+#DIV_2_home > div {
+	padding: 0 1vw;
 }

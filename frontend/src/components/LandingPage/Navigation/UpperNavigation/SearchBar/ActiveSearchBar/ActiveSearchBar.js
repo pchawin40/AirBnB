@@ -9,6 +9,7 @@ import UpperActiveSearchBar from "./UpperActiveSearchBar";
 
 //? ActiveSearchBar component
 const ActiveSearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
+
   return (
     <aside className="active-bar-container">
       {/* keep logo and side links */}
@@ -16,7 +17,7 @@ const ActiveSearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
       <UpperActiveSearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
       
       {/* lower active search bar */}
-      <LowerActiveSearchBar/>
+      <LowerActiveSearchBar />
     </aside>
   );
 };

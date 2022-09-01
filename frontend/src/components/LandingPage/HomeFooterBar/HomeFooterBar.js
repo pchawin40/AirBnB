@@ -38,16 +38,18 @@ const HomeFooterBar = () => {
 
         {/* //? lower div container (lower) */}
         <div className="lower_div_container_home">
-          
+
           {/* //? outer lower div 1 */}
           <div id="DIV_1_home">
-            <span className="inner_div_1_content_home" id="SPAN_2">© 2022 Airbnb, Inc.</span>
-            <span className="inner_div_1_content_home" id="SPAN_3">·</span>
-            <span className="inner_div_1_content_home" id="A_4">Privacy</span>
-            <span className="inner_div_1_content_home" id="SPAN_5">·</span>
-            <span className="inner_div_1_content_home" id="A_6">Terms</span>
-            <span className="inner_div_1_content_home" id="SPAN_7">·</span>
-            <span className="inner_div_1_content_home" id="A_8">Sitemap</span>
+            <div id="left_inner_div_1_home">
+              <span className="inner_div_1_content_home" id="SPAN_2">© 2022 Airbnb, Inc.</span>
+              <span className="inner_div_1_content_home" id="SPAN_3">·</span>
+              <span className="inner_div_1_content_home" id="A_4">Privacy</span>
+              <span className="inner_div_1_content_home" id="SPAN_5">·</span>
+              <span className="inner_div_1_content_home" id="A_6">Terms</span>
+              <span className="inner_div_1_content_home" id="SPAN_7">·</span>
+              <span className="inner_div_1_content_home" id="A_8">Sitemap</span>
+            </div>
           </div>
 
           {/* //? outer lower div 2 */}
