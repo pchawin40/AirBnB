@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 // import react-redux
 import { useDispatch, useSelector } from 'react-redux';
 
-// invoke react-router-dom
-import { useParams } from 'react-router-dom';
+// import store
 import * as reviewActions from '../../../../store/reviews';
 
 // import component
@@ -40,8 +39,7 @@ const ReviewModal = ({ reviewId }) => {
     // restore review and rating
     setReview(currentReview.review);
     setRating(currentReview.stars);
-
-  }, [currentReview]);
+  }, [dispatch, currentReview.review, currentReview.stars]);
 
   //? HandleReviewSubmit
   const handleReviewSubmit = e => {

@@ -1,7 +1,6 @@
 // frontend/src/components/LandingPage/LandingPage.js
 
 import Navigation from './Navigation';
-import MapContainer from './MapContainer';
 import Head from './Head';
 import HomeFooterBar from './HomeFooterBar';
 

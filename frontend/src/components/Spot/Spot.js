@@ -31,10 +31,7 @@ const Spot = ({ isLoaded }) => {
   // get current spot first 
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};
-
-  // spot owner
-  const spotOwner = useSelector(spotActions.getSpotOwner());
-
+  
   // useEffect for dispatch (initial render)
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(spotId));

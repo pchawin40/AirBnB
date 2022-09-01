@@ -36,7 +36,7 @@ const UpperNavigation = ({ isLoaded }) => {
     if (sessionUser) {
       dispatch(userActions.thunkLoadUserById(sessionUser.id));
     }
-  }, [dispatch]);
+  }, [dispatch, sessionUser]);
 
   // get user's name
   const user = useSelector(userActions.getAllUsers);

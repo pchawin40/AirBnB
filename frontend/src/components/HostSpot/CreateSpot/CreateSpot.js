@@ -117,7 +117,7 @@ const CreateSpot = () => {
         {/* //? Left aside */}
         <aside id="create-left-aside">
           <figure id="create-logo-container">
-            <i style={{ zIndex: 1 }} onClick={handleExitButton} className="fa-brands fa-airbnb" id="create-logo-icon"></i>
+            <i style={{ zIndex: 1 }} onClick={handleExitButton} className="fa-brands fa-airbnb create-logo-icon"></i>
           </figure>
           {/* airbnb logo */}
           <h1>Describe your spot to host ☺</h1>

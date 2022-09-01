@@ -1,6 +1,3 @@
-// import react
-import { useRef, useState } from 'react';
-
 // import react-router-dom
 import { useHistory } from 'react-router-dom';
 

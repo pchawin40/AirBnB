@@ -178,13 +178,13 @@ const SignupFormPage = () => {
           <section className="inner-main-pic-carousel">
 
             {/* image 1 */}
-            <img src='https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg' />
+            <img src='https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg' alt="img 1" />
 
             {/* image 2 */}
-            <img src='https://i.picsum.photos/id/101/2621/1747.jpg?hmac=cu15YGotS0gIYdBbR1he5NtBLZAAY6aIY5AbORRAngs' />
+            <img src='https://i.picsum.photos/id/101/2621/1747.jpg?hmac=cu15YGotS0gIYdBbR1he5NtBLZAAY6aIY5AbORRAngs' alt="img 2"/>
 
             {/* image 3 */}
-            <img src={`https://i.picsum.photos/id/1041/5184/2916.jpg?hmac=TW_9o6HeD7H7I7NVo-S1Fa1iAvzQ10uvmJqsXvNoi0M`} />
+            <img src={`https://i.picsum.photos/id/1041/5184/2916.jpg?hmac=TW_9o6HeD7H7I7NVo-S1Fa1iAvzQ10uvmJqsXvNoi0M`} alt="img 3"/>
 
           </section>
         </section>
@@ -284,7 +284,7 @@ const SignupFormPage = () => {
                 <img
                   style={{ width: "150px" }}
                   src={sessionUser.profileImageUrl}
-                  alt="profile"
+                  alt="profile sign-up"
                 />
               </div>
             )}
@@ -292,7 +292,7 @@ const SignupFormPage = () => {
 
         </section>
         <section className="sign-up-form-right">
-          <img src="https://a0.muscache.com/im/pictures/f409b291-8b55-4780-81c3-a067062982d1.jpg?im_w=2560&im_q=highq" />
+          <img src="https://a0.muscache.com/im/pictures/f409b291-8b55-4780-81c3-a067062982d1.jpg?im_w=2560&im_q=highq" alt="form img"/>
         </section>
       </section>
     </section>

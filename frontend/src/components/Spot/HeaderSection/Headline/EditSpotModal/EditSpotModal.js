@@ -57,7 +57,7 @@ const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
   // console.log("currentSpot", currentSpot)
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(spotId));
-  }, [dispatch]);
+  }, [dispatch, spotId]);
 
   useEffect(() => {
     setAddress(currentSpot.address);
