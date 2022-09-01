@@ -67,7 +67,7 @@ const UpperNavigation = ({ isLoaded }) => {
       </>
       :
       // Become a host (if not logged in)
-      <NavLink className="user-host-links" to="/hosting">Become a Host</NavLink>;
+      <NavLink className="user-host-links" to="/signup">Become a Host</NavLink>;
 
   //? Render UpperNavigation Links and Logout button
   return (

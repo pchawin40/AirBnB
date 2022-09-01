@@ -13,7 +13,7 @@ import { Redirect } from 'react-router-dom';
 import * as sessionActions from '../../../../store/session';
 
 //? SignupFormPage Functional Component
-const SignupFormPage = () => {
+const SignupFormPageOld = () => {
   /**
    * Controlled Inputs:
    * ------------------
@@ -207,4 +207,4 @@ const SignupFormPage = () => {
   );
 }
 
-export default SignupFormPage;
+export default SignupFormPageOld;

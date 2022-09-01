@@ -14,7 +14,7 @@ import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
 
 // import components
-import SignupFormPage from './components/LandingPage/UserLoginRegistration/SignupFormPage/SignupFormPage';
+import SignupFormPage from './components/LandingPage/UserLoginRegistration/SignupFormPage';
 import LandingPage from './components/LandingPage';
 import Spot from './components/Spot';
 import HostSpot from './components/HostSpot';
