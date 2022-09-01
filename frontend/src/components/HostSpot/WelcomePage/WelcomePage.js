@@ -40,19 +40,6 @@ const WelcomePage = () => {
           muted
           loop
         />
-
-        {/* button to watch full video */}
-        <button className="welcome-button" id="left-welcome-button">
-          <span>
-            <i className="fa-solid fa-play"></i>
-          </span>
-          Watch full video
-        </button>
-
-        {/* button to continue/stop welcome video */}
-        <button className="welcome-button" id="right-welcome-button">
-          <i className="fa-solid fa-play"></i>
-        </button>
       </aside>
 
       {/* //? Right section */}

@@ -13,8 +13,8 @@
 }
 
 .gallery-image-container > img {
-  height: 30em;
-  width: auto;
+  height: 50vh;
+  width: 50vw;
 
   border-radius: 1rem;
 }
