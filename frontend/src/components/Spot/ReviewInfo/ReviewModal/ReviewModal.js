@@ -17,7 +17,7 @@ import './ReviewModal.css';
 const ReviewModal = ({ reviewId }) => {
   // invoke dispatch
   const dispatch = useDispatch();
-  
+
   /**
   * Controlled Inputs:
   * ------------------
@@ -55,6 +55,9 @@ const ReviewModal = ({ reviewId }) => {
 
     // reset validation erros before dispatching
     setValidationErrors([]);
+
+
+
 
     // dispatch add review thunk action
     return dispatch(reviewActions.thunkEditReview(postReview, reviewId)).catch(
