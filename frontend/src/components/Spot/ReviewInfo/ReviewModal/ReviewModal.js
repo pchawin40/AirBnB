@@ -1,8 +1,11 @@
 // import react
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 // import react-redux
 import { useDispatch, useSelector } from 'react-redux';
+
+// import react-router-dom
+import { useParams } from 'react-router-dom';
 
 // import store
 import * as reviewActions from '../../../../store/reviews';
@@ -10,36 +13,47 @@ import * as reviewActions from '../../../../store/reviews';
 // import component
 import StarSystem from './StarSystem';
 
+// import context
+import { ReviewContext } from '../../../../context/ReviewContext';
+
+
 // import css
 import './ReviewModal.css';
 
 //? ReviewModal component
-const ReviewModal = ({ reviewId }) => {
+const ReviewModal = ({ reviewId, reviewAction }) => {
   // invoke dispatch
   const dispatch = useDispatch();
-  
+
   /**
   * Controlled Inputs:
   * ------------------
-  * review: User's reviews for spot
-  * rating: User's rating for spot
-  * hover: hover state for rating
   * validationErrors: Errors from inputs
   */
-  const [review, setReview] = useState("");
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0);
   const [validationErrors, setValidationErrors] = useState([]);
+  const [review, setReview] = useState("");
+
+  const { spotId } = useParams();
+
+  const { rating, setRating } = useContext(ReviewContext);
 
   // get existing review (if any)
-  const reviewState = useSelector(reviewActions.getAllReviews);
-  const currentReview = Array.isArray(reviewState) ? reviewState.find(review => review.id === Number(reviewId)) : [];
+  const currentReview = useSelector(state => state.reviews.Reviews);
+  // const currentReview = Array.isArray(reviewState) ? reviewState.find(review => review.id === Number(reviewId)) : [];
 
+  //? useEffect initial
   useEffect(() => {
     // restore review and rating
-    setReview(currentReview.review);
-    setRating(currentReview.stars);
-  }, [dispatch, currentReview.review, currentReview.stars]);
+    if (currentReview) {
+      setReview(currentReview.review);
+      setRating(currentReview.stars);
+    }
+  }, [dispatch]);
+
+  //? useEffect review
+  useEffect(() => {
+    setReview(review);
+  }, [review])
 
   //? HandleReviewSubmit
   const handleReviewSubmit = e => {
@@ -57,7 +71,15 @@ const ReviewModal = ({ reviewId }) => {
     setValidationErrors([]);
 
     // dispatch add review thunk action
-    return dispatch(reviewActions.thunkEditReview(postReview, reviewId)).catch(
+    return dispatch(
+      reviewAction === "edit" ?
+        reviewActions.thunkEditReview(postReview, reviewId)
+        :
+        reviewActions.thunkAddReview(postReview, spotId)
+    ).then(() => {
+      // reload webpage after adding or editing is finished
+      window.location.reload(false);
+    }).catch(
       async res => {
         // parse data
         const data = await res.json();
@@ -86,16 +108,15 @@ const ReviewModal = ({ reviewId }) => {
         id="spot-review"
         name="spot-review"
         value={review}
-        onChange={e => setReview(e.target.value)}
+        onChange={e => {
+          setReview(e.target.value)
+
+        }}
       />
 
       {/* //? Spot's star rating */}
-      <StarSystem
-        rating={rating}
-        hover={hover}
-        setRating={setRating}
-        setHover={setHover}
-      />
+        <StarSystem
+        />
 
       {/* //? Submit Review Button */}
       <button id="submit-review-button" type="submit">

@@ -1,9 +1,5 @@
 //? UpperRightNavLink component
 const UpperRightNavLink = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
-  console.log("isLoaded", isLoaded);
-  console.log("userHostLinks", userHostLinks);
-  console.log("user", user);
-  console.log("sessionLinks", sessionLinks);
 
   return (
     <ul>

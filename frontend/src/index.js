@@ -35,7 +35,6 @@ if (process.env.NODE_ENV !== 'production') {
   // attach actions to window
   window.csrfFetch = csrfFetch;
   window.store = store;
-  // Test Case: sessionActions.login({ user: { credential: "john.smith@gmail.com", password: "password"} });
   window.sessionActions = sessionActions;
   window.spotActions = spotActions;
   window.reviewActions = reviewActions;

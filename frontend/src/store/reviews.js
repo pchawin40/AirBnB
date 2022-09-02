@@ -99,8 +99,7 @@ export const thunkAddReview = (review, spotId) => async dispatch => {
   if (res.ok) {
     // parsed res to json
     const postReview = await res.json();
-
-    console.log("postReview", postReview);
+    
     dispatch(addReview(postReview));
 
     // return review
