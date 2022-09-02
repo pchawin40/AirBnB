@@ -136,7 +136,13 @@ const ReviewInfo = () => {
 
       {/* //? Button to add more reviews */}
       <section className="review-info-review-button-container">
-        <button className="review-info-review-button" onClick={_ => setShowReviewModal(true)}>
+        <button
+          className="review-info-review-button"
+          onClick={_ => {
+            setReviewAction("create");
+            setShowReviewModal(true);
+          }}
+        >
           <span><i className="fa-solid fa-plus"></i></span>
           Write a review
         </button>

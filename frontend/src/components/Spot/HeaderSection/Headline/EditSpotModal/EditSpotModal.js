@@ -116,7 +116,7 @@ const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
             <i style={{ zIndex: 1 }} onClick={_ => history.push('/')} className="fa-brands fa-airbnb" id="create-logo-icon"></i>
           </figure>
           {/* airbnb logo */}
-          <h1>Edit your current listing spot</h1>
+          <h1>Edit your current listing spot ☺</h1>
         </aside>
 
         {/* //? Right section */}

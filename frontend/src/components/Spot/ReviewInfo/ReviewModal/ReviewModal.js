@@ -32,28 +32,23 @@ const ReviewModal = ({ reviewId, reviewAction }) => {
   */
   const [validationErrors, setValidationErrors] = useState([]);
   const [review, setReview] = useState("");
+  const [onLoad, setOnLoad] = useState("");
 
   const { spotId } = useParams();
 
   const { rating, setRating } = useContext(ReviewContext);
 
   // get existing review (if any)
-  const currentReview = useSelector(state => state.reviews.Reviews);
-  // const currentReview = Array.isArray(reviewState) ? reviewState.find(review => review.id === Number(reviewId)) : [];
+  const currentReview = useSelector(state => state.reviews.Reviews ? state.reviews.Reviews[0] : state.reviews);
 
-  //? useEffect initial
   useEffect(() => {
-    // restore review and rating
-    if (currentReview) {
+    setOnLoad(true);
+
+    if ("edit" === reviewAction) {
       setReview(currentReview.review);
       setRating(currentReview.stars);
-    }
-  }, [dispatch]);
-
-  //? useEffect review
-  useEffect(() => {
-    setReview(review);
-  }, [review])
+    } 
+  }, [onLoad, reviewAction])
 
   //? HandleReviewSubmit
   const handleReviewSubmit = e => {
@@ -91,38 +86,40 @@ const ReviewModal = ({ reviewId, reviewAction }) => {
   }
 
   return (
-    <form id="review-form" onSubmit={handleReviewSubmit}>
-      {/* //? Display Errors (if any) */}
-      <ul>
-        {
-          Array.isArray(validationErrors) ?
-            validationErrors.map(error => <li key={error} className="error-list">{error}</li>)
-            :
-            ""
-        }
-      </ul>
+    (onLoad ?
+      <form id="review-form" onSubmit={handleReviewSubmit}>
+        {/* //? Display Errors (if any) */}
+        <ul>
+          {
+            Array.isArray(validationErrors) ?
+              validationErrors.map(error => <li key={error} className="error-list">{error}</li>)
+              :
+              ""
+          }
+        </ul>
 
-      {/* //? Spot's review */}
-      <label id="spot-review-label" htmlFor="spot-review">Tell us your review:</label>
-      <textarea
-        id="spot-review"
-        name="spot-review"
-        value={review}
-        onChange={e => {
-          setReview(e.target.value)
+        {/* //? Spot's review */}
+        <label id="spot-review-label" htmlFor="spot-review">Tell us your review:</label>
+        <textarea
+          id="spot-review"
+          name="spot-review"
+          value={review}
+          onChange={e => {
+            setReview(e.target.value)
+          }}
+        />
 
-        }}
-      />
-
-      {/* //? Spot's star rating */}
+        {/* //? Spot's star rating */}
         <StarSystem
         />
 
-      {/* //? Submit Review Button */}
-      <button id="submit-review-button" type="submit">
-        Submit Review
-      </button>
-    </form>
+        {/* //? Submit Review Button */}
+        <button id="submit-review-button" type="submit">
+          Submit Review
+        </button>
+      </form>
+      :
+      setOnLoad(true))
   );
 };
 
