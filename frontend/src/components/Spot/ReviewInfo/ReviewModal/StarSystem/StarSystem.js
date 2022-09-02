@@ -1,7 +1,17 @@
+// import react
+import { useContext } from 'react';
+
+// import context
+import { ReviewContext } from '../../../../../context/ReviewContext';
+
+// import css
 import './StarSystem.css';
 
 //? StarSystem component
-const StarSystem = ({ rating, hover, setRating, setHover }) => {
+// const StarSystem = ({ rating, hover, setRating, setHover }) => {
+const StarSystem = () => {
+  const { rating, setRating, hover, setHover } = useContext(ReviewContext);
+
   return (
     <div className="star-rating">
       {[...Array(5)].map((star, index) => {

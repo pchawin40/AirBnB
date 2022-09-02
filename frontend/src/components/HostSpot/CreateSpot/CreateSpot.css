@@ -57,9 +57,23 @@
   background-color: white;
 }
 
+.create-right-text-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  
+  height: 60%;
+}
+
+#create-spot-form{
+  height: 100%;
+}
+
+
 #create-spot-form > input {
-  width: 60%;
-  padding: 1rem;
+  width: 30vw;
+  padding: .25rem;
   border-radius: 1rem;
   background-color: rgb(255, 255, 255);
   min-width: fit-content;

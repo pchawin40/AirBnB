@@ -13,16 +13,21 @@ import * as sessionActions from '../../../store/session';
 // import css
 import './ReviewInfo.css';
 
+// import context
+import { Modal } from "../../../context/Modal";
+import ReviewProvider from '../../../context/ReviewContext';
+
+
 // import component
 import ReviewTracker from './ReviewTracker';
 import ReviewModal from './ReviewModal';
-import { Modal } from "../../../context/Modal";
 
 //? ReviewInfo component
 const ReviewInfo = () => {
   // state for review modal
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewId, setReviewId] = useState(null);
+  const [reviewAction, setReviewAction] = useState("create");
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -33,6 +38,7 @@ const ReviewInfo = () => {
   // get spots data
   const reviewState = useSelector(reviewActions.getAllReviews);
   const reviews = reviewState !== undefined ? reviewState.filter(review => review.spotId === Number(spotId)) : null;
+
 
   // get current logged in user
   const user = useSelector(sessionActions.getSessionUser);
@@ -48,12 +54,12 @@ const ReviewInfo = () => {
 
     avgReview = parseFloat(sumReviews / reviews.length).toFixed(2);
   }
-  
+
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(Number(spotId)));
     dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
   }, [dispatch, spotId]);
-  
+
   //? handleReviewRemove: remove review from database
   const handleReviewRemove = review => {
     dispatch(reviewActions.thunkRemoveReview(Number(review.id)));
@@ -74,8 +80,9 @@ const ReviewInfo = () => {
         id={review.id}
         className="edit-review-button"
         onClick={e => {
-          setShowReviewModal(true)
-          setReviewId(e.target.id)
+          setShowReviewModal(true);
+          setReviewId(e.target.id);
+          setReviewAction("edit");
         }}
       >
         Edit My Review
@@ -129,7 +136,13 @@ const ReviewInfo = () => {
 
       {/* //? Button to add more reviews */}
       <section className="review-info-review-button-container">
-        <button className="review-info-review-button" onClick={_ => setShowReviewModal(true)}>
+        <button
+          className="review-info-review-button"
+          onClick={_ => {
+            setReviewAction("create");
+            setShowReviewModal(true);
+          }}
+        >
           <span><i className="fa-solid fa-plus"></i></span>
           Write a review
         </button>
@@ -140,7 +153,9 @@ const ReviewInfo = () => {
         showReviewModal
         &&
         <Modal onClose={_ => setShowReviewModal(false)}>
-            <ReviewModal reviewId={reviewId}/>
+          <ReviewProvider>
+            <ReviewModal reviewId={reviewId} reviewAction={reviewAction} />
+          </ReviewProvider>
         </Modal>
       }
     </section>

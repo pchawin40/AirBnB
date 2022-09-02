@@ -519,7 +519,8 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
   // get user by current user id
   const getReview = await Review.findOne({
     where: {
-      userId: user.id
+      userId: user.id,
+      spotId
     }
   });
 
@@ -596,8 +597,6 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
   // router.get('/test/:spotId', async (req, res) => {
   // deconstruct spotId
   const { spotId } = req.params;
-
-  console.log("SPOT ID HERE", spotId);
 
   // modify spot with given body
   const {
