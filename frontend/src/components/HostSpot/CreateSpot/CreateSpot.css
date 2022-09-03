@@ -21,8 +21,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  padding-right: 5rem;
 }
 
 #create-logo-icon{
@@ -57,26 +55,23 @@
   background-color: white;
 }
 
-.create-right-text-content{
+.create-right-form-content{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
-  
-  height: 60%;
+
+  height: 80%;
+  width: 80%;
 }
 
-#create-spot-form{
-  height: 100%;
+#create-logo-container{
+  position: absolute;
+  top: 2vw;
+  left: 1vw;
 }
 
-
-#create-spot-form > input {
-  width: 30vw;
-  padding: .25rem;
-  border-radius: 1rem;
-  background-color: rgb(255, 255, 255);
-  min-width: fit-content;
+.create-logo-icon{
+  color: white;
 }
 
 .create-button-spot-back{

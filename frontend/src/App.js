@@ -13,6 +13,9 @@ import { useEffect, useState } from 'react';
 import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
 
+// import context
+import SpotProvider from './context/SpotContext';
+
 // import components
 import SignupFormPage from './components/LandingPage/UserLoginRegistration/SignupFormPage';
 import LandingPage from './components/LandingPage';
@@ -20,6 +23,7 @@ import Spot from './components/Spot';
 import HostSpot from './components/HostSpot';
 import CreateSpot from './components/HostSpot/CreateSpot';
 import ResourceNotFound from './components/ResourceNotFound';
+import SpotForm from './components/HostSpot/CreateSpot/SpotForm';
 
 function App() {
 
@@ -61,6 +65,14 @@ function App() {
           <Route path="/host/homes">
             <HostSpot/>
           </Route>
+
+          {/* //? Test component */}
+          <Route path="/test">
+            {/* <SpotProvider> */}
+              <SpotForm />
+            {/* </SpotProvider> */}
+          </Route>
+
 
           {/* //? spot create */}
           <Route path="/host/create-spot">

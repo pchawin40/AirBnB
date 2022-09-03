@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     url: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.BLOB('long'),
       allowNull: true
     }
   }, {

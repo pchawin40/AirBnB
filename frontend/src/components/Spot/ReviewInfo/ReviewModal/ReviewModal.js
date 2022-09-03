@@ -65,9 +65,6 @@ const ReviewModal = ({ reviewId, reviewAction }) => {
     // reset validation erros before dispatching
     setValidationErrors([]);
 
-
-
-
     // dispatch add review thunk action
     return dispatch(
       reviewAction === "edit" ?

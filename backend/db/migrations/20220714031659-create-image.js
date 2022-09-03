@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       url: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.BLOB('long')
       },
       createdAt: {
         allowNull: false,
