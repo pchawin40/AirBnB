@@ -83,12 +83,45 @@ export const getSpotBySpotId = spotId => async dispatch => {
 
 //? Thunk action to post spot
 export const addASpot = spotToAdd => async dispatch => {
-  // fetch all spots using csrfFetch
+  const {
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+    previewImage,
+  } = spotToAdd;
+
+  // defining form data
+  const formData = new FormData();
+
+  formData.append("address", address);
+  formData.append("city", city);
+  formData.append("state", state);
+  formData.append("country", country);
+  formData.append("lat", lat);
+  formData.append("lng", lng);
+  formData.append("name", name);
+  formData.append("description", description);
+  formData.append("price", price);
+
+  // single file image upload
+  if (previewImage) formData.append("previewImage", previewImage);
+
+  // hit signup backend route w/ form data
   const res = await csrfFetch('/spots', {
     method: 'POST',
-    body: JSON.stringify(spotToAdd)
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    body: formData
   });
 
+  // if res is successful:
   if (res.ok) {
     // parsed res to json
     const spot = await res.json();
@@ -103,10 +136,56 @@ export const addASpot = spotToAdd => async dispatch => {
 
 //? Thunk action to edit spot
 export const thunkEditSpot = (spotToEdit, spotId) => async dispatch => {
-  // fetch all spots using csrfFetch
+  const {
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+    previewImage
+  } = spotToEdit;
+
+  // defining form data
+  const formData = new FormData();
+
+  formData.append("address", address);
+  formData.append("city", city);
+  formData.append("state", state);
+  formData.append("country", country);
+  formData.append("lat", lat);
+  formData.append("lng", lng);
+  formData.append("name", name);
+  formData.append("description", description);
+  formData.append("price", price);
+
+
+  //? check if url
+  function isURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    return pattern.test(str);
+  }
+
+  // if preview image is not url, then add a different formdata object name
+  if (!isURL(previewImage) && previewImage) formData.append("previewImage", previewImage);
+  else formData.append("image", previewImage);
+
+
+  // hit signup backend route w/ form data
   const res = await csrfFetch(`/spots/${spotId}`, {
     method: 'PUT',
-    body: JSON.stringify(spotToEdit)
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    body: formData
   });
 
   if (res.ok) {
@@ -120,7 +199,6 @@ export const thunkEditSpot = (spotToEdit, spotId) => async dispatch => {
     return spot;
   }
 }
-
 
 //? Thunk action to delete spot
 export const thunkDeleteSpot = spotId => async dispatch => {

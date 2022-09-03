@@ -36,6 +36,20 @@
 }
 
 /**********************************
+*       Spot Error List
+***********************************/
+.error-list-container{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-list{
+  color: red;
+  font-weight: bold;
+}
+
+/**********************************
 *       Spot Description
 ***********************************/
 #spot-form-description{

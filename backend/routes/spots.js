@@ -14,6 +14,9 @@ const { check } = require('express-validator');
 const { query } = require('express-validator/check');
 const { handleValidationErrors } = require('../utils/validation');
 
+//? import AWS S3 file
+const { singlePublicFileUpload, singleMulterUpload } = require('../awsS3');
+
 const validateSpot = [
   // check if address is valid 
   check('address')
@@ -547,7 +550,8 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
 
 // TODO: Create a Spot
 // Creates and returns a new Spot
-router.post('/', requireAuth, validateSpot, async (req, res) => {
+router.post('/', singleMulterUpload("previewImage"), requireAuth, validateSpot, async (req, res) => {
+
   // deconstruct body
   const {
     address,
@@ -558,9 +562,10 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     lng,
     name,
     description,
-    price,
-    previewImage
+    price
   } = req.body;
+
+  const previewImage = req.file ? await singlePublicFileUpload(req.file) : null;
 
   // get the current user info
   const user = await User.findOne({
@@ -593,7 +598,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
 
 // TODO: Edit a Spot
 // Updates and returns an existing spot
-router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
+router.put('/:spotId', singleMulterUpload("previewImage"), requireAuth, validateSpot, async (req, res, next) => {
   // router.get('/test/:spotId', async (req, res) => {
   // deconstruct spotId
   const { spotId } = req.params;
@@ -608,9 +613,16 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     lng,
     name,
     description,
-    price,
-    previewImage
+    price
   } = req.body;
+
+  let previewImage;
+
+  if (req.file) {
+    previewImage = await singlePublicFileUpload(req.file);
+  } else {
+    previewImage = req.body.previewImage;
+  }
 
   // find spot to authorize
   const spotAuthorize = await Spot.findByPk(spotId);

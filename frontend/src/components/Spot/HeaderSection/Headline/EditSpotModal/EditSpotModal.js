@@ -12,6 +12,7 @@ import * as spotActions from '../../../../../store/spots';
 
 // import css
 import '../../../../HostSpot/CreateSpot';
+import SpotForm from '../../../../HostSpot/CreateSpot/SpotForm';
 
 //? CreateSpot component
 const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
@@ -72,41 +73,6 @@ const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
     setPreviewImage(currentSpot.previewImage);
   }, [currentSpot]);
 
-  //? handleSubmit: submit create a spot form
-  const handleSubmit = e => {
-    // prevent page from refreshing
-    e.preventDefault();
-
-    // grab data from user's spot inputs
-    const spot = {
-      ...currentSpot,
-      address,
-      city,
-      state,
-      country,
-      lat,
-      lng,
-      name,
-      description,
-      price,
-      previewImage
-    }
-
-    // dispatch create spot
-    return dispatch(spotActions.thunkEditSpot(spot, Number(spotId))).then(res => {
-      // console.log("res", await res.json())
-      return history.push('/');
-    }).catch(
-      async res => {
-        // parse res to data json
-        const data = await res.json();
-
-        // set error if any
-        if (data) setValidationErrors([data.message]);
-      }
-    );
-  };
-
   return (
     <>
       <main id="create-page">
@@ -122,109 +88,9 @@ const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
         {/* //? Right section */}
         <section id="create-right-section">
           {/* create step */}
-          <section className="create-right-text-content">
-            <form id="create-spot-form" onSubmit={handleSubmit}>
-              <ul>
-                {
-                  validationErrors.map(error => <li key={error}>{error}</li>)
-                }
-              </ul>
-
-              {/* //? address */}
-              <input
-                placeholder="Address"
-                type="Address"
-                onChange={e => setAddress(e.target.value)}
-                required
-                value={address}
-              />
-
-              {/* //? city */}
-              <input
-                placeholder="City"
-                type="City"
-                onChange={e => setCity(e.target.value)}
-                required
-                value={city}
-              />
-
-              {/* //? state */}
-              <input
-                placeholder="State"
-                type="state"
-                onChange={e => setState(e.target.value)}
-                required
-                value={state}
-              />
-
-              {/* //? country */}
-              <input
-                placeholder="Country"
-                type="country"
-                onChange={e => setCountry(e.target.value)}
-                required
-                value={country}
-              />
-
-              {/* //? lat */}
-              <input
-                placeholder="Lat"
-                type="lat"
-                onChange={e => setLat(e.target.value)}
-                required
-                value={lat}
-              />
-
-              {/* //? lng */}
-              <input
-                placeholder="Lng"
-                type="lng"
-                onChange={e => setLng(e.target.value)}
-                required
-                value={lng}
-              />
-
-              {/* //? name */}
-              <input
-                placeholder="Name"
-                type="name"
-                onChange={e => setName(e.target.value)}
-                required
-                value={name}
-              />
-
-              {/* //? description */}
-              <input
-                placeholder="Description"
-                type="description"
-                onChange={e => setDescription(e.target.value)}
-                required
-                value={description}
-              />
-
-              {/* //? price */}
-              <input
-                placeholder="Price"
-                type="price"
-                onChange={e => setPrice(e.target.value)}
-                required
-                value={price}
-              />
-
-              {/* //? preview image */}
-              <input
-                placeholder="Preview image"
-                type="previewImage"
-                onChange={e => setPreviewImage(e.target.value)}
-                required
-                value={previewImage}
-              />
-
-              {/* //? button to submit form */}
-              <button className="create-button spot-create" id="right-section-enter-button">
-                Host Your Spot
-              </button>
-            </form>
+          <section className="create-right-form-content">
+            {/* Edit Spot Modal */}
+            <SpotForm spotActivity="edit" currentSpot={currentSpot} />
           </section>
           <button className="create-button spot-exit" id="right-section-exit-button" onClick={_ => setEditSpotModal(false)}>
             Exit

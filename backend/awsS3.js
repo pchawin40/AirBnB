@@ -2,7 +2,7 @@
 
 const AWS = require("aws-sdk");
 // name of your bucket here
-const NAME_OF_BUCKET = "airbnb-clone-project-chawin-east";
+const NAME_OF_BUCKET = process.env.AWS_BUCKET_NAME;
 
 const multer = require("multer");
 

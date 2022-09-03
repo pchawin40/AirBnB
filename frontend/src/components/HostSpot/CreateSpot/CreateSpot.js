@@ -7,9 +7,6 @@ import { useDispatch } from 'react-redux';
 // import react-router-dom
 import { useHistory, NavLink } from 'react-router-dom';
 
-// import store
-import * as spotActions from '../../../store/spots';
-
 // import css
 import './CreateSpot.css';
 

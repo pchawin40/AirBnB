@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 // import react-router-dom
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 // import api
 import Autocomplete from "react-google-autocomplete";
@@ -19,7 +19,9 @@ import { useSpot } from "../../../../context/SpotContext";
 // import css
 import './SpotForm.css';
 
-const SpotForm = () => {
+const SpotForm = ({spotActivity = "create", currentSpot}) => {
+  window.Buffer = window.Buffer || require("buffer").Buffer;
+
   /**
    * Controlled Inputs:
    * ------------------
@@ -47,6 +49,8 @@ const SpotForm = () => {
     price, setPrice
   } = useSpot();
 
+  const [spot, setSpot] = useState("");
+
   const [image, setImage] = useState(null);
   const [validationErrors, setValidationErrors] = useState([]);
 
@@ -62,19 +66,46 @@ const SpotForm = () => {
   // invoke history
   const history = useHistory();
 
+  // deconstruct spotId (if any)
+  let { spotId } = useParams();
+
+  if(!spotId) spotId = 0;
+
   // load on start up
   useEffect(() => {
+    if(spotId) dispatch(spotActions.getSpotBySpotId(spotId));
+    
     // dispatch maps get api key
     dispatch(mapActions.getKey());
-  }, [dispatch]);
+  }, [dispatch, spotId ? spotId : ""]);
+
+  useEffect(() => {
+    if (currentSpot) {
+      console.log("image", currentSpot.previewImage);
+      setAddress(currentSpot.address);
+      setCity(currentSpot.city);
+      setState(currentSpot.state);
+      setCountry(currentSpot.country);
+      setLat(currentSpot.lat);
+      setLng(currentSpot.lng);
+      setName(currentSpot.name);
+      setDescription(currentSpot.description);
+      setPrice(currentSpot.price);
+      setImage(currentSpot.previewImage);
+      setSpot(currentSpot.address + " " + currentSpot.city + " " + currentSpot.state + " " + currentSpot.country);
+    }
+  }, [currentSpot]);
 
   //? handleSubmit: submit create a spot form
   const handleSubmit = e => {
     // prevent page from refreshing
     e.preventDefault();
 
+    console.log("IMAGE HERE", image);
+
     // grab data from user's spot inputs
     const spot = {
+      ...currentSpot ? currentSpot : "",
       address,
       city,
       state,
@@ -86,34 +117,31 @@ const SpotForm = () => {
       price,
       previewImage: image
     }
-
-    console.log("image", image);
-
-    // reset spot data after signing up
-    setAddress("");
-    setCity("");
-    setState("");
-    setCountry("");
-    setLat("");
-    setLng("");
-    setName("");
-    setDescription("");
-    setPrice("");
-    setImage(ref);
+    
+    // reset validation errors
+    setValidationErrors([]);
 
     // reset ref value
     ref.current.value = "";
 
     // dispatch create spot
-    return dispatch(spotActions.addASpot(spot)).then(_ => history.push('/'))
+    return dispatch(
+      spotActivity === "create"
+        ?
+        // if activity is not edit, add the spot
+        spotActions.addASpot(spot)
+        :
+        // otherwise, edit the spot
+        spotActions.thunkEditSpot(spot, Number(spotId))
+    )
+      .then(_ => history.push('/'))
       .catch(
         async res => {
           // parse res to data json
           const data = await res.json();
 
           // set error if any
-          console.log("data", data.errors);
-          if (data) setValidationErrors([validationErrors, ...Object.values(data.errors)]);
+          if (data) setValidationErrors([...Object.values(data.errors)]);
         }
       );
   };
@@ -168,11 +196,15 @@ const SpotForm = () => {
   return (
     <form id="spot-form" onSubmit={handleSubmit}>
       {/* //? Validation Errors */}
-      <ul>
-        {
-          validationErrors.map(error => <li key={error} >{error}</li>)
-        }
-      </ul>
+      {
+        validationErrors.length > 0 &&
+        <ul className="error-list-container">
+          <h3>We found some errors while attempting to create your spot</h3>
+          {
+            validationErrors.map(error => <li key={error} className="error-list">{error}</li>)
+          }
+        </ul>
+      }
 
       {/* //? Name */}
       <section id="spot-form-name-section">
@@ -227,32 +259,30 @@ const SpotForm = () => {
         <label>Where is your spot located? </label>
 
         <section id="spot-form-address-inner-section">
- 
+
           <Autocomplete
             id="spot-form-address"
             apiKey={apiKey}
             placeholder="Enter address here"
             required
-            // value={spot}
+            value={spot}
+            onChange={e => setSpot(e.target.value)}
             options={{
               types: ["address"]
             }}
             // onChange={e => setSpot(e.target.value)}
             onPlaceSelected={(place) => {
-              console.log("place", place);
-
               const findComponent = keyword =>
                 place.address_components.find(component => component.types.includes(keyword));
-              
+
               const parseComponent = keyword =>
                 findComponent(keyword) ? findComponent(keyword).long_name : "";
-              
+
               // set address
               const street_number = parseComponent("street_number");
               const route = parseComponent("route");
 
               const selectAddress = street_number + " " + route;
-              console.log("selectAddress", selectAddress);
               setAddress(selectAddress);
 
               // set city
