@@ -45,7 +45,7 @@ const UpperNavigation = ({ isLoaded }) => {
     // When have session user, contain link to log out current user
     sessionUser ?
       // render ProfileButton component 
-      <ProfileButton user={sessionUser} />
+      <ProfileButton />
       :
       // When no session user, contain links to login and sign up
       <>

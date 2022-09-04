@@ -36,10 +36,10 @@ const LowerActiveSearchBar = () => {
             <p>Who</p>
             <p className="lower-text">Add guests</p>
           </section>
-          <button className="who-button-text-button">
-            <i class="fa-solid fa-magnifying-glass who-guest-search-icon"></i>
+          <div className="who-button-text-button">
+            <i className="fa-solid fa-magnifying-glass who-guest-search-icon"></i>
             <p>Search</p>
-          </button>
+          </div>
         </button>
       </div>
     </nav >

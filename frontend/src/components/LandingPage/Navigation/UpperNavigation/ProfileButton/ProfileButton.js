@@ -16,7 +16,7 @@ import * as sessionActions from '../../../../../store/session';
 import './ProfileButton.css';
 
 //? ProfileButton Component
-const ProfileButton = ({ user }) => {
+const ProfileButton = () => {
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -30,8 +30,10 @@ const ProfileButton = ({ user }) => {
 
   //? openMenu: toggle menu
   const openMenu = () => {
+
     // if showMenu is true, keep showMenu state as is
     if (showMenu) return;
+
     // otherwise, set to true
     setShowMenu(true);
   }
@@ -41,9 +43,12 @@ const ProfileButton = ({ user }) => {
     // if show menu is currently set as false, don't do anything
     if (!showMenu) return;
 
+    
     // helper function to turn menu off
-    const closeMenu = () => {
-      setShowMenu(false);
+    const closeMenu = e => {
+      if (!(e.target.classList.contains('profile-icon'))) {
+        setShowMenu(false);
+      }
     }
 
     // when user click outside menu, close it
@@ -59,15 +64,16 @@ const ProfileButton = ({ user }) => {
     dispatch(sessionActions.logout());
   }
 
+  const click = () => { console.log("showMenu click", showMenu) };
   // return ProfileButton component
   return (
     <div id="profile-button-container">
-      <button id="nav-button-container" onClick={openMenu} >
+      <button id="nav-button-container" className="profile-icon" onClick={openMenu} >
         {/* represent menu icon */}
-        <i className="fa-solid fa-bars fa-lg"></i>
+        <i className="fa-solid fa-bars fa-lg profile-icon" onClick={openMenu}></i>
 
         {/* represent user profile button */}
-        <i id="user-profile-icon" className="fa-solid fa-circle-user fa-xl"></i>
+        <i id="user-profile-icon" className="fa-solid fa-circle-user fa-xl profile-icon" onClick={openMenu}></i>
       </button>
       {
         showMenu && (

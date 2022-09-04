@@ -14,7 +14,7 @@ import './Modal.css';
 const ModalContext = createContext();
 
 //? helper context function to use ModalContext
-const useModal = () => useContext(ModalContext);
+export const useModal = () => useContext(ModalContext);
 
 /**
  * ?Modal functional component
@@ -64,7 +64,9 @@ export function ModalProvider({ children }) {
   // render ModalContext.Provider
   return (
     <>
-      <ModalContext.Provider value={value}>
+      <ModalContext.Provider
+        value={value}
+      >
         {children}
       </ModalContext.Provider>
       <div ref={modalRef}/>

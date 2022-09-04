@@ -18,14 +18,18 @@ const HomeFooterBar = () => {
   const [showMapModal, setShowMapModal] = useState(false);
 
   return (
-    <div className="outer-footer-container_home">
+    <div className="outer-footer-container_home" style={{ zIndex: 100 }}>
       <div className="footer-content-container_home">
         {/* //? upper div container (map) */}
         <div id="DIV_MAP_home">
-          <button id="inner_div_map_button_home" onClick={_ => setShowMapModal(true)}>
-            <span>Show map</span>
-            <i className="fa-solid fa-map"></i>
-          </button>
+          {
+            !showMapModal
+            &&
+            <button id="inner_div_map_button_home" onClick={_ => setShowMapModal(true)}>
+              {<span>Show map</span>}
+              <i className="fa-solid fa-map"></i>
+            </button>
+          }
         </div>
         {
           // Show Review Modal
