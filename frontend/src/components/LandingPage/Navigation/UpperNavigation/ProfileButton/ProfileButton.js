@@ -80,49 +80,49 @@ const ProfileButton = () => {
           <ul id='profile-dropdown'>
             <div className="top-container">
               {/* //? Messages */}
-              <NavLink to="/">
+              {/* <NavLink to="/">
                 Messages
-              </NavLink>
+              </NavLink> */}
 
               {/* //? Trips */}
-              <NavLink to="/">
+              {/* <NavLink to="/">
                 Trips
-              </NavLink>
+              </NavLink> */}
 
               {/* //? Wishlist */}
-              <NavLink to="/">
+              {/* <NavLink to="/">
                 Wishlists
-              </NavLink>
+              </NavLink> */}
             </div>
             <div className="middle-container">
-              {/* //? Manage Listings */}
-              <NavLink to="/">
+              {/* // TODO: Manage Listings */}
+              <NavLink to="/" className="todo-link">
                 Manage Listings
               </NavLink>
 
               {/* //? Host an Experience */}
-              <NavLink to="/host/homes">
+              <NavLink className="active-link" to="/host/homes">
                 Host an experience
               </NavLink>
 
               {/* //? Refer a Host */}
-              <NavLink to="/">
+              {/* <NavLink to="/">
                 Refer a Host
-              </NavLink>
+              </NavLink> */}
 
-              {/* //? Account */}
-              <NavLink to="/">
+              {/* // TODO: Account: User Account */}
+              <NavLink to="/" className="todo-link">
                 Account
               </NavLink>
             </div>
             <div className="lower-container">
-              {/* //? Help */}
-              <NavLink to="/">
+              {/* // TODO: Help: Lead to README in Github */} 
+              <NavLink to="/" className="todo-link">
                 Help
               </NavLink>
 
               {/* //? Log out */}
-              <NavLink exact to="/" onClick={handleLogout}>
+              <NavLink exact to="/" onClick={handleLogout} className="active-link">
                 Logout
               </NavLink>
             </div>

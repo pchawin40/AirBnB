@@ -53,6 +53,15 @@
   border-bottom: 1px solid #EDEDED;
 }
 
+.active-link{
+  font-weight: bold;
+}
+
+.todo-link{
+  color: red;
+  font-weight: bold;
+}
+
 /******************************
 *       Lower Container
 *******************************/
