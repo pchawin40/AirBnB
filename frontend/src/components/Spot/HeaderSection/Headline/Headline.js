@@ -85,14 +85,17 @@ const Headline = () => {
     if ((spot && currentUser) && (Number(spot.ownerId) === currentUser.id)) {
       // return buttons
       return (
-        <nav className="owner-button-spot-container">
-          <button className="owner-edit-spot-button" onClick={handleEditSpot}>
-            Edit Spot
-          </button>
-          <button className="owner-delete-spot-button" onClick={e => handleDeleteSpot(spot.id)}>
-            Delete Spot
-          </button>
-        </nav>
+        <>
+          {/* // button for spot */}
+          <nav className="owner-button-spot-container">
+            <button className="owner-edit-spot-button" onClick={handleEditSpot}>
+              Edit Spot
+            </button>
+            <button className="owner-delete-spot-button" onClick={e => handleDeleteSpot(spot.id)}>
+              Delete Spot
+            </button>
+          </nav>
+        </>
       );
     }
 
@@ -112,7 +115,7 @@ const Headline = () => {
           editSpotModal
           &&
           <Modal onClose={_ => setEditSpotModal(false)}>
-              <EditSpotModal editSpotModal={editSpotModal} setEditSpotModal={setEditSpotModal} />
+            <EditSpotModal editSpotModal={editSpotModal} setEditSpotModal={setEditSpotModal} />
           </Modal>
         }
       </div>

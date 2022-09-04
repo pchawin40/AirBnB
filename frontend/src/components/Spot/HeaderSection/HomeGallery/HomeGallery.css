@@ -9,14 +9,19 @@
 
   height: fit-content;
   width: auto;
+}
 
+.gallery-image-container:hover{
+  cursor: pointer;
 }
 
 .gallery-image-container > img {
   border: 5px solid black;
 
   height: 50vh;
-  width: 50vw;
+  min-width: 30vw;
+  width: auto;
+  max-width: 80%;
 
   border-radius: 1rem;
 }

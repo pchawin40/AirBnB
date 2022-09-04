@@ -1,4 +1,5 @@
 // import component
+import ImageProvider from '../../../context/ImageContext';
 import Headline from './Headline';
 import HomeGallery from './HomeGallery';
 
@@ -7,10 +8,12 @@ const HeaderSection = ({ spot }) => {
   return (
     <section>
       {/* //? Headline */}
-      <Headline/>
-      
+      <Headline />
+
       {/* //? Home Gallery */}
-      <HomeGallery spot={spot} />
+      <ImageProvider>
+        <HomeGallery spot={spot} />
+      </ImageProvider>
     </section>
   );
 };

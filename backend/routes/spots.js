@@ -445,13 +445,14 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
 
 // TODO: Add an Image to a Spot based on the Spot's id
 // Create and return a new image for a spot specified by id.
-router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+router.post('/:spotId/images', singleMulterUpload("workingImage"), requireAuth, async (req, res, next) => {
   // deconstruct spotId
   const { spotId } = req.params;
 
   // deconstruct url
-  const { url } = req.body;
-
+  // const { url } = req.body;
+  const url = req.file ? await singlePublicFileUpload(req.file) : null;
+  
   // get the current user info
   const user = await User.findOne({
     where: {
@@ -490,7 +491,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
   const imageCreated = await Image.findByPk(image.id);
 
-  res.json(imageCreated);
+  return res.json(imageCreated);
 });
 
 // TODO: Create a Review for a Spot based on the Spot's id

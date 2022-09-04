@@ -2,7 +2,7 @@
 
 
 // import react-redux
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // import react-router-dom
@@ -14,8 +14,19 @@ import * as spotActions from '../../../../store/spots';
 // import css
 import './HomeGallery.css';
 
-// import HomeGallery component
+// import context
+import { useImage } from '../../../../context/ImageContext';
+import { Modal } from '../../../../context/Modal';
+
+// import component
+import ImageModal from '../../ImageModal';
+
+//? HomeGallery component
 const HomeGallery = () => {
+  const {
+    editImageModal, setEditImageModal
+  } = useImage();
+
   const dispatch = useDispatch();
 
   // get spot id
@@ -29,10 +40,25 @@ const HomeGallery = () => {
     dispatch(spotActions.getSpotBySpotId(spotId));
   }, [dispatch, spotId]);
 
+  //? On handling image click, open modal for image
+  const handleImageClick = () => setEditImageModal(true);
+
   return (
     spot &&
-    <section className="gallery-image-container">
-      <img onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} src={spot.previewImage ? spot.previewImage : "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} alt={spot.name} />
+    <section className="gallery-image-container" onClick={handleImageClick}>
+      <img
+        onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
+        src={spot.previewImage ? spot.previewImage : "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
+        alt={spot.name}
+      />
+      {
+        // Show Image Modal
+        editImageModal
+        &&
+        <Modal onClose={_ => setEditImageModal(false)}>
+          <ImageModal />
+        </Modal>
+      }
     </section>
   );
 };

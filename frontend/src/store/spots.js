@@ -112,7 +112,7 @@ export const addASpot = spotToAdd => async dispatch => {
   // single file image upload
   if (previewImage) formData.append("previewImage", previewImage);
 
-  // hit signup backend route w/ form data
+  // hit backend route w/ form data
   const res = await csrfFetch('/spots', {
     method: 'POST',
     headers: {
@@ -151,6 +151,7 @@ export const thunkEditSpot = (spotToEdit, spotId) => async dispatch => {
 
   // defining form data
   const formData = new FormData();
+  const imageForm = new FormData();
 
   formData.append("address", address);
   formData.append("city", city);
@@ -161,7 +162,6 @@ export const thunkEditSpot = (spotToEdit, spotId) => async dispatch => {
   formData.append("name", name);
   formData.append("description", description);
   formData.append("price", price);
-
 
   //? check if url
   function isURL(str) {
@@ -175,9 +175,11 @@ export const thunkEditSpot = (spotToEdit, spotId) => async dispatch => {
   }
 
   // if preview image is not url, then add a different formdata object name
-  if (!isURL(previewImage) && previewImage) formData.append("previewImage", previewImage);
-  else formData.append("image", previewImage);
-
+  (!isURL(previewImage) && previewImage) ?
+    formData.append("previewImage", previewImage)
+  :
+    formData.append("image", previewImage)
+  ;
 
   // hit signup backend route w/ form data
   const res = await csrfFetch(`/spots/${spotId}`, {
