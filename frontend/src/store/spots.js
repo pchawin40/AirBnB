@@ -223,7 +223,7 @@ export const thunkDeleteSpot = spotId => async dispatch => {
 
 
 /* --------- SELECTOR FUNCTIONS -------- */
-export const getAllSpots = state => Object.values(state.spots)[0];
+export const getAllSpots = state => state.spots.Spots;
 
 export const getSpotById = spotId => state => Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId));
 
@@ -234,20 +234,20 @@ const initialSpots = [];
 
 const spotsReducer = (state = initialSpots, action) => {
   // newSpots
-  const newSpots = { ...state };
+  const newSpots = { ...state};
 
   switch (action.type) {
-    //? case: add a spot
+    //? case: add spot
     case ADD_SPOT:
-      return Object.assign({}, newSpots, action.spot);
+      newSpots[action.spot.id] = action.spot;
+      return newSpots;
     //? case: reset spot
     case RESET_SPOT:
-      return state;
+      return initialSpots;
     //? case: remove spot
     case DELETE_SPOT:
-      const spots = Object.assign({}, newSpots, action.spots);
-      delete spots.spots[action.spotId];
-      return spots;
+      delete newSpots[action.spot];
+      return newSpots;
     //? default case
     default:
       return Object.assign({}, newSpots, action.spots);

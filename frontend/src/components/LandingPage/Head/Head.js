@@ -1,5 +1,5 @@
 // import component
-import SpotCardContainer from "./SpotContainer";
+import SpotCardContainer from "./SpotCardContainer";
 
 //? Head component
 const Head = () => {

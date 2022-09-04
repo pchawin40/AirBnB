@@ -15,9 +15,9 @@ export default function SpotProvider({ children }) {
   const [country, setCountry] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const [name, setName] = useState("test");
+  const [description, setDescription] = useState("test");
+  const [price, setPrice] = useState(500);
 
   // Spot Provider
   return (

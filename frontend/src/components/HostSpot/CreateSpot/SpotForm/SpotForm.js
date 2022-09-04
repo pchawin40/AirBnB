@@ -81,7 +81,6 @@ const SpotForm = ({spotActivity = "create", currentSpot}) => {
 
   useEffect(() => {
     if (currentSpot) {
-      console.log("image", currentSpot.previewImage);
       setAddress(currentSpot.address);
       setCity(currentSpot.city);
       setState(currentSpot.state);
@@ -100,8 +99,6 @@ const SpotForm = ({spotActivity = "create", currentSpot}) => {
   const handleSubmit = e => {
     // prevent page from refreshing
     e.preventDefault();
-
-    console.log("IMAGE HERE", image);
 
     // grab data from user's spot inputs
     const spot = {
@@ -137,6 +134,7 @@ const SpotForm = ({spotActivity = "create", currentSpot}) => {
       .then(_ => history.push('/'))
       .catch(
         async res => {
+          console.log("res", res);
           // parse res to data json
           const data = await res.json();
 
@@ -263,10 +261,11 @@ const SpotForm = ({spotActivity = "create", currentSpot}) => {
           <Autocomplete
             id="spot-form-address"
             apiKey={apiKey}
+            defaultValue={spot}
             placeholder="Enter address here"
             required
-            value={spot}
-            onChange={e => setSpot(e.target.value)}
+            // value={spot}
+            // onChange={e => setSpot(e.target.value)}
             options={{
               types: ["address"]
             }}
@@ -304,6 +303,8 @@ const SpotForm = ({spotActivity = "create", currentSpot}) => {
               // set lng
               const selectLng = place.geometry.location.lng();
               setLng(selectLng);
+
+              setSpot(place.formatted_address);
             }}
           />
 
