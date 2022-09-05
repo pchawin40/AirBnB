@@ -134,7 +134,6 @@ const SpotForm = ({spotActivity = "create", currentSpot}) => {
       .then(_ => history.push('/'))
       .catch(
         async res => {
-          console.log("res", res);
           // parse res to data json
           const data = await res.json();
 

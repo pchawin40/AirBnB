@@ -15,7 +15,7 @@ const { query } = require('express-validator/check');
 const { handleValidationErrors } = require('../utils/validation');
 
 //? import AWS S3 file
-const { singlePublicFileUpload, singleMulterUpload } = require('../awsS3');
+const { singlePublicFileUpload, singleMulterUpload, multipleMulterUpload, multiplePublicFileUpload } = require('../awsS3');
 
 const validateSpot = [
   // check if address is valid 
@@ -443,53 +443,58 @@ router.post('/:spotId/bookings', requireAuth, authorization, async (req, res, ne
 
 // TODO: Add an Image to a Spot based on the Spot's id
 // Create and return a new image for a spot specified by id.
-router.post('/:spotId/images', singleMulterUpload("workingImage"), requireAuth, async (req, res, next) => {
-  // deconstruct spotId
-  const { spotId } = req.params;
+router.post('/:spotId/images',
+  multipleMulterUpload("workingImages"),
+  requireAuth,
+  async (req, res, next) => {
+    // deconstruct spotId
+    const { spotId } = req.params;
 
-  // deconstruct url
-  const url = req.file ? await singlePublicFileUpload(req.file) : null;
-  
-  // get the current user info
-  const user = await User.findOne({
-    where: {
-      id: req.user.id
+    // deconstruct url
+    const urls = await multiplePublicFileUpload(req.files);
+
+    // get the current user info
+    const user = await User.findOne({
+      where: {
+        id: req.user.id
+      }
+    });
+
+    // find spot to authorize
+    const spotAuthorize = await Spot.findByPk(spotId);
+
+    if (spotAuthorize && spotAuthorize.ownerId !== req.user.id) {
+      const err = Error("Forbidden");
+      err.status = 403;
+      return next(err);
     }
-  });
 
-  // find spot to authorize
-  const spotAuthorize = await Spot.findByPk(spotId);
+    // TODO: Require proper authorization: Spot must belong to the current user
+    const spot = await Spot.findOne({
+      where: {
+        id: spotId,
+        ownerId: user.id
+      }
+    });
 
-  if (spotAuthorize && spotAuthorize.ownerId !== req.user.id) {
-    const err = Error("Forbidden");
-    err.status = 403;
-    return next(err);
-  }
-
-  // TODO: Require proper authorization: Spot must belong to the current user
-  const spot = await Spot.findOne({
-    where: {
-      id: spotId,
-      ownerId: user.id
+    // TODO: Error response: Couldn't find a Spot with the specified id
+    if (!spot) {
+      const err = Error("Spot couldn't be found");
+      err.status = 404;
+      return next(err);
     }
+
+    // TODO: Successful Response
+    
+    let imageCreated = [];
+
+    urls.map(async url => {
+      const image = await spot.createImage({ url });
+      imageCreated.push(await Image.findByPk(image.id));
+    });
+
+    res.json(imageCreated);
   });
-
-  // TODO: Error response: Couldn't find a Spot with the specified id
-  if (!spot) {
-    const err = Error("Spot couldn't be found");
-    err.status = 404;
-    return next(err);
-  }
-
-  // TODO: Successful Response
-  const image = await spot.createImage({
-    url
-  });
-
-  const imageCreated = await Image.findByPk(image.id);
-
-  return res.json(imageCreated);
-});
 
 // TODO: Create a Review for a Spot based on the Spot's id
 // Create and return a new review for a spot specified by id
@@ -653,7 +658,7 @@ router.put('/:spotId', singleMulterUpload("previewImage"), requireAuth, validate
     err.status = 404;
     return next(err);
   }
-  
+
   // update spot with deconstructed request body
   const updateSpot = await spot.update({
     address,

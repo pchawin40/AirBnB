@@ -32,11 +32,15 @@ const HomeGallery = () => {
 
   // get spot by spot id
   const spots = useSelector(spotActions.getAllSpots);
+  const spotState = useSelector(state => state.spots);
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : null;
 
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(spotId));
   }, [dispatch, spotId]);
+
+  useEffect(() => {
+  }, [spotState]);
 
   return (
     spot &&

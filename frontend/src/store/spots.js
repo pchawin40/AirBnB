@@ -51,6 +51,19 @@ export const deleteSpot = spotId => {
   };
 };
 
+//? Action: Add Images (to current spot)
+// action
+const ADD_IMAGES = 'spots/ADD_IMAGES';
+
+// action creator: remove image from list of images given by current spot
+export const addImages = (images, spotId) => {
+  return {
+    type: ADD_IMAGES,
+    images,
+    spotId
+  };
+};
+
 //? Action: Delete Image (of current spot)
 // action
 const DELETE_IMAGE = 'spots/DELETE_IMAGE';
@@ -234,6 +247,39 @@ export const thunkDeleteSpot = spotId => async dispatch => {
   }
 }
 
+//? Thunk action to add image (given by current spot)
+export const thunkAddImage = (images, spotId) => async dispatch => {
+  // define form data
+  const formData = new FormData();
+
+  //* for multiple image files
+  if (images && images.length !== 0) {
+    for (let i = 0; i < images.length; i++) {
+      formData.append("workingImages", images[i]);
+    }
+  }
+
+  const res = await csrfFetch(`/spots/${spotId}/images`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    body: formData
+  });
+  if (res.ok) {
+    // parse res to json
+    const imageData = await res.json();
+
+    // dispatch addImage w/ parsed spot
+    dispatch(addImages(imageData, spotId));
+
+    // return images
+    return imageData;
+  } 
+
+  return images;
+}
+
 //? Thunk action to delete image (given by current spot)
 export const thunkDeleteImage = (imageId, spotId) => async dispatch => {
   // fetch csrfFetch to delete image
@@ -286,6 +332,9 @@ const spotsReducer = (state = initialSpots, action) => {
     case DELETE_IMAGE:
       delete Object.values(newSpots.Images).find(image => image.id === action.imageId);
       return newSpots;
+    //? case: add image
+    case ADD_IMAGES:
+      return Object.assign({}, Object.values(newSpots.Images), action.images);
     //? default case
     default:
       return Object.assign({}, newSpots, action.spots);

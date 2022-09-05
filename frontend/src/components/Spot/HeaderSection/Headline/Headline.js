@@ -103,12 +103,6 @@ const Headline = () => {
               Delete Spot
             </button>
           </nav>
-          <nav className="owner-button-image-container">
-            {/* // add image */}
-            <button className="owner-add-image-button" onClick={handleAddImage}>
-              Add Images
-            </button>
-          </nav>
         </>
       );
     }
