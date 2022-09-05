@@ -64,7 +64,7 @@ const ProfileButton = () => {
     dispatch(sessionActions.logout());
   }
 
-  const click = () => { console.log("showMenu click", showMenu) };
+  // const click = () => { console.log("showMenu click", showMenu) };
   // return ProfileButton component
   return (
     <div id="profile-button-container">

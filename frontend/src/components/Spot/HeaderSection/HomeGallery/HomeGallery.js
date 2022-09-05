@@ -15,17 +15,15 @@ import * as spotActions from '../../../../store/spots';
 import './HomeGallery.css';
 
 // import context
-import { useImage } from '../../../../context/ImageContext';
 import { Modal } from '../../../../context/Modal';
 
 // import component
-import ImageModal from '../../ImageModal';
+import ImageModal from './ImageModal';
 
 //? HomeGallery component
 const HomeGallery = () => {
-  const {
-    editImageModal, setEditImageModal
-  } = useImage();
+
+  const [showImageModal, setShowImageModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -40,23 +38,21 @@ const HomeGallery = () => {
     dispatch(spotActions.getSpotBySpotId(spotId));
   }, [dispatch, spotId]);
 
-  //? On handling image click, open modal for image
-  const handleImageClick = () => setEditImageModal(true);
-
   return (
     spot &&
-    <section className="gallery-image-container" onClick={handleImageClick}>
+    <section className="gallery-image-container">
       <img
         onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
         src={spot.previewImage ? spot.previewImage : "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
         alt={spot.name}
+        onClick={_ => setShowImageModal(true)}
       />
       {
         // Show Image Modal
-        editImageModal
+        showImageModal
         &&
-        <Modal onClose={_ => setEditImageModal(false)}>
-          <ImageModal />
+        <Modal onClose={_ => setShowImageModal(false)}>
+              <ImageModal setShowImageModal={setShowImageModal} />
         </Modal>
       }
     </section>

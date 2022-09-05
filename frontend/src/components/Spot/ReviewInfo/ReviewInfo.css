@@ -3,17 +3,17 @@
 *****************************************/
 .review-info{
   display: grid;
-  margin: 5rem 5rem;
-  margin-top: 3rem;
-  padding-bottom: 5rem;
+  padding: 5rem 5rem;
   align-items: center;
-  width: 100vw;
+  align-self: center;
+  width: fit-content;
+  grid-template-columns: 30% auto;
   grid-template-rows: repeat(3, auto-fill);
   grid-template-areas: 
   "header feature"
   "tracker feature"
   "tracker feature"
-  "button feature"
+  "button feature";
 }
 
 /*****************************************
@@ -57,13 +57,11 @@
   grid-area: feature;
 
   display: grid;
+  width: fit-content;
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: auto-fill;
 
   justify-self: start;
-
-  margin-left: 4rem;
-  margin-right: 10rem;
 }
 
 .review-info-feature-container > li{

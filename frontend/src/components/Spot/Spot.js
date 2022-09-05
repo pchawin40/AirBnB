@@ -19,6 +19,9 @@ import HomeContent from './HomeContent/HomeContent';
 import ReviewInfo from "./ReviewInfo";
 import SpotFooter from "./SpotFooter";
 
+// import css
+import './Spot.css';
+
 //? Spot component
 const Spot = ({ isLoaded }) => {
 
@@ -31,7 +34,7 @@ const Spot = ({ isLoaded }) => {
   // get current spot first 
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};
-  
+
   // useEffect for dispatch (initial render)
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(spotId));
@@ -48,17 +51,19 @@ const Spot = ({ isLoaded }) => {
         {/* Upper Nav Bar */}
         <UpperNavigation isLoaded={isLoaded} />
 
-        {/* Header Section */}
-        <HeaderSection />
+        <div className="spot-sections-container">
+          {/* Header Section */}
+          <HeaderSection />
 
-        {/* Home Content */}
-        <HomeContent />
+          {/* Home Content */}
+          <HomeContent />
 
-        {/* Review Content */}
-        {/* //? Review */}
-        <ReviewInfo spot={spot} />
+          {/* Review Content */}
+          {/* //? Review */}
+          <ReviewInfo spot={spot} />
 
-        {/* Reserve Bar */}
+          {/* Reserve Bar */}
+        </div>
 
         {/* Lower Footer Bar */}
         {/* //? Lower Footer */}

@@ -51,6 +51,19 @@ export const deleteSpot = spotId => {
   };
 };
 
+//? Action: Delete Image (of current spot)
+// action
+const DELETE_IMAGE = 'spots/DELETE_IMAGE';
+
+// action creator: remove image from list of images given by current spot
+export const deleteImage = (imageId, spotId) => {
+  return {
+    type: DELETE_IMAGE,
+    imageId,
+    spotId
+  };
+};
+
 /* --------- THUNKS -------- */
 //? Thunk action to get all spots
 export const getSpots = () => async dispatch => {
@@ -221,11 +234,32 @@ export const thunkDeleteSpot = spotId => async dispatch => {
   }
 }
 
+//? Thunk action to delete image (given by current spot)
+export const thunkDeleteImage = (imageId, spotId) => async dispatch => {
+  // fetch csrfFetch to delete image
+  const res = await csrfFetch(`/images/${imageId}`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    // parse res to json
+    const image = await res.json();
+
+    // dispatch deleteImage
+    dispatch(deleteImage(imageId, spotId));
+
+    return image
+  }
+}
+
 
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getAllSpots = state => state.spots.Spots;
 
 export const getSpotById = spotId => state => Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId));
+
+// get all images
+export const getImagesBySpot = state => Object.values(state.spots.Images);
 
 export const getSpotOwner = () => state => state.spots.Owners ? state.spots.Owners : state.spots;
 
@@ -247,6 +281,10 @@ const spotsReducer = (state = initialSpots, action) => {
     //? case: remove spot
     case DELETE_SPOT:
       delete newSpots[action.spot];
+      return newSpots;
+    //? case: remove image
+    case DELETE_IMAGE:
+      delete Object.values(newSpots.Images).find(image => image.id === action.imageId);
       return newSpots;
     //? default case
     default:

@@ -69,6 +69,11 @@ const Headline = () => {
 
   //? handle delete spot
   const handleDeleteSpot = spotId => {
+
+    // user confirmation prompt
+    const choice = window.confirm("Are you sure you want to delete this spot?");
+    if (!choice) return;
+
     // delete spot
     dispatch(spotActions.thunkDeleteSpot(spotId)).catch(async res => {
       const data = await res.json();
@@ -79,6 +84,9 @@ const Headline = () => {
     // redirect user to home page after delete
     return history.push('/');
   };
+
+  //? handle add image
+  const handleAddImage = () => {};
 
   const userEdit = () => {
     // if user own the spot 
@@ -93,6 +101,12 @@ const Headline = () => {
             </button>
             <button className="owner-delete-spot-button" onClick={e => handleDeleteSpot(spot.id)}>
               Delete Spot
+            </button>
+          </nav>
+          <nav className="owner-button-image-container">
+            {/* // add image */}
+            <button className="owner-add-image-button" onClick={handleAddImage}>
+              Add Images
             </button>
           </nav>
         </>

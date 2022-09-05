@@ -236,8 +236,6 @@ router.get('/:spotId', async (req, res, next) => {
   // deconstruct spotId from req.params
   const { spotId } = req.params;
 
-  const spot = await Spot.findByPk(spotId);
-
   const getSpot = await Spot.findOne({
     attributes: [
       '*'
@@ -450,7 +448,6 @@ router.post('/:spotId/images', singleMulterUpload("workingImage"), requireAuth, 
   const { spotId } = req.params;
 
   // deconstruct url
-  // const { url } = req.body;
   const url = req.file ? await singlePublicFileUpload(req.file) : null;
   
   // get the current user info

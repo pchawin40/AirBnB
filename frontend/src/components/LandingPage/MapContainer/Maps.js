@@ -45,7 +45,7 @@ const Maps = ({ apiKey, showMapModal, setShowUpModal }) => {
             {/* // button to show list */}
             <button id="map-button" onClick={_ => window.location.reload()}>
               Show list
-              <i class="fa-solid fa-list map-list-icon"></i>
+              <i className="fa-solid fa-list map-list-icon"></i>
             </button>
           </>
         )

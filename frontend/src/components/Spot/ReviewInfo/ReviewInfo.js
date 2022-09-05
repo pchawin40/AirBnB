@@ -61,6 +61,10 @@ const ReviewInfo = () => {
 
   //? handleReviewRemove: remove review from database
   const handleReviewRemove = review => {
+
+    const choice = window.confirm("Are you sure you want to delete this review?");
+    if (!choice) return;
+    
     dispatch(reviewActions.thunkRemoveReview(Number(review.id)));
 
     window.location.reload(false);
@@ -69,7 +73,7 @@ const ReviewInfo = () => {
   // if review's user id is current logged in user's id, show button
   const showDeleteButton = review => {
     if (user && review.userId === user.id) {
-      return <button className="delete-review-button" onClick={e => handleReviewRemove(review)}>Remove My Review</button>
+      return <button className="delete-review-button" onClick={_ => handleReviewRemove(review)}>Remove My Review</button>
     }
   }
 

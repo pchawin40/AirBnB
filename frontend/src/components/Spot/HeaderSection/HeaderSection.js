@@ -6,7 +6,7 @@ import HomeGallery from './HomeGallery';
 //? HeaderSection component
 const HeaderSection = ({ spot }) => {
   return (
-    <section>
+    <section className="header-section">
       {/* //? Headline */}
       <Headline />
 

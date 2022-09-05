@@ -3,7 +3,6 @@
 **************************/
 .headline-container{
   display: grid;
-  width: 100vw;
   justify-self: center;
   align-self: center;
   grid-template-columns: repeat(4, 1fr);

@@ -4,13 +4,13 @@ export const ImageContext = createContext();
 export const useImage = () => useContext(ImageContext);
 
 export default function ImageProvider({ children }) {
-  const [editImageModal, setEditImageModal] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
 
   return (
     <>
       <ImageContext.Provider
         value={{
-          editImageModal, setEditImageModal
+          showImageModal, setShowImageModal
         }}
       >
         {children}
