@@ -266,6 +266,7 @@ export const thunkAddImage = (images, spotId) => async dispatch => {
     },
     body: formData
   });
+
   if (res.ok) {
     // parse res to json
     const imageData = await res.json();
@@ -276,6 +277,8 @@ export const thunkAddImage = (images, spotId) => async dispatch => {
     // return images
     return imageData;
   } 
+
+  console.log("FAILED");
 
   return images;
 }
@@ -334,7 +337,12 @@ const spotsReducer = (state = initialSpots, action) => {
       return newSpots;
     //? case: add image
     case ADD_IMAGES:
-      return Object.assign({}, Object.values(newSpots.Images), action.images);
+      return { ...state, images: action.images };
+      // return Object.assign({}, Object.values(newSpots.Images), action.images);
+      // action.images(image => {
+      //   newSpots[action.spot.id] = action.spot;
+      // });
+      // return newSpots;
     //? default case
     default:
       return Object.assign({}, newSpots, action.spots);
