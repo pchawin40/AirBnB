@@ -40,6 +40,7 @@
 *           Review Tracker
 ******************************************/
 .review-info-tracker-container{
+  min-height: fit-content;
   grid-area: tracker;
 
   padding-left: .5rem;
@@ -48,6 +49,11 @@
   width: 20vw;
 
   margin-top: 2rem;
+  min-height: fit-content;
+}
+
+#review-tracker-permitted-container-false{
+  margin-bottom: 7rem;
 }
 
 /*****************************************
@@ -150,6 +156,11 @@
 /*****************************************
 *          Review Button Container
 ******************************************/
+.review-info{
+  width: 90%;
+  min-height: fit-content;
+}
+
 .review-info-review-button-container{
   grid-area: button;
   padding-right: 5rem;

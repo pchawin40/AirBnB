@@ -80,7 +80,7 @@ const ReviewModal = ({ reviewId, reviewAction }) => {
         const data = await res.json();
 
         // set any error data into validation errors
-        if (data.message) setValidationErrors([data.message]);
+        if (data.message) setValidationErrors(Object.values(data.errors));
       }
     );
   }

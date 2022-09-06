@@ -79,6 +79,7 @@
 
 .image-add-edit-button-container h3{
   margin-right: 1vw;
+  font-weight: normal;
 }
 
 .owner-cancel-image-button{
@@ -151,7 +152,6 @@
   font-size: 1rem;
   text-align: center;
   width: 100%;
-  /* background-color: pink; */
   font-weight: bold;
 }
 
@@ -184,7 +184,6 @@
 }
 
 #lone-container-true{
-  /* background-color: red; */
   padding: 1rem;
   height: 85%;
   width: 75%;

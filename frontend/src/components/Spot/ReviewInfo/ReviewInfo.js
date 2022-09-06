@@ -38,7 +38,6 @@ const ReviewInfo = () => {
   const reviewState = useSelector(reviewActions.getAllReviews);
   const reviews = reviewState !== undefined ? reviewState.filter(review => review.spotId === Number(spotId)) : null;
 
-
   // get current logged in user
   const user = useSelector(sessionActions.getSessionUser);
 
@@ -64,7 +63,7 @@ const ReviewInfo = () => {
 
     const choice = window.confirm("Are you sure you want to delete this review?");
     if (!choice) return;
-    
+
     dispatch(reviewActions.thunkRemoveReview(Number(review.id)));
 
     window.location.reload(false);
@@ -108,7 +107,13 @@ const ReviewInfo = () => {
       </header>
 
       {/* //? review tracker */}
-      <section className="review-info-tracker-container">
+      <section
+        className="review-info-tracker-container"
+        id={`review-tracker-permitted-container-${
+          reviews &&
+          !(reviews.find(review => review.userId === user.id))
+        }`}
+      >
         <ReviewTracker />
       </section>
 
@@ -138,19 +143,25 @@ const ReviewInfo = () => {
       </section>
 
       {/* //? Button to add more reviews */}
-      <section className="review-info-review-button-container">
-        <button
-          className="review-info-review-button"
-          onClick={_ => {
-            setReviewAction("create");
-            setShowReviewModal(true);
-          }}
-        >
-          <span><i className="fa-solid fa-plus"></i></span>
-          Write a review
-        </button>
-      </section>
+      {/* if user already has existing review, don't show this */}
 
+      {
+        // filter through all reviews to see if user exist
+        reviews &&
+        !(reviews.find(review => review.userId === user.id)) &&
+        <section className="review-info-review-button-container">
+          <button
+            className="review-info-review-button"
+            onClick={_ => {
+              setReviewAction("create");
+              setShowReviewModal(true);
+            }}
+          >
+            <span><i className="fa-solid fa-plus"></i></span>
+            Write a review
+          </button>
+        </section>
+      }
       {
         // Show Review Modal
         showReviewModal

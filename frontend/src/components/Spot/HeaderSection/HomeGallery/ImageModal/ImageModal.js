@@ -132,7 +132,7 @@ const ImageModal = ({ setShowImageModal }) => {
                   </>
                   :
                   <>
-                    <h3> Click here to add images</h3>
+                    <h3> Click button to add images</h3>
                   </>
               }
             </div>
