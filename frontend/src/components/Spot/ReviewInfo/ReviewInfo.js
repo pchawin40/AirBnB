@@ -130,22 +130,24 @@ const ReviewInfo = ({ spot }) => {
       <section className="review-info-feature-container">
         {
           allReviewsByCurrentSpot &&
-          allReviewsByCurrentSpot.length > 0 &&
-          Array.isArray(allReviewsByCurrentSpot) ? allReviewsByCurrentSpot.map(review =>
-            <li key={review.id}>
-              <div className="image-fig-caption-container">
-                <img className="review-profile-image" src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`} alt={review.id} />
+            Array.isArray(allReviewsByCurrentSpot) &&
+            allReviewsByCurrentSpot.length > 0 &&
+            Array.isArray(allReviewsByCurrentSpot) ? allReviewsByCurrentSpot.map(review =>
+              review && review.id &&
+              <li key={review.id}>
+                <div className="image-fig-caption-container">
+                  <img className="review-profile-image" src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`} alt={review.id} />
 
-                {/* //? button to delete review, if available */}
-                {showEditButton(review)}
-                {showDeleteButton(review)}
-              </div>
-              <figcaption className="review-caption-container">
-                <p className="review-content">{review.review}</p>
-                <p className="review-author">{review.User.firstName + " " + review.User.lastName}</p>
-              </figcaption>
-            </li>
-          ) :
+                  {/* //? button to delete review, if available */}
+                  {showEditButton(review)}
+                  {showDeleteButton(review)}
+                </div>
+                <figcaption className="review-caption-container">
+                  <p className="review-content">{review.review}</p>
+                  <p className="review-author">{review.User.firstName + " " + review.User.lastName}</p>
+                </figcaption>
+              </li>
+            ) :
             <div id="no-review-button-container">
               <li>No reviews for this spot yet. Write one now!</li>
               <button id="no-review-button" onClick={_ => setShowReviewModal(true)}><i className="fa-solid fa-circle-plus"></i></button>
@@ -157,7 +159,7 @@ const ReviewInfo = ({ spot }) => {
       {/* if user already has existing review, don't show this */}
       {/* // filter through all reviews to see if user exist */}
       {
-        allReviewsByCurrentSpot && Array.isArray(allReviewsByCurrentSpot) &&
+        allReviewsByCurrentSpot && Array.isArray(allReviewsByCurrentSpot) && user &&
         !(allReviewsByCurrentSpot.some(review => review.userId === user.id)) &&
         <section className="review-info-review-button-container">
           <button

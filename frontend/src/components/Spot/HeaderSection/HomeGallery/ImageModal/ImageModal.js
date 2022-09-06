@@ -162,10 +162,10 @@ const ImageModal = ({ setShowImageModal }) => {
               </label>
             </aside>
             :
-            images.map(image =>
+            images.map((image, index) =>
             (
               <figure
-                key={image.id}
+                key={index + " " + image.id}
                 id={`lone-container-${images.length === 1}`}
                 className="image-figure"
               >

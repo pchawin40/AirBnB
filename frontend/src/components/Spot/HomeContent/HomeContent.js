@@ -44,7 +44,7 @@ const HomeContent = () => {
   }, [dispatch, spotId]);
 
   return (
-    spot && 
+    spot &&
     <>
       <section className="home-content-section-container">
         {/* //? Home Content Title Section */}
@@ -57,7 +57,11 @@ const HomeContent = () => {
 
           {/* include user image */}
           <figure className="user-profile-pic-container">
-            <img className="user-profile-pic" src="https://xsgames.co/randomusers/avatar.php?g=female" alt="profile-pic" />
+            <img
+              className="user-profile-pic"
+              onError={e => e.target.src = `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`}
+              src="https://xsgames.co/randomusers/avatar.php?g=female"
+              alt="profile-pic" />
           </figure>
         </section>
 

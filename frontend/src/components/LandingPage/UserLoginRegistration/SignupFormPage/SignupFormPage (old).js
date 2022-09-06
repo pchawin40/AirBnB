@@ -50,7 +50,7 @@ const SignupFormPageOld = () => {
   //? handleSubmit: handle form submit
 
   // if session user exist, return to '/' path
-  if(sessionUser) return <Redirect to='/'/>;
+  if (sessionUser) return <Redirect to='/' />;
 
   const handleSubmit = e => {
     // prevent page from refreshing
@@ -73,7 +73,7 @@ const SignupFormPageOld = () => {
       password,
       image
     };
- 
+
     // reset form data to default value after signing up
     setFirstName("");
     setLastName("");
@@ -118,10 +118,10 @@ const SignupFormPageOld = () => {
       <form onSubmit={handleSubmit}>
         <ul>
           {
-            validationErrors.map(error => <li key={error}>{error}</li>)
+            validationErrors.forEacherror => <li key={error}>{error}</li>)
           }
         </ul>
-        
+
         {/* //? firstName */}
         <input
           placeholder="First name"
@@ -171,7 +171,7 @@ const SignupFormPageOld = () => {
           value={confirmedPassword}
         >
         </input>
-        
+
         {/* //? Single File Upload */}
         {/* //* putting ref clears file input upon invalid submission */}
         <input type="file" onChange={updateFile} ref={ref} />
@@ -184,14 +184,14 @@ const SignupFormPageOld = () => {
               multiple
               onChange={updateFiles} />
           </label> */}
-        
+
         {/* //? Sign Up Button*/}
         <button type="submit">
           Sign Up
         </button>
       </form>
 
-    <div>
+      <div>
         {sessionUser && (
           <div>
             <h1>{sessionUser.username}</h1>

@@ -100,11 +100,12 @@ const HomeGallery = () => {
             ?
             <>
               {
+                images[0] &&
                 <figure className="feature-single-image-container">
                   <img
                     onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
                     src={images[0].url}
-                    key={images[0].id}
+                    key={images[0].id + " " + images[0].url}
                     className="feature-single-image"
                     alt={`Pic ${images[0].id} of Spot ${spotId}`}
                     onClick={_ => setShowImageModal(true)}
@@ -116,29 +117,31 @@ const HomeGallery = () => {
             (
               images.length < 5 ?
                 (images.map((image, index) => {
-                  return (
-                    <figure className="feature-image-container" id={`image-less-image-container-${index + 1}`}>
-                      <img
-                        onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
-                        src={image.url}
-                        key={image.id}
-                        id={`feature-less-image-${index + 1}`}
-                        className="feature-less-images"
-                        alt={`Pic ${image.id} of Spot ${spotId}`}
-                        onClick={_ => setShowImageModal(true)}
-                      />
-                    </figure>
-                  )
+                  if (image) {
+                    return (
+                      <figure className="feature-image-container" id={`image-less-image-container-${index + 1}`} key={image.id}>
+                        <img
+                          onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
+                          src={image.url}
+                          key={index + " " + image.id}
+                          id={`feature-less-image-${index + 1}`}
+                          className="feature-less-images"
+                          alt={`Pic ${image.id} of Spot ${spotId}`}
+                          onClick={_ => setShowImageModal(true)}
+                        />
+                      </figure>
+                    )
+                  }
                 }))
                 :
                 (images.map((image, index) => {
                   if (index < 5) {
                     return (
-                      <figure className="feature-image-container">
+                      <figure className="feature-image-container" key={image.id}>
                         <img
                           onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
                           src={image.url ? image.url : "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
-                          key={image.id}
+                          key={index + " " + image.id}
                           className="feature-images"
                           alt={`Pic ${image.id} of Spot ${spotId}`}
                           onClick={_ => setShowImageModal(true)}
