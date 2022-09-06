@@ -30,7 +30,7 @@ const LoginFormModal = () => {
         &&
         // .... render LoginForm component
         <Modal onClose={_ => setShowModal(false)}>
-            <LoginForm />
+            <LoginForm setShowModal={setShowModal} />
         </Modal>
       }
     </>

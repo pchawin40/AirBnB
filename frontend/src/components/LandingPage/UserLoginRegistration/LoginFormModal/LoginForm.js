@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import react-router-dom
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 // import session store
 import * as sessionActions from '../../../../store/session';
@@ -15,10 +15,13 @@ import * as sessionActions from '../../../../store/session';
 
 // TODO: LoginFormPage component
 //? holds all the files for login form
-const LoginForm = () => {
+const LoginForm = ({ setShowModal }) => {
 
   // dispatch
   const dispatch = useDispatch();
+
+  // invoke history
+  const history = useHistory();
 
   // getSessionUser: get current session user
   const currentUser = useSelector(sessionActions.getSessionUser);
@@ -48,7 +51,7 @@ const LoginForm = () => {
       credential,
       password
     };
-    
+
     // reset validation errors before dispatching
     setValidationErrors([]);
 
@@ -67,37 +70,54 @@ const LoginForm = () => {
 
   // return login form
   return (
-    <form onSubmit={handleSubmit}>
-      {/* //? Display Errors (if any) */}
-      <ul>
-        {
-          validationErrors.map(error => <li key={error} className="error-list">{error}</li>)
-        }
-      </ul>
-
-      {/* //? Username */}
-      <input
-        placeholder="Username or Email"
-        type='credential'
-        value={credential}
-        onChange={e => setCredential(e.target.value)}
-        required
+    <section className="login-container" style={{ zIndex: 1000 }}>
+      <i
+        className="fa-solid fa-x"
+        id="login-x-icon"
+        onClick={_ => setShowModal(false)}
       />
+      <aside className="login-form-header"><h1>Log in</h1></aside>
+      <form className="login-form-container" onSubmit={handleSubmit}>
+        <h2 className="login-form-container-header">Welcome to Airbnb</h2>
+        {/* //? Display Errors (if any) */}
+        <ul>
+          {
+            validationErrors.map(error => <li key={error} className="error-list">{error}</li>)
+          }
+        </ul>
 
-      {/* //? Password */}
-      <input
-        placeholder="Password"
-        type='password'
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        required
-      />
+        <div className="modal-login-inputs-container">
+          {/* //? Username */}
+          <input
+            placeholder="Email"
+            type='credential'
+            value={credential}
+            onChange={e => setCredential(e.target.value)}
+            required
+          />
 
-      {/* //? Log In Button */}
-      <button type="submit">
-        Log In
-      </button>
-    </form>
+          {/* //? Password */}
+          <input
+            placeholder="Password"
+            type='password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="modal-button-containers">
+          {/* //? Log In Button */}
+          <button className="modal-login-button" type="submit">
+            Log In
+          </button>
+          {/* //? Log In Button */}
+          <button className="modal-register-button" onClick={_ => history.push('/signup')}>
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </section>
   );
 };
 
