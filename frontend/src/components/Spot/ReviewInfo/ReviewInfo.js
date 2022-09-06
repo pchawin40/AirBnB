@@ -70,8 +70,8 @@ const ReviewInfo = ({ spot }) => {
   //? handleReviewRemove: remove review from database
   const handleReviewRemove = review => {
 
-    const choice = window.confirm("Are you sure you want to delete this review?");
-    if (!choice) return;
+    // const choice = window.confirm("Are you sure you want to delete this review?");
+    // if (!choice) return;
 
     dispatch(reviewActions.thunkRemoveReview(Number(review.id)));
 
@@ -87,17 +87,19 @@ const ReviewInfo = ({ spot }) => {
 
   const showEditButton = review => {
     if (user && review.userId === user.id) {
-      return (<button
-        id={review.id}
-        className="edit-review-button"
-        onClick={e => {
-          setShowReviewModal(true);
-          setReviewId(e.target.id);
-          setReviewAction("edit");
-        }}
-      >
-        Edit My Review
-      </button>)
+      return (
+        <button
+          id={review.id}
+          className="edit-review-button"
+          onClick={e => {
+            setShowReviewModal(true);
+            setReviewId(e.target.id);
+            setReviewAction("edit");
+          }}
+        >
+          Edit My Review
+        </button>
+      );
     }
   }
 

@@ -49,7 +49,7 @@ const ReviewModal = ({ reviewId, reviewAction, allReviewsByCurrentSpot }) => {
     if ("edit" === reviewAction) {
       setReview(currentReview.review);
       setRating(currentReview.stars);
-    } 
+    }
   }, [onLoad, reviewAction])
 
   //? HandleReviewSubmit
@@ -70,7 +70,7 @@ const ReviewModal = ({ reviewId, reviewAction, allReviewsByCurrentSpot }) => {
     // dispatch add review thunk action
     return dispatch(
       reviewAction === "edit" ?
-        reviewActions.thunkEditReview(postReview, reviewId)
+        reviewActions.thunkEditReview(postReview, Number(reviewId))
         :
         reviewActions.thunkAddReview(postReview, spotId)
     ).then(() => {
