@@ -68,6 +68,30 @@ export const getReviewsBySpotId = spotId => async dispatch => {
   }
 };
 
+//? Thunk action to get all reviews
+export const thunkGetReviews = (spots) => async dispatch => {
+  // fecch all reviews given by spots
+  const allReviews = [];
+
+  spots.map(async (spot, index) => {
+    const res = await csrfFetch(`/spots/${spot.id}/reviews`);
+
+    if (res.ok) {
+      const reviews = await res.json();
+
+
+      if (reviews.Reviews.length > 0) {
+        allReviews.push(Object.values(reviews));
+      }
+
+      dispatch(loadReviews(allReviews));
+      return allReviews;
+    }
+  });
+
+
+}
+
 //? Thunk action to get a single review by spot id 
 export const thunkGetReview = (spotId, reviewId) => async dispatch => {
 
@@ -99,7 +123,7 @@ export const thunkAddReview = (review, spotId) => async dispatch => {
   if (res.ok) {
     // parsed res to json
     const postReview = await res.json();
-    
+
     dispatch(addReview(postReview));
 
     // return review
@@ -167,7 +191,8 @@ export const reviewsReducer = (state = initialReviews, action) => {
       return reviews;
     //? default case
     default:
-      return Object.assign({}, newReviews, action.reviews);
+      return { ...state, Reviews: action.reviews };
+      // return Object.assign({}, newReviews, action.reviews);
   }
 };
 

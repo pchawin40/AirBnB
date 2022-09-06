@@ -39,7 +39,7 @@ const Headline = () => {
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : null;
 
-  // get spots data
+  // get reviews data
   const reviewState = useSelector(reviewActions.getAllReviews);
   const reviews = reviewState !== undefined ? reviewState.filter(review => review.spotId === Number(spotId)) : null;
 
@@ -86,8 +86,6 @@ const Headline = () => {
   };
 
   //? handle add image
-  const handleAddImage = () => {};
-
   const userEdit = () => {
     // if user own the spot 
     if ((spot && currentUser) && (Number(spot.ownerId) === currentUser.id)) {

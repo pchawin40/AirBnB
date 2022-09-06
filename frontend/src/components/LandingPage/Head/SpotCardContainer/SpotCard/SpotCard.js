@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 
 // import store
 import * as spotActions from '../../../../../store/spots';
+import * as reviewActions from '../../../../../store/reviews';
 
 // import css
 import './SpotCard.css';
@@ -19,6 +20,9 @@ const SpotCard = () => {
   const spotState = useSelector(spotActions.getAllSpots);
   const [spots, setSpots] = useState([]);
 
+  // review state
+  const reviewState = useSelector(state => state.reviews);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +31,35 @@ const SpotCard = () => {
 
   useEffect(() => {
     setSpots(spotState);
+    if (spots) {
+      // console.log("spots", spots);
+      dispatch(reviewActions.thunkGetReviews(spots));
+    }
   }, [spotState]);
+
+  //? get avgReview
+  const findAvgReviews = (reviews, spotId) => {
+    // if Reviews exist in given reviews
+    if (reviews.Reviews) {
+      // define variable to use for summing up and averaging reviews
+      let sumReviews = 0;
+      const reviewsToSum = [];
+      Object.values(reviews.Reviews).map(review => reviewsToSum.push(...review[0]));
+
+      // add all relevant stars
+      reviewsToSum.map(review => {
+        if (review.spotId === spotId) {
+          sumReviews += review.stars;
+        }
+      });
+
+      // get length of all reviews by spot id
+      const allReviewsByCurrentSpot = reviewsToSum.filter(review => review.spotId === spotId); 
+
+      // return average of reviews
+      return parseFloat(sumReviews / allReviewsByCurrentSpot.length).toFixed(2);
+    }
+  }
 
   // invoke history
   const history = useHistory();
@@ -45,7 +77,12 @@ const SpotCard = () => {
       {/* //? Show all spots */}
       {
         spots && spots.map(spot => {
-          // getAllReviewsBySpotId(spot.id);
+
+          let avgReview;
+
+          if (reviewState) {
+            avgReview = findAvgReviews(reviewState, spot.id);
+          }
 
           return (
             <div className="spot-card-content" key={spot.id} onClick={e => handleCardClick(spot.id)}>
@@ -58,20 +95,23 @@ const SpotCard = () => {
                 {/* <span>{}</span> */}
               </div>
 
-              <div className="spot-name card-info">
-                {spot.name}
+              <div className="spot-header card-info">
+                <div>
+                  {/* City, Country */}
+                  <span>{spot.city}</span>
+                  <span>, </span>
+                  <span>{spot.country.toUpperCase().includes("america".toUpperCase()) ? spot.state : spot.country}</span>
+                </div>
 
-                {/* // TODO: Spot Review */}
-                {/* //! To fix: add reviews by spot id here */}
-                <span><i className="fa-solid fa-star"></i></span>
+                {/* // //? Spot Review */}
+                <span>{isNaN(avgReview) ? 0 : avgReview}</span>
+                <i className="fa-solid fa-star"></i>
               </div>
 
               <div className="spot-location card-info">
                 {/* longitude and latitude */}
-                {spot.lat + " " + spot.lng}
+                {"lat: " + spot.lat + " " + "lng: " + spot.lng}
               </div>
-
-              {/* // TODO: Spot Booking Dates */}
 
               <div className="spot-price card-info">
                 <span>${spot.price}</span> night

@@ -26,7 +26,6 @@
 }
 
 .spot-image{
-  border: 5px solid black;
   display: block;
   object-fit: fill;
 
@@ -43,9 +42,10 @@
   opacity: .7;
 }
 
-.spot-name{
+.spot-header{
   display: flex;
   justify-content: space-between;
+  text-align: left;
 }
 
 .fa-star{
@@ -62,6 +62,10 @@
   border-radius: 1.25rem;
 }
 
-.spot-price > span, .spot-name{
+.spot-price > span, .spot-header{
   font-weight: bold;
+}
+
+.spot-price{
+  padding-top: .5rem;
 }
