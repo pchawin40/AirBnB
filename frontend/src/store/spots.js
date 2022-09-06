@@ -338,11 +338,6 @@ const spotsReducer = (state = initialSpots, action) => {
     //? case: add image
     case ADD_IMAGES:
       return { ...state, images: action.images };
-      // return Object.assign({}, Object.values(newSpots.Images), action.images);
-      // action.images(image => {
-      //   newSpots[action.spot.id] = action.spot;
-      // });
-      // return newSpots;
     //? default case
     default:
       return Object.assign({}, newSpots, action.spots);

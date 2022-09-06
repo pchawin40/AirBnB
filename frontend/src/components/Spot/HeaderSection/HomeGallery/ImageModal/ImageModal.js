@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 
 // import store
 import * as spotActions from '../../../../../store/spots';
+import * as sessionActions from '../../../../../store/session';
 
 // import css
 import './ImageModal.css';
@@ -21,7 +22,8 @@ const ImageModal = ({ setShowImageModal }) => {
 
   // invoke dispatch
   const dispatch = useDispatch();
-  
+
+  // invoke ref
   const ref = useRef();
 
   // state
@@ -29,13 +31,18 @@ const ImageModal = ({ setShowImageModal }) => {
   const [images, setImages] = useState(imageState);
   const [newImages, setNewImages] = useState([]);
 
+  // get session user
+  const sessionUser = useSelector(sessionActions.getSessionUser);
+  // get spot owner
+  const spotOwner = useSelector(spotActions.getSpotOwner());
+
   // get all images from current spot (/spots/:spotId GET)
   // const images
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(spotId));
   }, [dispatch, spotId]);
 
-
+  // update image if imageState changes
   useEffect(() => {
     setImages(imageState);
   }, [imageState]);
@@ -45,8 +52,8 @@ const ImageModal = ({ setShowImageModal }) => {
   const handleImageDelete = async image => {
     const choice = window.confirm("Are you sure you want to delete this image?");
     if (!choice) return;
-    dispatch(spotActions.thunkDeleteImage(image.id, spotId));
-    dispatch(spotActions.getSpotBySpotId(spotId));
+    dispatch(spotActions.thunkDeleteImage(image.id, spotId))
+      .then(() => dispatch(spotActions.getSpotBySpotId(spotId)));
   };
 
   //? handle form submit
@@ -55,7 +62,7 @@ const ImageModal = ({ setShowImageModal }) => {
     e.preventDefault();
 
     const fileUpload = Object.values(newImages);
-    
+
     // reset new images
     setNewImages("");
 
@@ -64,18 +71,16 @@ const ImageModal = ({ setShowImageModal }) => {
     dispatch(spotActions.thunkAddImage(fileUpload, spotId))
       .then(() => dispatch(spotActions.getSpotBySpotId(spotId)))
       .catch(
-      async res => {
-        // parse error data
-        const data = await res.json();
+        async res => {
+          // parse error data
+          const data = await res.json();
 
-        console.log("error here");
+          // set any error data into validation errors
+          if (data.errors) alert(Object.values(data.errors));
 
-        // set any error data into validation errors
-        if (data.errors) alert(Object.values(data.errors));
-
-        return;
-      }
-    );
+          return;
+        }
+      );
   }
 
   //? updateFiles: multiple file update function
@@ -91,45 +96,50 @@ const ImageModal = ({ setShowImageModal }) => {
         <i className="fa-solid fa-x fa-xl"></i>
       </div>
       {/* //? Add existing images  */}
-      <form className="add-existing-images-container" onSubmit={handleImageSubmit}>
-        {/* //? Multiple File Upload */}
-        <label className="exist-add-image-label">
-          {/* Multiple Upload */}
-          <input
-            type="file"
-              multiple
-              ref={ref}
-            className="exist-add-image-input"
-            onChange={updateFiles} />
-        </label>
-        {/* //? Plus Container */}
-        <div className="image-add-edit-button-container">
-          {
-            // console.log("newImages", newImages) &&
-            newImages.length > 0 ?
-              <>
-                <button
-                  className="owner-add-image-button"
-                  type="submit"
-                >
-                  Add Images
-                </button>
+      {
+        sessionUser && spotOwner &&
+        sessionUser.id === spotOwner.id &&
+        (
+          <form className="add-existing-images-container" onSubmit={handleImageSubmit}>
+            {/* //? Multiple File Upload */}
+            <label className="exist-add-image-label">
+              {/* Multiple Upload */}
+              <input
+                type="file"
+                multiple
+                ref={ref}
+                className="exist-add-image-input"
+                onChange={updateFiles} />
+            </label>
+            {/* //? Plus Container */}
+            <div className="image-add-edit-button-container">
+              {
+                newImages.length > 0 ?
+                  <>
+                    <button
+                      className="owner-add-image-button"
+                      type="submit"
+                    >
+                      Add Images
+                    </button>
 
-                <button
-                  className="owner-cancel-image-button"
-                  onClick={_ => setNewImages([])}
-                >
-                  Cancel
-                </button>
-              </>
-              :
-              <>
-                <h3> Click here to add images</h3>
-              </>
-          }
-        </div>
-      </form>
-      <section className="image-figure-container">
+                    <button
+                      className="owner-cancel-image-button"
+                      onClick={_ => setNewImages([])}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                  :
+                  <>
+                    <h3> Click here to add images</h3>
+                  </>
+              }
+            </div>
+          </form>
+        )
+      }
+      <section className="image-figure-container" id={`lone-figure-container-${images.length === 1}`}>
         {
           images.length < 1 ?
             <aside className="no-image-aside">
@@ -156,15 +166,21 @@ const ImageModal = ({ setShowImageModal }) => {
             (
               <figure
                 key={image.id}
+                id={`lone-container-${images.length === 1}`}
                 className="image-figure"
               >
                 <img
                   src={image.url}
+                  onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
                   alt={image.id}
                   className="modal-image"
-                  onClick={_ => handleImageDelete(image)}
+                  onClick={_ => sessionUser.id === spotOwner.id && handleImageDelete(image)}
                 />
-                <p className="delete-image-text">Delete</p>
+                {
+                  spotOwner && sessionUser &&
+                  sessionUser.id === spotOwner.id &&
+                  <p className="delete-image-text">Delete</p>
+                }
               </figure>
             ))
         }

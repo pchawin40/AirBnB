@@ -183,7 +183,15 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 // Returns all the reviews that belong to a spot specified by its id
 router.get('/:spotId/reviews', async (req, res, next) => {
   // deconstruct spotId
-  const { spotId } = req.params;
+  const spotId = Number(req.params.spotId);
+
+  const validateSpot = await Spot.findByPk(spotId);
+
+  if (!validateSpot) {
+    const err = Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
 
   // get reviews
   const reviews = await Review.findAll({
@@ -196,13 +204,6 @@ router.get('/:spotId/reviews', async (req, res, next) => {
       }
     ]
   });
-
-  // TODO: Error response: Couldn't find a Spot with the specified id
-  if (!reviews.length) {
-    const err = Error("Spot couldn't be found");
-    err.status = 404;
-    return next(err);
-  }
 
   // get array of images for current review 
   // reviews.map(async review => {

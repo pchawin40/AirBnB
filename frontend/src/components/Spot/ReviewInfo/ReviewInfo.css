@@ -153,6 +153,8 @@
 .review-info-review-button-container{
   grid-area: button;
   padding-right: 5rem;
+  min-width: fit-content;
+  width: 20vw;
 }
 
 .review-info-review-button{

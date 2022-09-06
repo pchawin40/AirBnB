@@ -9,7 +9,7 @@ const images = [
     imageableId: 1
   },
   {
-    url: "image url 2",
+    url: "https://images2.fanpop.com/images/photos/5900000/Randomness-random-5997130-1280-800.jpg",
     imageableType: "Spot",
     imageableId: 2
   },
