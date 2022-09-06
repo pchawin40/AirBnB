@@ -206,6 +206,7 @@ const HomeGallery = () => {
             <div className="not-permitted-no-image-container">
               <h3>
                 No images currently available for this spot.
+                Sign in or register to upload one!
               </h3>
             </div>
         }

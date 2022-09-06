@@ -148,10 +148,17 @@ const ReviewInfo = ({ spot }) => {
                 </figcaption>
               </li>
             ) :
-            <div id="no-review-button-container">
-              <li>No reviews for this spot yet. Write one now!</li>
-              <button id="no-review-button" onClick={_ => setShowReviewModal(true)}><i className="fa-solid fa-circle-plus"></i></button>
-            </div>
+            user ?
+              (
+                <div id="no-review-button-container">
+                  <li>No reviews for this spot yet. Write one now!</li>
+                  <button id="no-review-button" onClick={_ => setShowReviewModal(true)}><i className="fa-solid fa-circle-plus"></i></button>
+                </div>
+              )
+              :
+              <div id="no-review-button-container">
+                <li>No reviews for this spot yet. Log in or register to write one!</li>
+              </div>
         }
       </section>
 
