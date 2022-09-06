@@ -43,7 +43,7 @@ const ProfileButton = () => {
     // if show menu is currently set as false, don't do anything
     if (!showMenu) return;
 
-    
+
     // helper function to turn menu off
     const closeMenu = e => {
       if (!(e.target.classList.contains('profile-icon'))) {
@@ -115,7 +115,7 @@ const ProfileButton = () => {
               </NavLink>
             </div>
             <div className="lower-container">
-              {/* // TODO: Help: Lead to README in Github */} 
+              {/* // TODO: Help: Lead to README in Github */}
               <NavLink to="/" className="todo-link">
                 Help
               </NavLink>

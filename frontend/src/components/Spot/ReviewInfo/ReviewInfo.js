@@ -37,6 +37,8 @@ const ReviewInfo = ({ spot }) => {
   // get current logged in user
   const user = useSelector(sessionActions.getSessionUser);
 
+  console.log("user", user);
+
   // get reviews data
   const reviewState = useSelector(reviewActions.getAllReviews);
   const reviewsToSum = [];
@@ -102,7 +104,8 @@ const ReviewInfo = ({ spot }) => {
   }
 
   return (
-    <section className="review-info">
+    Array.isArray(allReviewsByCurrentSpot) &&
+    (<section className="review-info">
       {/* //? review header */}
       <header className="review-info-header-container">
         <span><i className="fa-solid fa-star"></i></span>
@@ -118,8 +121,8 @@ const ReviewInfo = ({ spot }) => {
       {/* //? review tracker */}
       <section
         className="review-info-tracker-container"
-        id={`review-tracker-permitted-container-${allReviewsByCurrentSpot &&
-          !(allReviewsByCurrentSpot.find(review => review.userId === user.id))
+        id={`review-tracker-permitted-container-${Array.isArray(allReviewsByCurrentSpot) && user &&
+          !(allReviewsByCurrentSpot.some(review => review.userId === user.id))
           }`}
       >
         <ReviewTracker />
@@ -154,8 +157,8 @@ const ReviewInfo = ({ spot }) => {
       {/* if user already has existing review, don't show this */}
       {/* // filter through all reviews to see if user exist */}
       {
-        allReviewsByCurrentSpot &&
-        !(allReviewsByCurrentSpot.find(review => review.userId === user.id)) &&
+        allReviewsByCurrentSpot && Array.isArray(allReviewsByCurrentSpot) &&
+        // !(allReviewsByCurrentSpot.find(review => review.userId === user.id)) &&
         <section className="review-info-review-button-container">
           <button
             className="review-info-review-button"
@@ -165,7 +168,7 @@ const ReviewInfo = ({ spot }) => {
             }}
           >
             <span><i className="fa-solid fa-plus"></i></span>
-              Write a review
+            Write a review
           </button>
         </section>
       }
@@ -176,11 +179,11 @@ const ReviewInfo = ({ spot }) => {
         &&
         <Modal onClose={_ => setShowReviewModal(false)}>
           <ReviewProvider>
-              <ReviewModal reviewId={reviewId} reviewAction={reviewAction} allReviewsByCurrentSpot={allReviewsByCurrentSpot} />
+            <ReviewModal reviewId={reviewId} reviewAction={reviewAction} allReviewsByCurrentSpot={allReviewsByCurrentSpot} />
           </ReviewProvider>
         </Modal>
       }
-    </section>
+    </section>)
   );
 }
 
