@@ -156,7 +156,8 @@ const ReviewInfo = ({ spot }) => {
       {/* // filter through all reviews to see if user exist */}
       {
         allReviewsByCurrentSpot && Array.isArray(allReviewsByCurrentSpot) &&
-        // !(allReviewsByCurrentSpot.find(review => review.userId === user.id)) &&
+        !(allReviewsByCurrentSpot.some(review => review.userId === user.id))
+        &&
         <section className="review-info-review-button-container">
           <button
             className="review-info-review-button"
