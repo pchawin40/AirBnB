@@ -53,7 +53,7 @@ const SpotCard = () => {
       });
 
       // get length of all reviews by spot id
-      const allReviewsByCurrentSpot = reviewsToSum.filter(review => review.spotId === spotId); 
+      const allReviewsByCurrentSpot = reviewsToSum.filter(review => review.spotId === spotId);
 
       // return average of reviews
       return parseFloat(sumReviews / allReviewsByCurrentSpot.length).toFixed(2);
@@ -91,20 +91,21 @@ const SpotCard = () => {
                 <img className="spot-image card-info" onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} src={spot.previewImage ? spot.previewImage : "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} alt={spot.name} />
                 <span><i className="fa-solid fa-heart fa-lg spot-card-heart" style={{ zIndex: 2 }}></i></span>
                 {/* // TODO: get average review */}
-                {/* <span>{}</span> */}
               </div>
 
               <div className="spot-header card-info">
-                <div>
+                <div className="card-info-container-1">
                   {/* City, Country */}
                   <span>{spot.city}</span>
                   <span>, </span>
                   <span>{spot.country.toUpperCase().includes("america".toUpperCase()) ? spot.state : spot.country}</span>
                 </div>
 
-                {/* // //? Spot Review */}
-                <span>{isNaN(avgReview) ? 0 : avgReview}</span>
-                <i className="fa-solid fa-star"></i>
+                <div className="card-info-container-2">
+                  {/* // //? Spot Review */}
+                  <span>{isNaN(avgReview) ? 0 : avgReview}</span>
+                  <i className="fa-solid fa-star"></i>
+                </div>
               </div>
 
               <div className="spot-location card-info">
