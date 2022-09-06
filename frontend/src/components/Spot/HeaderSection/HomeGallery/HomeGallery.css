@@ -11,10 +11,6 @@
   width: auto;
 }
 
-.gallery-image-container:hover{
-  cursor: pointer;
-}
-
 /***************************
 * Feature Images Gallery
 ***************************/
@@ -30,6 +26,10 @@
   grid-template-areas: 
   "main main side2 side3"
   "main main side4 side5";
+}
+
+.feature-images-gallery img:hover {
+  cursor: pointer;
 }
 
 .feature-image-container{

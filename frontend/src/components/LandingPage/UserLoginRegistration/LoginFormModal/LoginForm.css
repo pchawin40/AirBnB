@@ -85,7 +85,7 @@ ul{
   font-weight: bold;
 }
 
-.modal-login-button:hover, #modal-register-button{
+.modal-login-button:hover, #modal-register-button:hover{
   cursor: pointer;
 }
 
