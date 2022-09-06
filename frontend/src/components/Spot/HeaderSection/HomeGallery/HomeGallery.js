@@ -116,7 +116,6 @@ const HomeGallery = () => {
             (
               images.length < 5 ?
                 (images.map((image, index) => {
-                  console.log("HERE");
                   return (
                     <figure className="feature-image-container" id={`image-less-image-container-${index + 1}`}>
                       <img
@@ -199,7 +198,7 @@ const HomeGallery = () => {
               </div>
 
             </form>
-              :
+            :
             images.length <= 0 &&
             <div className="not-permitted-no-image-container">
               <h3>

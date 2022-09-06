@@ -278,8 +278,6 @@ export const thunkAddImage = (images, spotId) => async dispatch => {
     return imageData;
   } 
 
-  console.log("FAILED");
-
   return images;
 }
 

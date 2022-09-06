@@ -37,8 +37,6 @@ const ReviewInfo = ({ spot }) => {
   // get current logged in user
   const user = useSelector(sessionActions.getSessionUser);
 
-  console.log("user", user);
-
   // get reviews data
   const reviewState = useSelector(reviewActions.getAllReviews);
   const reviewsToSum = [];
