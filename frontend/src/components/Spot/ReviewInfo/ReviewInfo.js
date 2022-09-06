@@ -129,6 +129,8 @@ const ReviewInfo = ({ spot }) => {
       {/* //? top reviews */}
       <section className="review-info-feature-container">
         {
+          allReviewsByCurrentSpot &&
+          allReviewsByCurrentSpot.length > 0 &&
           Array.isArray(allReviewsByCurrentSpot) ? allReviewsByCurrentSpot.map(review =>
             <li key={review.id}>
               <div className="image-fig-caption-container">
@@ -156,7 +158,7 @@ const ReviewInfo = ({ spot }) => {
       {/* // filter through all reviews to see if user exist */}
       {
         allReviewsByCurrentSpot && Array.isArray(allReviewsByCurrentSpot) &&
-        // !(allReviewsByCurrentSpot.find(review => review.userId === user.id)) &&
+        !(allReviewsByCurrentSpot.some(review => review.userId === user.id)) &&
         <section className="review-info-review-button-container">
           <button
             className="review-info-review-button"
