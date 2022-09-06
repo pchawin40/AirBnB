@@ -116,7 +116,7 @@ const ProfileButton = () => {
             </div>
             <div className="lower-container">
               {/* // TODO: Help: Lead to README in Github */}
-              <NavLink to="/" className="todo-link">
+              <NavLink to="/" className="active-link" onClick={_ => window.location.href = "https://github.com/pchawin40/AirBnB"}>
                 Help
               </NavLink>
 
