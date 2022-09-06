@@ -137,6 +137,8 @@ const SpotForm = ({spotActivity = "create", currentSpot}) => {
           // parse res to data json
           const data = await res.json();
 
+          console.log("data", data);
+          
           // set error if any
           if (data.errors) setValidationErrors([Object.values(data.errors)]);
         }

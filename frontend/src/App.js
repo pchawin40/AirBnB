@@ -49,7 +49,7 @@ function App() {
             {/* //? Landing Page */}
             <LandingPage isLoaded={isLoaded} />
           </Route>
-          
+
           {/* //? route: / */}
           <Route path="/signup">
             {/* SignupFormPage component */}
@@ -63,30 +63,22 @@ function App() {
 
           {/* //? spot create welcome */}
           <Route path="/host/homes">
-            <HostSpot/>
+            <HostSpot />
           </Route>
-
-          {/* //? Test component */}
-          <Route path="/test">
-            {/* <SpotProvider> */}
-              <SpotForm />
-            {/* </SpotProvider> */}
-          </Route>
-
 
           {/* //? spot create */}
           <Route path="/host/create-spot">
-            <CreateSpot/>
+            <CreateSpot />
           </Route>
 
-          
+
           {/* //? resource not found */}
           <Route>
-            <ResourceNotFound/>
+            <ResourceNotFound />
           </Route>
         </Switch>
       </section>
-    ) 
+    )
   );
 }
 
