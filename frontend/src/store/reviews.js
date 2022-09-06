@@ -169,7 +169,7 @@ export const thunkEditReview = (reviewToEdit, reviewId) => async dispatch => {
 }
 
 /* --------- SELECTOR FUNCTIONS -------- */
-export const getAllReviews = state => Object.values(state.reviews)[0];
+export const getAllReviews = state => state.reviews;
 
 export const getReviewById = reviewId => state => state.reviews.Reviews[reviewId];
 

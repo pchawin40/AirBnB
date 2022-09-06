@@ -21,7 +21,7 @@ import { ReviewContext } from '../../../../context/ReviewContext';
 import './ReviewModal.css';
 
 //? ReviewModal component
-const ReviewModal = ({ reviewId, reviewAction }) => {
+const ReviewModal = ({ reviewId, reviewAction, allReviewsByCurrentSpot }) => {
   // invoke dispatch
   const dispatch = useDispatch();
 
@@ -39,7 +39,9 @@ const ReviewModal = ({ reviewId, reviewAction }) => {
   const { rating, setRating } = useContext(ReviewContext);
 
   // get existing review (if any)
-  const currentReview = useSelector(state => state.reviews.Reviews ? state.reviews.Reviews[0] : state.reviews);
+  // const currentReview = useSelector(state => state.reviews.Reviews ? state.reviews.Reviews[0] : state.reviews);
+
+  const currentReview = allReviewsByCurrentSpot.find(review => review.id === Number(reviewId));
 
   useEffect(() => {
     setOnLoad(true);

@@ -32,7 +32,6 @@ const SpotCard = () => {
   useEffect(() => {
     setSpots(spotState);
     if (spots) {
-      // console.log("spots", spots);
       dispatch(reviewActions.thunkGetReviews(spots));
     }
   }, [spotState]);

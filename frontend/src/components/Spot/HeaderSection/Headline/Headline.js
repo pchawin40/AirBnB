@@ -32,6 +32,9 @@ const Headline = () => {
   // invoke history
   const history = useHistory();
 
+  // get current session user
+  const currentUser = useSelector(sessionActions.getSessionUser);
+
   // get spot id
   const { spotId } = useParams();
 
@@ -41,23 +44,27 @@ const Headline = () => {
 
   // get reviews data
   const reviewState = useSelector(reviewActions.getAllReviews);
-  const reviews = reviewState !== undefined ? reviewState.filter(review => review.spotId === Number(spotId)) : null;
+  const reviewsToSum = [];
+  if (reviewState.Reviews) {
+    reviewsToSum.push(...Object.values(reviewState.Reviews)[0]);
+  }
 
-  // get current session user
-  const currentUser = useSelector(sessionActions.getSessionUser);
-
-  // get average of all reviews from review
-  // total / #
-
+  // reviews initial data for summing and averaging
+  let sumReviews = 0;
   let avgReview = 0;
 
-  if (reviews) {
-    let sumReviews = 0;
-
-    reviews.forEach(review => sumReviews += review.stars);
-
-    avgReview = parseFloat(sumReviews / reviews.length).toFixed(2);
+  // sum all relevant reviews
+  if (reviewsToSum) {
+    reviewsToSum.map(review => {
+      if (review.spotId === Number(spotId)) sumReviews += review.stars;
+    })
   }
+
+  // all reviews (for length)
+  const allReviewsByCurrentSpot = reviewsToSum.filter(review => review.spotId === Number(spotId));
+
+  // get avg of current reviews
+  avgReview = parseFloat(sumReviews / allReviewsByCurrentSpot.length).toFixed(2);
 
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(Number(spotId)));
@@ -134,7 +141,7 @@ const Headline = () => {
         <span>•</span>
 
         {/* # of reviews */}
-        <span className="review-length-text">{reviews ? reviews.length : 0} reviews</span>
+        <span className="review-length-text">{allReviewsByCurrentSpot.length ? allReviewsByCurrentSpot.length : 0} reviews</span>
 
         {/* host type */}
         <span><i className="fa-solid fa-medal"></i> Superhost </span>

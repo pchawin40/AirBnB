@@ -22,7 +22,7 @@ import ReviewTracker from './ReviewTracker';
 import ReviewModal from './ReviewModal';
 
 //? ReviewInfo component
-const ReviewInfo = () => {
+const ReviewInfo = ({ spot }) => {
   // state for review modal
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewId, setReviewId] = useState(null);
@@ -34,29 +34,38 @@ const ReviewInfo = () => {
   // get spot id
   const { spotId } = useParams();
 
-  // get spots data
-  const reviewState = useSelector(reviewActions.getAllReviews);
-  const reviews = reviewState !== undefined ? reviewState.filter(review => review.spotId === Number(spotId)) : null;
-
   // get current logged in user
   const user = useSelector(sessionActions.getSessionUser);
 
-  //! To fix page reload when deleting by using state
-
-  let avgReview = 0;
-
-  if (reviews) {
-    let sumReviews = 0;
-
-    reviews.forEach(review => sumReviews += review.stars);
-
-    avgReview = parseFloat(sumReviews / reviews.length).toFixed(2);
+  // get reviews data
+  const reviewState = useSelector(reviewActions.getAllReviews);
+  const reviewsToSum = [];
+  if (reviewState.Reviews) {
+    reviewsToSum.push(...Object.values(reviewState.Reviews)[0]);
   }
 
+  // reviews initial data for summing and averaging
+  let sumReviews = 0;
+  let avgReview = 0;
+
+  // sum all relevant reviews
+  if (reviewsToSum) {
+    reviewsToSum.map(review => {
+      if (review.spotId === Number(spotId)) sumReviews += review.stars;
+    })
+  }
+
+  // all reviews (for length)
+  const allReviewsByCurrentSpot = reviewsToSum.filter(review => review.spotId === Number(spotId));
+
+  // get avg of current reviews
+  avgReview = parseFloat(sumReviews / allReviewsByCurrentSpot.length).toFixed(2);
+
   useEffect(() => {
-    dispatch(spotActions.getSpotBySpotId(Number(spotId)));
-    dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
-  }, [dispatch, spotId]);
+    if (!(isNaN(avgReview))) {
+      dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
+    }
+  }, [!(isNaN(avgReview))]);
 
   //? handleReviewRemove: remove review from database
   const handleReviewRemove = review => {
@@ -103,16 +112,15 @@ const ReviewInfo = () => {
         <span>·</span>
 
         {/* num of reviews */}
-        <span id="review-info-num-reviews">{reviews ? reviews.length : 0} reviews</span>
+        <span id="review-info-num-reviews">{allReviewsByCurrentSpot.length} reviews</span>
       </header>
 
       {/* //? review tracker */}
       <section
         className="review-info-tracker-container"
-        id={`review-tracker-permitted-container-${
-          reviews &&
-          !(reviews.find(review => review.userId === user.id))
-        }`}
+        id={`review-tracker-permitted-container-${allReviewsByCurrentSpot &&
+          !(allReviewsByCurrentSpot.find(review => review.userId === user.id))
+          }`}
       >
         <ReviewTracker />
       </section>
@@ -120,7 +128,7 @@ const ReviewInfo = () => {
       {/* //? top reviews */}
       <section className="review-info-feature-container">
         {
-          Array.isArray(reviews) ? reviews.map(review =>
+          Array.isArray(allReviewsByCurrentSpot) ? allReviewsByCurrentSpot.map(review =>
             <li key={review.id}>
               <div className="image-fig-caption-container">
                 <img className="review-profile-image" src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`} alt={review.id} />
@@ -144,11 +152,10 @@ const ReviewInfo = () => {
 
       {/* //? Button to add more reviews */}
       {/* if user already has existing review, don't show this */}
-
+      {/* // filter through all reviews to see if user exist */}
       {
-        // filter through all reviews to see if user exist
-        reviews &&
-        !(reviews.find(review => review.userId === user.id)) &&
+        allReviewsByCurrentSpot &&
+        !(allReviewsByCurrentSpot.find(review => review.userId === user.id)) &&
         <section className="review-info-review-button-container">
           <button
             className="review-info-review-button"
@@ -158,17 +165,18 @@ const ReviewInfo = () => {
             }}
           >
             <span><i className="fa-solid fa-plus"></i></span>
-            Write a review
+              Write a review
           </button>
         </section>
       }
+
+      {/* // Show Review Modal */}
       {
-        // Show Review Modal
         showReviewModal
         &&
         <Modal onClose={_ => setShowReviewModal(false)}>
           <ReviewProvider>
-            <ReviewModal reviewId={reviewId} reviewAction={reviewAction} />
+              <ReviewModal reviewId={reviewId} reviewAction={reviewAction} allReviewsByCurrentSpot={allReviewsByCurrentSpot} />
           </ReviewProvider>
         </Modal>
       }
