@@ -193,7 +193,7 @@ const SignupFormPage = () => {
       {/* //? Sign Up Form */}
       <section className="sign-up-form-container">
         <section className="sign-up-form-left">
-          <form className="sign-up-form" onSubmit={handleSubmit}>
+          <form className="sign-up-form" onSubmit={handleSubmit} ref={ref}>
 
             <h2>
               Welcome to Airbnb
@@ -257,10 +257,10 @@ const SignupFormPage = () => {
 
             {/* //? Single File Upload */}
             {/* //* putting ref clears file input upon invalid submission */}
-            <div className="form-image-upload-container">
-              <span>Your profile picture:</span>
-              <input id="form-image-upload" type="file" onChange={updateFile} ref={ref} />
-            </div>
+            {/* <div className="form-image-upload-container"> */}
+              {/* <span>Your profile picture:</span> */}
+              {/* <input id="form-image-upload" type="file" onChange={updateFile} /> */}
+            {/* </div> */}
 
             {/* //? Multiple File Upload */}
             {/* <label>
@@ -272,7 +272,7 @@ const SignupFormPage = () => {
           </label> */}
 
             {/* //? Sign Up Button*/}
-            <button type="submit">
+            <button className="sign-up-submit-button" type="submit">
               Sign Up
             </button>
           </form>

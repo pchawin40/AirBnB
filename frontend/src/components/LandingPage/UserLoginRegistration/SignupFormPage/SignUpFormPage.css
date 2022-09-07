@@ -197,6 +197,12 @@
 
 .sign-up-form > h2{
   font-size: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: red; */
+  width: 40rem;
+
 }
 
 .sign-up-form input:not(#form-image-upload) {
@@ -244,6 +250,10 @@
   cursor: pointer;
   font-weight: bold;
   transform: scale(1.02);
+}
+
+.sign-up-submit-button{
+  margin-top: 3vh;
 }
 
 
