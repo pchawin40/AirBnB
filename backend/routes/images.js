@@ -23,7 +23,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
   // find image to authorize
   const imageAuthorize = await Image.findByPk(imageId);
 
-  if (imageAuthorize && imageAuthorize.imageableId !== req.user.id) {
+  if (!imageAuthorize) {
     const err = Error("Forbidden");
     err.status = 403;
     return next(err);
