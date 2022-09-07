@@ -199,7 +199,7 @@ const SignupFormPage = () => {
               Welcome to Airbnb
             </h2>
 
-            <ul>
+            <ul className="sign-up-error-list">
               {
                 validationErrors.map(error => <li key={error}>{error}</li>)
               }

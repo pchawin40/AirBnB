@@ -205,6 +205,12 @@
 
 }
 
+.sign-up-error-list * {
+  color: red;
+  font-size: larger;
+  font-weight: bold;
+}
+
 .sign-up-form input:not(#form-image-upload) {
   width: 80%;
   height: 3rem;
