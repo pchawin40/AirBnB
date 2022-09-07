@@ -2,11 +2,61 @@
 *By Chawin Pathompornvivat - [Visit AirBnB Clone](https://airbnb-project-chawin.herokuapp.com/)*
 
 **Table of Contents**
+* [Getting Started](#getting-started)
 * [AirBnB at a Glance](#airbnb-at-a-glance)
 * [Application Architecture & Technologies Used](#application-architecture) 
 * [Frontend Overview](#frontend-overview)
 * [Backend Overview](#backend-overview)
 * [Conclusion & Next Steps](#conclusion-and-next-steps)
+
+## Getting Started
+You'll need both the backend and the frontend for the AirBnB clone application. Take a moment to clone it from https://github.com/pchawin40/AirBnB. 
+
+In both frontend and backend repository, run `npm install` for backend and frontend as it runs on React version 17. Next, run `npm install react-chrome-dino` to add a Resource Not Found component npm package (https://www.npmjs.com/package/react-chrome-dino). After installing, start both the backend server and frontend server by running 'npm start'.
+
+Once you have run npm installation for both the backend and the frontend, run npm start in both repository to start your fullstack app.
+
+### Configuration
+In the `backend` folder, create a `'.env` file that will be used to define your environment variables.
+
+Populate the `.env` file based on the example below:
+
+```plaintext
+PORT=8000
+DB_FILE=db/dev.db
+JWT_SECRET=«generate_strong_secret_here»
+JWT_EXPIRES_IN=604800
+AWS_ACCESS_KEY_ID=«input_aws_access_key_id_here»
+AWS_SECRET_ACCESS_KEY=«input_aws_secret_access_key_here»
+AWS_BUCKET_NAME=«input_aws_bucket_name_here»
+AWS_REGION=«input_aws_region_here»
+MAPS_API_KEY=«input_maps_api_key_here»
+```
+
+Assign `PORT` to `8000`, and a strong JWT secret.
+
+> Recommendation to generate a strong secret: create a random string using
+> `openssl` (a library that should already be installed in your Ubuntu/MacOS
+> shell). Run `openssl rand -base64 10` to generate a random JWT secret.
+
+### Migrating and Seeding Database
+Additionally, to set up backend database server. In the backend repository, run the following commands:
+
+`dotenv npx sequelize db:migrate`: This command will migrate the data from the migrations files
+`dotenv npx sequelize db:seed:all`: This command will seed the data from the seeders files
+
+### Explore the reference application
+* `App`: Does the browser routing
+* `LandingPage`: The browser that users first see when they start up the webpage.
+* `HostSpot`: Create AirBnB spot rendered on `LandingPage`
+* `Spot`: Makes a fetch to the backend on mount and update to load the details of the selected Spot.
+* `ResourceNotFound`: An easter egg for when the resource that user attempt to load but is not found
+
+### Proxy
+In this project, two servers will be run on the following addresses:
+
+* `http://localhost:8000` for your frontend
+* `http://localhost:8000` for your backend
 
 ## AirBnB at a Glance
 AirBnB is a fullstack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets the user 

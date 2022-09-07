@@ -258,8 +258,8 @@ const SignupFormPage = () => {
             {/* //? Single File Upload */}
             {/* //* putting ref clears file input upon invalid submission */}
             {/* <div className="form-image-upload-container"> */}
-              {/* <span>Your profile picture:</span> */}
-              {/* <input id="form-image-upload" type="file" onChange={updateFile} /> */}
+            {/* <span>Your profile picture:</span> */}
+            {/* <input id="form-image-upload" type="file" onChange={updateFile} /> */}
             {/* </div> */}
 
             {/* //? Multiple File Upload */}
