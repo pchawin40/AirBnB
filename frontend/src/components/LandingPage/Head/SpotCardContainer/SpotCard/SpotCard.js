@@ -67,7 +67,7 @@ const SpotCard = () => {
   const handleCardClick = spotId => {
 
     // change url to spot id clicked on
-    return history.push(`/spots/${spotId}`);
+    return history.push(`/rooms/${spotId}`);
   };
 
   // for each spot, put into card

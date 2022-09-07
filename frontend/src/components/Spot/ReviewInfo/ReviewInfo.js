@@ -70,8 +70,8 @@ const ReviewInfo = ({ spot }) => {
   //? handleReviewRemove: remove review from database
   const handleReviewRemove = review => {
 
-    // const choice = window.confirm("Are you sure you want to delete this review?");
-    // if (!choice) return;
+    const choice = window.confirm("Are you sure you want to delete this review?");
+    if (!choice) return;
 
     dispatch(reviewActions.thunkRemoveReview(Number(review.id)));
 

@@ -57,7 +57,7 @@ function App() {
           </Route>
 
           {/* //? spot detail */}
-          <Route exact path="/spots/:spotId">
+          <Route exact path="/rooms/:spotId">
             <Spot isLoaded={isLoaded} />
           </Route>
 
