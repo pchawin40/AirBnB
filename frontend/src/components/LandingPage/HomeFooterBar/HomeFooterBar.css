@@ -130,6 +130,15 @@
 	cursor: pointer;
 }
 
+#SPAN_2{
+	text-decoration: none;
+	cursor: default;
+}
+
 #DIV_2_home > div {
 	padding: 0 1vw;
+}
+
+#inner_div_1_globe_home:hover{
+	cursor: default;
 }

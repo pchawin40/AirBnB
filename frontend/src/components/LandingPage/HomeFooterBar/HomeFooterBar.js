@@ -3,6 +3,12 @@
 // import react
 import { useState } from 'react';
 
+// import react-router-dom
+import { NavLink } from 'react-router-dom';
+
+// import react-redux
+import { useSelector } from 'react-redux';
+
 // import css
 import './HomeFooterBar.css';
 
@@ -13,24 +19,30 @@ import { Modal } from '../../../context/Modal';
 import MapModal from './MapModal';
 
 //? HomeFooterBar component
-const HomeFooterBar = () => {
+const HomeFooterBar = ({ mapState = true }) => {
   // state for MapModal
   const [showMapModal, setShowMapModal] = useState(false);
+
+  const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <div className="outer-footer-container_home" style={{ zIndex: 100 }}>
       <div className="footer-content-container_home">
         {/* //? upper div container (map) */}
-        <div id="DIV_MAP_home">
-          {
-            !showMapModal
-            &&
-            <button id="inner_div_map_button_home" onClick={_ => setShowMapModal(true)}>
-              {<span>Show map</span>}
-              <i className="fa-solid fa-map"></i>
-            </button>
-          }
-        </div>
+        {
+          mapState &&
+          <div id="DIV_MAP_home">
+            {
+              !showMapModal
+              &&
+              <button id="inner_div_map_button_home" onClick={_ => setShowMapModal(true)}>
+                {<span>Show map</span>}
+                <i className="fa-solid fa-map"></i>
+              </button>
+            }
+          </div>
+        }
+
         {
           // Show Review Modal
           showMapModal
@@ -48,11 +60,28 @@ const HomeFooterBar = () => {
             <div id="left_inner_div_1_home">
               <span className="inner_div_1_content_home" id="SPAN_2">© 2022 Airbnb, Inc.</span>
               <span className="inner_div_1_content_home" id="SPAN_3">·</span>
-              <span className="inner_div_1_content_home" id="A_4">Privacy</span>
+              <span className="inner_div_1_content_home" id="A_4"></span>
+
+              {
+                sessionUser ?
+                  <NavLink
+                    to="/host/homes"
+                    className="inner_div_1_content_home"
+                  >
+                    Host an Experience
+                  </NavLink>
+                  :
+                  <NavLink
+                    to="/signup"
+                    className="inner_div_1_content_home"
+                  >
+                    Become a Host
+                  </NavLink>
+              }
               <span className="inner_div_1_content_home" id="SPAN_5">·</span>
-              <span className="inner_div_1_content_home" id="A_6">Terms</span>
-              <span className="inner_div_1_content_home" id="SPAN_7">·</span>
-              <span className="inner_div_1_content_home" id="A_8">Sitemap</span>
+              {/* <span className="inner_div_1_content_home" id="A_6">Log Out</span> */}
+              {/* <span className="inner_div_1_content_home" id="SPAN_7">·</span> */}
+              {/* <span className="inner_div_1_content_home" id="A_8">Sitemap</span> */}
             </div>
           </div>
 
@@ -63,28 +92,23 @@ const HomeFooterBar = () => {
                 {/* globe icon */}
                 <i className="fa-solid fa-globe" id="inner_div_1_globe_home"></i>
               </span>
-              <span className="inner_div_1_content_home">
+              <span className="inner_div_1_content_home" id="SPAN_2">
                 {/* Language */}
                 English (US)
               </span>
             </div>
 
-            <div id="inner_div_2_home">
-              <span className="inner_div_2_content_a_home">
-                {/* currency */}
-                $
-              </span>
-              <span className="inner_div_2_content_b_home">
-                {/* dollar sign */}
-                USD
-              </span>
-            </div>
-
             {/* //? outer lower div 3 */}
             <div id="inner_div_3_home">
-              {/* Support & resources */}
-              <span className="inner_div_3_content_home">Support & resources</span>
-              <i className="fa-solid fa-angle-up up_arrow_home"></i>
+              <i class="fa-brands fa-github fa-xl"></i>
+              <NavLink
+                to="/"
+                className="inner_div_3_content_home"
+                onClick={_ => {
+                  return window.open('https://github.com/pchawin40/AirBnB', '_blank');
+                }}>
+                Check out AirBnB clone Github and Readme
+              </NavLink>
             </div>
           </div>
         </div>

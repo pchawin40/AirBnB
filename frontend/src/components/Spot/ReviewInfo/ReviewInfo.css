@@ -4,7 +4,7 @@
 .review-info{
   display: grid;
   padding: 5rem 5rem;
-  margin-bottom: 5rem;
+  margin-bottom: 20rem;
   align-items: center;
   align-self: center;
   width: fit-content;
@@ -22,7 +22,7 @@
 ******************************************/
 .review-info-header-container{
   grid-area: header;
-
+  
   display: flex;
   align-items: center;
   
@@ -43,12 +43,12 @@
 .review-info-tracker-container{
   min-height: fit-content;
   grid-area: tracker;
-
+  
   padding-left: .5rem;
   padding-top: 2rem;
-
+  
   width: 20vw;
-
+  
   margin-top: 2rem;
   min-height: fit-content;
 }
@@ -62,12 +62,12 @@
 ******************************************/
 .review-info-feature-container{
   grid-area: feature;
-
+  
   display: grid;
   width: fit-content;
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: auto-fill;
-
+  
   justify-self: start;
 }
 
@@ -194,4 +194,8 @@
   font-weight: bold;
 
   box-shadow: 0 8px 8px -4px black;
+}
+
+.empty-div{
+  margin-bottom: 5rem;
 }

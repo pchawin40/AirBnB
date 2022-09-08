@@ -194,6 +194,8 @@ const ReviewInfo = ({ spot }) => {
           </ReviewProvider>
         </Modal>
       }
+
+      <div className="empty-div"></div>
     </section>)
   );
 }

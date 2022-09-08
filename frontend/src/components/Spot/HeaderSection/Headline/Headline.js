@@ -144,7 +144,7 @@ const Headline = () => {
         <span className="review-length-text">{allReviewsByCurrentSpot.length ? allReviewsByCurrentSpot.length : 0} reviews</span>
 
         {/* host type */}
-        <span><i className="fa-solid fa-medal"></i> Superhost </span>
+        <span><i className="fa-solid fa-medal"></i> {avgReview && avgReview >= 4 ? "Superhost" : "Host"} </span>
 
         <span>•</span>
 

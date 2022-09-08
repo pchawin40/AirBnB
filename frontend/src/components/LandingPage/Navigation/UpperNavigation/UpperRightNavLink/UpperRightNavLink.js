@@ -9,7 +9,7 @@ const UpperRightNavLink = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
         {userHostLinks}
 
         {/* // TODO: Modal for Region Setting */}
-        <i className="fa-solid fa-globe" id="nav-link-fa-globe"></i>
+        {/* <i className="fa-solid fa-globe" id="nav-link-fa-globe"></i> */}
 
         {/* //TODO: sessionLinks */}
         {isLoaded && user && sessionLinks}

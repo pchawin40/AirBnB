@@ -95,9 +95,9 @@ const ProfileButton = () => {
             </div>
             <div className="middle-container">
               {/* // TODO: Manage Listings */}
-              <NavLink to="/" className="todo-link">
+              {/* <NavLink to="/" className="todo-link">
                 Manage Listings
-              </NavLink>
+              </NavLink> */}
 
               {/* //? Host an Experience */}
               <NavLink className="active-link" to="/host/homes">
@@ -110,9 +110,9 @@ const ProfileButton = () => {
               </NavLink> */}
 
               {/* // TODO: Account: User Account */}
-              <NavLink to="/" className="todo-link">
+              {/* <NavLink to="/" className="todo-link">
                 Account
-              </NavLink>
+              </NavLink> */}
             </div>
             <div className="lower-container">
               {/* // TODO: Help: Lead to README in Github */}

@@ -116,7 +116,6 @@ const SpotCard = () => {
               <div className="spot-price card-info">
                 <span>${spot.price}</span> night
               </div>
-
             </div>
           )
         }

@@ -21,6 +21,7 @@ import SpotFooter from "./SpotFooter";
 
 // import css
 import './Spot.css';
+import HomeFooterBar from '../LandingPage/HomeFooterBar';
 
 //? Spot component
 const Spot = ({ isLoaded }) => {
@@ -67,7 +68,8 @@ const Spot = ({ isLoaded }) => {
 
         {/* Lower Footer Bar */}
         {/* //? Lower Footer */}
-        <SpotFooter className="spot-footer-container" />
+        <HomeFooterBar mapShow={false} />
+        {/* <SpotFooter className="spot-footer-container" /> */}
       </>
     )
   );

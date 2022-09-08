@@ -11,7 +11,7 @@ const SpotCardContainer = () => {
   return (
     <div className="spot-card-container">
       {/* //? Spot Component */}
-      <SpotCard/>
+      <SpotCard />
     </div>
   );
 };
