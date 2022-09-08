@@ -17,7 +17,7 @@ In both frontend and backend repository, run `npm install` for backend and front
 Once you have run npm installation for both the backend and the frontend, run npm start in both repository to start your fullstack app.
 
 ### Configuration
-In the `backend` folder, create a `'.env` file that will be used to define your environment variables.
+In the `backend` folder, create a `.env` file that will be used to define your environment variables.
 
 Populate the `.env` file based on the example below:
 
