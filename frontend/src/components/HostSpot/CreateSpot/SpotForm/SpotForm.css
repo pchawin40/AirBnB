@@ -93,7 +93,19 @@
 /**********************************
 *       Spot Submit Button
 ***********************************/
-#spot-form-button{
+#spot-form-button-create{
+  padding: 1rem;
+  position: absolute;
+  background-color: #E41C5E;
+  border-radius: 1rem;
+  color: white;
+  font-weight: bold;
+  border: none;
+  bottom: 2vh;
+  right: 2vw;
+}
+
+#spot-form-button-edit{
   padding: 1rem;
   position: absolute;
   background-color: #E41C5E;

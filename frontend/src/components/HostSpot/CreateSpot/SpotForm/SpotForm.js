@@ -19,7 +19,7 @@ import { useSpot } from "../../../../context/SpotContext";
 // import css
 import './SpotForm.css';
 
-const SpotForm = ({spotActivity = "create", currentSpot}) => {
+const SpotForm = ({ spotActivity = "create", currentSpot}) => {
   window.Buffer = window.Buffer || require("buffer").Buffer;
 
   /**
@@ -318,7 +318,8 @@ const SpotForm = ({spotActivity = "create", currentSpot}) => {
 
       {/* //? Sign Up Button */}
       <button
-        id="spot-form-button"
+        id={`spot-form-button-${spotActivity}`}
+        className="spot-form-button"
         type="submit"
       >
         Create Your Spot
