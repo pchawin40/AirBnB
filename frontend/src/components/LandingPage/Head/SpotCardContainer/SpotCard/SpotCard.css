@@ -42,6 +42,10 @@
   opacity: .7;
 }
 
+.spot-card-heart:hover{
+  color: white;
+}
+
 .spot-header{
   display: flex;
   justify-content: space-between;
