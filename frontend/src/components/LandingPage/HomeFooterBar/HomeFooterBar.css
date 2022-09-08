@@ -28,6 +28,18 @@
 	"lower";
 }
 
+#DIV_2_home{
+	margin-bottom: 1vh;
+}
+
+#inner_div_3_home{
+	height: 100%;
+	display: flex;
+	align-items: center;
+	place-self: center;
+	margin-right: 5vw;
+}
+
 #DIV_1_home, #DIV_2_home{
 	display: flex;
 	align-items: center;
@@ -39,6 +51,7 @@
 	display: grid;
 	grid-template-columns: repeat(3, auto);
 	grid-template-areas: "left . right";
+	align-self: center;
 
 	border-top: 1px solid #EDEDED;
 	background-color: #FFFFFF;

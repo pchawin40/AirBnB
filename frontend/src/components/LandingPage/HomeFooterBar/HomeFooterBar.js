@@ -90,24 +90,29 @@ const HomeFooterBar = ({ mapState = true }) => {
             <div id="inner_div_1_home">
               <span className="inner_div_1_content_home">
                 {/* globe icon */}
-                <i className="fa-solid fa-globe" id="inner_div_1_globe_home"></i>
-              </span>
-              <span className="inner_div_1_content_home" id="SPAN_2">
-                {/* Language */}
-                English (US)
+                <NavLink
+                  to="/"
+                  className="inner_div_1_content_home"
+                  id="SPAN_2"
+                  onClick={_ => {
+                    return window.open('https://www.linkedin.com/in/chawin-pathompornvivat', '_blank');
+                  }}>
+                  <i className="fa-brands fa-linkedin fa-xl"></i>
+                  Visit My LinkedIn
+                </NavLink>
               </span>
             </div>
 
             {/* //? outer lower div 3 */}
             <div id="inner_div_3_home">
-              <i class="fa-brands fa-github fa-xl"></i>
               <NavLink
                 to="/"
                 className="inner_div_3_content_home"
                 onClick={_ => {
                   return window.open('https://github.com/pchawin40/AirBnB', '_blank');
                 }}>
-                Check out AirBnB clone Github and Readme
+                  <i className="fa-brands fa-github fa-xl"></i>
+                Check out Readme
               </NavLink>
             </div>
           </div>
