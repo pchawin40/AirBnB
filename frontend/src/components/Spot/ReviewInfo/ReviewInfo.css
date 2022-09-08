@@ -45,11 +45,12 @@
   grid-area: tracker;
   
   padding-left: .5rem;
-  padding-top: 2rem;
+  /* padding-top: 2rem; */
   
   width: 20vw;
   
-  margin-top: 2rem;
+  margin-top: 0;
+  /* margin-top: 2rem; */
   min-height: fit-content;
 }
 

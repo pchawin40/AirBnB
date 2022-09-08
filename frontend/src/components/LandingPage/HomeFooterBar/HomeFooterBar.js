@@ -19,7 +19,7 @@ import { Modal } from '../../../context/Modal';
 import MapModal from './MapModal';
 
 //? HomeFooterBar component
-const HomeFooterBar = ({ mapState = true }) => {
+const HomeFooterBar = ({ mapState = false }) => {
   // state for MapModal
   const [showMapModal, setShowMapModal] = useState(false);
 

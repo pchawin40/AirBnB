@@ -15,7 +15,7 @@ const LandingPage = ({ isLoaded }) =>
     <Head />
 
     {/* //? HomeFooterBar */}
-    <HomeFooterBar />
+    <HomeFooterBar mapState={true} />
   </>
 )
 ; 
