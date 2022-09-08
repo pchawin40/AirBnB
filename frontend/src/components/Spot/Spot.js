@@ -68,7 +68,7 @@ const Spot = ({ isLoaded }) => {
 
         {/* Lower Footer Bar */}
         {/* //? Lower Footer */}
-        <HomeFooterBar mapShow={false} />
+        <HomeFooterBar mapShow={true} />
         {/* <SpotFooter className="spot-footer-container" /> */}
       </>
     )

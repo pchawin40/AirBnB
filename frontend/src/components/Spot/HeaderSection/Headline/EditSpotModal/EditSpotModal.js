@@ -13,6 +13,7 @@ import * as spotActions from '../../../../../store/spots';
 // import css
 import '../../../../HostSpot/CreateSpot';
 import SpotForm from '../../../../HostSpot/CreateSpot/SpotForm';
+import './EditSpotModal.css';
 
 //? CreateSpot component
 const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {

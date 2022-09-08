@@ -98,7 +98,7 @@
 
 #right-section-exit-button{
   position: absolute;
-  top: 25px;
+  top: 10vh;
   right: 50px;
   opacity: .98;
   padding: 1rem 1.5rem;

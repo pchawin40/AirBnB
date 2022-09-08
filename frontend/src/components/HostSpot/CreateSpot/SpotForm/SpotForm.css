@@ -4,7 +4,8 @@
 #spot-form{
   /* background-color: pink; */
   width: 100%;
-  height: 100%;
+  margin-top: 3vh;
+  height: 90%;
 
   display: flex;
   justify-content: space-evenly;
@@ -100,7 +101,7 @@
   color: white;
   font-weight: bold;
   border: none;
-  bottom: 2vh;
+  bottom: 12vh;
   right: 2vw;
 }
 
