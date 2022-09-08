@@ -196,6 +196,12 @@
   box-shadow: 0 8px 8px -4px black;
 }
 
+.empty-div-container{
+  height: 120%;
+  margin-bottom: 5vh;
+  background-color: pink;
+}
+
 .empty-div{
   margin-bottom: 5rem;
 }

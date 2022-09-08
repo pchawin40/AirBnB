@@ -143,9 +143,18 @@
 	cursor: pointer;
 }
 
-#SPAN_2{
+#SPAN_1:hover{
 	text-decoration: none;
 	cursor: default;
+}
+
+#SPAN_2{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#SPAN_2:hover{
+	text-decoration: underline;
 }
 
 #DIV_2_home > div {
@@ -154,4 +163,8 @@
 
 #inner_div_1_globe_home:hover{
 	cursor: default;
+}
+
+.external-link-hover:hover{
+	cursor: pointer;
 }

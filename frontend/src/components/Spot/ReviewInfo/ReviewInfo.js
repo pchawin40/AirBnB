@@ -104,100 +104,104 @@ const ReviewInfo = ({ spot }) => {
   }
 
   return (
-    Array.isArray(allReviewsByCurrentSpot) &&
-    (<section className="review-info">
-      {/* //? review header */}
-      <header className="review-info-header-container">
-        <span><i className="fa-solid fa-star"></i></span>
-        {/* avgReviews */}
-        <span>{isNaN(avgReview) ? 0 : avgReview}</span>
+    Array.isArray(allReviewsByCurrentSpot) ?
+      (<section className="review-info">
+        {/* //? review header */}
+        <header className="review-info-header-container">
+          <span><i className="fa-solid fa-star"></i></span>
+          {/* avgReviews */}
+          <span>{isNaN(avgReview) ? 0 : avgReview}</span>
 
-        <span>·</span>
+          <span>·</span>
 
-        {/* num of reviews */}
-        <span id="review-info-num-reviews">{allReviewsByCurrentSpot.length} reviews</span>
-      </header>
+          {/* num of reviews */}
+          <span id="review-info-num-reviews">{allReviewsByCurrentSpot.length} reviews</span>
+        </header>
 
-      {/* //? review tracker */}
-      <section
-        className="review-info-tracker-container"
-        id={`review-tracker-permitted-container-${Array.isArray(allReviewsByCurrentSpot) && user &&
-          !(allReviewsByCurrentSpot.some(review => review.userId === user.id))
-          }`}
-      >
-        <ReviewTracker />
-      </section>
-
-      {/* //? top reviews */}
-      <section className="review-info-feature-container">
-        {
-          allReviewsByCurrentSpot &&
-            Array.isArray(allReviewsByCurrentSpot) &&
-            allReviewsByCurrentSpot.length > 0 &&
-            Array.isArray(allReviewsByCurrentSpot) ? allReviewsByCurrentSpot.map(review =>
-              review && review.id &&
-              <li key={review.id}>
-                <div className="image-fig-caption-container">
-                  <img className="review-profile-image" src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`} alt={review.id} />
-
-                  {/* //? button to delete review, if available */}
-                  {showEditButton(review)}
-                  {showDeleteButton(review)}
-                </div>
-                <figcaption className="review-caption-container">
-                  <p className="review-content">{review.review}</p>
-                  <p className="review-author">{review.User.firstName + " " + review.User.lastName}</p>
-                </figcaption>
-              </li>
-            ) :
-            user ?
-              (
-                <div id="no-review-button-container">
-                  <li>No reviews for this spot yet. Write one now!</li>
-                  <button id="no-review-button" onClick={_ => setShowReviewModal(true)}><i className="fa-solid fa-circle-plus"></i></button>
-                </div>
-              )
-              :
-              <div id="no-review-button-container">
-                <li>No reviews for this spot yet. Log in or register to write one!</li>
-              </div>
-        }
-      </section>
-
-      {/* //? Button to add more reviews */}
-      {/* if user already has existing review, don't show this */}
-      {/* // filter through all reviews to see if user exist */}
-      {
-        allReviewsByCurrentSpot && Array.isArray(allReviewsByCurrentSpot) && user &&
-        !(allReviewsByCurrentSpot.some(review => review.userId === user.id)) &&
-        <section className="review-info-review-button-container">
-          <button
-            className="review-info-review-button"
-            onClick={_ => {
-              setReviewAction("create");
-              setShowReviewModal(true);
-            }}
-          >
-            <span><i className="fa-solid fa-plus"></i></span>
-            Write a review
-          </button>
+        {/* //? review tracker */}
+        <section
+          className="review-info-tracker-container"
+          id={`review-tracker-permitted-container-${Array.isArray(allReviewsByCurrentSpot) && user &&
+            !(allReviewsByCurrentSpot.some(review => review.userId === user.id))
+            }`}
+        >
+          <ReviewTracker />
         </section>
-      }
 
-      {/* // Show Review Modal */}
-      {
-        showReviewModal
-        &&
-        <Modal onClose={_ => setShowReviewModal(false)}>
-          <ReviewProvider>
-            <ReviewModal reviewId={reviewId} reviewAction={reviewAction} allReviewsByCurrentSpot={allReviewsByCurrentSpot} />
-          </ReviewProvider>
-        </Modal>
-      }
+        {/* //? top reviews */}
+        <section className="review-info-feature-container">
+          {
+            allReviewsByCurrentSpot &&
+              Array.isArray(allReviewsByCurrentSpot) &&
+              allReviewsByCurrentSpot.length > 0 &&
+              Array.isArray(allReviewsByCurrentSpot) ? allReviewsByCurrentSpot.map(review =>
+                review && review.id &&
+                <li key={review.id}>
+                  <div className="image-fig-caption-container">
+                    <img className="review-profile-image" src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`} alt={review.id} />
 
-      <div className="empty-div"></div>
-    </section>)
-  );
+                    {/* //? button to delete review, if available */}
+                    {showEditButton(review)}
+                    {showDeleteButton(review)}
+                  </div>
+                  <figcaption className="review-caption-container">
+                    <p className="review-content">{review.review}</p>
+                    <p className="review-author">{review.User.firstName + " " + review.User.lastName}</p>
+                  </figcaption>
+                </li>
+              ) :
+              user ?
+                (
+                  <div id="no-review-button-container">
+                    <li>No reviews for this spot yet. Write one now!</li>
+                    <button id="no-review-button" onClick={_ => setShowReviewModal(true)}><i className="fa-solid fa-circle-plus"></i></button>
+                  </div>
+                )
+                :
+                <div id="no-review-button-container">
+                  <li>No reviews for this spot yet. Log in or register to write one!</li>
+                </div>
+          }
+        </section>
+
+        {/* //? Button to add more reviews */}
+        {/* if user already has existing review, don't show this */}
+        {/* // filter through all reviews to see if user exist */}
+        {
+          allReviewsByCurrentSpot && Array.isArray(allReviewsByCurrentSpot) && user &&
+          !(allReviewsByCurrentSpot.some(review => review.userId === user.id)) &&
+          <section className="review-info-review-button-container">
+            <button
+              className="review-info-review-button"
+              onClick={_ => {
+                setReviewAction("create");
+                setShowReviewModal(true);
+              }}
+            >
+              <span><i className="fa-solid fa-plus"></i></span>
+              Write a review
+            </button>
+          </section>
+        }
+
+        {/* // Show Review Modal */}
+        {
+          showReviewModal
+          &&
+          <Modal onClose={_ => setShowReviewModal(false)}>
+            <ReviewProvider>
+              <ReviewModal reviewId={reviewId} reviewAction={reviewAction} allReviewsByCurrentSpot={allReviewsByCurrentSpot} />
+            </ReviewProvider>
+          </Modal>
+        }
+
+        <div className="empty-div"></div>
+      </section>)
+      :
+      <div className="empty-div-container">
+        <div className="empty-div"></div>
+      </div>
+  )
 }
 
 
