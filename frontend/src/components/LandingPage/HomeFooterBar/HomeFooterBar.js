@@ -111,8 +111,8 @@ const HomeFooterBar = ({ mapState = true }) => {
                 onClick={_ => {
                   return window.open('https://github.com/pchawin40/AirBnB', '_blank');
                 }}>
-                  <i className="fa-brands fa-github fa-xl"></i>
-                Check out Readme
+                <i className="fa-brands fa-github fa-xl"></i>
+                Check Out Readme
               </NavLink>
             </div>
           </div>
