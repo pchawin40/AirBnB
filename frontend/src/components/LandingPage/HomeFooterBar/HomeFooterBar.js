@@ -78,7 +78,7 @@ const HomeFooterBar = ({ mapState = false }) => {
                     Become a Host
                   </NavLink>
               }
-              <span className="inner_div_1_content_home" id="SPAN_5">·</span>
+              {/* <span className="inner_div_1_content_home" id="SPAN_5">·</span> */}
               {/* <span className="inner_div_1_content_home" id="A_6">Log Out</span> */}
               {/* <span className="inner_div_1_content_home" id="SPAN_7">·</span> */}
               {/* <span className="inner_div_1_content_home" id="A_8">Sitemap</span> */}
