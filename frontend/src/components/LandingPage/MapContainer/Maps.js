@@ -22,7 +22,7 @@ const center = {
 }
 
 //? Maps Component
-const Maps = ({ apiKey, showMapModal, setShowUpModal }) => {
+const Maps = ({ apiKey, setShowMapModal}) => {
 
   //? isLoaded: whether API is successfully loaded
   const { isLoaded } = useJsApiLoader({
@@ -43,7 +43,14 @@ const Maps = ({ apiKey, showMapModal, setShowUpModal }) => {
             />
 
             {/* // button to show list */}
-            <button id="map-button" onClick={_ => window.location.reload()}>
+            <button
+              id="map-button"
+              onClick={_ => {
+                // window.location.reload();
+                setShowMapModal(false)
+              }
+              }
+            >
               Show list
               <i className="fa-solid fa-list map-list-icon"></i>
             </button>

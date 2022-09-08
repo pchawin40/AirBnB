@@ -13,7 +13,7 @@ import { getKey, getMapKey } from '../../../store/maps';
 import Maps from "./Maps";
 
 //? MapContainer component: index for Maps
-const MapContainer = () => {
+const MapContainer = ({ setShowMapModal }) => {
   // get map key using selector
   const key = useSelector(getMapKey);
 
@@ -26,7 +26,7 @@ const MapContainer = () => {
   }, [dispatch, key]);
 
   // if there's no key, return null. else, return the Maps component using api key
-  return!key ? null : <Maps apiKey={key} />
+  return !key ? null : <Maps apiKey={key} setShowMapModal={setShowMapModal} />
 };
 
 // export MapContainer

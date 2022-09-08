@@ -2,11 +2,11 @@
 import MapContainer from "../../MapContainer";
 
 //? MapModal
-const MapModal = () => {
+const MapModal = ({ setShowMapModal }) => {
   return (
     <>
       {/* //* MapContainer */}
-      <MapContainer />
+      <MapContainer setShowMapModal={setShowMapModal}/>
     </>
   );
 };
