@@ -46,8 +46,8 @@ const Maps = ({ apiKey, setShowMapModal}) => {
             <button
               id="map-button"
               onClick={_ => {
-                // window.location.reload();
-                setShowMapModal(false)
+                window.location.reload();
+                // setShowMapModal(false)
               }
               }
             >
