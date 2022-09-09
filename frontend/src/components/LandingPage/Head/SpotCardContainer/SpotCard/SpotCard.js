@@ -110,7 +110,7 @@ const SpotCard = () => {
 
               <div className="spot-location card-info">
                 {/* longitude and latitude */}
-                {"lat: " + spot.lat.toFixed(7) + " " + "lng: " + spot.lng.toFixed(7)}
+                {"lat: " + spot.lat ? spot.lat.toFixed(7) : spot.lat + " " + "lng: " + spot.lng ? spot.lng.toFixed(7) : spot.lng}
               </div>
 
               <div className="spot-price card-info">
