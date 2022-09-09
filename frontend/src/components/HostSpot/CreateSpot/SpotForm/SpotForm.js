@@ -136,11 +136,10 @@ const SpotForm = ({ spotActivity = "create", currentSpot}) => {
         async res => {
           // parse res to data json
           const data = await res.json();
-
-          console.log("data", data);
           
           // set error if any
           if (data.errors) setValidationErrors([Object.values(data.errors)]);
+          console.log("validationErrors HERE", validationErrors.map(error => error.map(error => console.log("error", error))));
         }
       );
   };
@@ -196,11 +195,12 @@ const SpotForm = ({ spotActivity = "create", currentSpot}) => {
     <form id="spot-form" onSubmit={handleSubmit}>
       {/* //? Validation Errors */}
       {
-        validationErrors.length > 0 &&
+        validationErrors.length > 0
+        &&
         <ul className="error-list-container">
           <h3>We found some errors while attempting to create your spot</h3>
           {
-            validationErrors.map(error => <li key={error} className="error-list">{error}</li>)
+              validationErrors.map(error => error.map(error => <li key={error} className="error-list">{error}</li>))
           }
         </ul>
       }

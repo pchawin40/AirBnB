@@ -38,9 +38,9 @@ const HomeContent = () => {
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(spotId));
 
-    return () => {
-      dispatch(spotActions.resetSpot());
-    };
+    // return () => {
+    //   dispatch(spotActions.resetSpot());
+    // };
   }, [dispatch, spotId]);
 
   return (
