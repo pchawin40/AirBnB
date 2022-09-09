@@ -141,7 +141,7 @@ const ReviewInfo = ({ spot }) => {
                     <img
                       className="review-profile-image"
                       src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`}
-                      onError={e => e.target.src = `https://xsgames.co/randomusers/assets/avatars/male/${() => Math.floor(Math.random() * 79)}.jpg`}
+                      onError={e => e.target.src = `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`}
                       alt={review.id} />
 
                     {/* //? button to delete review, if available */}
