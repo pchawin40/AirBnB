@@ -140,7 +140,7 @@ const ReviewInfo = ({ spot }) => {
                   <div className="image-fig-caption-container">
                     <img
                       className="review-profile-image"
-                      src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}`}
+                      src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set${Math.floor(Math.random() * 6)}`}
                       onError={e => e.target.src = `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`}
                       alt={review.id} />
 
