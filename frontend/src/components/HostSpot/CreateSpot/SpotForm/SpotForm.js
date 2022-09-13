@@ -131,8 +131,10 @@ const SpotForm = ({ spotActivity = "create", currentSpot}) => {
         // otherwise, edit the spot
         spotActions.thunkEditSpot(spot, Number(spotId))
     )
-      .then(_ => history.push('/'))
-      .then(_ => dispatch(spotActions.getSpots()))
+      .then(_ => {
+        history.push('/')
+        dispatch(spotActions.getSpots())
+      })
       .catch(
         async res => {
           // parse res to data json
