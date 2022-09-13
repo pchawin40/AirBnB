@@ -22,10 +22,20 @@
   border-radius: 1rem;
   overflow:hidden;
   grid-template-columns: repeat( auto-fill, 25%);
-  grid-template-rows: repeat(auto-fill, 45%);
   grid-template-areas: 
   "main main side2 side3"
   "main main side4 side5";
+}
+
+.feature-images-gallery:has(#image-less-image-container-1), 
+.feature-images-gallery:has(#image-less-image-container-2)
+.feature-images-gallery:has(#image-less-image-container-3){
+  grid-template-rows: repeat(auto-fill, 100%);
+}
+
+.feature-images-gallery:has(#image-less-image-container-4),
+.feature-images-gallery:has(.feature-image-container){
+  grid-template-rows: repeat(auto-fill, 45%);
 }
 
 .feature-images-gallery img:hover {
