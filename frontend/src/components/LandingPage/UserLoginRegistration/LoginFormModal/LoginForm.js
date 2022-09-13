@@ -1,7 +1,7 @@
 // frontend/src/components/LoginFormPage/LoginForm.js
 
 // import react
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // import react-redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 
 // import session store
 import * as sessionActions from '../../../../store/session';
-
+import * as spotActions from '../../../../store/spots';
 
 // TODO: LoginFormPage component
 //? holds all the files for login form
@@ -19,6 +19,10 @@ const LoginForm = ({ setShowModal }) => {
 
   // dispatch
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(spotActions.getSpots());
+  }, [dispatch]);
 
   // invoke history
   const history = useHistory();
@@ -57,15 +61,17 @@ const LoginForm = ({ setShowModal }) => {
 
     // dispatch login thunk action
     // handle and display errors if any
-    return dispatch(sessionActions.login(user)).catch(
-      async res => {
-        // parse error data
-        const data = await res.json();
+    return dispatch(sessionActions.login(user))
+      .then(_ => spotActions.getSpots())
+      .catch(
+        async res => {
+          // parse error data
+          const data = await res.json();
 
-        // set any error data into validation errors
-        if (data) setValidationErrors(Object.values([data.message]));
-      }
-    );
+          // set any error data into validation errors
+          if (data) setValidationErrors(Object.values([data.message]));
+        }
+      );
   }
 
   // return login form
