@@ -31,7 +31,7 @@ const SpotCard = () => {
 
   useEffect(() => {
     setSpots(spotState);
-    if (spots) {
+    if (spots && spotState) {
       dispatch(reviewActions.thunkGetReviews(spots));
     }
   }, [spotState]);
@@ -43,7 +43,7 @@ const SpotCard = () => {
       // define variable to use for summing up and averaging reviews
       let sumReviews = 0;
       const reviewsToSum = [];
-      Object.values(reviews.Reviews).map(review => reviewsToSum.push(...review[0]));
+      Object.values(reviews.Reviews).map(review => reviewsToSum.push(...review));
 
       // add all relevant stars
       reviewsToSum.map(review => {

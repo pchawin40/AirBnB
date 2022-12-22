@@ -179,6 +179,48 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   });
 });
 
+
+//? Get all reviews for all spots
+// return all reviews for all spots available
+router.get('/reviews', async (req, res, next) => {
+  // get all reviews
+  const reviews = await Review.findAll({
+    include: [
+      {
+        model: User
+      }
+    ]
+  });
+
+  // get array of images for all review
+  for (const review of reviews) {
+    // get images of current review
+    const images = await Image.findAll({ where: { imageableId: review.id } });
+
+    // put images into reviews
+    const reviewImages = [];
+
+    // for each image in images. . . .
+    images.map(image => {
+      // push all its attribute into a variable to be stored
+      const currentImage = {
+        ...image.dataValues
+      };
+
+      // push current images into review images
+      reviewImages.push(currentImage);
+    });
+
+    // add review images into current review
+    review.dataValues['Images'] = reviewImages;
+  }
+
+  // save images into review json
+  res.json({
+    Reviews: reviews
+  });
+});
+
 // TODO: Get all Reviews by a Spot's id
 // Returns all the reviews that belong to a spot specified by its id
 router.get('/:spotId/reviews', async (req, res, next) => {
@@ -486,7 +528,7 @@ router.post('/:spotId/images',
     }
 
     // TODO: Successful Response
-    
+
     let imageCreated = [];
 
     urls.map(async url => {
