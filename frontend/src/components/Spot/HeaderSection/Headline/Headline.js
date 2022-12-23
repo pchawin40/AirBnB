@@ -15,6 +15,7 @@ import * as sessionActions from '../../../../store/session';
 // import context
 import { Modal } from '../../../../context/Modal';
 import { useReview } from '../../../../context/ReviewContext';
+import { useSpot } from '../../../../context/SpotContext';
 
 // import component
 import EditSpotModal from './EditSpotModal';
@@ -27,9 +28,8 @@ const Headline = () => {
   /**
    * Controlled inputs
    */
-  // state for review modal
-  const [editSpotModal, setEditSpotModal] = useState(false);
   const { avgReview, setAvgReview } = useReview();
+  const { editSpotModal, setEditSpotModal } = useSpot();
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -110,7 +110,7 @@ const Headline = () => {
           editSpotModal
           &&
           <Modal onClose={_ => setEditSpotModal(false)}>
-            <EditSpotModal editSpotModal={editSpotModal} setEditSpotModal={setEditSpotModal} />
+            <EditSpotModal />
           </Modal>
         }
       </div>
