@@ -49,10 +49,6 @@ const Spot = ({ isLoaded }) => {
   // useEffect for dispatch (initial render)
   useEffect(() => {
     dispatch(spotActions.getSpotBySpotId(spotId));
-
-    return () => {
-      dispatch(spotActions.resetSpot());
-    };
   }, [dispatch, spotId]);
 
   // per spot

@@ -32,15 +32,14 @@ const HomeContent = () => {
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};
 
   // spot owner
-  const spotOwner = useSelector(spotActions.getSpotOwner());
+  const spotOwner = useSelector(spotActions.getSpotOwner);
 
-  // useEffect for dispatch (initial render)
+  /**
+   * UseEffect
+   */
+  // per general
   useEffect(() => {
-    dispatch(spotActions.getSpotBySpotId(spotId));
-
-    // return () => {
-    //   dispatch(spotActions.resetSpot());
-    // };
+    // nothing for now
   }, [dispatch, spotId]);
 
   return (
@@ -56,21 +55,24 @@ const HomeContent = () => {
           <p className="guests-text">2 guests • 1 bed • 0 baths</p>
 
           {/* include user image */}
-          <figure className="user-profile-pic-container">
-            <img
-              className="user-profile-pic"
-              onError={e =>
-                e.target.src = 
+          {
+            spot &&
+            <figure className="user-profile-pic-container">
+              <img
+                className="user-profile-pic"
+                onError={e =>
+                  e.target.src =
                   `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set${Math.floor(Math.random() * 6)}`
                 }
-              src={
-                Math.random() * 3 > 1 ? 
-                  `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`
-                  :
-                  `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(Math.random() * 79)}.jpg`
-              }
-              alt="profile-pic" />
-          </figure>
+                src={
+                  Math.random() * 3 > 1 ?
+                    `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`
+                    :
+                    `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(Math.random() * 79)}.jpg`
+                }
+                alt="profile-pic" />
+            </figure>
+          }
         </section>
 
         {/* //? Home Content About Info */}
