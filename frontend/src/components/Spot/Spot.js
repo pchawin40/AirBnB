@@ -23,6 +23,9 @@ import SpotFooter from "./SpotFooter";
 import './Spot.css';
 import HomeFooterBar from '../LandingPage/HomeFooterBar';
 
+// import context
+import { useSpot } from '../../context/SpotContext';
+
 //? Spot component
 const Spot = ({ isLoaded }) => {
 
@@ -33,10 +36,14 @@ const Spot = ({ isLoaded }) => {
   const { spotId } = useParams();
 
   /** 
-   * Selector functions
+   * Controlled inputs
    */
-  // get current spot first 
-  const spots = useSelector(spotActions.getAllSpots);
+  // get all available spots 
+  const { spots, setSpots } = useSpot();
+
+  /**
+   * UseEffect
+  */
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};
 
   // useEffect for dispatch (initial render)
@@ -47,6 +54,11 @@ const Spot = ({ isLoaded }) => {
       dispatch(spotActions.resetSpot());
     };
   }, [dispatch, spotId]);
+
+  // per spot
+  useEffect(() => {
+    // nothing for now
+  }, [spots, spot]);
 
   return (
     isLoaded && (

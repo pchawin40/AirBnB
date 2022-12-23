@@ -189,3 +189,15 @@
   align-items: center;
   border: 5px dashed black;
 }
+
+/* Loading Gallery */
+.no-loaded-figure{
+  height: 100%;
+  width: 80%;
+}
+
+.no-loaded-figure > img{
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}

@@ -39,7 +39,6 @@ const SpotCard = () => {
   // per general
   useEffect(() => {
     // nothing for now
-    console.log('spots', spots);
   }, [spots]);
 
   // invoke history
