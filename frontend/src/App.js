@@ -4,7 +4,7 @@
 import { Switch, Route } from 'react-router-dom';
 
 // import react-redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import react
 import { useEffect, useState } from 'react';
@@ -12,9 +12,11 @@ import { useEffect, useState } from 'react';
 // import store 
 import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
+import * as reviewActions from './store/reviews';
 
 // import context
-import SpotProvider from './context/SpotContext';
+import SpotProvider, { useSpot } from './context/SpotContext';
+import { useReview } from './context/ReviewContext';
 
 // import components
 import SignupFormPage from './components/LandingPage/UserLoginRegistration/SignupFormPage';
@@ -30,15 +32,54 @@ function App() {
   // invoke dispatch
   const dispatch = useDispatch();
 
+  /**
+   * Controlled inputs
+   */
   // state: isLoaded 
   const [isLoaded, setIsLoaded] = useState(false);
+  const { avgReview, setAvgReview } = useReview();
+  const { spots, setSpots } = useSpot();
 
+  /**
+   * Selector Functions
+   */
+  const allReviews = useSelector(reviewActions.getAllReviews);
+  const averageReviews = useSelector(allReviews ? reviewActions.getAverageReviews : 0);
+
+  /**
+   * UseEffect
+   */
   // on load...
   useEffect(() => {
     // ... restore session user and set is loaded to true
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
-    dispatch(spotActions.getSpots());
+    dispatch(spotActions.thunkGetSpots());
+    dispatch(reviewActions.thunkGetReviews());
   }, [isLoaded, dispatch]);
+
+  /**
+    * Selector functions
+   */
+  // get spot
+  const spotState = useSelector(spotActions.getAllSpots);
+
+  /**
+   * UseEffect
+   */
+  // per all reviews
+  useEffect(() => {
+    // nothing for now
+    if (allReviews && averageReviews > 0) {
+      setAvgReview(averageReviews);
+    }
+  }, [allReviews, avgReview]);
+
+  // per spot state
+  useEffect(() => {
+    if (spotState) {
+      setSpots(spotState);
+    }
+  }, [spotState]);
 
   return (
     isLoaded && (

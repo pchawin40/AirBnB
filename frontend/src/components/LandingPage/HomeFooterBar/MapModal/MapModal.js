@@ -10,16 +10,10 @@ import MapContainer from "../../MapContainer";
 //? MapModal
 const MapModal = ({ setShowMapModal }) => {
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(spotActions.getSpots());
-  }, [dispatch]);
-
   return (
     <>
       {/* //* MapContainer */}
-      <MapContainer setShowMapModal={setShowMapModal}/>
+      <MapContainer setShowMapModal={setShowMapModal} />
     </>
   );
 };

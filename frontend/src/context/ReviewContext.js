@@ -8,6 +8,8 @@ export default function ReviewProvider({ children }) {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewAction, setReviewAction] = useState("");
+  const [avgReview, setAvgReview] = useState(0);
+  const [reviewLoaded, setReviewLoaded] = useState(false);
 
   return (
     <>
@@ -16,7 +18,9 @@ export default function ReviewProvider({ children }) {
           review, setReview,
           rating, setRating,
           hover, setHover,
-          reviewAction, setReviewAction
+          reviewAction, setReviewAction,
+          avgReview, setAvgReview,
+          reviewLoaded, setReviewLoaded
         }}
       >
         {children}

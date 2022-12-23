@@ -32,6 +32,9 @@ const Spot = ({ isLoaded }) => {
   // get spotId
   const { spotId } = useParams();
 
+  /** 
+   * Selector functions
+   */
   // get current spot first 
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};

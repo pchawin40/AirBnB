@@ -165,6 +165,18 @@ export const getAllReviews = state => state.reviews;
 
 export const getReviewById = reviewId => state => state.reviews.Reviews[reviewId];
 
+// get average review
+export const getAverageReviews
+  = state => state.reviews
+    && state.reviews.Reviews
+    && Object.values(state.reviews.Reviews).length > 0
+    ?
+    Object.values(state.reviews.Reviews)[0]
+      .map(review => review.stars)
+      .reduce(((initialAvg, currAvg) => initialAvg + currAvg), 0)
+    / Object.values(state.reviews.Reviews)[0].length
+    : 0;
+
 /* --------- REDUCERS -------- */
 const initialReviews = [];
 

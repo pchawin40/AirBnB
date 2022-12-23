@@ -14,6 +14,7 @@ import * as sessionActions from '../../../../store/session';
 
 // import context
 import { Modal } from '../../../../context/Modal';
+import { useReview } from '../../../../context/ReviewContext';
 
 // import component
 import EditSpotModal from './EditSpotModal';
@@ -23,8 +24,12 @@ import './Headline.css';
 
 //? Headline component
 const Headline = () => {
+  /**
+   * Controlled inputs
+   */
   // state for review modal
   const [editSpotModal, setEditSpotModal] = useState(false);
+  const { avgReview, setAvgReview } = useReview();
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -42,31 +47,8 @@ const Headline = () => {
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : null;
 
-  // get reviews data
-  const reviewState = useSelector(reviewActions.getAllReviews);
-  const reviewsToSum = [];
-  if (reviewState.Reviews) {
-    reviewsToSum.push(...Object.values(reviewState.Reviews)[0]);
-  }
-
-  // reviews initial data for summing and averaging
-  let sumReviews = 0;
-  let avgReview = 0;
-
-  // sum all relevant reviews
-  if (reviewsToSum) {
-    reviewsToSum.map(review => {
-      if (review.spotId === Number(spotId)) sumReviews += review.stars;
-    })
-  }
-
-  // all reviews (for length)
-  const allReviewsByCurrentSpot = reviewsToSum.filter(review => review.spotId === Number(spotId));
-
-  // get avg of current reviews
-  avgReview = parseFloat(sumReviews / allReviewsByCurrentSpot.length).toFixed(2);
-
   useEffect(() => {
+
     dispatch(spotActions.getSpotBySpotId(Number(spotId)));
     dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
   }, [dispatch, spotId]);
@@ -136,14 +118,20 @@ const Headline = () => {
       {/* //? Div 2 Inner Div 1 */}
       <div className="div_2_inner_div_1">
         {/* review by spot id */}
-        <span><i className="fa-solid fa-star"></i>{isNaN(avgReview) ? 0 : avgReview}</span>
+        {/* //TODO: To fix */}
+        <span><i className="fa-solid fa-star"></i>
+          {
+            avgReview
+          }
+        </span>
 
         <span>•</span>
 
         {/* # of reviews */}
-        <span className="review-length-text">{allReviewsByCurrentSpot.length ? allReviewsByCurrentSpot.length : 0} reviews</span>
+        {/* <span className="review-length-text">{allReviewsByCurrentSpot.length ? allReviewsByCurrentSpot.length : 0} reviews</span> */}
 
         {/* host type */}
+        {/* // TODO: To fix avgReview */}
         <span><i className="fa-solid fa-medal"></i> {avgReview && avgReview >= 4 ? "Superhost" : "Host"} </span>
 
         <span>•</span>

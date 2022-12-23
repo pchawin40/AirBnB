@@ -26,6 +26,7 @@ import * as userActions from './store/users';
 // import context
 import { ModalProvider } from './context/Modal';
 import SpotProvider from './context/SpotContext';
+import ReviewProvider from './context/ReviewContext';
 
 const store = configureStore();
 
@@ -47,11 +48,13 @@ const Root = () => {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <SpotProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </SpotProvider>
+        <BrowserRouter>
+          <SpotProvider>
+            <ReviewProvider>
+              <App />
+            </ReviewProvider>
+          </SpotProvider>
+        </BrowserRouter>
       </ModalProvider>
     </Provider>
   );

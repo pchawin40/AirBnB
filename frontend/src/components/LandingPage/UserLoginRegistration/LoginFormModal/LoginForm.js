@@ -20,10 +20,6 @@ const LoginForm = ({ setShowModal }) => {
   // dispatch
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(spotActions.getSpots());
-  }, [dispatch]);
-
   // invoke history
   const history = useHistory();
 
@@ -62,7 +58,7 @@ const LoginForm = ({ setShowModal }) => {
     // dispatch login thunk action
     // handle and display errors if any
     return dispatch(sessionActions.login(user))
-      .then(_ => spotActions.getSpots())
+      .then(_ => spotActions.thunkGetSpots())
       .catch(
         async res => {
           // parse error data

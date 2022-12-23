@@ -79,7 +79,7 @@ export const deleteImage = (imageId, spotId) => {
 
 /* --------- THUNKS -------- */
 //? Thunk action to get all spots
-export const getSpots = () => async dispatch => {
+export const thunkGetSpots = () => async dispatch => {
   // fetch all spots using csrfFetch
   const res = await csrfFetch('/spots');
 
@@ -203,9 +203,9 @@ export const thunkEditSpot = (spotToEdit, spotId) => async dispatch => {
   // if preview image is not url, then add a different formdata object name
   (!isURL(previewImage) && previewImage) ?
     formData.append("previewImage", previewImage)
-  :
+    :
     formData.append("image", previewImage)
-  ;
+    ;
 
   // hit signup backend route w/ form data
   const res = await csrfFetch(`/spots/${spotId}`, {
@@ -276,7 +276,7 @@ export const thunkAddImage = (images, spotId) => async dispatch => {
 
     // return images
     return imageData;
-  } 
+  }
 
   return images;
 }
@@ -315,7 +315,7 @@ const initialSpots = [];
 
 const spotsReducer = (state = initialSpots, action) => {
   // newSpots
-  const newSpots = { ...state};
+  const newSpots = { ...state };
 
   switch (action.type) {
     //? case: add spot

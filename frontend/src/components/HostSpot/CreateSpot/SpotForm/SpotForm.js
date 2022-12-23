@@ -19,7 +19,7 @@ import { useSpot } from "../../../../context/SpotContext";
 // import css
 import './SpotForm.css';
 
-const SpotForm = ({ spotActivity = "create", currentSpot}) => {
+const SpotForm = ({ spotActivity = "create", currentSpot }) => {
   window.Buffer = window.Buffer || require("buffer").Buffer;
 
   /**
@@ -69,12 +69,12 @@ const SpotForm = ({ spotActivity = "create", currentSpot}) => {
   // deconstruct spotId (if any)
   let { spotId } = useParams();
 
-  if(!spotId) spotId = 0;
+  if (!spotId) spotId = 0;
 
   // load on start up
   useEffect(() => {
-    if(spotId) dispatch(spotActions.getSpotBySpotId(spotId));
-    
+    if (spotId) dispatch(spotActions.getSpotBySpotId(spotId));
+
     // dispatch maps get api key
     dispatch(mapActions.getKey());
   }, [dispatch, spotId ? spotId : ""]);
@@ -114,7 +114,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot}) => {
       price,
       previewImage: image
     }
-    
+
     // reset validation errors
     setValidationErrors([]);
 
@@ -133,13 +133,13 @@ const SpotForm = ({ spotActivity = "create", currentSpot}) => {
     )
       .then(_ => {
         history.push('/')
-        dispatch(spotActions.getSpots())
+        dispatch(spotActions.thunkGetSpots())
       })
       .catch(
         async res => {
           // parse res to data json
           const data = await res.json();
-          
+
           // set error if any
           if (data.errors) setValidationErrors([Object.values(data.errors)]);
           console.log("validationErrors HERE", validationErrors.map(error => error.map(error => console.log("error", error))));
@@ -203,7 +203,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot}) => {
         <ul className="error-list-container">
           <h3>We found some errors while attempting to create your spot</h3>
           {
-              validationErrors.map(error => error.map(error => <li key={error} className="error-list">{error}</li>))
+            validationErrors.map(error => error.map(error => <li key={error} className="error-list">{error}</li>))
           }
         </ul>
       }

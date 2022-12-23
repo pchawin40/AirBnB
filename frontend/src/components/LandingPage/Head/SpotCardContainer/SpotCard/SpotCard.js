@@ -14,55 +14,40 @@ import * as reviewActions from '../../../../../store/reviews';
 // import css
 import './SpotCard.css';
 
+// import context
+import { useReview } from "../../../../../context/ReviewContext";
+import { useSpot } from "../../../../../context/SpotContext";
+
 //? Spot component
 const SpotCard = () => {
+
+  /**
+   * Controlled inputs
+   */
   // get spots data
-  const spotState = useSelector(spotActions.getAllSpots);
-  const [spots, setSpots] = useState([]);
+  const { spots, setSpots } = useSpot();
+  const { avgReview, setAvgReview } = useReview();
 
-  // review state
-  const reviewState = useSelector(state => state.reviews);
+  /**
+   * Selector functions
+   */
+  const averageReviews = useSelector(reviewActions.getAverageReviews);
 
-  const dispatch = useDispatch();
-
+  /**
+   * UseEffect
+   */
+  // per general
   useEffect(() => {
-    dispatch(spotActions.getSpots());
-  }, [dispatch])
-
-  useEffect(() => {
-    setSpots(spotState);
-    if (spots && spotState) {
-      dispatch(reviewActions.thunkGetReviews(spots));
-    }
-  }, [spotState]);
-
-  //? get avgReview
-  const findAvgReviews = (reviews, spotId) => {
-    // if Reviews exist in given reviews
-    if (reviews.Reviews) {
-      // define variable to use for summing up and averaging reviews
-      let sumReviews = 0;
-      const reviewsToSum = [];
-      Object.values(reviews.Reviews).map(review => reviewsToSum.push(...review));
-
-      // add all relevant stars
-      reviewsToSum.map(review => {
-        if (review.spotId === spotId) {
-          sumReviews += review.stars;
-        }
-      });
-
-      // get length of all reviews by spot id
-      const allReviewsByCurrentSpot = reviewsToSum.filter(review => review.spotId === spotId);
-
-      // return average of reviews
-      return parseFloat(sumReviews / allReviewsByCurrentSpot.length).toFixed(2);
-    }
-  }
+    // nothing for now
+    console.log('spots', spots);
+  }, [spots]);
 
   // invoke history
   const history = useHistory();
 
+  /**
+   * Handler functions
+   */
   //? handleCardClick component
   const handleCardClick = spotId => {
 
@@ -76,12 +61,6 @@ const SpotCard = () => {
       {/* //? Show all spots */}
       {
         spots && spots.map(spot => {
-
-          let avgReview;
-
-          if (reviewState) {
-            avgReview = findAvgReviews(reviewState, spot.id);
-          }
 
           return (
             <div className="spot-card-content" key={spot.id} onClick={e => handleCardClick(spot.id)}>

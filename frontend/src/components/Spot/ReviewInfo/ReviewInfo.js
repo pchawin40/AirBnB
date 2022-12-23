@@ -27,6 +27,7 @@ const ReviewInfo = ({ spot }) => {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewId, setReviewId] = useState(null);
   const [reviewAction, setReviewAction] = useState("create");
+  const [reviewLoaded, setReviewLoaded] = useState(false);
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -62,10 +63,11 @@ const ReviewInfo = ({ spot }) => {
   avgReview = parseFloat(sumReviews / allReviewsByCurrentSpot.length).toFixed(2);
 
   useEffect(() => {
-    if (!(isNaN(avgReview))) {
+    if (!(isNaN(avgReview)) && allReviewsByCurrentSpot.length && !reviewLoaded) {
       dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
+      setReviewLoaded(true);
     }
-  }, [!(isNaN(avgReview))]);
+  }, [avgReview]);
 
   //? handleReviewRemove: remove review from database
   const handleReviewRemove = review => {
@@ -110,9 +112,9 @@ const ReviewInfo = ({ spot }) => {
         <header className="review-info-header-container">
           <span><i className="fa-solid fa-star"></i></span>
           {/* avgReviews */}
-          <span>{isNaN(avgReview) ? 0 : avgReview}</span>
+          {/* <span>{isNaN(avgReview) && reviewLoaded ? 0 : avgReview}</span> */}
 
-          <span>·</span>
+          {/* <span>·</span> */}
 
           {/* num of reviews */}
           <span id="review-info-num-reviews">{allReviewsByCurrentSpot.length} reviews</span>
@@ -193,9 +195,7 @@ const ReviewInfo = ({ spot }) => {
           showReviewModal
           &&
           <Modal onClose={_ => setShowReviewModal(false)}>
-            <ReviewProvider>
-              <ReviewModal reviewId={reviewId} reviewAction={reviewAction} allReviewsByCurrentSpot={allReviewsByCurrentSpot} />
-            </ReviewProvider>
+            <ReviewModal reviewId={reviewId} reviewAction={reviewAction} allReviewsByCurrentSpot={allReviewsByCurrentSpot} />
           </Modal>
         }
 
