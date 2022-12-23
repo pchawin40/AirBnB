@@ -61,7 +61,7 @@ const HomeGallery = () => {
    * UseEffect
    */
   useEffect(() => {
-    dispatch(spotActions.getSpotBySpotId(spotId));
+    // nothing for now
   }, [dispatch, spotId]);
 
   // update image if imageState changes
@@ -85,7 +85,7 @@ const HomeGallery = () => {
     ref.current.value = "";
 
     dispatch(spotActions.thunkAddImage(currentFileUpload, spotId))
-      .then(() => dispatch(spotActions.getSpotBySpotId(spotId)))
+      .then(() => dispatch(spotActions.thunkGetSpotBySpotId(spotId)))
       .catch(
         async res => {
           // parse error data

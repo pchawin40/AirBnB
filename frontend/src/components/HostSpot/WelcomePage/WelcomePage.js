@@ -27,11 +27,11 @@ const WelcomePage = () => {
       <aside id="welcome-left-aside">
         {/* airbnb logo */}
         <figure id="welcome-logo-container">
-          <i style={{zIndex: 1}} className="fa-brands fa-airbnb" id="welcome-logo-icon"></i>
+          <i style={{ zIndex: 1 }} className="fa-brands fa-airbnb" id="welcome-logo-icon"></i>
         </figure>
 
         {/* welcome video */}
-        <video 
+        <video
           id="welcome-video"
           src="https://a0.muscache.com/v/8b/04/8b0456c7-13f8-54bc-889a-7cf549f144a3/8b0456c713f854bc889a7cf549f144a3_4000k_1.mp4"
           alt="airbnb-welcome"

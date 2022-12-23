@@ -42,6 +42,8 @@ const HomeContent = () => {
     // nothing for now
   }, [dispatch, spotId]);
 
+  console.log('img url: ', `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`);
+
   return (
     spot &&
     <>
@@ -62,13 +64,13 @@ const HomeContent = () => {
                 className="user-profile-pic"
                 onError={e =>
                   e.target.src =
-                  `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set${Math.floor(Math.random() * 6)}`
+                  `https://robohash.org/${(spotId).toString(36).substring(7)}?set=set${Math.floor(spotId * 6)}`
                 }
                 src={
-                  Math.random() * 3 > 1 ?
-                    `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`
+                  spotId * 3 > 1 ?
+                    `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(79 - spotId)}.jpg`
                     :
-                    `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(Math.random() * 79)}.jpg`
+                    `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(79 - spotId)}.jpg`
                 }
                 alt="profile-pic" />
             </figure>

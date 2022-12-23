@@ -95,7 +95,7 @@ export const thunkGetSpots = () => async dispatch => {
   }
 };
 
-export const getSpotBySpotId = spotId => async dispatch => {
+export const thunkGetSpotBySpotId = spotId => async dispatch => {
   const res = await csrfFetch(`/spots/${spotId}`);
 
   if (res.ok) {

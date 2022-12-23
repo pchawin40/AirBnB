@@ -73,7 +73,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
 
   // load on start up
   useEffect(() => {
-    if (spotId) dispatch(spotActions.getSpotBySpotId(spotId));
+    if (spotId) dispatch(spotActions.thunkGetSpotBySpotId(spotId));
 
     // dispatch maps get api key
     dispatch(mapActions.getKey());
@@ -142,7 +142,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
 
           // set error if any
           if (data.errors) setValidationErrors([Object.values(data.errors)]);
-          console.log("validationErrors HERE", validationErrors.map(error => error.map(error => console.log("error", error))));
+          console.log("validationErrors: ", validationErrors.map(error => error.map(error => console.log("error", error))));
         }
       );
   };

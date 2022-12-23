@@ -39,7 +39,7 @@ const ImageModal = ({ setShowImageModal }) => {
   // get all images from current spot (/spots/:spotId GET)
   // const images
   useEffect(() => {
-    dispatch(spotActions.getSpotBySpotId(spotId));
+    // nothing for now
   }, [dispatch, spotId]);
 
   // update image if imageState changes
@@ -53,7 +53,7 @@ const ImageModal = ({ setShowImageModal }) => {
     const choice = window.confirm("Are you sure you want to delete this image?");
     if (!choice) return;
     dispatch(spotActions.thunkDeleteImage(image.id, spotId))
-      .then(() => dispatch(spotActions.getSpotBySpotId(spotId)));
+      .then(() => dispatch(spotActions.thunkGetSpotBySpotId(spotId)));
   };
 
   //? handle form submit
@@ -69,7 +69,7 @@ const ImageModal = ({ setShowImageModal }) => {
     ref.current.value = "";
 
     dispatch(spotActions.thunkAddImage(fileUpload, spotId))
-      .then(() => dispatch(spotActions.getSpotBySpotId(spotId)))
+      .then(() => dispatch(spotActions.thunkGetSpotBySpotId(spotId)))
       .catch(
         async res => {
           // parse error data

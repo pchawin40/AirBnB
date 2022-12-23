@@ -46,15 +46,10 @@ const Spot = ({ isLoaded }) => {
   */
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};
 
-  // useEffect for dispatch (initial render)
-  useEffect(() => {
-    dispatch(spotActions.getSpotBySpotId(spotId));
-  }, [dispatch, spotId]);
-
-  // per spot
+  // per general
   useEffect(() => {
     // nothing for now
-  }, [spots, spot]);
+  }, [dispatch, spotId, spots, spot]);
 
   return (
     isLoaded && (
