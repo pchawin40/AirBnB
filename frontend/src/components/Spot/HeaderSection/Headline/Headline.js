@@ -50,7 +50,7 @@ const Headline = () => {
   useEffect(() => {
 
     dispatch(spotActions.thunkGetSpotBySpotId(Number(spotId)));
-    // dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
+    dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
   }, [dispatch, spotId]);
 
   //? handle edit spot

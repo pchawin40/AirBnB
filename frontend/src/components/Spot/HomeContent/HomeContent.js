@@ -42,8 +42,6 @@ const HomeContent = () => {
     // nothing for now
   }, [dispatch, spotId]);
 
-  console.log('img url: ', `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`);
-
   return (
     spot &&
     <>

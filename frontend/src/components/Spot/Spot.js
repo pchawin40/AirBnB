@@ -25,6 +25,7 @@ import HomeFooterBar from '../LandingPage/HomeFooterBar';
 
 // import context
 import { useSpot } from '../../context/SpotContext';
+import { useReview } from '../../context/ReviewContext';
 
 //? Spot component
 const Spot = ({ isLoaded }) => {
@@ -40,6 +41,8 @@ const Spot = ({ isLoaded }) => {
    */
   // get all available spots 
   const { spots, setSpots } = useSpot();
+  // control current spot id
+  const { currentSpotId, setCurrentSpotId } = useReview();
 
   /**
    * UseEffect
@@ -48,8 +51,11 @@ const Spot = ({ isLoaded }) => {
 
   // per general
   useEffect(() => {
-    // nothing for now
-  }, [dispatch, spotId, spots, spot]);
+    // if spotId exists, set spotId as current spot id
+    if (spotId) {
+      setCurrentSpotId(spotId);
+    }
+  }, [dispatch, spotId, spots, spot, currentSpotId]);
 
   return (
     isLoaded && (

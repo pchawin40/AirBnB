@@ -10,6 +10,7 @@ export default function ReviewProvider({ children }) {
   const [reviewAction, setReviewAction] = useState("");
   const [avgReview, setAvgReview] = useState(0);
   const [reviewLoaded, setReviewLoaded] = useState(false);
+  const [currentSpotId, setCurrentSpotId] = useState(null);
 
   return (
     <>
@@ -20,7 +21,8 @@ export default function ReviewProvider({ children }) {
           hover, setHover,
           reviewAction, setReviewAction,
           avgReview, setAvgReview,
-          reviewLoaded, setReviewLoaded
+          reviewLoaded, setReviewLoaded,
+          currentSpotId, setCurrentSpotId
         }}
       >
         {children}

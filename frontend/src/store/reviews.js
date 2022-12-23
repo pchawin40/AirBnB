@@ -161,9 +161,25 @@ export const thunkEditReview = (reviewToEdit, reviewId) => async dispatch => {
 }
 
 /* --------- SELECTOR FUNCTIONS -------- */
-export const getAllReviews = state => state.reviews;
+export const getAllReviews = state => Object.values(state.reviews);
 
 export const getReviewById = reviewId => state => state.reviews.Reviews[reviewId];
+
+// get all reviews by current spot
+export const getReviewsByCurrentSpot
+  =
+  spotId =>
+    state =>
+      state.reviews &&
+        state.reviews.Reviews &&
+        Object.values(state.reviews.Reviews).length > 0
+        ?
+        Object.values(state.reviews.Reviews)[0]
+          .filter(review => {
+            return review.spotId === Number(spotId)
+          })
+        :
+        [];
 
 // get average review
 export const getAverageReviews

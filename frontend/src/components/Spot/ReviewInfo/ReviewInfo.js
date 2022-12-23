@@ -15,60 +15,45 @@ import './ReviewInfo.css';
 
 // import context
 import { Modal } from "../../../context/Modal";
-import ReviewProvider from '../../../context/ReviewContext';
+import ReviewProvider, { useReview } from '../../../context/ReviewContext';
 
 // import component
 import ReviewTracker from './ReviewTracker';
 import ReviewModal from './ReviewModal';
 
 //? ReviewInfo component
-const ReviewInfo = ({ spot }) => {
+const ReviewInfo = () => {
+  // invoke dispatch
+  const dispatch = useDispatch();
+
+  /**
+   * Controlled inputs
+   */
   // state for review modal
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewId, setReviewId] = useState(null);
   const [reviewAction, setReviewAction] = useState("create");
-  const [reviewLoaded, setReviewLoaded] = useState(false);
+  const { avgReview, setAvgReview } = useReview();
+  // control current spot id
+  const { currentSpotId, setCurrentSpotId } = useReview();
 
-  // invoke dispatch
-  const dispatch = useDispatch();
-
-  // get spot id
-  const { spotId } = useParams();
-
+  /**
+   * Selector functions
+   */
   // get current logged in user
   const user = useSelector(sessionActions.getSessionUser);
+  const allReviewsByCurrentSpot = useSelector(reviewActions.getReviewsByCurrentSpot(currentSpotId));
 
-  // get reviews data
-  const reviewState = useSelector(reviewActions.getAllReviews);
-  const reviewsToSum = [];
-  if (reviewState.Reviews) {
-    reviewsToSum.push(...Object.values(reviewState.Reviews)[0]);
-  }
-
-  // reviews initial data for summing and averaging
-  let sumReviews = 0;
-  let avgReview = 0;
-
-  // sum all relevant reviews
-  if (reviewsToSum) {
-    reviewsToSum.map(review => {
-      if (review.spotId === Number(spotId)) sumReviews += review.stars;
-    })
-  }
-
-  // all reviews (for length)
-  const allReviewsByCurrentSpot = reviewsToSum.filter(review => review.spotId === Number(spotId));
-
-  // get avg of current reviews
-  avgReview = parseFloat(sumReviews / allReviewsByCurrentSpot.length).toFixed(2);
-
+  /**
+   * UseEffect
+  */
   useEffect(() => {
-    if (!(isNaN(avgReview)) && allReviewsByCurrentSpot.length && !reviewLoaded) {
-      dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
-      setReviewLoaded(true);
-    }
-  }, [avgReview]);
+    // nothing for now
+  }, [avgReview, allReviewsByCurrentSpot, user, currentSpotId]);
 
+  /**
+   * Handler Functions
+   */
   //? handleReviewRemove: remove review from database
   const handleReviewRemove = review => {
 
@@ -105,14 +90,23 @@ const ReviewInfo = ({ spot }) => {
     }
   }
 
+  // function to check if reviews are loaded
+  const reviewsByCurrentSpot = () => {
+
+    return (
+      Array.isArray(allReviewsByCurrentSpot)
+      && allReviewsByCurrentSpot.length > 0
+    );
+  }
+
   return (
-    Array.isArray(allReviewsByCurrentSpot) ?
+    allReviewsByCurrentSpot ?
       (<section className="review-info">
         {/* //? review header */}
         <header className="review-info-header-container">
           <span><i className="fa-solid fa-star"></i></span>
           {/* avgReviews */}
-          {/* <span>{isNaN(avgReview) && reviewLoaded ? 0 : avgReview}</span> */}
+          <span>{isNaN(avgReview) ? 0 : avgReview}</span>
 
           {/* <span>·</span> */}
 
@@ -133,10 +127,8 @@ const ReviewInfo = ({ spot }) => {
         {/* //? top reviews */}
         <section className="review-info-feature-container">
           {
-            allReviewsByCurrentSpot &&
-              Array.isArray(allReviewsByCurrentSpot) &&
-              allReviewsByCurrentSpot.length > 0 &&
-              Array.isArray(allReviewsByCurrentSpot) ? allReviewsByCurrentSpot.map(review =>
+            reviewsByCurrentSpot()
+              ? allReviewsByCurrentSpot.map(review =>
                 review && review.id &&
                 <li key={review.id}>
                   <div className="image-fig-caption-container">

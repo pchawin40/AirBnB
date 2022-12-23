@@ -29,7 +29,7 @@ let enhancer;
 
 // ... in production mode, apply only thunk middleware 
 if (process.env.NODE_ENV === 'production')
-  enhancer = applyMiddleware(thunk);
+	enhancer = applyMiddleware(thunk);
 // ... in development mode, apply thunk, thunk middleware, and dev tools
 else {
 	const logger = require('redux-logger').default;

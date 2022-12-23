@@ -39,6 +39,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const { avgReview, setAvgReview } = useReview();
   const { spots, setSpots } = useSpot();
+  
 
   /**
    * Selector Functions
@@ -111,7 +112,6 @@ function App() {
           <Route path="/host/create-spot">
             <CreateSpot />
           </Route>
-
 
           {/* //? resource not found */}
           <Route>
