@@ -115,14 +115,14 @@ const ReviewInfo = () => {
         </header>
 
         {/* //? review tracker */}
-        <section
+        {/* <section
           className="review-info-tracker-container"
           id={`review-tracker-permitted-container-${Array.isArray(allReviewsByCurrentSpot) && user &&
             !(allReviewsByCurrentSpot.some(review => review.userId === user.id))
             }`}
         >
           <ReviewTracker />
-        </section>
+        </section> */}
 
         {/* //? top reviews */}
         <section className="review-info-feature-container">
