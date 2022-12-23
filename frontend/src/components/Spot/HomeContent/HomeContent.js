@@ -68,9 +68,9 @@ const HomeContent = () => {
                 }
                 src={
                   spotId * 3 > 1 ?
-                    `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(79 - spotId)}.jpg`
+                    `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(79 - spotId) > 0 ? Math.floor(79 - spotId) : 1}.jpg`
                     :
-                    `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(79 - spotId)}.jpg`
+                    `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(79 - spotId) > 0 ? Math.floor(79 - spotId) : 1}.jpg`
                 }
                 alt="profile-pic" />
             </figure>
