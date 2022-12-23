@@ -183,11 +183,12 @@ export const getReviewsByCurrentSpot
 
 // get average review
 export const getAverageReviews
-  = state => state.reviews
+  = spotId => state => state.reviews
     && state.reviews.Reviews
     && Object.values(state.reviews.Reviews).length > 0
     ?
     Object.values(state.reviews.Reviews)[0]
+      .filter(review => review.spotId === Number(spotId))
       .map(review => review.stars)
       .reduce(((initialAvg, currAvg) => initialAvg + currAvg), 0)
     / Object.values(state.reviews.Reviews)[0].length

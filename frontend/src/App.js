@@ -37,7 +37,6 @@ function App() {
    */
   // state: isLoaded 
   const [isLoaded, setIsLoaded] = useState(false);
-  const { avgReview, setAvgReview } = useReview();
   const { spots, setSpots } = useSpot();
   
 
@@ -45,7 +44,6 @@ function App() {
    * Selector Functions
    */
   const allReviews = useSelector(reviewActions.getAllReviews);
-  const averageReviews = useSelector(allReviews ? reviewActions.getAverageReviews : 0);
 
   /**
    * UseEffect
@@ -69,10 +67,7 @@ function App() {
   // per all reviews
   useEffect(() => {
     // nothing for now
-    if (allReviews && averageReviews > 0) {
-      setAvgReview(averageReviews);
-    }
-  }, [allReviews, avgReview]);
+  }, [allReviews]);
 
   // per spot state
   useEffect(() => {

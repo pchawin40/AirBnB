@@ -9,6 +9,12 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 // import css
 import './Maps.css';
 
+// import react-redux
+import { useDispatch } from 'react-redux';
+
+// import store
+import * as reviewActions from '../../../store/reviews';
+
 // style for map container
 const containerStyle = {
   width: '80vw',
@@ -30,6 +36,9 @@ const Maps = ({ apiKey, setShowMapModal}) => {
     googleMapsApiKey: apiKey
   });
 
+  // invoke dispatch
+  const dispatch = useDispatch();
+
   return (
     <div>
       {
@@ -46,10 +55,9 @@ const Maps = ({ apiKey, setShowMapModal}) => {
             <button
               id="map-button"
               onClick={_ => {
-                window.location.reload();
-                // setShowMapModal(false)
-              }
-              }
+                dispatch(reviewActions.thunkGetReviews())
+                .then(() => setShowMapModal(false));
+              }}
             >
               Show list
               <i className="fa-solid fa-list map-list-icon"></i>

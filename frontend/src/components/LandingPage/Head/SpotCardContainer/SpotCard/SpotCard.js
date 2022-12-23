@@ -32,8 +32,6 @@ const SpotCard = () => {
    * Selector functions
    */
   const allReviews = useSelector(reviewActions.getAllReviews);
-  // get all available reviews
-  const averageReviews = useSelector(reviewActions.getAverageReviews);
 
   /**
    * UseEffect
@@ -56,15 +54,6 @@ const SpotCard = () => {
     return history.push(`/rooms/${spotId}`);
   };
 
-  // check if review is ready to be loaded
-  const checkReviewsReady = () => {
-    return (
-      Array.isArray(allReviews)
-      &&
-      allReviews.length > 0
-    );
-  }
-
   // for each spot, put into card
   return (
     <>
@@ -74,17 +63,11 @@ const SpotCard = () => {
 
           // if review is ready to be check...
           const currentSpotReviews =
-          checkReviewsReady()
-          ?
           // filter out all reviews by current spot id
-          allReviews.filter(review => {
-            // if review exist, return matching spot id. otherwise, false
-            return review ? review.spotId === spot.id : false;
-          }).map(review => review.stars)
-            // sum up all review ratings
-            .reduce((prevSum, currSum) => prevSum += currSum, 0)
-              :
-              0;
+            allReviews
+              .filter(review => review.spotId === spot.id)
+              .map(review => review.stars)
+              .reduce((prevSum, currSum) => prevSum += currSum, 0);
 
           // divide by length of all reviews by current spot
           // save variable to be pass in as average spot reviews

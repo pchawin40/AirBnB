@@ -26,6 +26,7 @@ import HomeFooterBar from '../LandingPage/HomeFooterBar';
 // import context
 import { useSpot } from '../../context/SpotContext';
 import { useReview } from '../../context/ReviewContext';
+import { getAverageReviews } from '../../store/reviews';
 
 //? Spot component
 const Spot = ({ isLoaded }) => {
@@ -43,6 +44,13 @@ const Spot = ({ isLoaded }) => {
   const { spots, setSpots } = useSpot();
   // control current spot id
   const { currentSpotId, setCurrentSpotId } = useReview();
+  // control average review for current spot
+  const { avgReview, setAvgReview } = useReview();
+
+  /**
+   * Selector functions
+   */
+  const averageReviews = useSelector(getAverageReviews(spotId));
 
   /**
    * UseEffect
@@ -55,6 +63,9 @@ const Spot = ({ isLoaded }) => {
     if (spotId) {
       setCurrentSpotId(spotId);
     }
+
+    //?set average review
+    setAvgReview(averageReviews);
   }, [dispatch, spotId, spots, spot, currentSpotId]);
 
   return (
