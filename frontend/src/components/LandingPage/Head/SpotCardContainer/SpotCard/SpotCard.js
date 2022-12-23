@@ -31,6 +31,8 @@ const SpotCard = () => {
   /**
    * Selector functions
    */
+  const allReviews = useSelector(reviewActions.getAllReviews);
+  // get all available reviews
   const averageReviews = useSelector(reviewActions.getAverageReviews);
 
   /**
@@ -54,12 +56,39 @@ const SpotCard = () => {
     return history.push(`/rooms/${spotId}`);
   };
 
+  // check if review is ready to be loaded
+  const checkReviewsReady = () => {
+    return (
+      Array.isArray(allReviews)
+      &&
+      allReviews.length > 0
+    );
+  }
+
   // for each spot, put into card
   return (
     <>
       {/* //? Show all spots */}
       {
         spots && spots.map(spot => {
+
+          // if review is ready to be check...
+          const currentSpotReviews =
+          checkReviewsReady()
+          ?
+          // filter out all reviews by current spot id
+          allReviews.filter(review => {
+            // if review exist, return matching spot id. otherwise, false
+            return review ? review.spotId === spot.id : false;
+          }).map(review => review.stars)
+            // sum up all review ratings
+            .reduce((prevSum, currSum) => prevSum += currSum, 0)
+              :
+              0;
+
+          // divide by length of all reviews by current spot
+          // save variable to be pass in as average spot reviews
+          const currentAvgSpotReviews = currentSpotReviews / allReviews.length;
 
           return (
             <div className="spot-card-content" key={spot.id} onClick={e => handleCardClick(spot.id)}>
@@ -81,7 +110,7 @@ const SpotCard = () => {
 
                 <div className="card-info-container-2">
                   {/* // //? Spot Review */}
-                  <span>{isNaN(avgReview) ? 0 : avgReview}</span>
+                  <span>{isNaN(currentAvgSpotReviews) ? 0 : currentAvgSpotReviews}</span>
                   <i className="fa-solid fa-star"></i>
                 </div>
               </div>

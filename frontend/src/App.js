@@ -55,7 +55,6 @@ function App() {
     // ... restore session user and set is loaded to true
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
     dispatch(spotActions.thunkGetSpots());
-    dispatch(reviewActions.thunkGetReviews());
   }, [isLoaded, dispatch]);
 
   /**
