@@ -27,14 +27,14 @@ const ImageModal = ({ setShowImageModal }) => {
   const ref = useRef();
 
   // state
-  const imageState = useSelector(spotActions.getImagesBySpot);
+  const imageState = useSelector(spotActions.getImagesBySpot(spotId));
   const [images, setImages] = useState(imageState);
   const [newImages, setNewImages] = useState([]);
 
   // get session user
   const sessionUser = useSelector(sessionActions.getSessionUser);
   // get spot owner
-  const spotOwner = useSelector(spotActions.getSpotOwner());
+  const spotOwner = useSelector(spotActions.getSpotOwner(spotId));
 
   // get all images from current spot (/spots/:spotId GET)
   // const images
@@ -53,7 +53,7 @@ const ImageModal = ({ setShowImageModal }) => {
     const choice = window.confirm("Are you sure you want to delete this image?");
     if (!choice) return;
     dispatch(spotActions.thunkDeleteImage(image.id, spotId))
-      .then(() => dispatch(spotActions.thunkGetSpotBySpotId(spotId)));
+      .then(() => dispatch(spotActions.thunkGetSpots()));
   };
 
   //? handle form submit
@@ -69,7 +69,7 @@ const ImageModal = ({ setShowImageModal }) => {
     ref.current.value = "";
 
     dispatch(spotActions.thunkAddImage(fileUpload, spotId))
-      .then(() => dispatch(spotActions.thunkGetSpotBySpotId(spotId)))
+      .then(() => dispatch(spotActions.thunkGetSpots()))
       .catch(
         async res => {
           // parse error data
@@ -89,6 +89,16 @@ const ImageModal = ({ setShowImageModal }) => {
     setNewImages(files);
   }
 
+  /**
+   * Handler functions
+   */
+  const checkIfSpotOwner = () => {
+    return (
+      sessionUser && spotOwner &&
+      sessionUser.id === spotOwner
+    );
+  };
+
   return (
     Array.isArray(images) &&
     <section className="section-container">
@@ -97,8 +107,7 @@ const ImageModal = ({ setShowImageModal }) => {
       </div>
       {/* //? Add existing images  */}
       {
-        sessionUser && spotOwner &&
-        sessionUser.id === spotOwner.id &&
+        checkIfSpotOwner() &&
         (
           <form className="add-existing-images-container" onSubmit={handleImageSubmit}>
             {/* //? Multiple File Upload */}
@@ -174,11 +183,10 @@ const ImageModal = ({ setShowImageModal }) => {
                   onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"}
                   alt={image.id}
                   className="modal-image"
-                  onClick={_ => sessionUser.id === spotOwner.id && handleImageDelete(image)}
+                  onClick={_ => checkIfSpotOwner() && handleImageDelete(image)}
                 />
                 {
-                  spotOwner && sessionUser &&
-                  sessionUser.id === spotOwner.id &&
+                  checkIfSpotOwner() &&
                   <p className="delete-image-text">Delete</p>
                 }
               </figure>

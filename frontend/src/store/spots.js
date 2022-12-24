@@ -240,7 +240,7 @@ export const thunkDeleteSpot = spotId => async dispatch => {
     const spot = await res.json();
 
     // dispatch deleteSpot
-    dispatch(deleteSpot(spot));
+    dispatch(deleteSpot(spotId));
 
     // return spot
     return spot;
@@ -306,9 +306,27 @@ export const getAllSpots = state => state.spots.Spots;
 export const getSpotById = spotId => state => Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId));
 
 // get all images
-export const getImagesBySpot = state => Object.values(state.spots.Images);
+export const getImagesBySpot = spotId =>
+  state =>
+    state.spots
+      &&
+      state.spots.Spots
+      &&
+      Object.values(state.spots.Spots).length > 0
+      ?
+      Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId)).Images
+      :
+      [];
 
-export const getSpotOwner = () => state => state.spots.Owners ? state.spots.Owners : state.spots;
+export const getSpotOwner = spotId =>
+  state =>
+    state.spots?.Spots
+      &&
+      Object.values(state.spots.Spots).length > 0
+      ?
+      Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId)).ownerId
+      :
+      null;
 
 /* --------- REDUCERS -------- */
 const initialSpots = [];
@@ -318,20 +336,20 @@ const spotsReducer = (state = initialSpots, action) => {
   const newSpots = { ...state };
 
   switch (action.type) {
-    //? case: add spot
-    case ADD_SPOT:
-      newSpots[action.spot.id] = action.spot;
-      return newSpots;
     //? case: reset spot
     case RESET_SPOT:
       return initialSpots;
     //? case: remove spot
     case DELETE_SPOT:
-      delete newSpots[action.spot];
+      Object.values(newSpots)[0].forEach((spot, index) => {
+        if (spot.id === action.spotId) {
+          delete newSpots.Spots[index];
+        }
+      })
+
       return newSpots;
     //? case: remove image
     case DELETE_IMAGE:
-      delete Object.values(newSpots.Images).find(image => image.id === action.imageId);
       return newSpots;
     //? case: add image
     case ADD_IMAGES:

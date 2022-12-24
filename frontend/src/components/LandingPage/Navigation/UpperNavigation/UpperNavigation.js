@@ -33,11 +33,18 @@ const UpperNavigation = ({ isLoaded }) => {
   // invoke dispatch
   const dispatch = useDispatch();
 
+  /**
+   * Selector functions
+   */
+  const allReviews = useSelector(reviewActions.getAllReviews);
+
+  /**
+   * UseEffect
+   */
   useEffect(() => {
     if (sessionUser) {
       dispatch(userActions.thunkLoadUserById(sessionUser.id))
     }
-    dispatch(reviewActions.thunkGetReviews());
   }, [dispatch, sessionUser]);
 
   // get user's name

@@ -49,12 +49,15 @@ const HomeGallery = () => {
   // get session user
   const sessionUser = useSelector(sessionActions.getSessionUser);
   // get spot owner
-  const spotOwner = useSelector(spotActions.getSpotOwner);
+  const spotOwner = useSelector(spotActions.getSpotOwner(spotId));
 
   // get spot by spot id
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : null;
-  const imageState = useSelector(state => state.spots);
-  const [images, setImages] = useState(imageState.Images !== undefined ? imageState.Images : imageState);
+
+  // const imageState = useSelector(state => state.spots);
+  // const [images, setImages] = useState(imageState.Images !== undefined ? imageState.Images : imageState);
+  const images = useSelector(spotActions.getImagesBySpot(spotId));
+
   const [fileUpload, setFileUpload] = useState(null);
 
   /**
@@ -62,12 +65,7 @@ const HomeGallery = () => {
    */
   useEffect(() => {
     // nothing for now
-  }, [dispatch, spotId]);
-
-  // update image if imageState changes
-  useEffect(() => {
-    setImages(imageState.Images);
-  }, [imageState]);
+  }, [dispatch, spotId, images]);
 
   /**
    * Handler functions
@@ -85,7 +83,7 @@ const HomeGallery = () => {
     ref.current.value = "";
 
     dispatch(spotActions.thunkAddImage(currentFileUpload, spotId))
-      .then(() => dispatch(spotActions.thunkGetSpotBySpotId(spotId)))
+      .then(() => dispatch(spotActions.thunkGetSpots()))
       .catch(
         async res => {
           // parse error data
@@ -178,8 +176,9 @@ const HomeGallery = () => {
           {
             images.length <= 0 &&
               (
-                spotOwner && sessionUser &&
-                spotOwner.id === sessionUser.id) ?
+                sessionUser &&
+                spotOwner === sessionUser.id
+              ) ?
               <form className="home-gallery-no-image-aside" onSubmit={handleImageSubmit}>
 
                 <h3>
