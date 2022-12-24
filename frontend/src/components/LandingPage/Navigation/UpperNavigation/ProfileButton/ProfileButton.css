@@ -12,8 +12,9 @@
 }
 
 #profile-dropdown{
-  top: 6rem;
+  top: 5.5rem;
   right: 3rem;
+  padding: 10px 0;
   height: fit-content;
   position: absolute;
   border-radius: 2rem;
