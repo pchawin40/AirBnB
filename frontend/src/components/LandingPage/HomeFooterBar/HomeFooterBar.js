@@ -31,11 +31,7 @@ const HomeFooterBar = ({ mapState = false }) => {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-<<<<<<< HEAD
-    <div className="outer-footer-container_home" style={{zIndex: editSpotModal ? 100 : 0}}>
-=======
     <div className="outer-footer-container_home" style={{ zIndex: editSpotModal ? 100 : 0 }}>
->>>>>>> Heroku-Revising
       <div className="footer-content-container_home">
         {/* //? upper div container (map) */}
         {

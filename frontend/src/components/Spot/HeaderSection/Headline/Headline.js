@@ -22,18 +22,13 @@ import EditSpotModal from './EditSpotModal';
 
 // import css
 import './Headline.css';
-import { useSpot } from '../../../../context/SpotContext';
 
 //? Headline component
 const Headline = () => {
   /**
    * Controlled inputs
    */
-<<<<<<< HEAD
-=======
   // state for review modal
-  const { editSpotModal, setEditSpotModal } = useSpot();
->>>>>>> Heroku-Revising
   const { avgReview, setAvgReview } = useReview();
   const { editSpotModal, setEditSpotModal } = useSpot();
 
@@ -117,10 +112,6 @@ const Headline = () => {
           // Show Edit Modal
           editSpotModal
           &&
-<<<<<<< HEAD
-          <Modal onClose={_ => setEditSpotModal(false)}>
-            <EditSpotModal />
-=======
           <Modal
               onClose={_ => {
                 // turn window vertical scroll back on
@@ -130,7 +121,6 @@ const Headline = () => {
               }}
             >
             <EditSpotModal editSpotModal={editSpotModal} setEditSpotModal={setEditSpotModal} />
->>>>>>> Heroku-Revising
           </Modal>
         }
       </div>
