@@ -5,9 +5,11 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100vh 100vh 110vh;
+  grid-auto-rows: max-content;
+
   grid-template-areas: 
   "header"
-  "main"
+  "main"  
   "form";
 }
 
