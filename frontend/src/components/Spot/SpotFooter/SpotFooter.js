@@ -3,6 +3,7 @@ import './SpotFooter.css';
 
 //? SpotFooter component
 const SpotFooter = () => {
+
   return (
     <footer className="home-content-footer">
 

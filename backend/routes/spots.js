@@ -216,7 +216,7 @@ router.get('/reviews', async (req, res, next) => {
   }
 
   // save images into review json
-  res.json({
+  return res.json({
     Reviews: reviews
   });
 });
@@ -370,8 +370,7 @@ router.get('/', validateQuery, async (req, res) => {
   // find all with query and search parameter (if exists)
   const spots = await Spot.findAll({
     include: {
-      model: Image,
-      attributes: []
+      model: Image
     },
     where,
     limit,

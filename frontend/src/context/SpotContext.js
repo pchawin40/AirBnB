@@ -19,6 +19,7 @@ export default function SpotProvider({ children }) {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [spots, setSpots] = useState([]);
+  const [editSpotModal, setEditSpotModal] = useState(false);
 
   // Spot Provider
   return (
@@ -34,7 +35,8 @@ export default function SpotProvider({ children }) {
           name, setName,
           description, setDescription,
           price, setPrice,
-          spots, setSpots
+          spots, setSpots,
+          editSpotModal, setEditSpotModal
         }}
       >
         {children}

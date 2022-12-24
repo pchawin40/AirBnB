@@ -69,7 +69,7 @@ export const getReviewsBySpotId = spotId => async dispatch => {
 };
 
 //? Thunk action to get all reviews
-export const thunkGetReviews = (_) => async dispatch => {
+export const thunkGetReviews = () => async dispatch => {
   // fetch all reviews given by spots
   const res = await csrfFetch(`/spots/reviews`);
 

@@ -73,7 +73,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
 
   // load on start up
   useEffect(() => {
-    if (spotId) dispatch(spotActions.thunkGetSpotBySpotId(spotId));
+    if (spotId) dispatch(spotActions.thunkGetSpots());
 
     // dispatch maps get api key
     dispatch(mapActions.getKey());

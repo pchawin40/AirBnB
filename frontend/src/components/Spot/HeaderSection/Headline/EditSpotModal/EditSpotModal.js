@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // import react-router-dom
 import { useHistory, useParams } from 'react-router-dom';
+import { useSpot } from '../../../../../context/SpotContext';
 
 // import store
 import * as spotActions from '../../../../../store/spots';
@@ -16,7 +17,7 @@ import SpotForm from '../../../../HostSpot/CreateSpot/SpotForm';
 import './EditSpotModal.css';
 
 //? CreateSpot component
-const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
+const EditSpotModal = () => {
   // deconstruct spotId
   const { spotId } = useParams();
 
@@ -45,8 +46,8 @@ const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [previewImage, setPreviewImage] = useState("");
-
   const [validationErrors, setValidationErrors] = useState([]);
+  const { editSpotModal, setEditSpotModal } = useSpot();
 
   // turn off window scroll y
   document.body.style.overflowY = "hidden";

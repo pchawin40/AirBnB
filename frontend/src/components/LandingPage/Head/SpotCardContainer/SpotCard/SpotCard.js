@@ -33,16 +33,20 @@ const SpotCard = () => {
    */
   const allReviews = useSelector(reviewActions.getAllReviews);
 
+  // invoke dispatch
+  const dispatch = useDispatch();
+
+  // invoke history
+  const history = useHistory();
+
   /**
    * UseEffect
    */
   // per general
   useEffect(() => {
     // nothing for now
+    dispatch(reviewActions.thunkGetReviews());
   }, [spots]);
-
-  // invoke history
-  const history = useHistory();
 
   /**
    * Handler functions
