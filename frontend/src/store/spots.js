@@ -357,6 +357,21 @@ export const getSpotByLocation =
           );
         });
 
+export const getSpotByLocationType =
+  locationType =>
+    state =>
+      Object.values(state.spots.Spots)
+        .filter(spot => {
+          if ('All'.toLowerCase().includes(locationType.toLowerCase())) {
+            return true
+          };
+
+          return (
+            // if location type is not empty, search by location type
+            spot.locationType.toLowerCase().includes(locationType.toLowerCase())
+          );
+        });
+
 /* --------- REDUCERS -------- */
 const initialSpots = [];
 

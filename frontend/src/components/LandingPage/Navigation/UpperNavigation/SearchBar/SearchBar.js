@@ -29,16 +29,16 @@ const SearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
         <div>Anywhere</div>
 
         {/* span to divide */}
-        <span className='lineDivide' />
+        {/* <span className='lineDivide' /> */}
       </button>
 
       {/* //? Schedule */}
-      <button className='searchBarButtons scheduleButton' onClick={_ => setShowActiveBarModal(true)}>
-        <div>Any week</div>
+      {/* <button className='searchBarButtons scheduleButton' onClick={_ => setShowActiveBarModal(true)}> */}
+      {/* <div>Any week</div> */}
 
-        {/* span to divide */}
-        {/* <span className='lineDivide'/> */}
-      </button>
+      {/* span to divide */}
+      {/* <span className='lineDivide'/> */}
+      {/* </button> */}
 
       {/* //? Guests */}
       <button className='searchBarButtons guestsButton' onClick={_ => setShowActiveBarModal(true)}>

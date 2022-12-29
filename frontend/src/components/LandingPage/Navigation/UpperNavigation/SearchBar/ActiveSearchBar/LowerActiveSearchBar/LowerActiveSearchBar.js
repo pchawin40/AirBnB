@@ -79,7 +79,7 @@ const LowerActiveSearchBar = () => {
         </button>
 
         {/* //? Check in */}
-        <button
+        {/* <button
           className="check-in-button"
           onClick={() => {
             document.querySelector(".lower-text.check-in").select()
@@ -93,10 +93,10 @@ const LowerActiveSearchBar = () => {
               type='date'
             />
           </div>
-        </button>
+        </button> */}
 
         {/* //? Check out */}
-        <button
+        {/* <button
           className="check-out-button"
           onClick={() => {
             document.querySelector(".lower-text.check-out").select()
@@ -110,7 +110,7 @@ const LowerActiveSearchBar = () => {
               type='date'
             />
           </div>
-        </button>
+        </button> */}
 
         {/* //? Who */}
         <button
@@ -120,7 +120,9 @@ const LowerActiveSearchBar = () => {
             setShowActiveBarModal(false);
           }}
         >
-          <div className="who-button-text-button">
+          <div
+            className="who-button-text-button"
+          >
             <i className="fa-solid fa-magnifying-glass who-guest-search-icon"></i>
             <p>
               Search
