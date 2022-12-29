@@ -37,11 +37,8 @@ export default function SpotProvider({ children }) {
           description, setDescription,
           price, setPrice,
           spots, setSpots,
-<<<<<<< HEAD
-          spotQuery, setSpotQuery
-=======
+          spotQuery, setSpotQuery,
           editSpotModal, setEditSpotModal
->>>>>>> master
         }}
       >
         {children}
