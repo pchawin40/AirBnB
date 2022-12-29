@@ -11,11 +11,12 @@ import { Modal } from '../../../../../context/Modal';
 
 // import component
 import ActiveSearchBar from './ActiveSearchBar';
+import { useSpot } from '../../../../../context/SpotContext';
 
 //? SearchBar component
 const SearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
   // state for review modal
-  const [showActiveBarModal, setShowActiveBarModal] = useState(false);
+  const { showActiveBarModal, setShowActiveBarModal } = useSpot();
 
   // TODO: Render bar that contain link
 
@@ -28,21 +29,21 @@ const SearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
         <div>Anywhere</div>
 
         {/* span to divide */}
-        <span className='lineDivide'/>
+        <span className='lineDivide' />
       </button>
-      
+
       {/* //? Schedule */}
       <button className='searchBarButtons scheduleButton' onClick={_ => setShowActiveBarModal(true)}>
         <div>Any week</div>
 
         {/* span to divide */}
-        <span className='lineDivide'/>
+        {/* <span className='lineDivide'/> */}
       </button>
-      
+
       {/* //? Guests */}
       <button className='searchBarButtons guestsButton' onClick={_ => setShowActiveBarModal(true)}>
         {/* add guests text */}
-        <div className='guestText'>Add guests</div>
+        {/* <div className='guestText'>Add guests</div> */}
 
         {/* search icon */}
         <div className='searchIcon'>
@@ -54,7 +55,7 @@ const SearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
         showActiveBarModal
         &&
         <Modal onClose={_ => setShowActiveBarModal(false)}>
-            <ActiveSearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
+          <ActiveSearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
         </Modal>
       }
     </div>

@@ -67,7 +67,7 @@ const SpotCard = () => {
 
           // if review is ready to be check...
           const currentSpotReviews =
-          // filter out all reviews by current spot id
+            // filter out all reviews by current spot id
             allReviews
               .filter(review => review.spotId === spot.id)
               .map(review => review.stars)
@@ -75,7 +75,12 @@ const SpotCard = () => {
 
           // divide by length of all reviews by current spot
           // save variable to be pass in as average spot reviews
-          const currentAvgSpotReviews = currentSpotReviews / allReviews.length;
+          const currentAvgSpotReviews = (
+            currentSpotReviews
+            /
+            allReviews
+              .filter(review => review.spotId === spot.id).length
+          );
 
           return (
             <div className="spot-card-content" key={spot.id} onClick={e => handleCardClick(spot.id)}>
@@ -91,8 +96,8 @@ const SpotCard = () => {
                 <div className="card-info-container-1">
                   {/* City, Country */}
                   <span>{spot.city}</span>
-                  <span>, </span>
-                  <span>{spot.country.toUpperCase().includes("america".toUpperCase()) ? spot.state : spot.country}</span>
+                  <span>, &nbsp;</span>
+                  <span>{spot.country.toUpperCase().includes("america".toUpperCase()) ? spot.state : spot.country}&nbsp;</span>
                 </div>
 
                 <div className="card-info-container-2">
@@ -103,12 +108,25 @@ const SpotCard = () => {
               </div>
 
               <div className="spot-location card-info">
+                {/* name */}
+                {spot.name}
                 {/* longitude and latitude */}
-                {"lat: " + spot.lat + " " + "lng: " + spot.lng}
+                {/* {"lat: " + spot.lat + " " + "lng: " + spot.lng} */}
               </div>
 
               <div className="spot-price card-info">
-                <span>${spot.price}</span> night
+                <span>${spot.price}</span>&nbsp;
+                {
+                  spot.locationType === 'Stays'
+                    ?
+                    <>
+                      night
+                    </>
+                    :
+                    <>
+                      experience
+                    </>
+                }
               </div>
             </div>
           )

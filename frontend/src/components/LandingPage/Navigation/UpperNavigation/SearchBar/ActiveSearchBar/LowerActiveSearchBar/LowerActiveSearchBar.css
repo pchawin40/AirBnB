@@ -15,7 +15,7 @@
 
 .lower-search-nav > div {
   display: grid;
-  grid-template-columns: 30% 17% 17% auto;
+  grid-template-columns: 30% 25% 25% auto;
   justify-self: flex-start;
   width: 50vw;
   border-radius: 4rem;
@@ -95,7 +95,7 @@ form > input, button{
   width: 7rem;
 }
 
-#check-in-inner-div, #check-out-inner-div{
+#check-in-inner-div{
   border-right: 1px solid #DDDDDD;
 }
 
@@ -126,7 +126,7 @@ form > input, button{
   width: 10rem;
 }
 
-.who-button > :nth-child(2){
+.who-button > .who-button-text-button{
   background: #E96691;
   background: -webkit-radial-gradient(center, #E96691, #E41C5E);
   background: -moz-radial-gradient(center, #E96691, #E41C5E);
@@ -168,6 +168,24 @@ form > input, button{
   font-weight: bold;
 }
 
-.lower-text{
+input.lower-text{
   color: #818181;
+  border: none;
+  background-color: #EBEBEB;
+}
+
+.check-in-button input.lower-text{
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.check-in-button input.lower-text,
+.check-out-button input.lower-text{
+  outline: none;
+}
+
+.where-button:hover .where-input.lower-text,
+.check-in-button:hover input.lower-text,
+.check-out-button:hover input.lower-text{
+  background-color: #DDDDDD;
 }

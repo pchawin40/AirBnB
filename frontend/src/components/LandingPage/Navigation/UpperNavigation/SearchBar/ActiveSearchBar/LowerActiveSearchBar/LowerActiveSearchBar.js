@@ -20,6 +20,7 @@ const LowerActiveSearchBar = () => {
    */
   const { spotQuery, setSpotQuery } = useSpot();
   const { spots, setSpots } = useSpot();
+  const { showActiveBarModal, setShowActiveBarModal } = useSpot();
 
   /**
    * Selector functions
@@ -32,18 +33,29 @@ const LowerActiveSearchBar = () => {
    * UseEffect
    */
   useEffect(() => {
-    if (spotQuery) {
-      setSpots(spotByLocation)
-    } else {
-      setSpots(spotState);
-    }
-  }, [spotQuery]);
+  }, [spotQuery, spots]);
 
   /**
    * Handler functions
    */
   const handleQueryUpdate = (e) => {
     setSpotQuery(e.target.value);
+  }
+
+  const handleSearch = () => {
+    // set spots with given query if exists
+    if (spotQuery) {
+      setSpots(spotByLocation)
+    } else {
+      setSpots(spotState);
+    }
+
+
+    // reset query
+    setSpotQuery("");
+
+    // turn search bar back to inactive
+    setShowActiveBarModal(false);
   }
 
   return (
@@ -67,30 +79,52 @@ const LowerActiveSearchBar = () => {
         </button>
 
         {/* //? Check in */}
-        <button className="check-in-button">
+        <button
+          className="check-in-button"
+          onClick={() => {
+            document.querySelector(".lower-text.check-in").select()
+          }}
+        >
           <div id="check-in-inner-div">
             <p>Check in</p>
-            <p className="lower-text">Add dates</p>
+            <input
+              className='lower-text check-in'
+              placeholder='Add dates'
+              type='date'
+            />
           </div>
         </button>
 
         {/* //? Check out */}
-        <button className="check-out-button">
+        <button
+          className="check-out-button"
+          onClick={() => {
+            document.querySelector(".lower-text.check-out").select()
+          }}
+        >
           <div id="check-out-inner-div">
             <p>Check out</p>
-            <p className="lower-text">Add dates</p>
+            <input
+              className='lower-text check-out'
+              placeholder='Add dates'
+              type='date'
+            />
           </div>
         </button>
 
         {/* //? Who */}
-        <button className="who-button">
-          <section className="who-button-text-content">
-            <p>Who</p>
-            <p className="lower-text">Add guests</p>
-          </section>
+        <button
+          className="who-button"
+          onClick={_ => {
+            handleSearch();
+            setShowActiveBarModal(false);
+          }}
+        >
           <div className="who-button-text-button">
             <i className="fa-solid fa-magnifying-glass who-guest-search-icon"></i>
-            <p>Search</p>
+            <p>
+              Search
+            </p>
           </div>
         </button>
       </div>

@@ -15,17 +15,17 @@ const UpperActiveSearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) =
       <section className="active-nav-bar-section">
         {/* stays */}
         <li className="active-nav-bar-li nav-li-1">
-          Stays
+          All
         </li>
 
         {/* experiences */}
         <li className="active-nav-bar-li nav-li-2">
-          Experiences
+          Stays
         </li>
-        
+
         {/* online experiences */}
         <li className="active-nav-bar-li nav-li-3">
-          Online Experiences
+          Experiences
         </li>
       </section>
 

@@ -8,7 +8,8 @@
   width: fit-content;
 
   margin: 1rem;
-  padding: rem;
+  padding: 1rem;
+  padding-bottom: 0;
 }
 
 .spot-card-content:hover{
@@ -22,7 +23,7 @@
 .spot-image-container{
   position: relative;
   border-radius: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .spot-image{
@@ -57,8 +58,8 @@
 }
 
 .spot-image{
-  width: 23em;
-  height: 18em;
+  width: 17em;
+  height: 12em;
   object-fit: cover;
 
   margin-bottom: 1.25rem;
@@ -80,7 +81,7 @@
   padding-top: .5rem;
 }
 
-
+.card-info-container-1,
 .card-info-container-2{
   display: flex;
   align-items: center;

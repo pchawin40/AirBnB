@@ -186,12 +186,25 @@ export const getAverageReviews
   = spotId => state => state.reviews
     && state.reviews.Reviews
     && Object.values(state.reviews.Reviews).length > 0
+    && !isNaN(
+      Object.values(state.reviews.Reviews)[0]
+        .filter(review => review.spotId === Number(spotId))
+        .map(review => review.stars)
+        .reduce(((initialAvg, currAvg) => initialAvg + currAvg), 0)
+      / Object.values(state.reviews.Reviews)[0]
+        .filter(review => {
+          console.log('review', review);
+
+          return review.spotId === Number(spotId)
+        }).length
+    )
     ?
     Object.values(state.reviews.Reviews)[0]
       .filter(review => review.spotId === Number(spotId))
       .map(review => review.stars)
       .reduce(((initialAvg, currAvg) => initialAvg + currAvg), 0)
-    / Object.values(state.reviews.Reviews)[0].length
+    / Object.values(state.reviews.Reviews)[0]
+      .filter(review => review.spotId === Number(spotId)).length
     : 0;
 
 /* --------- REDUCERS -------- */

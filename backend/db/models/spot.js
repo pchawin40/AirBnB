@@ -83,6 +83,10 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    locationType: {
+      type: DataTypes.STRING(15),
+      allowNull: false
+    },
     previewImage: {
       type: DataTypes.STRING,
       allowNull: true

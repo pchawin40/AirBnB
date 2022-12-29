@@ -22,6 +22,12 @@ const reviews = [
   {
     review: "I know this cabin is more geared to the winter season but we went in July and it is just as fun as summer getaway.",
     stars: 5
+  },
+  {
+    review: "Indiana Jones ride is the most thrilling with favourites like It's a Small World and Astro Orbitors drawing big lines.",
+    stars: 5,
+    userId: 2,
+    spotId: 3
   }
 ];
 
@@ -40,7 +46,9 @@ module.exports = {
       for (let reviewInfo of reviews) {
         const {
           review,
-          stars
+          stars,
+          userId,
+          spotId
         } = reviewInfo;
 
         // userId
@@ -52,8 +60,8 @@ module.exports = {
         await user.createReview({
           review,
           stars,
-          userId: user.id,
-          spotId: spot.id
+          userId: userId ? userId : user.id,
+          spotId: spotId ? spotId : spot.id
         });
       }
     } catch (e) {

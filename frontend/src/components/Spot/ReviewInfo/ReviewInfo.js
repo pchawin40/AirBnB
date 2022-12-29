@@ -106,7 +106,7 @@ const ReviewInfo = () => {
         <header className="review-info-header-container">
           <span><i className="fa-solid fa-star"></i></span>
           {/* avgReviews */}
-          <span>{isNaN(avgReview) ? 0 : avgReview}</span>
+          <span>{avgReview} &nbsp;</span>
 
           {/* <span>·</span> */}
 

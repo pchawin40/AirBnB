@@ -40,6 +40,9 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
+      locationType: {
+        type: Sequelize.STRING(15)
+      },
       ownerId: {
         type: Sequelize.INTEGER
       },

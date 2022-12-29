@@ -21,6 +21,7 @@ export default function SpotProvider({ children }) {
   const [spots, setSpots] = useState([]);
   const [spotQuery, setSpotQuery] = useState("");
   const [editSpotModal, setEditSpotModal] = useState(false);
+  const [showActiveBarModal, setShowActiveBarModal] = useState(false);
 
   // Spot Provider
   return (
@@ -38,7 +39,8 @@ export default function SpotProvider({ children }) {
           price, setPrice,
           spots, setSpots,
           spotQuery, setSpotQuery,
-          editSpotModal, setEditSpotModal
+          editSpotModal, setEditSpotModal,
+          showActiveBarModal, setShowActiveBarModal
         }}
       >
         {children}
