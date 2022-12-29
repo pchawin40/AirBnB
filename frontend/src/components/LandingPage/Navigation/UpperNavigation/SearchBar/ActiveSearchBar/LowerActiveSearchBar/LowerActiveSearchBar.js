@@ -50,7 +50,12 @@ const LowerActiveSearchBar = () => {
     <nav className="lower-search-nav">
       <div className="inner-lower-search-nav">
         {/* //? Where */}
-        <button className="where-button">
+        <button
+          className="where-button"
+          onClick={() => {
+            document.querySelector(".where-input.lower-text").select()
+          }}
+        >
           <div className="where-inner-div">
             <p>Where</p>
             <input
