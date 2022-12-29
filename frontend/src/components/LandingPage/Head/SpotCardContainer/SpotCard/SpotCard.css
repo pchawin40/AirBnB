@@ -86,3 +86,8 @@
   display: flex;
   align-items: center;
 }
+
+.spot-location.card-info.location-type{
+  margin-top: .2rem;
+  font-size: smaller;
+}

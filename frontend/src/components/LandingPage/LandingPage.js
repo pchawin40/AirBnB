@@ -3,21 +3,38 @@
 import Navigation from './Navigation';
 import Head from './Head';
 import HomeFooterBar from './HomeFooterBar';
+import { useLandingPage } from '../../context/LandingContext';
+import { useEffect } from 'react';
 
-const LandingPage = ({ isLoaded }) => 
-(
-  <>
-    {/* //? Navigation */}
-    <Navigation isLoaded={isLoaded} />
+const LandingPage = ({ isLoaded }) => {
+  /**
+   * Controlled inputs
+   */
+  const { currentPage, setCurrentPage } = useLandingPage();
 
-    {/* //? Content */}
-    {/* //* Head */}
-    <Head />
+  /**
+   * UseEffect
+   */
+  useEffect(() => {
+    // set current page to landing
+    setCurrentPage("landing");
+  }, [currentPage]);
 
-    {/* //? HomeFooterBar */}
-    <HomeFooterBar mapState={true} />
-  </>
-)
-; 
+  return (
+    (
+      <>
+        {/* //? Navigation */}
+        <Navigation isLoaded={isLoaded} />
+
+        {/* //? Content */}
+        {/* //* Head */}
+        <Head />
+
+        {/* //? HomeFooterBar */}
+        <HomeFooterBar mapState={true} />
+      </>
+    )
+  );
+};
 
 export default LandingPage;

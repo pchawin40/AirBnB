@@ -38,7 +38,7 @@ function App() {
   // state: isLoaded 
   const [isLoaded, setIsLoaded] = useState(false);
   const { spots, setSpots } = useSpot();
-  
+
 
   /**
    * Selector Functions

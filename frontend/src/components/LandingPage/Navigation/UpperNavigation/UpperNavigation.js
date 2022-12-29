@@ -20,11 +20,21 @@ import LoginFormModal from '../../UserLoginRegistration/LoginFormModal';
 import LogoContainer from './LogoContainer';
 import SearchBar from './SearchBar';
 import DemoUser from '../../UserLoginRegistration/DemoUser';
-import { useEffect } from 'react';
 import UpperRightNavLink from './UpperRightNavLink';
+
+// import react
+import { useEffect } from 'react';
+
+// import context
+import { useLandingPage } from '../../../../context/LandingContext';
 
 //? UpperNavigation Component
 const UpperNavigation = ({ isLoaded }) => {
+
+  /**
+  * Controlled inputs
+  */
+  const { currentPage, setCurrentPage } = useLandingPage();
 
   // get current session user
   // const sessionUser = undefined;
@@ -85,7 +95,11 @@ const UpperNavigation = ({ isLoaded }) => {
       <LogoContainer />
 
       {/* //? Render Search Link */}
-      <SearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
+      {
+        currentPage === 'landing'
+        &&
+        <SearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
+      }
 
       {/* // TODO: Render User Link */}
       {/* //? UpperRightNavLink */}

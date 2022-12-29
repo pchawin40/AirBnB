@@ -53,7 +53,7 @@ const HomeFooterBar = ({ mapState = false }) => {
           showMapModal
           &&
           <Modal onClose={_ => setShowMapModal(false)}>
-              <MapModal setShowMapModal={setShowMapModal} />
+            <MapModal setShowMapModal={setShowMapModal} />
           </Modal>
         }
 

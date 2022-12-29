@@ -2,7 +2,7 @@
 import './SignUpFormPage.css';
 
 // import react
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 // import react-redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import { useHistory, Redirect } from 'react-router-dom';
 // import store
 import * as sessionActions from '../../../../store/session';
 import HomeFooterBar from '../../HomeFooterBar';
+import { useLandingPage } from '../../../../context/LandingContext';
 
 //? SignupFormPage component
 const SignupFormPage = () => {
@@ -40,10 +41,19 @@ const SignupFormPage = () => {
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [image, setImage] = useState(null);
+  const { currentPage, setCurrentPage } = useLandingPage();
 
   // for multiple image file upload
   // const [images, setImages] = useState(null);
   const [validationErrors, setValidationErrors] = useState([]);
+
+  /**
+   * UseEffect
+   */
+  useEffect(() => {
+    // set current page to sign up
+    setCurrentPage("signup");
+  }, [currentPage]);
 
   // invoke useDispatch
   const dispatch = useDispatch();

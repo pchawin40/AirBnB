@@ -8,24 +8,32 @@ import { useState } from 'react';
 
 // import context
 import { Modal } from '../../../../../context/Modal';
+import { useSpot } from '../../../../../context/SpotContext';
 
 // import component
 import ActiveSearchBar from './ActiveSearchBar';
-import { useSpot } from '../../../../../context/SpotContext';
+
+// import react-router-dom
+import { useHistory } from 'react-router-dom';
 
 //? SearchBar component
 const SearchBar = ({ userHostLinks, isLoaded, user, sessionLinks }) => {
   // state for review modal
   const { showActiveBarModal, setShowActiveBarModal } = useSpot();
 
-  // TODO: Render bar that contain link
-
-  // TODO: handle on click to pop up modal
+  // invoke history
+  const history = useHistory();
 
   return (
     <div className='searchBarContainer'>
       {/* //? Location */}
-      <button className='searchBarButtons locationButton' onClick={_ => setShowActiveBarModal(true)}>
+      <button
+        className='searchBarButtons locationButton'
+        onClick={_ => {
+          // set active bar to true
+          setShowActiveBarModal(true);
+        }}
+      >
         <div>Anywhere</div>
 
         {/* span to divide */}

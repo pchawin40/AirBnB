@@ -1,11 +1,12 @@
 // import react
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // import react-redux
 import { useDispatch } from 'react-redux';
 
 // import react-router-dom
 import { useHistory, NavLink } from 'react-router-dom';
+import { useLandingPage } from '../../../context/LandingContext';
 
 // import css
 import './CreateSpot.css';
@@ -17,20 +18,18 @@ import SpotForm from './SpotForm';
 const CreateSpot = () => {
 
   /**
-   * Controlled Inputs:
-   * ------------------
-   * address: spot's address
-   * city: spot's city
-   * state: spot's state
-   * country: spot's country
-   * lat: spot's lat
-   * lng: spot's lng
-   * name: spot's name
-   * description: spot's description
-   * price: spot's price
-   * previewImage: spot's preview image
-   * validationErrors: spot's validation errors
+   * Controlled inputs
    */
+  const { currentPage, setCurrentPage } = useLandingPage();
+
+  /**
+   * UseEffect
+   */
+  useEffect(() => {
+    // set page to create spot
+    setCurrentPage('create');
+  }, [currentPage]);
+
   // invoke history
   const history = useHistory();
 
@@ -56,7 +55,7 @@ const CreateSpot = () => {
           {/* create step */}
           <section className="create-right-form-content">
             {/* //? Spot Form component */}
-            <SpotForm/>
+            <SpotForm />
           </section>
           <button className="create-button spot-exit" id="right-section-exit-button" onClick={handleExitButton}>
             Exit

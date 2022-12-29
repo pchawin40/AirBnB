@@ -18,14 +18,17 @@ import HeaderSection from "./HeaderSection";
 import HomeContent from './HomeContent/HomeContent';
 import ReviewInfo from "./ReviewInfo";
 import SpotFooter from "./SpotFooter";
+import HomeFooterBar from '../LandingPage/HomeFooterBar';
 
 // import css
 import './Spot.css';
-import HomeFooterBar from '../LandingPage/HomeFooterBar';
 
 // import context
 import { useSpot } from '../../context/SpotContext';
 import { useReview } from '../../context/ReviewContext';
+import { useLandingPage } from '../../context/LandingContext';
+
+// import store
 import { getAverageReviews } from '../../store/reviews';
 
 //? Spot component
@@ -46,6 +49,8 @@ const Spot = ({ isLoaded }) => {
   const { currentSpotId, setCurrentSpotId } = useReview();
   // control average review for current spot
   const { avgReview, setAvgReview } = useReview();
+  // control current page
+  const { currentPage, setCurrentPage } = useLandingPage();
 
   /**
    * Selector functions
@@ -67,6 +72,12 @@ const Spot = ({ isLoaded }) => {
     //?set average review
     setAvgReview(averageReviews);
   }, [dispatch, spotId, spots, spot, currentSpotId]);
+
+  // per current page
+  useEffect(() => {
+    // set current page to spot
+    setCurrentPage('spot');
+  }, [currentPage]);
 
   return (
     isLoaded && (

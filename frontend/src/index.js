@@ -27,6 +27,7 @@ import * as userActions from './store/users';
 import { ModalProvider } from './context/Modal';
 import SpotProvider from './context/SpotContext';
 import ReviewProvider from './context/ReviewContext';
+import LandingProvider from './context/LandingContext';
 
 const store = configureStore();
 
@@ -51,7 +52,9 @@ const Root = () => {
         <BrowserRouter>
           <SpotProvider>
             <ReviewProvider>
-              <App />
+              <LandingProvider>
+                <App />
+              </LandingProvider>
             </ReviewProvider>
           </SpotProvider>
         </BrowserRouter>

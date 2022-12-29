@@ -1,8 +1,27 @@
 // import npm package
 import ChromeDinoGame from 'react-chrome-dino';
 
+// import react
+import { useEffect } from 'react';
+
+// import context
+import { useLandingPage } from '../../context/LandingContext';
+
 //? ResourceNotFound component
 const ResourceNotFound = () => {
+  /**
+  * Controlled inputs
+  */
+  const { currentPage, setCurrentPage } = useLandingPage();
+
+  /**
+   * UseEffect
+   */
+  useEffect(() => {
+    // set current page to host
+    setCurrentPage("host");
+  }, [currentPage]);
+
   return (
     <>
       <h1>

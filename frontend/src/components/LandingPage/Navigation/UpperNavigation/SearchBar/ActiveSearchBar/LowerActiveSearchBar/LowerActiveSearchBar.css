@@ -140,6 +140,7 @@ input.where-input{
   padding-bottom: .25rem;
   padding-right: 1rem;
   
+  min-width: fit-content;
   position: absolute;
   top: 7%;
   right: .5rem;

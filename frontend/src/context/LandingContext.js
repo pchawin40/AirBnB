@@ -16,6 +16,8 @@ export default function LandingProvider({ children }) {
   const [user, setUser] = useState(<></>);
   // When no session user, contain links to login and sign up
   const [sessionLinks, setSessionLinks] = useState(<></>);
+  // set current page
+  const [currentPage, setCurrentPage] = useState("Landing");
 
   // Landing Provider
   return (
@@ -25,7 +27,8 @@ export default function LandingProvider({ children }) {
           isLoaded, setIsLoaded,
           userHostLinks, setUserHostLinks,
           user, setUser,
-          sessionLinks, setSessionLinks
+          sessionLinks, setSessionLinks,
+          currentPage, setCurrentPage
         }}
       >
         {children}

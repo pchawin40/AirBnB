@@ -110,11 +110,15 @@ const SpotCard = () => {
               <div className="spot-location card-info">
                 {/* name */}
                 {spot.name}
-                {/* longitude and latitude */}
-                {/* {"lat: " + spot.lat + " " + "lng: " + spot.lng} */}
               </div>
 
               <div className="spot-price card-info">
+                {
+                  spot.locationType
+                }
+                &nbsp;
+                |
+                &nbsp;
                 <span>${spot.price}</span>&nbsp;
                 {
                   spot.locationType === 'Stays'
