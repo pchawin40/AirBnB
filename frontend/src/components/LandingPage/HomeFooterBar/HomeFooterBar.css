@@ -67,7 +67,7 @@
 }
 
 #inner_div_map_button_home{
-	margin-bottom: 3rem;
+	margin-bottom: 4rem;
 	padding: 1.25vh 1vw;
 	
 	border-radius: 1rem;
@@ -83,13 +83,14 @@
 	position: absolute;
 	bottom: 5vh;
 	left: 45vw;
+
+	transition: .1s ease-in-out all;
 }
 
 #inner_div_map_button_home:hover{
-	transform: scale(1.1);
-
-	font-weight: bold;
 	cursor: pointer;
+	font-weight: bold;
+	transform: scale(1.005);
 }
 
 .fa-map_home{

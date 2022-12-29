@@ -31,7 +31,13 @@ const SpotCard = () => {
   /**
    * Selector functions
    */
-  const averageReviews = useSelector(reviewActions.getAverageReviews);
+  const allReviews = useSelector(reviewActions.getAllReviews);
+
+  // invoke dispatch
+  const dispatch = useDispatch();
+
+  // invoke history
+  const history = useHistory();
 
   /**
    * UseEffect
@@ -39,10 +45,8 @@ const SpotCard = () => {
   // per general
   useEffect(() => {
     // nothing for now
+    dispatch(reviewActions.thunkGetReviews());
   }, [spots]);
-
-  // invoke history
-  const history = useHistory();
 
   /**
    * Handler functions
@@ -60,6 +64,18 @@ const SpotCard = () => {
       {/* //? Show all spots */}
       {
         spots && spots.map(spot => {
+
+          // if review is ready to be check...
+          const currentSpotReviews =
+          // filter out all reviews by current spot id
+            allReviews
+              .filter(review => review.spotId === spot.id)
+              .map(review => review.stars)
+              .reduce((prevSum, currSum) => prevSum += currSum, 0);
+
+          // divide by length of all reviews by current spot
+          // save variable to be pass in as average spot reviews
+          const currentAvgSpotReviews = currentSpotReviews / allReviews.length;
 
           return (
             <div className="spot-card-content" key={spot.id} onClick={e => handleCardClick(spot.id)}>
@@ -81,7 +97,7 @@ const SpotCard = () => {
 
                 <div className="card-info-container-2">
                   {/* // //? Spot Review */}
-                  <span>{isNaN(avgReview) ? 0 : avgReview}</span>
+                  <span>{isNaN(currentAvgSpotReviews) ? 0 : currentAvgSpotReviews}</span>
                   <i className="fa-solid fa-star"></i>
                 </div>
               </div>

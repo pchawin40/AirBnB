@@ -73,13 +73,14 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
 
   // load on start up
   useEffect(() => {
-    if (spotId) dispatch(spotActions.thunkGetSpotBySpotId(spotId));
+    if (spotId) dispatch(spotActions.thunkGetSpots());
 
     // dispatch maps get api key
     dispatch(mapActions.getKey());
   }, [dispatch, spotId ? spotId : ""]);
 
   useEffect(() => {
+    // if edit form, apply the current spot information
     if (currentSpot) {
       setAddress(currentSpot.address);
       setCity(currentSpot.city);
@@ -92,6 +93,19 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
       setPrice(currentSpot.price);
       setImage(currentSpot.previewImage);
       setSpot(currentSpot.address + " " + currentSpot.city + " " + currentSpot.state + " " + currentSpot.country);
+    } else {
+      // if not editing, set to default value
+      setAddress("");
+      setCity("");
+      setState("");
+      setCountry("");
+      setLat("");
+      setLng("");
+      setName("");
+      setDescription("");
+      setPrice("");
+      setImage("");
+      setSpot("");
     }
   }, [currentSpot]);
 

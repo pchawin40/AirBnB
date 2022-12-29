@@ -114,16 +114,6 @@ const ReviewInfo = () => {
           <span id="review-info-num-reviews">{allReviewsByCurrentSpot.length} reviews</span>
         </header>
 
-        {/* //? review tracker */}
-        <section
-          className="review-info-tracker-container"
-          id={`review-tracker-permitted-container-${Array.isArray(allReviewsByCurrentSpot) && user &&
-            !(allReviewsByCurrentSpot.some(review => review.userId === user.id))
-            }`}
-        >
-          <ReviewTracker />
-        </section>
-
         {/* //? top reviews */}
         <section className="review-info-feature-container">
           {

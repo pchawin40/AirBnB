@@ -15,6 +15,7 @@ import * as sessionActions from '../../../../store/session';
 // import context
 import { Modal } from '../../../../context/Modal';
 import { useReview } from '../../../../context/ReviewContext';
+import { useSpot } from '../../../../context/SpotContext';
 
 // import component
 import EditSpotModal from './EditSpotModal';
@@ -28,8 +29,8 @@ const Headline = () => {
    * Controlled inputs
    */
   // state for review modal
-  const [editSpotModal, setEditSpotModal] = useState(false);
   const { avgReview, setAvgReview } = useReview();
+  const { editSpotModal, setEditSpotModal } = useSpot();
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -48,10 +49,10 @@ const Headline = () => {
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : null;
 
   useEffect(() => {
-
-    dispatch(spotActions.thunkGetSpotBySpotId(Number(spotId)));
-    dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
-  }, [dispatch, spotId]);
+    if (spotId) {
+      dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
+    }
+  }, [dispatch, spotId, spots]);
 
   //? handle edit spot
   const handleEditSpot = () => setEditSpotModal(true);
@@ -64,7 +65,9 @@ const Headline = () => {
     if (!choice) return;
 
     // delete spot
-    dispatch(spotActions.thunkDeleteSpot(spotId)).catch(async res => {
+    dispatch(spotActions.thunkDeleteSpot(spotId))
+      .then(() => spotActions.thunkGetSpots())
+      .catch(async res => {
       const data = await res.json();
 
       console.error("data", data.message);
@@ -109,7 +112,14 @@ const Headline = () => {
           // Show Edit Modal
           editSpotModal
           &&
-          <Modal onClose={_ => setEditSpotModal(false)}>
+          <Modal
+              onClose={_ => {
+                // turn window vertical scroll back on
+                document.body.style.overflowY = "scroll";
+
+                setEditSpotModal(false);
+              }}
+            >
             <EditSpotModal editSpotModal={editSpotModal} setEditSpotModal={setEditSpotModal} />
           </Modal>
         }

@@ -14,19 +14,24 @@ import './HomeFooterBar.css';
 
 // import context
 import { Modal } from '../../../context/Modal';
+import { useSpot } from '../../../context/SpotContext';
 
 // import component
 import MapModal from './MapModal';
 
 //? HomeFooterBar component
 const HomeFooterBar = ({ mapState = false }) => {
+  /**
+   * Controlled inputs
+   */
   // state for MapModal
   const [showMapModal, setShowMapModal] = useState(false);
+  const { editSpotModal, setEditSpotModal } = useSpot();
 
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <div className="outer-footer-container_home" style={{ zIndex: 100 }}>
+    <div className="outer-footer-container_home" style={{ zIndex: editSpotModal ? 100 : 0 }}>
       <div className="footer-content-container_home">
         {/* //? upper div container (map) */}
         {

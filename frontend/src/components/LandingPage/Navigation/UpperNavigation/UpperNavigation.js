@@ -12,6 +12,7 @@ import './UpperNavigation.css';
 // import session store
 import * as sessionActions from '../../../../store/session';
 import * as userActions from '../../../../store/users';
+import * as reviewActions from '../../../../store/reviews';
 
 // import component
 import ProfileButton from './ProfileButton/ProfileButton';
@@ -32,9 +33,17 @@ const UpperNavigation = ({ isLoaded }) => {
   // invoke dispatch
   const dispatch = useDispatch();
 
+  /**
+   * Selector functions
+   */
+  const allReviews = useSelector(reviewActions.getAllReviews);
+
+  /**
+   * UseEffect
+   */
   useEffect(() => {
     if (sessionUser) {
-      dispatch(userActions.thunkLoadUserById(sessionUser.id));
+      dispatch(userActions.thunkLoadUserById(sessionUser.id))
     }
   }, [dispatch, sessionUser]);
 

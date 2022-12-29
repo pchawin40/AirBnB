@@ -69,7 +69,7 @@ export const getReviewsBySpotId = spotId => async dispatch => {
 };
 
 //? Thunk action to get all reviews
-export const thunkGetReviews = (_) => async dispatch => {
+export const thunkGetReviews = () => async dispatch => {
   // fetch all reviews given by spots
   const res = await csrfFetch(`/spots/reviews`);
 
@@ -161,7 +161,7 @@ export const thunkEditReview = (reviewToEdit, reviewId) => async dispatch => {
 }
 
 /* --------- SELECTOR FUNCTIONS -------- */
-export const getAllReviews = state => Object.values(state.reviews);
+export const getAllReviews = state => state.reviews && state.reviews.Reviews ? Object.values(state.reviews.Reviews)[0] : [];
 
 export const getReviewById = reviewId => state => state.reviews.Reviews[reviewId];
 
@@ -183,11 +183,12 @@ export const getReviewsByCurrentSpot
 
 // get average review
 export const getAverageReviews
-  = state => state.reviews
+  = spotId => state => state.reviews
     && state.reviews.Reviews
     && Object.values(state.reviews.Reviews).length > 0
     ?
     Object.values(state.reviews.Reviews)[0]
+      .filter(review => review.spotId === Number(spotId))
       .map(review => review.stars)
       .reduce(((initialAvg, currAvg) => initialAvg + currAvg), 0)
     / Object.values(state.reviews.Reviews)[0].length

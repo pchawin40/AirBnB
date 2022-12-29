@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // import react-router-dom
 import { useHistory, useParams } from 'react-router-dom';
+import { useSpot } from '../../../../../context/SpotContext';
 
 // import store
 import * as spotActions from '../../../../../store/spots';
@@ -16,7 +17,7 @@ import SpotForm from '../../../../HostSpot/CreateSpot/SpotForm';
 import './EditSpotModal.css';
 
 //? CreateSpot component
-const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
+const EditSpotModal = () => {
   // deconstruct spotId
   const { spotId } = useParams();
 
@@ -45,8 +46,11 @@ const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [previewImage, setPreviewImage] = useState("");
-
   const [validationErrors, setValidationErrors] = useState([]);
+  const { editSpotModal, setEditSpotModal } = useSpot();
+
+  // turn off window scroll y
+  document.body.style.overflowY = "hidden";
 
   // invoke useDispatch
   const dispatch = useDispatch();
@@ -82,7 +86,15 @@ const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
         {/* //? Left aside */}
         <aside id="create-left-aside">
           <figure id="create-logo-container">
-            <i style={{ zIndex: 1 }} onClick={_ => history.push('/')} className="fa-brands fa-airbnb" id="create-logo-icon"></i>
+            <i 
+            style={{ zIndex: 1 }}
+            onClick={_ => {
+              // turn window vertical scroll back on
+              document.body.style.overflowY = "scroll";
+
+              return history.push('/')
+            }} 
+            className="fa-brands fa-airbnb" id="create-logo-icon"></i>
           </figure>
           {/* airbnb logo */}
           <h1>Edit your current listing spot ☺</h1>
@@ -95,12 +107,27 @@ const EditSpotModal = ({ editSpotModal, setEditSpotModal }) => {
             {/* Edit Spot Modal */}
             <SpotForm spotActivity="edit" currentSpot={currentSpot} />
           </section>
-          <button className="create-button spot-exit" id="right-section-exit-button" onClick={_ => setEditSpotModal(false)}>
+          <button 
+          className="create-button spot-exit" 
+          id="right-section-exit-button" 
+          onClick={_ => {
+            // turn window vertical scroll back on
+            document.body.style.overflowY = "scroll";
+
+            return setEditSpotModal(false);
+          }}
+          >
             Exit
           </button>
           <section id="create-right-lower-section">
             <li>
-              <span onClick={_ => setEditSpotModal(false)} className="create-button-spot-back">
+              <span
+                onClick={_ => {
+                  // turn window vertical scroll back on
+                  document.body.style.overflowY = "scroll";
+                  return setEditSpotModal(false);
+                }}
+                className="create-button-spot-back">
                 Back
               </span>
             </li>
