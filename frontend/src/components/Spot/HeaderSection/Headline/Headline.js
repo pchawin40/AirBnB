@@ -68,10 +68,10 @@ const Headline = () => {
     dispatch(spotActions.thunkDeleteSpot(spotId))
       .then(() => spotActions.thunkGetSpots())
       .catch(async res => {
-      const data = await res.json();
+        const data = await res.json();
 
-      console.error("data", data.message);
-    });
+        console.error("data", data.message);
+      });
 
     // redirect user to home page after delete
     return history.push('/');
@@ -113,13 +113,13 @@ const Headline = () => {
           editSpotModal
           &&
           <Modal
-              onClose={_ => {
-                // turn window vertical scroll back on
-                document.body.style.overflowY = "scroll";
+            onClose={_ => {
+              // turn window vertical scroll back on
+              document.body.style.overflowY = "scroll";
 
-                setEditSpotModal(false);
-              }}
-            >
+              setEditSpotModal(false);
+            }}
+          >
             <EditSpotModal editSpotModal={editSpotModal} setEditSpotModal={setEditSpotModal} />
           </Modal>
         }
@@ -153,9 +153,9 @@ const Headline = () => {
       {/* //? Div 2 Inner Div 2 */}
       <div className="div_2_inner_div_2">
         {/* share */}
-        <span><i className="fa-solid fa-arrow-up-from-bracket"></i>Share</span>
+        {/* <span><i className="fa-solid fa-arrow-up-from-bracket"></i>Share</span> */}
         {/* save */}
-        <span><i className="fa-regular fa-heart"></i>Save</span>
+        {/* <span><i className="fa-regular fa-heart"></i>Save</span> */}
       </div>
     </section>
   );
