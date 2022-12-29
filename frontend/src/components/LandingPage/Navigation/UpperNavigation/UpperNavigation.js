@@ -76,7 +76,7 @@ const UpperNavigation = ({ isLoaded }) => {
       <LogoContainer />
 
       {/* //? Render Search Link */}
-      {/* <SearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} /> */}
+      <SearchBar userHostLinks={userHostLinks} isLoaded={isLoaded} user={user} sessionLinks={sessionLinks} />
 
       {/* // TODO: Render User Link */}
       {/* //? UpperRightNavLink */}

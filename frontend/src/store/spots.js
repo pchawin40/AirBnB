@@ -310,6 +310,35 @@ export const getImagesBySpot = state => Object.values(state.spots.Images);
 
 export const getSpotOwner = () => state => state.spots.Owners ? state.spots.Owners : state.spots;
 
+export const getSpotByLocation =
+  location =>
+    state =>
+      Object.values(state.spots.Spots)
+        .filter(spot => {
+          // combine address, city, state, country, name, description
+          const currentSpotLocation = `
+            ${spot.address} ${spot.city} ${spot.state} ${spot.country} ${spot.name} ${spot.description}
+          `;
+
+          const currentCityState = `
+            ${spot.city}, ${spot.state}
+          `
+
+          return (
+            // if location is empty, return true
+            !location ? true : false
+              ||
+              // or if location is not empty, search by address
+              currentSpotLocation.toLowerCase().includes(location.toLowerCase())
+              ||
+              currentCityState.toLowerCase().includes(location.toLowerCase())
+              ||
+              spot.lat.toString().includes(location)
+              ||
+              spot.lng.toString().includes(location)
+          );
+        });
+
 /* --------- REDUCERS -------- */
 const initialSpots = [];
 
