@@ -20,6 +20,7 @@ export default function SpotProvider({ children }) {
   const [price, setPrice] = useState("");
   const [spots, setSpots] = useState([]);
   const [spotQuery, setSpotQuery] = useState("");
+  const [locationType, setLocationType] = useState("");
   const [editSpotModal, setEditSpotModal] = useState(false);
   const [showActiveBarModal, setShowActiveBarModal] = useState(false);
 
@@ -39,6 +40,7 @@ export default function SpotProvider({ children }) {
           price, setPrice,
           spots, setSpots,
           spotQuery, setSpotQuery,
+          locationType, setLocationType,
           editSpotModal, setEditSpotModal,
           showActiveBarModal, setShowActiveBarModal
         }}

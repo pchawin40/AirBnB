@@ -23,12 +23,21 @@
   font-weight: bold;
 }
 
-#spot-form-name, #spot-form-price, #spot-form-description{
+#spot-form-location-type{
+  margin-top: 1rem;
+
+  font-size: 12px;
+}
+
+#spot-form-name, 
+#spot-form-location-type,
+#spot-form-price, 
+#spot-form-description{
   padding-top: 1vh;
   padding-bottom: 1vh;
 }
 
-#spot-form-name, #spot-form-price, #spot-form-description, #spot-form-address{
+#spot-form-name, #spot-location-type, #spot-form-price, #spot-form-description, #spot-form-address{
   font-style: italic;
   width: 100%;
   border: none;
