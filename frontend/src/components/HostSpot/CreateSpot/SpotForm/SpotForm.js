@@ -46,7 +46,8 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
     lng, setLng,
     name, setName,
     description, setDescription,
-    price, setPrice
+    price, setPrice,
+    locationType, setLocationType
   } = useSpot();
 
   const [spot, setSpot] = useState("");
@@ -92,6 +93,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
       setDescription(currentSpot.description);
       setPrice(currentSpot.price);
       setImage(currentSpot.previewImage);
+      setLocationType(currentSpot.locationType);
       setSpot(currentSpot.address + " " + currentSpot.city + " " + currentSpot.state + " " + currentSpot.country);
     } else {
       // if not editing, set to default value
@@ -106,6 +108,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
       setPrice("");
       setImage("");
       setSpot("");
+      setLocationType("");
     }
   }, [currentSpot]);
 
@@ -126,6 +129,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
       name,
       description,
       price,
+      locationType,
       previewImage: image
     }
 
@@ -134,6 +138,8 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
 
     // reset ref value
     ref.current.value = "";
+
+    history.push('/')
 
     // dispatch create spot
     return dispatch(
@@ -146,8 +152,7 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
         spotActions.thunkEditSpot(spot, Number(spotId))
     )
       .then(_ => {
-        history.push('/')
-        dispatch(spotActions.thunkGetSpots())
+        return dispatch(spotActions.thunkGetSpots())
       })
       .catch(
         async res => {
@@ -232,6 +237,20 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
           value={name}
           onChange={e => setName(e.target.value)}
         />
+      </section>
+
+      <section id="spot-form-location-type">
+        <label htmlFor="location-type">What is your location type?</label>
+        <select
+          id="spot-form-location-type"
+          name="location-type"
+          value={locationType}
+          onChange={e => setLocationType(e.target.value)}
+        >
+          <option value="">--Select Location Type--</option>
+          <option value="Stays">Stay</option>
+          <option value="Experiences">Experience</option>
+        </select>
       </section>
 
       {/* //? Description */}

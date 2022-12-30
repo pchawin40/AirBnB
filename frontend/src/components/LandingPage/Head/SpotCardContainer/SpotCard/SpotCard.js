@@ -114,7 +114,15 @@ const SpotCard = () => {
 
               <div className="spot-price card-info">
                 {
-                  spot.locationType
+                  spot.locationType === 'Stays'
+                    ?
+                    <>
+                      Stay
+                    </>
+                    :
+                    <>
+                      Experience
+                    </>
                 }
                 &nbsp;
                 |

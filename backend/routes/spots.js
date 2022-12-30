@@ -58,6 +58,9 @@ const validateSpot = [
   check('price')
     .exists({ checkFalsy: true })
     .withMessage('Price per day is required'),
+  check('locationType')
+    .exists({ checkFalsy: true })
+    .withMessage('locationType is required'),
   handleValidationErrors
 ];
 
@@ -607,7 +610,8 @@ router.post('/', singleMulterUpload("previewImage"), requireAuth, validateSpot, 
     lng,
     name,
     description,
-    price
+    price,
+    locationType
   } = req.body;
 
   const previewImage = req.file ? await singlePublicFileUpload(req.file) : null;
@@ -631,7 +635,8 @@ router.post('/', singleMulterUpload("previewImage"), requireAuth, validateSpot, 
     name,
     description,
     price,
-    previewImage
+    previewImage,
+    locationType
   });
 
   const spotReturn = await Spot.findByPk(postSpot.id);
@@ -658,7 +663,8 @@ router.put('/:spotId', singleMulterUpload("previewImage"), requireAuth, validate
     lng,
     name,
     description,
-    price
+    price,
+    locationType
   } = req.body;
 
   let previewImage;
@@ -712,7 +718,8 @@ router.put('/:spotId', singleMulterUpload("previewImage"), requireAuth, validate
     name,
     description,
     price,
-    previewImage
+    previewImage,
+    locationType
   });
 
   const spotReturn = await Spot.findByPk(updateSpot.id);

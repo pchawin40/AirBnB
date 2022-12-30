@@ -119,6 +119,7 @@ export const addASpot = spotToAdd => async dispatch => {
     name,
     description,
     price,
+    locationType,
     previewImage,
   } = spotToAdd;
 
@@ -134,6 +135,7 @@ export const addASpot = spotToAdd => async dispatch => {
   formData.append("name", name);
   formData.append("description", description);
   formData.append("price", price);
+  formData.append("locationType", locationType);
 
   // single file image upload
   if (previewImage) formData.append("previewImage", previewImage);
@@ -172,7 +174,8 @@ export const thunkEditSpot = (spotToEdit, spotId) => async dispatch => {
     name,
     description,
     price,
-    previewImage
+    previewImage,
+    locationType
   } = spotToEdit;
 
   // defining form data
@@ -188,6 +191,7 @@ export const thunkEditSpot = (spotToEdit, spotId) => async dispatch => {
   formData.append("name", name);
   formData.append("description", description);
   formData.append("price", price);
+  formData.append("locationType", locationType);
 
   //? check if url
   function isURL(str) {
