@@ -4,7 +4,7 @@
 .sign-up-form-page-container{
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100vh 130vh 100vh;
+  grid-template-rows: 100vh 110vh 100vh;
   grid-auto-rows: max-content;
 
   grid-template-areas: 
@@ -131,7 +131,7 @@
   background-color: white;
   position: absolute;
   width: 40rem;
-  height: 15rem;
+  height: 5rem;
   font-size: 54px;
   display: flex;
   flex-direction: column;
@@ -147,7 +147,7 @@
 .main-pic-carousel{
   width: 100rem;
   height: 40rem;
-  margin-top: 15rem;
+  margin-top: 10rem;
 }
 
 .inner-main-pic-carousel{
@@ -167,7 +167,7 @@
 
 .inner-main-pic-carousel > img:hover{
   transform: scale(1.02);
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 /****************************************
