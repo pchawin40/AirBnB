@@ -223,8 +223,7 @@ const SignupFormPage = () => {
               onChange={e => setFirstName(e.target.value)}
               required
               value={firstName}
-            >
-            </input>
+            />
 
             {/* //? lastName */}
             <input
@@ -306,8 +305,6 @@ const SignupFormPage = () => {
           <img src="https://a0.muscache.com/im/pictures/f409b291-8b55-4780-81c3-a067062982d1.jpg?im_w=2560&im_q=highq" alt="form img" />
         </section>
       </section>
-
-      <HomeFooterBar mapState={false} />
     </section>
   );
 };
