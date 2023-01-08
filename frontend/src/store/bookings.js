@@ -82,7 +82,6 @@ export const thunkAddBooking = (spotId, booking) => async dispatch => {
 
 //? Thunk action to remove booking
 export const thunkRemoveBooking = bookingId => async dispatch => {
-  console.log('bookingId', bookingId);
 
   // call csrfFetch to remove booking with given bookingId
   const res = await csrfFetch(`/bookings/${bookingId}`, {

@@ -129,7 +129,6 @@ const HomeContent = () => {
         const currentErrors = [];
 
         if ("Spot must NOT belong to the current user".includes(errorMsg)) {
-          // setBookingErrors(bookingErrors.push(`hello`));
           currentErrors.push(errorMsg)
         }
 
