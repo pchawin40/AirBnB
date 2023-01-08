@@ -8,6 +8,11 @@ import { useDispatch } from 'react-redux';
 
 // import react-router-dom
 import { NavLink } from 'react-router-dom';
+import { useBooking } from '../../../../../context/BookingContext';
+import { Modal } from '../../../../../context/Modal';
+
+// import component
+import BookingModal from '../../../../BookingModal';
 
 // import session store 
 import * as sessionActions from '../../../../../store/session';
@@ -27,6 +32,7 @@ const ProfileButton = () => {
    * showMenu: show menu for current user
    */
   const [showMenu, setShowMenu] = useState(false);
+  const { bookingModal, setBookingModal } = useBooking();
 
   //? openMenu: toggle menu
   const openMenu = () => {
@@ -95,9 +101,15 @@ const ProfileButton = () => {
             </div>
             <div className="middle-container">
               {/* // TODO: Manage Listings */}
-              {/* <NavLink to="/" className="todo-link">
-                Manage Listings
-              </NavLink> */}
+              <li
+                onClick={_ => {
+                  // open booking modal
+                  setBookingModal(true);
+                }}
+                className="active-link"
+              >
+                Check my bookings
+              </li>
 
               {/* //? Host an Experience */}
               <NavLink className="active-link" to="/host/homes">
@@ -127,6 +139,14 @@ const ProfileButton = () => {
             </div>
           </ul>
         )
+      }
+      {
+        // Show Booking Modal
+        bookingModal
+        &&
+        <Modal onClose={_ => setBookingModal(false)}>
+          <BookingModal />
+        </Modal>
       }
     </div>
   );

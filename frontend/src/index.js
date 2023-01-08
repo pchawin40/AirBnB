@@ -28,6 +28,7 @@ import { ModalProvider } from './context/Modal';
 import SpotProvider from './context/SpotContext';
 import ReviewProvider from './context/ReviewContext';
 import LandingProvider from './context/LandingContext';
+import BookingProvider from './context/BookingContext';
 
 const store = configureStore();
 
@@ -53,7 +54,9 @@ const Root = () => {
           <SpotProvider>
             <ReviewProvider>
               <LandingProvider>
-                <App />
+                <BookingProvider>
+                  <App />
+                </BookingProvider>
               </LandingProvider>
             </ReviewProvider>
           </SpotProvider>

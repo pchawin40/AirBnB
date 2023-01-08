@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
 import * as reviewActions from './store/reviews';
+import * as bookingActions from './store/bookings';
 
 // import context
 import SpotProvider, { useSpot } from './context/SpotContext';
@@ -53,6 +54,9 @@ function App() {
     // ... restore session user and set is loaded to true
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
     dispatch(spotActions.thunkGetSpots());
+
+    // call to dispatch to get booking
+    dispatch(bookingActions.thunkGetUserBookings());
   }, [isLoaded, dispatch]);
 
   /**

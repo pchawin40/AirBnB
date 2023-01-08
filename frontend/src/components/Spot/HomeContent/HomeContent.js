@@ -1,7 +1,7 @@
 // frontend/src/Component/Spot/HomeContent/HomeContent.js
 
 // import react
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // import react-redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +13,10 @@ import { useParams } from 'react-router-dom';
 import './HomeContent.css';
 
 // import store
-import * as spotActions from '../../../store/spots'
+import * as spotActions from '../../../store/spots';
+import * as reviewActions from '../../../store/reviews';
+import * as bookingActions from '../../../store/bookings';
+import * as sessionActions from '../../../store/session';
 
 // import offerList data
 import { offerList } from '../../../data/data';
@@ -21,18 +24,31 @@ import { offerList } from '../../../data/data';
 //? HomeContent component
 const HomeContent = () => {
 
+  /**
+   * Controlled inputs
+   */
   // invoke dispatch
   const dispatch = useDispatch();
+  const [checkInDate, setCheckInDate] = useState(null);
+  const [checkOutDate, setCheckOutDate] = useState(null);
+  const [bookingError, setBookingError] = useState("");
 
   // get spotId
   const { spotId } = useParams();
 
+  /**
+   * UseSelector
+   */
+  // spot owner
+  const spotOwner = useSelector(spotActions.getSpotOwner);
   // get current spot first 
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};
-
-  // spot owner
-  const spotOwner = useSelector(spotActions.getSpotOwner);
+  const averageReviews = useSelector(reviewActions.getAverageReviews(spotId));
+  const allReviewsByCurrentSpot = useSelector(reviewActions.getReviewsByCurrentSpot(spotId));
+  const spotById = useSelector(spotActions.getSpotById(spotId));
+  const allBookings = useSelector(bookingActions.getCurrentUserBookings);
+  const sessionUser = useSelector(sessionActions.getSessionUser);
 
   /**
    * UseEffect
@@ -40,12 +56,89 @@ const HomeContent = () => {
   // per general
   useEffect(() => {
     // nothing for now
-  }, [dispatch, spotId]);
+    console.log('allBookings', allBookings);
+  }, [dispatch, spotId, allBookings, bookingError]);
+
+  /**
+   * Handler function
+   */
+  const updateCheckIn = e => {
+    setCheckInDate(e.target.value);
+  }
+
+  const updateCheckOut = e => {
+    setCheckOutDate(e.target.value);
+  }
+
+  // function to check if check in and check out are valid
+  const checkBookingIsValid = () => {
+
+    console.log('test',
+      Object.values(allBookings).filter(booking => {
+        return (
+          booking.spotId === spotId
+          &&
+          booking.userId === sessionUser.id
+          &&
+          (new Date(booking.startDate).toDateString() === new Date(checkInDate).toDateString()
+            ||
+            new Date(booking.endDate).toDateString() === new Date(checkOutDate).toDateString())
+        )
+      }));
+
+    return (
+      checkInDate && checkOutDate
+      &&
+      // check if check out date is after check in date
+      new Date(checkInDate) < new Date(checkOutDate)
+      &&
+      // check if checkInDate and checkOutDate already exists
+      allBookings
+      &&
+      Object.values(allBookings).length > 0
+      &&
+      Object.values(allBookings).filter(booking => {
+        return (
+          booking.spotId === spotId
+          &&
+          booking.userId === sessionUser.id
+          &&
+          (new Date(booking.startDate).toDateString() === new Date(checkInDate).toDateString()
+            ||
+            new Date(booking.endDate).toDateString() === new Date(checkOutDate).toDateString())
+        )
+      }).length === 0
+    );
+  };
+
+  const handleBookingReserve = () => {
+    const postBooking = {
+      startDate: checkInDate,
+      endDate: checkOutDate
+    }
+
+    // reset data
+    setBookingError("");
+    setCheckInDate(null);
+    setCheckOutDate(null);
+
+    // call on thunk to post booking then fetch new booking data
+    dispatch(bookingActions.thunkAddBooking(spotId, postBooking))
+      .then(() => dispatch(bookingActions.thunkGetUserBookings()))
+      .catch(async res => {
+        const error = await res.json();
+        const errorMsg = error.message;
+
+        if ("Spot must NOT belong to the current user".includes(errorMsg)) {
+          setBookingError("Spot must not belong to the current user");
+        }
+      });
+  }
 
   return (
     spot &&
-    <>
-      <section className="home-content-section-container">
+    <section className="home-content-outer-container">
+      <section className="home-content-section-left">
         {/* //? Home Content Title Section */}
         <section className="home-content-title-section">
           {/* Title */}
@@ -128,40 +221,113 @@ const HomeContent = () => {
             )}
           </section>
         </section>
-
-        {/* //! TODO: Calendar API: for spot stay reserve */}
-
-        {/* //? Location Map */}
-        {/* <section className="home-content-location-info"> */}
-        {/* location header */}
-
-        {/* map */}
-
-        {/* location */}
-
-        {/* about location */}
-        {/* </section> */}
-
-        {/* //? Host Info */}
-        {/* <section className="home-content-host-info"> */}
-        {/* host header */}
-
-        {/* about host */}
-
-        {/* host contact info */}
-        {/* </section> */}
-
-        {/* //? Things to know */}
-        {/* <section className="home-content-know-info"> */}
-        {/* house rules */}
-
-        {/* health & safety */}
-
-        {/* cancellation policy */}
-        {/* </section> */}
-
       </section>
-    </>
+
+      <section className="home-content-section-right">
+        {/* Appointment Maker */}
+        <section className='home-content-inner-right'>
+          <aside className='home-content-inner-right-2'>
+
+            {/* Title Section */}
+            <section className="title">
+              {/* //? Title */}
+              {/* $ per night or per event */}
+              <h2>
+                <span>
+                  {
+                    `$${spotById?.price}`
+                  }
+                </span>
+                &nbsp;
+
+                {/* stay type */}
+                <span>
+                  {
+                    spot.locationType === 'Stays'
+                      ?
+                      <>
+                        night
+                      </>
+                      :
+                      <>
+                        experience
+                      </>
+                  }
+                </span>
+              </h2>
+
+              <span>
+                {/* Ratings */}
+                <i className="fa-solid fa-star fa-xs" />
+
+                <span>
+                  {/* get average rating for current spot */}
+                  {
+                    averageReviews
+                  }
+                </span>
+
+                <span>
+                  •
+                </span>
+
+                {/* num of reviews */}
+                <span id="review-info-num-reviews">{allReviewsByCurrentSpot.length} reviews</span>
+              </span>
+            </section>
+
+            {/* Schedule Section */}
+            <section className="schedule">
+              {/* Check In */}
+              <figure>
+                <label
+                  htmlFor='check-in'
+                >
+                  CHECK-IN
+                </label>
+                <input
+                  type="date"
+                  id="check-in"
+                  onChange={updateCheckIn}
+                />
+              </figure>
+
+              {/* Check Out */}
+              <figure>
+                <label
+                  htmlFor='check-out'
+                >
+                  CHECK-OUT
+                </label>
+                <input
+                  type="date"
+                  id="check-out"
+                  onChange={updateCheckOut}
+                />
+              </figure>
+
+            </section>
+
+            {/* Reserve Section */}
+            <section className="reserve">
+              <button
+                className={checkBookingIsValid() ? "valid booking" : "invalid booking"}
+                onClick={_ => checkBookingIsValid() ? handleBookingReserve() : ""}
+              >
+                Reserve
+              </button>
+
+              {/* Display error */}
+              <span>
+                {
+                  bookingError
+                }
+              </span>
+            </section>
+          </aside>
+        </section>
+      </section>
+    </section>
   );
 }
 

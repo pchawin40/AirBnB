@@ -3,69 +3,81 @@
 /******************************
 *   Profile Button Container
 *******************************/
-#nav-button-container{
-  margin: 0;
+#nav-button-container {
+	margin: 0;
 }
 
-#nav-button-container:hover{
-  cursor: pointer;
+#nav-button-container:hover {
+	cursor: pointer;
 }
 
-#profile-dropdown{
-  top: 5.5rem;
-  right: 3rem;
-  padding: 10px 0;
-  height: fit-content;
-  position: absolute;
-  border-radius: 2rem;
-  background-color: white;
-  border: 1px solid #EDEDED;
-  display: flex;
-  flex-direction: column;
+#profile-dropdown {
+	top: 5.5rem;
+	right: 3rem;
+	padding: 10px 0;
+	height: fit-content;
+	position: absolute;
+	border-radius: 2rem;
+	background-color: white;
+	border: 1px solid #ededed;
+	display: flex;
+	flex-direction: column;
 }
 
-.top-container, .middle-container, .lower-container{
-  display: flex;
-  flex-direction: column;
+.top-container,
+.middle-container,
+.lower-container {
+	display: flex;
+	flex-direction: column;
 }
 
-.top-container > a, .middle-container > a, .lower-container > a {
-  padding: 1rem;
-  text-align: start;
-  padding-right: 5rem;
+li.active-link,
+.top-container > a,
+.middle-container > a,
+.lower-container > a {
+	padding: 1rem;
+	text-align: start;
+	padding-right: 5rem;
 }
 
-.top-container > a:hover, .middle-container > a:hover, .lower-container > a:hover{
-  background-color: #EDEDED;
+li.active-link:hover,
+.top-container > a:hover,
+.middle-container > a:hover,
+.lower-container > a:hover {
+	background-color: #ededed;
+}
+
+li.active-link:hover {
+	cursor: pointer;
 }
 
 /******************************
 *       Top Container
 *******************************/
-.top-container{
-  padding-top: 1rem;
+.top-container {
+	padding-top: 1rem;
 }
 
 /******************************
 *       Middle Container
 *******************************/
-.middle-container{
-  border-top: 1px solid #EDEDED;
-  border-bottom: 1px solid #EDEDED;
+.middle-container {
+	border-top: 1px solid #ededed;
+	border-bottom: 1px solid #ededed;
 }
 
-.active-link{
-  font-weight: bold;
+.active-link {
+	font-weight: bold;
 }
 
-.todo-link{
-  color: red;
-  font-weight: bold;
+.todo-link {
+	color: red;
+	font-weight: bold;
 }
 
 /******************************
 *       Lower Container
 *******************************/
-.lower-container{
-  padding-bottom: 1rem;
+.lower-container {
+	padding-bottom: 1rem;
 }

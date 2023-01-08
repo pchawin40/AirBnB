@@ -307,7 +307,7 @@ export const thunkDeleteImage = (imageId, spotId) => async dispatch => {
 /* --------- SELECTOR FUNCTIONS -------- */
 export const getAllSpots = state => state.spots.Spots;
 
-export const getSpotById = spotId => state => Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId));
+export const getSpotById = spotId => state => state.spots.Spots && Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId));
 
 // get all images
 export const getImagesBySpot = spotId =>
