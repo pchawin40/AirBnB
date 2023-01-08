@@ -18,8 +18,6 @@ import { useSpot } from '../../../context/SpotContext';
 
 // import component
 import MapModal from './MapModal';
-import { useBooking } from '../../../context/BookingContext';
-import BookingModal from '../../BookingModal';
 
 //? HomeFooterBar component
 const HomeFooterBar = ({ mapState = false }) => {
@@ -29,7 +27,6 @@ const HomeFooterBar = ({ mapState = false }) => {
   // state for MapModal
   const [showMapModal, setShowMapModal] = useState(false);
   const { editSpotModal, setEditSpotModal } = useSpot();
-  const { bookingModal, setBookingModal } = useBooking();
 
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -86,7 +83,10 @@ const HomeFooterBar = ({ mapState = false }) => {
                     Become a Host
                   </NavLink>
               }
-
+              {/* <span className="inner_div_1_content_home" id="SPAN_5">·</span> */}
+              {/* <span className="inner_div_1_content_home" id="A_6">Log Out</span> */}
+              {/* <span className="inner_div_1_content_home" id="SPAN_7">·</span> */}
+              {/* <span className="inner_div_1_content_home" id="A_8">Sitemap</span> */}
             </div>
           </div>
 
@@ -124,15 +124,6 @@ const HomeFooterBar = ({ mapState = false }) => {
           </div>
         </div>
       </div>
-
-      {
-        // Show Booking Modal
-        bookingModal
-        &&
-        <Modal onClose={_ => setBookingModal(false)}>
-          <BookingModal />
-        </Modal>
-      }
     </div>
   );
 };
