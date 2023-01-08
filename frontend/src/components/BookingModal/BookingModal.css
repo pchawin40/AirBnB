@@ -1,0 +1,67 @@
+/* frontend/src/components/BookingModal/BookingModal.css */
+.booking.modal {
+	height: 50vh;
+	width: 50vw;
+
+	margin: 0;
+	padding: 0;
+}
+
+table.booking.modal.inner {
+	width: 100%;
+	border-radius: 24px;
+	overflow: hidden;
+}
+
+table.booking.modal.inner > thead {
+	height: 20%;
+	font-size: 36px;
+}
+
+table.booking.modal.inner > tbody {
+	height: 100%;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: block;
+}
+
+table.booking.modal.inner > tbody > tr {
+	width: 100%;
+	height: 3rem;
+
+	display: flex;
+}
+
+table.booking.modal.inner > tbody > tr:not(:first-child) {
+	margin-bottom: 12px;
+}
+
+table.booking.modal.inner > tbody > tr:first-child {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+table.booking.modal.inner figure {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	width: 100%;
+	height: 5rem;
+	justify-items: center;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+}
+
+table.booking.modal.inner button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background-color: white;
+	border: none;
+}
+
+table.booking.modal.inner button > i:hover {
+	cursor: pointer;
+}
