@@ -58,7 +58,7 @@ const Spot = ({ isLoaded }) => {
    * Selector functions
    */
   const averageReviews = useSelector(getAverageReviews(spotId));
-  const currentUser = useSelector(sessionActions.getSessionUser);
+  const sessionUser = useSelector(sessionActions.getSessionUser);
 
   /**
    * UseEffect
@@ -75,8 +75,10 @@ const Spot = ({ isLoaded }) => {
     //?set average review
     setAvgReview(averageReviews);
 
-    // call to dispatch to get booking
-    dispatch(bookingActions.thunkGetUserBookings());
+    if (sessionUser) {
+      // call to dispatch to get booking
+      dispatch(bookingActions.thunkGetUserBookings());
+    }
   }, [dispatch, spotId, spots, spot, currentSpotId]);
 
   // per current page

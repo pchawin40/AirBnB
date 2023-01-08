@@ -71,11 +71,11 @@ const HomeContent = () => {
 
   // function to check if check in and check out are valid
   const checkBookingIsValid = () => {
-
     return (
-      checkInDate && checkOutDate
+      // check if session user exists
+      sessionUser
       &&
-      // check that check in date and check out date is not default (null)
+      // check that check in date and check out date is not default (plain new date)
       (
         new Date(checkInDate).toDateString() !== new Date().toDateString()
         &&

@@ -45,6 +45,7 @@ function App() {
    * Selector Functions
    */
   const allReviews = useSelector(reviewActions.getAllReviews);
+  const sessionUser = useSelector(sessionActions.getSessionUser);
 
   /**
    * UseEffect
@@ -55,8 +56,10 @@ function App() {
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
     dispatch(spotActions.thunkGetSpots());
 
-    // call to dispatch to get booking
-    dispatch(bookingActions.thunkGetUserBookings());
+    if (sessionUser) {
+      // call to dispatch to get booking
+      dispatch(bookingActions.thunkGetUserBookings());
+    }
   }, [isLoaded, dispatch]);
 
   /**
