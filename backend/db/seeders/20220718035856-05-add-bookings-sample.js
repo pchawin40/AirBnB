@@ -5,11 +5,11 @@ const { Booking, User, Spot } = require('../models');
 // Today's date
 const moment = require('moment-timezone');
 const today = moment.utc().format('YYYY-MM-DD HH:mm:ss');
-
+const tomorrow = moment.utc(new Date(new Date().getTime() + (24 * 60 * 60 * 1000))).format('YYYY-MM-DD HH:mm:ss');
 const bookings = [
   {
     startDate: today,
-    endDate: today
+    endDate: tomorrow
   }
 ];
 
