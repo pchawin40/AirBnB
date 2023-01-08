@@ -29,9 +29,9 @@ const HomeContent = () => {
    */
   // invoke dispatch
   const dispatch = useDispatch();
-  const [checkInDate, setCheckInDate] = useState(null);
-  const [checkOutDate, setCheckOutDate] = useState(null);
-  const [bookingError, setBookingError] = useState("");
+  const [checkInDate, setCheckInDate] = useState(new Date());
+  const [checkOutDate, setCheckOutDate] = useState(new Date());
+  const [bookingErrors, setBookingErrors] = useState([]);
 
   // get spotId
   const { spotId } = useParams();
@@ -56,8 +56,7 @@ const HomeContent = () => {
   // per general
   useEffect(() => {
     // nothing for now
-    console.log('allBookings', allBookings);
-  }, [dispatch, spotId, allBookings, bookingError]);
+  }, [dispatch, spotId, allBookings, bookingErrors, checkInDate, checkOutDate]);
 
   /**
    * Handler function
@@ -73,21 +72,15 @@ const HomeContent = () => {
   // function to check if check in and check out are valid
   const checkBookingIsValid = () => {
 
-    console.log('test',
-      Object.values(allBookings).filter(booking => {
-        return (
-          booking.spotId === spotId
-          &&
-          booking.userId === sessionUser.id
-          &&
-          (new Date(booking.startDate).toDateString() === new Date(checkInDate).toDateString()
-            ||
-            new Date(booking.endDate).toDateString() === new Date(checkOutDate).toDateString())
-        )
-      }));
-
     return (
       checkInDate && checkOutDate
+      &&
+      // check that check in date and check out date is not default (null)
+      (
+        new Date(checkInDate).toDateString() !== new Date().toDateString()
+        &&
+        new Date(checkOutDate).toDateString() !== new Date().toDateString()
+      )
       &&
       // check if check out date is after check in date
       new Date(checkInDate) < new Date(checkOutDate)
@@ -99,13 +92,13 @@ const HomeContent = () => {
       &&
       Object.values(allBookings).filter(booking => {
         return (
-          booking.spotId === spotId
+          booking.spotId == spotId
           &&
           booking.userId === sessionUser.id
           &&
-          (new Date(booking.startDate).toDateString() === new Date(checkInDate).toDateString()
+          (new Date(booking.startDate).toDateString() == new Date(checkInDate).toDateString()
             ||
-            new Date(booking.endDate).toDateString() === new Date(checkOutDate).toDateString())
+            new Date(booking.endDate).toDateString() == new Date(checkOutDate).toDateString())
         )
       }).length === 0
     );
@@ -118,20 +111,39 @@ const HomeContent = () => {
     }
 
     // reset data
-    setBookingError("");
-    setCheckInDate(null);
-    setCheckOutDate(null);
+    setBookingErrors([]);
 
     // call on thunk to post booking then fetch new booking data
     dispatch(bookingActions.thunkAddBooking(spotId, postBooking))
-      .then(() => dispatch(bookingActions.thunkGetUserBookings()))
+      .then(() => {
+        dispatch(bookingActions.thunkGetUserBookings());
+
+        // reset date if no errors occur
+        setCheckInDate(new Date());
+        setCheckOutDate(new Date());
+      })
       .catch(async res => {
         const error = await res.json();
         const errorMsg = error.message;
 
+        const currentErrors = [];
+
         if ("Spot must NOT belong to the current user".includes(errorMsg)) {
-          setBookingError("Spot must not belong to the current user");
+          // setBookingErrors(bookingErrors.push(`hello`));
+          currentErrors.push(errorMsg)
         }
+
+        // TODO: Fix booking error issue
+        if (error.errors?.startDate) {
+          currentErrors.push(error.errors.startDate);
+        }
+
+        if (error.errors?.endDate) {
+          currentErrors.push(error.errors.endDate);
+        }
+
+        // set booking errors (if any)
+        setBookingErrors(currentErrors);
       });
   }
 
@@ -288,6 +300,8 @@ const HomeContent = () => {
                 <input
                   type="date"
                   id="check-in"
+                  value={checkInDate}
+                  min={new Date().toISOString().split('T')[0]}
                   onChange={updateCheckIn}
                 />
               </figure>
@@ -302,6 +316,8 @@ const HomeContent = () => {
                 <input
                   type="date"
                   id="check-out"
+                  value={checkOutDate}
+                  min={new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0]}
                   onChange={updateCheckOut}
                 />
               </figure>
@@ -318,11 +334,21 @@ const HomeContent = () => {
               </button>
 
               {/* Display error */}
-              <span>
+              <ul>
                 {
-                  bookingError
+                  Object.values(bookingErrors).map((bookingError, bookingIndex) => {
+                    return (
+                      <li
+                        key={`bookingError | bookingIndex ${bookingIndex}`}
+                      >
+                        {
+                          bookingError
+                        }
+                      </li>
+                    )
+                  })
                 }
-              </span>
+              </ul>
             </section>
           </aside>
         </section>

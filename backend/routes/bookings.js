@@ -99,6 +99,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 // TODO: Delete a Booking
 // Delete an existing booking
 router.delete('/:bookingId', requireAuth, async (req, res, next) => {
+
   // deconstruct bookingId
   const { bookingId } = req.params;
 
@@ -152,7 +153,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
   }
 
   // delete booking if found
-  // booking.destroy();
+  booking.destroy();
 
   // TODO: Successful Response
   res.json({

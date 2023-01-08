@@ -271,8 +271,8 @@
 }
 
 .home-content-inner-right {
-	width: fit-content;
-	height: 30%;
+	width: 20rem;
+	height: 35%;
 
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -406,8 +406,15 @@ section.reserve > button.valid.booking:hover {
 	cursor: pointer;
 }
 
-section.reserve > span {
+section.reserve ul {
+	width: 100%;
+	height: fit-content;
+}
+
+section.reserve li {
 	color: red;
 	font-weight: bold;
 	margin-top: 1rem;
+	text-align: center;
+	font-size: smaller;
 }

@@ -100,7 +100,6 @@ const ProfileButton = () => {
               </NavLink> */}
             </div>
             <div className="middle-container">
-              {/* // TODO: Manage Listings */}
               <li
                 onClick={_ => {
                   // open booking modal
