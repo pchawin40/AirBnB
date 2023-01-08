@@ -27,6 +27,7 @@ import { useEffect } from 'react';
 
 // import context
 import { useLandingPage } from '../../../../context/LandingContext';
+import BookingProvider from '../../../../context/BookingContext';
 
 //? UpperNavigation Component
 const UpperNavigation = ({ isLoaded }) => {
@@ -64,7 +65,9 @@ const UpperNavigation = ({ isLoaded }) => {
     // When have session user, contain link to log out current user
     sessionUser ?
       // render ProfileButton component 
-      <ProfileButton />
+      <BookingProvider>
+        <ProfileButton />
+      </BookingProvider>
       :
       // When no session user, contain links to login and sign up
       <>
