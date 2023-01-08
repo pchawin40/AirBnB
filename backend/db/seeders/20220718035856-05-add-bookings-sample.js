@@ -34,7 +34,7 @@ module.exports = {
       const user = await User.findByPk(1);
 
       // spotId
-      const spot = await Spot.findByPk(1);
+      const spot = await Spot.findByPk(2);
 
       // create booking
       await Booking.create({
