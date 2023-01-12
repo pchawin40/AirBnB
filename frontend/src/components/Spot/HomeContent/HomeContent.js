@@ -147,212 +147,219 @@ const HomeContent = () => {
   }
 
   return (
-    spot && spotOwner &&
-    <section className="home-content-outer-container">
-      <section className="home-content-section-left">
-        {/* //? Home Content Title Section */}
-        <section className="home-content-title-section">
-          {/* Title */}
-          <p className="title-text">Home hosted by <span>{spotOwner?.firstName} {spotOwner?.lastName}</span></p>
+    spot ?
+      <section className="home-content-outer-container">
+        <section className="home-content-section-left">
+          {/* //? Home Content Title Section */}
+          <section className="home-content-title-section">
+            {/* Title */}
+            <p className="title-text">Home hosted by <span>{spotOwner?.firstName} {spotOwner?.lastName}</span></p>
 
-          {/* Guests */}
-          <p className="guests-text">2 guests • 1 bed • 0 baths</p>
+            {/* Guests */}
+            <p className="guests-text">2 guests • 1 bed • 0 baths</p>
 
-          {/* include user image */}
-          {
-            spot &&
-            <figure className="user-profile-pic-container">
-              <img
-                className="user-profile-pic"
-                onError={e =>
-                  e.target.src =
-                  `https://robohash.org/${(spotId).toString(36).substring(7)}?set=set${Math.floor(spotId * 6)}`
-                }
-                src={
-                  spotId * 3 > 1 ?
-                    `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(79 - spotId) > 0 ? Math.floor(79 - spotId) : 1}.jpg`
-                    :
-                    `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(79 - spotId) > 0 ? Math.floor(79 - spotId) : 1}.jpg`
-                }
-                alt="profile-pic" />
-            </figure>
-          }
-        </section>
-
-        {/* //? Home Content About Info */}
-        <section className="home-content-about-info">
-          {/* Spot Info */}
-          <p>{spot.description}</p>
-        </section>
-
-        {/* //? Home Content Sleep Info */}
-        <section className="home-content-sleep-info">
-          {/* Spot Info */}
-          <h3>Where you'll sleep</h3>
-
-          <section>
-            {/* card 1 */}
-            <figure className="home-content-card-1">
-              <i className="fa-solid fa-bed"></i>
-              <span>
-                Bedroom 1
-              </span>
-              <span>
-                1 queen bed
-              </span>
-            </figure>
-
-            {/* card 2 */}
-            <figure className="home-content-card-2">
-              <i className="fa-solid fa-bed"></i>
-              <span>
-                Bedroom 2
-              </span>
-              <span>
-                1 queen bed
-              </span>
-            </figure>
-          </section>
-        </section>
-
-        {/* //? Home Content Offer Info */}
-        <section className="home-content-offer-info">
-          {/* Offer Info */}
-          <h3>What this place offers</h3>
-
-          <section className="offer-list-container">
-            {/* get list of offers */}
-            {offerList.map(offer =>
-              <figure key={offer.offer}>
-                {offer.offerImage}
-                <span>
-                  {offer.offer}
-                </span>
-              </figure>
-            )}
-          </section>
-        </section>
-      </section>
-
-      <section className="home-content-section-right">
-        {/* Appointment Maker */}
-        <section className='home-content-inner-right'>
-          <aside className='home-content-inner-right-2'>
-
-            {/* Title Section */}
-            <section className="title">
-              {/* //? Title */}
-              {/* $ per night or per event */}
-              <h2>
-                <span>
-                  {
-                    `$${spotById?.price}`
+            {/* include user image */}
+            {
+              spot &&
+              <figure className="user-profile-pic-container">
+                <img
+                  className="user-profile-pic"
+                  onError={e =>
+                    e.target.src =
+                    `https://robohash.org/${(spotId).toString(36).substring(7)}?set=set${Math.floor(spotId * 6)}`
                   }
-                </span>
-                &nbsp;
-
-                {/* stay type */}
-                <span>
-                  {
-                    spot.locationType === 'Stays'
-                      ?
-                      <>
-                        night
-                      </>
+                  src={
+                    spotId * 3 > 1 ?
+                      `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(79 - spotId) > 0 ? Math.floor(79 - spotId) : 1}.jpg`
                       :
-                      <>
-                        experience
-                      </>
+                      `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(79 - spotId) > 0 ? Math.floor(79 - spotId) : 1}.jpg`
                   }
-                </span>
-              </h2>
+                  alt="profile-pic" />
+              </figure>
+            }
+          </section>
 
-              <span>
-                {/* Ratings */}
-                <i className="fa-solid fa-star fa-xs" />
+          {/* //? Home Content About Info */}
+          <section className="home-content-about-info">
+            {/* Spot Info */}
+            <p>{spot.description}</p>
+          </section>
+
+          {/* //? Home Content Sleep Info */}
+          <section className="home-content-sleep-info">
+            {/* Spot Info */}
+            <h3>Where you'll sleep</h3>
+
+            <section>
+              {/* card 1 */}
+              <figure className="home-content-card-1">
+                <i className="fa-solid fa-bed"></i>
+                <span>
+                  Bedroom 1
+                </span>
+                <span>
+                  1 queen bed
+                </span>
+              </figure>
+
+              {/* card 2 */}
+              <figure className="home-content-card-2">
+                <i className="fa-solid fa-bed"></i>
+                <span>
+                  Bedroom 2
+                </span>
+                <span>
+                  1 queen bed
+                </span>
+              </figure>
+            </section>
+          </section>
+
+          {/* //? Home Content Offer Info */}
+          <section className="home-content-offer-info">
+            {/* Offer Info */}
+            <h3>What this place offers</h3>
+
+            <section className="offer-list-container">
+              {/* get list of offers */}
+              {offerList.map(offer =>
+                <figure key={offer.offer}>
+                  {offer.offerImage}
+                  <span>
+                    {offer.offer}
+                  </span>
+                </figure>
+              )}
+            </section>
+          </section>
+        </section>
+
+        <section className="home-content-section-right">
+          {/* Appointment Maker */}
+          <section className='home-content-inner-right'>
+            <aside className='home-content-inner-right-2'>
+
+              {/* Title Section */}
+              <section className="title">
+                {/* //? Title */}
+                {/* $ per night or per event */}
+                <h2>
+                  <span>
+                    {
+                      `$${spotById?.price}`
+                    }
+                  </span>
+                  &nbsp;
+
+                  {/* stay type */}
+                  <span>
+                    {
+                      spot.locationType === 'Stays'
+                        ?
+                        <>
+                          night
+                        </>
+                        :
+                        <>
+                          experience
+                        </>
+                    }
+                  </span>
+                </h2>
 
                 <span>
-                  {/* get average rating for current spot */}
+                  {/* Ratings */}
+                  <i className="fa-solid fa-star fa-xs" />
+
+                  <span>
+                    {/* get average rating for current spot */}
+                    {
+                      averageReviews
+                    }
+                  </span>
+
+                  <span>
+                    •
+                  </span>
+
+                  {/* num of reviews */}
+                  <span id="review-info-num-reviews">{allReviewsByCurrentSpot.length} reviews</span>
+                </span>
+              </section>
+
+              {/* Schedule Section */}
+              <section className="schedule">
+                {/* Check In */}
+                <figure>
+                  <label
+                    htmlFor='check-in'
+                  >
+                    CHECK-IN
+                  </label>
+                  <input
+                    type="date"
+                    id="check-in"
+                    value={checkInDate}
+                    min={new Date().toISOString().split('T')[0]}
+                    onChange={updateCheckIn}
+                  />
+                </figure>
+
+                {/* Check Out */}
+                <figure>
+                  <label
+                    htmlFor='check-out'
+                  >
+                    CHECK-OUT
+                  </label>
+                  <input
+                    type="date"
+                    id="check-out"
+                    value={checkOutDate}
+                    min={new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0]}
+                    onChange={updateCheckOut}
+                  />
+                </figure>
+
+              </section>
+
+              {/* Reserve Section */}
+              <section className="reserve">
+                <button
+                  className={checkBookingIsValid() ? "valid booking" : "invalid booking"}
+                  onClick={_ => checkBookingIsValid() ? handleBookingReserve() : ""}
+                >
+                  Reserve
+                </button>
+
+                {/* Display error */}
+                <ul>
                   {
-                    averageReviews
+                    Object.values(bookingErrors).map((bookingError, bookingIndex) => {
+                      return (
+                        <li
+                          key={`bookingError | bookingIndex ${bookingIndex}`}
+                        >
+                          {
+                            bookingError
+                          }
+                        </li>
+                      )
+                    })
                   }
-                </span>
-
-                <span>
-                  •
-                </span>
-
-                {/* num of reviews */}
-                <span id="review-info-num-reviews">{allReviewsByCurrentSpot.length} reviews</span>
-              </span>
-            </section>
-
-            {/* Schedule Section */}
-            <section className="schedule">
-              {/* Check In */}
-              <figure>
-                <label
-                  htmlFor='check-in'
-                >
-                  CHECK-IN
-                </label>
-                <input
-                  type="date"
-                  id="check-in"
-                  value={checkInDate}
-                  min={new Date().toISOString().split('T')[0]}
-                  onChange={updateCheckIn}
-                />
-              </figure>
-
-              {/* Check Out */}
-              <figure>
-                <label
-                  htmlFor='check-out'
-                >
-                  CHECK-OUT
-                </label>
-                <input
-                  type="date"
-                  id="check-out"
-                  value={checkOutDate}
-                  min={new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0]}
-                  onChange={updateCheckOut}
-                />
-              </figure>
-
-            </section>
-
-            {/* Reserve Section */}
-            <section className="reserve">
-              <button
-                className={checkBookingIsValid() ? "valid booking" : "invalid booking"}
-                onClick={_ => checkBookingIsValid() ? handleBookingReserve() : ""}
-              >
-                Reserve
-              </button>
-
-              {/* Display error */}
-              <ul>
-                {
-                  Object.values(bookingErrors).map((bookingError, bookingIndex) => {
-                    return (
-                      <li
-                        key={`bookingError | bookingIndex ${bookingIndex}`}
-                      >
-                        {
-                          bookingError
-                        }
-                      </li>
-                    )
-                  })
-                }
-              </ul>
-            </section>
-          </aside>
+                </ul>
+              </section>
+            </aside>
+          </section>
         </section>
       </section>
-    </section>
+      :
+      <>
+        <img
+          src="https://res.cloudinary.com/dfz7bzhoi/image/upload/v1671759968/loadinganimation_qksmz6.gif"
+          alt="loading-experstays"
+        />
+      </>
   );
 }
 
