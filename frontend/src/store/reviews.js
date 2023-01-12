@@ -193,7 +193,6 @@ export const getAverageReviews
         .reduce(((initialAvg, currAvg) => initialAvg + currAvg), 0)
       / Object.values(state.reviews.Reviews)[0]
         .filter(review => {
-          console.log('review', review);
 
           return review.spotId === Number(spotId)
         }).length

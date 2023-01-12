@@ -50,6 +50,7 @@ Additionally, to set up backend database server. In the backend repository, run 
 * `LandingPage`: The browser that users first see when they start up the webpage.
 * `HostSpot`: Create ExperStays spot rendered on `LandingPage`
 * `Spot`: Makes a fetch to the backend on mount and update to load the details of the selected Spot.
+* `BookingModal`: A modal to show the current booking by the current logged-in user
 * `ResourceNotFound`: An easter egg for when the resource that user attempt to load but is not found
 
 ### Proxy

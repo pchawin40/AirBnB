@@ -5,11 +5,11 @@ const { Booking, User, Spot } = require('../models');
 // Today's date
 const moment = require('moment-timezone');
 const today = moment.utc().format('YYYY-MM-DD HH:mm:ss');
-
+const tomorrow = moment.utc(new Date(new Date().getTime() + (24 * 60 * 60 * 1000))).format('YYYY-MM-DD HH:mm:ss');
 const bookings = [
   {
     startDate: today,
-    endDate: today
+    endDate: tomorrow
   }
 ];
 
@@ -34,7 +34,7 @@ module.exports = {
       const user = await User.findByPk(1);
 
       // spotId
-      const spot = await Spot.findByPk(1);
+      const spot = await Spot.findByPk(2);
 
       // create booking
       await Booking.create({

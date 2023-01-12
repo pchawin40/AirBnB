@@ -14,6 +14,7 @@ import mapsReducer from './maps';
 import spotsReducer from './spots';
 import reviewsReducer from './reviews';
 import usersReducer from './users';
+import bookingsReducer from './bookings';
 
 //? rootReducer
 const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
 	maps: mapsReducer,
 	spots: spotsReducer,
 	reviews: reviewsReducer,
-	users: usersReducer
+	users: usersReducer,
+	bookings: bookingsReducer
 });
 
 // enhancer...
