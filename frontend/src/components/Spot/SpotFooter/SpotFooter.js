@@ -55,7 +55,7 @@ const SpotFooter = () => {
           <ul>
             <h4>Community</h4>
             <li>
-              Airbnb.org: disaster relief housing
+              ExperStays.org: disaster relief housing
             </li>
             <li>
               Support Afghan refugees
@@ -89,10 +89,10 @@ const SpotFooter = () => {
           </ul>
         </section>
 
-        {/* airbnb */}
-        <section className="home-content-footer-airbnb">
+        {/* experstays */}
+        <section className="home-content-footer-experstays">
           <ul>
-            <h4>Airbnb</h4>
+            <h4>ExperStays</h4>
             <li>
               Newsroom
             </li>
@@ -121,7 +121,7 @@ const SpotFooter = () => {
 
           {/* //? outer lower div 1 */}
           <div id="DIV_1">
-            <span className="inner_div_1_content" id="SPAN_2">© 2022 Airbnb, Inc.</span>
+            <span className="inner_div_1_content" id="SPAN_2">© 2022 ExperStays, Inc.</span>
             <span className="inner_div_1_content" id="SPAN_3">·</span>
             <span className="inner_div_1_content" id="A_4">Privacy</span>
             <span className="inner_div_1_content" id="SPAN_5">·</span>

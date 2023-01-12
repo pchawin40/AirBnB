@@ -1,8 +1,8 @@
-# `AirBnB`
+# `ExperStays`
 
 ## Database Schema Design
 
-![airbnb-database-schema](../assets//AirBnB.png)
+![experstays-database-schema](../assets/ExperStays.png)
 
 ## API Documentation
 

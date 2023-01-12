@@ -7,13 +7,13 @@ import './LogoContainer.css';
 //? LogoContainer component
 const LogoContainer = () => {
   return (
-    <div className="logo-container" style={{zIndex: 100}}>
-      <NavLink exact to ="/">
+    <div className="logo-container" style={{ zIndex: 100 }}>
+      <NavLink exact to="/">
         {/* //? Logo */}
         <i className="fa-brands fa-airbnb fa-2xl"></i>
 
-        {/* //? Airbnb */}
-        <span className="airbnb-text">airbnb</span>
+        {/* //? ExperStays */}
+        <span className="experstays-text">ExperStays</span>
       </NavLink>
     </div>
   );

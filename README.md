@@ -1,16 +1,16 @@
-# AirBnB
-*By Chawin Pathompornvivat - [Visit AirBnB Clone](https://airbnb-project-chawin.herokuapp.com/)*
+# ExperStays
+*By Chawin Pathompornvivat - [Visit ExperStays Clone](https://experstays-project-chawin.herokuapp.com/)*
 
 **Table of Contents**
 * [Getting Started](#getting-started)
-* [AirBnB at a Glance](#airbnb-at-a-glance)
+* [ExperStays at a Glance](#experstays-at-a-glance)
 * [Application Architecture & Technologies Used](#application-architecture) 
 * [Frontend Overview](#frontend-overview)
 * [Backend Overview](#backend-overview)
 * [Conclusion & Next Steps](#conclusion-and-next-steps)
 
 ## Getting Started
-You'll need both the backend and the frontend for the AirBnB clone application. Take a moment to clone it from https://github.com/pchawin40/AirBnB. 
+You'll need both the backend and the frontend for the ExperStays clone application. Take a moment to clone it from https://github.com/pchawin40/ExperStays. 
 
 In both frontend and backend repository, run `npm install` for backend and frontend as it runs on React version 17. Next, run `npm install react-chrome-dino` to add a Resource Not Found component npm package (https://www.npmjs.com/package/react-chrome-dino). After installing, start both the backend server and frontend server by running 'npm start'.
 
@@ -48,7 +48,7 @@ Additionally, to set up backend database server. In the backend repository, run 
 ### Explore the reference application
 * `App`: Does the browser routing
 * `LandingPage`: The browser that users first see when they start up the webpage.
-* `HostSpot`: Create AirBnB spot rendered on `LandingPage`
+* `HostSpot`: Create ExperStays spot rendered on `LandingPage`
 * `Spot`: Makes a fetch to the backend on mount and update to load the details of the selected Spot.
 * `ResourceNotFound`: An easter egg for when the resource that user attempt to load but is not found
 
@@ -58,29 +58,29 @@ In this project, two servers will be run on the following addresses:
 * `http://localhost:8000` for your frontend
 * `http://localhost:8000` for your backend
 
-## AirBnB at a Glance
-AirBnB is a fullstack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets the user 
+## ExperStays at a Glance
+ExperStays is a fullstack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets the user 
 (i.e. the property owners and property renter) rent out their spaces to travelers looking
 for a space to stay or to book their travels to one of the rent property.
 
-##### AirBnB at a glance
-![AirBnB at a glance](/readme-resources/airbnb-demo-1.png)
+##### ExperStays at a glance
+![ExperStays at a glance](/readme-resources/experstays-demo-1.png)
 
-AirBnB is also integrated with the [Google Maps API](https://developers.google.com/maps/get-started). When users click on the 'Show Map' button in the landing page, it shows a map of earth and allow users to visualize where they'll be staying.
+ExperStays is also integrated with the [Google Maps API](https://developers.google.com/maps/get-started). When users click on the 'Show Map' button in the landing page, it shows a map of earth and allow users to visualize where they'll be staying.
 
-![AirBnB at a glance](/readme-resources/airbnb-demo-2.png)
+![ExperStays at a glance](/readme-resources/experstays-demo-2.png)
 
 ## Application Architecture
-As noted above, AirBnB is a fullstack MERN application. The majority of the application logic occurs within front end's [Redux](https://redux.js.org/) store and its interactions with the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/tutorial) via the [react-google-maps](https://www.npmjs.com/package/react-google-maps) library. 
+As noted above, ExperStays is a fullstack MERN application. The majority of the application logic occurs within front end's [Redux](https://redux.js.org/) store and its interactions with the [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/tutorial) via the [react-google-maps](https://www.npmjs.com/package/react-google-maps) library. 
 
 The backend serves the frontend, responds to frontend requests, acts as an intermediary to serve spots data to the frontend, and fetches data from the SQLite and PostgreSQL database. 
 
 ## Frontend Overview
-AirBnB is very frontend heavy application. It makes extensive use of 3rd-party APIs and resources to create a dynamic and data-rich experience. Below are the frontend technologies that make this application possible. 
+ExperStays is very frontend heavy application. It makes extensive use of 3rd-party APIs and resources to create a dynamic and data-rich experience. Below are the frontend technologies that make this application possible. 
 
 ### Frontend Technologies Used:
 #### React
-At its core, AirBnB is a React application. It uses very little of the core React library besides passing a few props, but makes extensive use of the technologies and libraries of the React ecosystem. Without the robust and well-documented React ecosystem, creating AirBnB would have been a substantially more challenging enterprise. 
+At its core, ExperStays is a React application. It uses very little of the core React library besides passing a few props, but makes extensive use of the technologies and libraries of the React ecosystem. Without the robust and well-documented React ecosystem, creating ExperStays would have been a substantially more challenging enterprise. 
 
 #### Redux
 [Redux](https://redux.js.org/) and the [react-redux](https://react-redux.js.org/) library were used to manage application state and make fetch requests to the server for data. 
@@ -92,16 +92,16 @@ Redux also stores and sets information about the `activeSpot`, whichever spot ha
 Redux also allows for a lot of extendibility if new features are to be implemented (additional feature wish-list discussed in [conclusion](#conclusion-and-next-steps)). 
 
 ## Backend Overview
-AirBnB uses an Express server with SQLite and PostgreSQL as the database. Compared to the frontend, the backend of AirBnB is fairly simple, with the server sending the front end to the client, receiving requests, and sending data to the frontend. Below are the backend technologies used with some notes regarding their implementation. 
+ExperStays uses an Express server with SQLite and PostgreSQL as the database. Compared to the frontend, the backend of ExperStays is fairly simple, with the server sending the front end to the client, receiving requests, and sending data to the frontend. Below are the backend technologies used with some notes regarding their implementation. 
 
 ### Backend Technologies Used
 #### ExpressJS
-[Express](https://expressjs.com/) was the natural choice for AirBnB's server-side framework. The minimalism of Express lent itself to the very light-weight responsibilities of AirBnB's server. The server is just a couple of routes and a connection to the database, with a few utilities to facilitate this. 
+[Express](https://expressjs.com/) was the natural choice for ExperStays's server-side framework. The minimalism of Express lent itself to the very light-weight responsibilities of ExperStays's server. The server is just a couple of routes and a connection to the database, with a few utilities to facilitate this. 
 
 ## Conclusion and Next Steps
-AirBnB Clone was fun to build. It opened my eyes to see the many functionalities that goes on with
-the actual AirBnB website. It made me appreciate the efforts that went into building the popular modern app of today.
+ExperStays Clone was fun to build. It opened my eyes to see the many functionalities that goes on with
+the actual ExperStays website. It made me appreciate the efforts that went into building the popular modern app of today.
 
-This also marks the first time that I've built a fullstack app solo, and my first project of significant scope where I originated the idea and brought it into existence. AirBnB has been an incredibly rewarding to create. 
+This also marks the first time that I've built a fullstack app solo, and my first project of significant scope where I originated the idea and brought it into existence. ExperStays has been an incredibly rewarding to create. 
 
-While making AirBnB, I got to play with a whole bunch of new technologies and get better at programming even more. At the beginning of the project, I'd only learned React 2 weeks previously, and Redux 1 week before. I've come out of it stronger with both, and eager to continue getting better with React and creating cool stuff with the many amazing libraries and technologies of the React ecosystem. 
+While making ExperStays, I got to play with a whole bunch of new technologies and get better at programming even more. At the beginning of the project, I'd only learned React 2 weeks previously, and Redux 1 week before. I've come out of it stronger with both, and eager to continue getting better with React and creating cool stuff with the many amazing libraries and technologies of the React ecosystem. 

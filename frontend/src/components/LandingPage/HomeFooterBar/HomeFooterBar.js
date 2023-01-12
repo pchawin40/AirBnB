@@ -63,7 +63,7 @@ const HomeFooterBar = ({ mapState = false }) => {
           {/* //? outer lower div 1 */}
           <div id="DIV_1_home">
             <div id="left_inner_div_1_home">
-              <span className="inner_div_1_content_home" id="SPAN_1">© 2022 Airbnb, Inc.</span>
+              <span className="inner_div_1_content_home" id="SPAN_1">© 2022 ExperStays, Inc.</span>
               <span className="inner_div_1_content_home" id="SPAN_3">·</span>
               <span className="inner_div_1_content_home" id="A_4"></span>
 
@@ -115,7 +115,7 @@ const HomeFooterBar = ({ mapState = false }) => {
                 className="inner_div_3_content_home external-link-hover"
                 id="SPAN_2"
                 onClick={_ => {
-                  return window.open('https://github.com/pchawin40/AirBnB', '_blank');
+                  return window.open('https://github.com/pchawin40/ExperStays', '_blank');
                 }}>
                 <i className="fa-brands fa-github fa-xl"></i>
                 Check Out Readme

@@ -46,7 +46,7 @@ const CreateSpot = () => {
           <figure id="create-logo-container">
             <i style={{ zIndex: 1 }} onClick={handleExitButton} className="fa-brands fa-airbnb fa-2xl create-logo-icon"></i>
           </figure>
-          {/* airbnb logo */}
+          {/* experstays logo */}
           <h1>Describe your spot to host ☺</h1>
         </aside>
 

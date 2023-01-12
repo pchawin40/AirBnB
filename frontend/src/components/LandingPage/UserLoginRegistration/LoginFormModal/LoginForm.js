@@ -80,7 +80,7 @@ const LoginForm = ({ setShowModal }) => {
       />
       <aside className="login-form-header"><h1>Log in</h1></aside>
       <form className="login-form-container" onSubmit={handleSubmit}>
-        <h2 className="login-form-container-header">Welcome to Airbnb</h2>
+        <h2 className="login-form-container-header">Welcome to ExperStays</h2>
         {/* //? Display Errors (if any) */}
         <ul>
           {

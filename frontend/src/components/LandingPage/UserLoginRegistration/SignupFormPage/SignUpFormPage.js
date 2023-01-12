@@ -137,7 +137,7 @@ const SignupFormPage = () => {
         <aside className="header-left-aside-container">
           {/* logo */}
           <figure className="sign-up-logo-container" onClick={_ => history.push('/')}>
-            <i className="fa-brands fa-airbnb fa-3x sign-up-fa-airbnb"></i>
+            <i className="fa-brands fa-airbnb fa-3x sign-up-fa-experstays"></i>
           </figure>
 
           {/* Text */}
@@ -207,7 +207,7 @@ const SignupFormPage = () => {
           <form className="sign-up-form" onSubmit={handleSubmit} ref={ref}>
 
             <h2>
-              Welcome to Airbnb
+              Welcome to ExperStays
             </h2>
 
             <ul className="sign-up-error-list">

@@ -1,7 +1,7 @@
 {
-  "name": "airbnb",
+  "name": "experstays",
   "version": "1.0.0",
-  "description": "AppAcademy's AirBnB Backend project",
+  "description": "AppAcademy's ExperStays Backend project",
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
@@ -17,15 +17,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pchawin40/AirBnB.git"
+    "url": "git+https://github.com/pchawin40/ExperStays.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pchawin40/AirBnB/issues"
+    "url": "https://github.com/pchawin40/ExperStays/issues"
   },
-  "homepage": "https://github.com/pchawin40/AirBnB#readme",
+  "homepage": "https://github.com/pchawin40/ExperStays#readme",
   "dependencies": {
     "aws-sdk": "^2.1204.0",
     "heroku-cli": "^7.0.9",

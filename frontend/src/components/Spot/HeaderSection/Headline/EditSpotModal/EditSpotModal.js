@@ -86,17 +86,17 @@ const EditSpotModal = () => {
         {/* //? Left aside */}
         <aside id="create-left-aside">
           <figure id="create-logo-container">
-            <i 
-            style={{ zIndex: 1 }}
-            onClick={_ => {
-              // turn window vertical scroll back on
-              document.body.style.overflowY = "scroll";
+            <i
+              style={{ zIndex: 1 }}
+              onClick={_ => {
+                // turn window vertical scroll back on
+                document.body.style.overflowY = "scroll";
 
-              return history.push('/')
-            }} 
-            className="fa-brands fa-airbnb" id="create-logo-icon"></i>
+                return history.push('/')
+              }}
+              className="fa-brands fa-airbnb" id="create-logo-icon"></i>
           </figure>
-          {/* airbnb logo */}
+          {/* experstays logo */}
           <h1>Edit your current listing spot ☺</h1>
         </aside>
 
@@ -107,15 +107,15 @@ const EditSpotModal = () => {
             {/* Edit Spot Modal */}
             <SpotForm spotActivity="edit" currentSpot={currentSpot} />
           </section>
-          <button 
-          className="create-button spot-exit" 
-          id="right-section-exit-button" 
-          onClick={_ => {
-            // turn window vertical scroll back on
-            document.body.style.overflowY = "scroll";
+          <button
+            className="create-button spot-exit"
+            id="right-section-exit-button"
+            onClick={_ => {
+              // turn window vertical scroll back on
+              document.body.style.overflowY = "scroll";
 
-            return setEditSpotModal(false);
-          }}
+              return setEditSpotModal(false);
+            }}
           >
             Exit
           </button>
