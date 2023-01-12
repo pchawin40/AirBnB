@@ -54,7 +54,7 @@ const UpperNavigation = ({ isLoaded }) => {
    */
   useEffect(() => {
     if (sessionUser) {
-      dispatch(userActions.thunkLoadUserById(sessionUser.id))
+      dispatch(userActions.thunkLoadUser(sessionUser.id))
     }
   }, [dispatch, sessionUser]);
 

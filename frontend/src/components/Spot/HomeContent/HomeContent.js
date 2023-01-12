@@ -40,7 +40,7 @@ const HomeContent = () => {
    * UseSelector
    */
   // spot owner
-  const spotOwner = useSelector(spotActions.getSpotOwner);
+  const spotOwner = useSelector(spotActions.getSpotOwner(spotId));
   // get current spot first 
   const spots = useSelector(spotActions.getAllSpots);
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};
@@ -56,7 +56,7 @@ const HomeContent = () => {
   // per general
   useEffect(() => {
     // nothing for now
-  }, [dispatch, spotId, allBookings, bookingErrors, checkInDate, checkOutDate]);
+  }, [dispatch, spotId, allBookings, bookingErrors, checkInDate, checkOutDate, spotOwner]);
 
   /**
    * Handler function
@@ -147,13 +147,13 @@ const HomeContent = () => {
   }
 
   return (
-    spot &&
+    spot && spotOwner &&
     <section className="home-content-outer-container">
       <section className="home-content-section-left">
         {/* //? Home Content Title Section */}
         <section className="home-content-title-section">
           {/* Title */}
-          <p className="title-text">Home hosted by <span>{spotOwner.firstName} {spotOwner.lastName}</span></p>
+          <p className="title-text">Home hosted by <span>{spotOwner?.firstName} {spotOwner?.lastName}</span></p>
 
           {/* Guests */}
           <p className="guests-text">2 guests • 1 bed • 0 baths</p>

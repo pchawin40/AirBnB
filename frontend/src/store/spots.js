@@ -328,7 +328,9 @@ export const getSpotOwner = spotId =>
       &&
       Object.values(state.spots.Spots).length > 0
       ?
-      Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId)).ownerId
+      Object.values(state.users).find(user =>
+        user.id === Object.values(state.spots.Spots).find(spot => spot.id === Number(spotId)).ownerId
+      )
       :
       null;
 
