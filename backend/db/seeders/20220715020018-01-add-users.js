@@ -10,13 +10,43 @@ const users = [
     firstName: 'John',
     lastName: 'Smith',
     email: 'john.smith@gmail.com',
+    profilePicture: `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set4`,
     hashedPassword: bcrypt.hashSync('secret password')
   },
   {
     firstName: 'Jane',
     lastName: 'Smith',
     email: 'jane.smith@gmail.com',
+    profilePicture: `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set4`,
     hashedPassword: bcrypt.hashSync('secret password 2')
+  },
+  {
+    firstName: 'Janet',
+    lastName: 'Jones',
+    email: 'janet.jones@gmail.com',
+    profilePicture: `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set4`,
+    hashedPassword: bcrypt.hashSync('secret password 3')
+  },
+  {
+    firstName: 'Craig',
+    lastName: 'Orozco',
+    email: 'craig.orozco@gmail.com',
+    profilePicture: `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set4`,
+    hashedPassword: bcrypt.hashSync('secret password 4')
+  },
+  {
+    firstName: 'Lea',
+    lastName: 'Riggs',
+    email: 'lea.riggs@gmail.com',
+    profilePicture: `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set4`,
+    hashedPassword: bcrypt.hashSync('secret password 5')
+  },
+  {
+    firstName: 'Moshe',
+    lastName: 'Potts',
+    email: 'moshe.potts@gmail.com',
+    profilePicture: `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set4`,
+    hashedPassword: bcrypt.hashSync('secret password 6')
   }
 ];
 
@@ -36,14 +66,16 @@ module.exports = {
         firstName,
         lastName,
         email,
-        hashedPassword
+        hashedPassword,
+        profilePicture
       } = userInfo;
 
       await User.create({
         firstName,
         lastName,
         email,
-        hashedPassword
+        hashedPassword,
+        profilePicture
       });
     }
   },

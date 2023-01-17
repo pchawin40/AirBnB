@@ -112,6 +112,11 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
     },
+    profilePicture: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: `https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set4`
+    },
     hashedPassword: {
       type: DataTypes.STRING.BINARY,
       allowNull: false,
