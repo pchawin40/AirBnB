@@ -22,6 +22,7 @@ import EditSpotModal from './EditSpotModal';
 
 // import css
 import './Headline.css';
+import { useLandingPage } from '../../../../context/LandingContext';
 
 //? Headline component
 const Headline = () => {
@@ -31,6 +32,7 @@ const Headline = () => {
   // state for review modal
   const { avgReview, setAvgReview } = useReview();
   const { editSpotModal, setEditSpotModal } = useSpot();
+  const { currentPage, setCurrentPage } = useLandingPage();
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -49,9 +51,7 @@ const Headline = () => {
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : null;
 
   useEffect(() => {
-    if (spotId) {
-      dispatch(reviewActions.getReviewsBySpotId(Number(spotId)));
-    }
+    // nothing for now
   }, [dispatch, spotId, spots]);
 
   //? handle edit spot

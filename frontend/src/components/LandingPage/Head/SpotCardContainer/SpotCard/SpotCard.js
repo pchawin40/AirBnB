@@ -17,6 +17,7 @@ import './SpotCard.css';
 // import context
 import { useReview } from "../../../../../context/ReviewContext";
 import { useSpot } from "../../../../../context/SpotContext";
+import { useLandingPage } from "../../../../../context/LandingContext";
 
 //? Spot component
 const SpotCard = () => {
@@ -27,6 +28,7 @@ const SpotCard = () => {
   // get spots data
   const { spots, setSpots } = useSpot();
   const { avgReview, setAvgReview } = useReview();
+  const { currentPage, setCurrentPage } = useLandingPage();
 
   /**
    * Selector functions
@@ -44,9 +46,11 @@ const SpotCard = () => {
    */
   // per general
   useEffect(() => {
-    // nothing for now
-    dispatch(reviewActions.thunkGetReviews());
-  }, [spots]);
+    if (allReviews.length === 0 && currentPage === "landing") {
+      // load reviews
+      dispatch(reviewActions.thunkGetReviews());
+    }
+  }, [spots, allReviews]);
 
   /**
    * Handler functions
@@ -63,7 +67,7 @@ const SpotCard = () => {
     <>
       {/* //? Show all spots */}
       {
-        spots && spots.map(spot => {
+        spots && spots.map((spot, index) => {
 
           // if review is ready to be check...
           const currentSpotReviews =

@@ -54,10 +54,13 @@ function App() {
   // on load...
   useEffect(() => {
     // ... restore session user and set is loaded to true
-    dispatch(reviewActions.thunkGetReviews());
     dispatch(userActions.thunkLoadUser());
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
     dispatch(spotActions.thunkGetSpots());
+
+    // if (allReviews.length === 0) {
+    //   dispatch(reviewActions.thunkGetReviews());
+    // }
 
     if (sessionUser) {
       // call to dispatch to get booking

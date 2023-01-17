@@ -12,6 +12,9 @@ import { useParams } from 'react-router-dom';
 // import css
 import './HomeContent.css';
 
+// import context
+import { useReview } from '../../../context/ReviewContext';
+
 // import store
 import * as spotActions from '../../../store/spots';
 import * as reviewActions from '../../../store/reviews';
@@ -20,6 +23,7 @@ import * as sessionActions from '../../../store/session';
 
 // import offerList data
 import { offerList } from '../../../data/data';
+import { useLandingPage } from '../../../context/LandingContext';
 
 //? HomeContent component
 const HomeContent = () => {
@@ -32,6 +36,9 @@ const HomeContent = () => {
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [bookingErrors, setBookingErrors] = useState([]);
+  // control average review for current spot
+  const { avgReview, setAvgReview } = useReview();
+  const { currentPage, setCurrentPage } = useLandingPage();
 
   // get spotId
   const { spotId } = useParams();
@@ -46,6 +53,7 @@ const HomeContent = () => {
   const spot = spots !== undefined ? spots.find(spot => spot.id === Number(spotId)) : {};
   const averageReviews = useSelector(reviewActions.getAverageReviews(spotId));
   const allReviewsByCurrentSpot = useSelector(reviewActions.getReviewsByCurrentSpot(spotId));
+  const allReviews = useSelector(reviewActions.getAllReviews);
   const spotById = useSelector(spotActions.getSpotById(spotId));
   const allBookings = useSelector(bookingActions.getCurrentUserBookings);
   const sessionUser = useSelector(sessionActions.getSessionUser);
@@ -56,7 +64,17 @@ const HomeContent = () => {
   // per general
   useEffect(() => {
     // nothing for now
-  }, [dispatch, spotId, allBookings, bookingErrors, checkInDate, checkOutDate, spotOwner]);
+  }, [dispatch, spotId, allBookings, bookingErrors, checkInDate, checkOutDate, spotOwner, spots]);
+
+
+  useEffect(() => {
+    // load reviews if no reviews is loaded yet
+    if (allBookings.length > 0 && allReviews.length === 0 && currentPage === "spot") {
+      dispatch(reviewActions.thunkGetReviews());
+    }
+
+    setAvgReview(averageReviews);
+  }, [dispatch, allBookings]);
 
   /**
    * Handler function

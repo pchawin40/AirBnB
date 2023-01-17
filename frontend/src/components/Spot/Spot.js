@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import * as spotActions from '../../store/spots';
 import * as bookingActions from '../../store/bookings';
 import * as sessionActions from '../../store/session';
+import * as reviewActions from '../../store/reviews';
 
 // import component
 import UpperNavigation from "../LandingPage/Navigation/UpperNavigation";
@@ -57,8 +58,8 @@ const Spot = ({ isLoaded }) => {
   /**
    * Selector functions
    */
-  const averageReviews = useSelector(getAverageReviews(spotId));
   const sessionUser = useSelector(sessionActions.getSessionUser);
+  const reviewsByCurrentSpot = useSelector(reviewActions.getReviewsByCurrentSpot(currentSpotId));
 
   /**
    * UseEffect
@@ -72,14 +73,11 @@ const Spot = ({ isLoaded }) => {
       setCurrentSpotId(spotId);
     }
 
-    //?set average review
-    setAvgReview(averageReviews);
-
     if (sessionUser) {
       // call to dispatch to get booking
       dispatch(bookingActions.thunkGetUserBookings());
     }
-  }, [dispatch, spotId, spots, spot, currentSpotId]);
+  }, [dispatch, spotId, spots, spot, currentSpotId, currentPage]);
 
   // per current page
   useEffect(() => {
