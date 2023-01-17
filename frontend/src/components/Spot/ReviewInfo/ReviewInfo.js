@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import * as spotActions from '../../../store/spots';
 import * as reviewActions from '../../../store/reviews';
 import * as sessionActions from '../../../store/session';
+import * as userActions from '../../../store/users';
 
 // import css
 import './ReviewInfo.css';
@@ -42,6 +43,7 @@ const ReviewInfo = () => {
    */
   // get current logged in user
   const user = useSelector(sessionActions.getSessionUser);
+  const allUsers = useSelector(userActions.getAllUsers);
   const allReviewsByCurrentSpot = useSelector(reviewActions.getReviewsByCurrentSpot(currentSpotId));
 
   /**
@@ -118,26 +120,33 @@ const ReviewInfo = () => {
         <section className="review-info-feature-container">
           {
             reviewsByCurrentSpot()
-              ? allReviewsByCurrentSpot.map(review =>
-                review && review.id &&
-                <li key={review.id}>
-                  <div className="image-fig-caption-container">
-                    <img
-                      className="review-profile-image"
-                      src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set${Math.floor(Math.random() * 6)}`}
-                      onError={e => e.target.src = `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`}
-                      alt={review.id} />
+              ? allReviewsByCurrentSpot.map(review => {
 
-                    {/* //? button to delete review, if available */}
-                    {showEditButton(review)}
-                    {showDeleteButton(review)}
-                  </div>
-                  <figcaption className="review-caption-container">
-                    <p className="review-content">{review.review}</p>
-                    <p className="review-author">{review.User.firstName + " " + review.User.lastName}</p>
-                  </figcaption>
-                </li>
-              ) :
+                // get review's user and find it with users to get profile picture
+                const currentReviewUserPic = allUsers.find(user => user.id === review.userId)?.profilePicture;
+
+                return (
+                  review && review.id &&
+                  <li key={review.id}>
+                    <div className="image-fig-caption-container">
+                      <img
+                        className="review-profile-image"
+                        src={currentReviewUserPic}
+                        // src={`https://robohash.org/${(Math.random() + 1).toString(36).substring(7)}?set=set${Math.floor(Math.random() * 6)}`}
+                        onError={e => e.target.src = `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 79)}.jpg`}
+                        alt={review.id} />
+
+                      {/* //? button to delete review, if available */}
+                      {showEditButton(review)}
+                      {showDeleteButton(review)}
+                    </div>
+                    <figcaption className="review-caption-container">
+                      <p className="review-content">{review.review}</p>
+                      <p className="review-author">{review.User.firstName + " " + review.User.lastName}</p>
+                    </figcaption>
+                  </li>
+                )
+              }) :
               user ?
                 (
                   <div id="no-review-button-container">

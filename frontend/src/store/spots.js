@@ -378,6 +378,8 @@ export const getSpotByLocationType =
           );
         });
 
+
+        
 /* --------- REDUCERS -------- */
 const initialSpots = [];
 

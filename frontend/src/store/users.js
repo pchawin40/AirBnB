@@ -61,7 +61,7 @@ export const thunkLoadUserById = userId => async dispatch => {
 }
 
 /* --------- SELECTOR FUNCTIONS -------- */
-export const getAllUsers = state => state.users;
+export const getAllUsers = state => Object.values(state.users);
 export const getUserById = userId => state => state.users[userId];
 
 /* --------- REDUCERS -------- */

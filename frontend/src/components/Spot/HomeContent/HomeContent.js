@@ -164,15 +164,8 @@ const HomeContent = () => {
               <figure className="user-profile-pic-container">
                 <img
                   className="user-profile-pic"
-                  onError={e =>
-                    e.target.src =
-                    `https://robohash.org/${(spotId).toString(36).substring(7)}?set=set${Math.floor(spotId * 6)}`
-                  }
                   src={
-                    spotId * 3 > 1 ?
-                      `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(79 - spotId) > 0 ? Math.floor(79 - spotId) : 1}.jpg`
-                      :
-                      `https://xsgames.co/randomusers/assets/avatars/female/${Math.floor(79 - spotId) > 0 ? Math.floor(79 - spotId) : 1}.jpg`
+                    spotOwner?.profilePicture
                   }
                   alt="profile-pic" />
               </figure>

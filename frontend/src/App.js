@@ -14,6 +14,7 @@ import * as sessionActions from './store/session';
 import * as spotActions from './store/spots';
 import * as reviewActions from './store/reviews';
 import * as bookingActions from './store/bookings';
+import * as userActions from './store/users';
 
 // import context
 import SpotProvider, { useSpot } from './context/SpotContext';
@@ -53,6 +54,8 @@ function App() {
   // on load...
   useEffect(() => {
     // ... restore session user and set is loaded to true
+    dispatch(reviewActions.thunkGetReviews());
+    dispatch(userActions.thunkLoadUser());
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
     dispatch(spotActions.thunkGetSpots());
 
