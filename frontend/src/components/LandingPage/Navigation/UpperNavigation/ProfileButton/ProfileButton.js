@@ -38,7 +38,12 @@ const ProfileButton = () => {
   const openMenu = () => {
 
     // if showMenu is true, keep showMenu state as is
-    if (showMenu) return;
+    if (showMenu) {
+      setShowMenu(false);
+      setBookingModal(false);
+
+      return;
+    }
 
     // otherwise, set to true
     setShowMenu(true);

@@ -52,7 +52,7 @@
 ? 		Profile Drop Down
 ***************************/
 
-.profile-dropdown {
+#profile-dropdown {
 	/* display */
 	display: flex;
 	flex-direction: column;
@@ -98,18 +98,18 @@
 	padding: 0;
 	border: lightgray 1px solid;
 	border-radius: 1rem;
-	
+
 	/* styling */
 	background-color: white;
 	-webkit-box-shadow: 0 10px 6px -6px #777;
-  -moz-box-shadow: 0 10px 6px -6px #777;
-  box-shadow: 0 10px 6px -6px #777;
+	-moz-box-shadow: 0 10px 6px -6px #777;
+	box-shadow: 0 10px 6px -6px #777;
 }
 
 #nav-button-container:hover {
 	-webkit-box-shadow: 0 10px 8px -6px #777;
-  -moz-box-shadow: 0 10px 8px -6px #777;
-  box-shadow: 0 10px 8px -6px #777;
+	-moz-box-shadow: 0 10px 8px -6px #777;
+	box-shadow: 0 10px 8px -6px #777;
 }
 
 i {
@@ -127,19 +127,19 @@ i {
 	padding-left: 0;
 }
 
-li{
+li {
 	display: flex;
 	align-items: center;
 }
 
-#login-button{
+#login-button {
 	margin: 0;
 }
 
 /**************************
 ? 				Nav Link
 ***************************/
-#nav-link-container{
+#nav-link-container {
 	margin-right: 4rem;
 }
 
@@ -152,12 +152,14 @@ a:hover {
 	border-radius: 2px;
 }
 
-.user-host-links, .fa-globe{
+.user-host-links,
+.fa-globe {
 	padding: 1rem;
 	margin-right: 0;
 }
 
-.user-host-links:hover, #nav-link-fa-globe:hover {
+.user-host-links:hover,
+#nav-link-fa-globe:hover {
 	border-radius: 1.25rem;
 	background-color: #f9f9f9;
 	cursor: pointer;
@@ -172,11 +174,11 @@ li > * {
 	margin: 1rem;
 }
 
-#sign-up-button{
+#sign-up-button {
 	padding: 1rem;
 }
 
-#sign-up-button:hover{
+#sign-up-button:hover {
 	border-radius: 1.25rem;
 	background-color: #f9f9f9;
 	cursor: pointer;
