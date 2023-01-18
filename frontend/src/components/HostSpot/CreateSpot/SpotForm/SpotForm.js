@@ -139,8 +139,6 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
     // reset ref value
     ref.current.value = "";
 
-    history.push('/')
-
     // dispatch create spot
     return dispatch(
       spotActivity === "create"
@@ -152,7 +150,9 @@ const SpotForm = ({ spotActivity = "create", currentSpot }) => {
         spotActions.thunkEditSpot(spot, Number(spotId))
     )
       .then(_ => {
-        return dispatch(spotActions.thunkGetSpots())
+
+        dispatch(spotActions.thunkGetSpots());
+        return history.push('/');
       })
       .catch(
         async res => {
