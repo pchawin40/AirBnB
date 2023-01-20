@@ -44,7 +44,16 @@ const CreateSpot = () => {
         {/* //? Left aside */}
         <aside id="create-left-aside">
           <figure id="create-logo-container">
-            <i style={{ zIndex: 1 }} onClick={handleExitButton} className="fa-brands fa-airbnb fa-2xl create-logo-icon"></i>
+            <figure
+              className="experstays-logo"
+              style={{ zIndex: 1 }}
+              onClick={handleExitButton}
+            >
+              <img
+                src="https://res.cloudinary.com/dfz7bzhoi/image/upload/v1674187623/ExperStays/ExperStays_white_vjcxwq.png"
+                alt="experstays-logo"
+              />
+            </figure>
           </figure>
           {/* experstays logo */}
           <h1>Describe your spot to host ☺</h1>

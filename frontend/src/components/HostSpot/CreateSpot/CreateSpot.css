@@ -94,6 +94,6 @@
   color: white;
 }
 
-#right-section-exit-button:hover, #right-section-enter-button:hover{
+.experstays-logo, #right-section-exit-button:hover, #right-section-enter-button:hover{
   cursor: pointer;
 }

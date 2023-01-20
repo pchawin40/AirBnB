@@ -10,7 +10,14 @@ const LogoContainer = () => {
     <div className="logo-container" style={{ zIndex: 100 }}>
       <NavLink exact to="/">
         {/* //? Logo */}
-        <i className="fa-brands fa-airbnb fa-2xl"></i>
+        <figure
+          className="experstays-logo"
+        >
+          <img
+            src="https://res.cloudinary.com/dfz7bzhoi/image/upload/v1674187163/ExperStays/ExperStays_i0stos.png"
+            alt="experstays-logo"
+          />
+        </figure>
 
         {/* //? ExperStays */}
         <span className="experstays-text">ExperStays</span>

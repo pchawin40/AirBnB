@@ -137,7 +137,14 @@ const SignupFormPage = () => {
         <aside className="header-left-aside-container">
           {/* logo */}
           <figure className="sign-up-logo-container" onClick={_ => history.push('/')}>
-            <i className="fa-brands fa-airbnb fa-3x sign-up-fa-experstays"></i>
+            <figure
+              className="experstays-logo"
+            >
+              <img
+                src="https://res.cloudinary.com/dfz7bzhoi/image/upload/v1674187951/ExperStays/ExperStays_white_thin_qbo5yh.png"
+                alt="experstays-logo"
+              />
+            </figure>
           </figure>
 
           {/* Text */}

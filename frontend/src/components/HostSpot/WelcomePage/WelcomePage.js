@@ -27,7 +27,16 @@ const WelcomePage = () => {
       <aside id="welcome-left-aside">
         {/* ExperStays logo */}
         <figure id="welcome-logo-container">
-          <i style={{ zIndex: 1 }} className="fa-brands fa-airbnb" id="welcome-logo-icon"></i>
+          <figure
+            className="experstays-logo"
+            style={{ zIndex: 1 }}
+            onClick={handleExitButton}
+          >
+            <img
+              src="https://res.cloudinary.com/dfz7bzhoi/image/upload/v1674187623/ExperStays/ExperStays_white_vjcxwq.png"
+              alt="experstays-logo"
+            />
+          </figure>
         </figure>
 
         {/* welcome video */}
