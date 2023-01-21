@@ -421,3 +421,37 @@ section.reserve li {
 	text-align: center;
 	font-size: smaller;
 }
+
+/***
+Media Queries
+***/
+@media only screen and (max-width: 1600px){
+	.home-content-outer-container{
+		/* background-color: pink;	 */
+
+		grid-template-columns: 75% auto;
+		width: 80%;		
+	}
+
+	.home-content-inner-right *{
+		white-space: nowrap;
+	}
+}
+
+@media only screen and (max-width: 1500px){
+	.home-content-outer-container{
+		background-color: pink;	
+
+		grid-template-columns: 80% auto;
+		width: 90%;		
+	}
+
+	.home-content-inner-right{
+		overflow: visible;
+	}
+
+	.home-content-inner-right *{
+		white-space: nowrap;
+		overflow: visible;
+	}
+}

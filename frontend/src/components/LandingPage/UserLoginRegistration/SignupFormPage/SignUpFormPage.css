@@ -285,3 +285,17 @@
   /* margin-top: 5rem; */
   /* margin-bottom: 5rem; */
 }
+
+/***
+Media Queries
+***/
+@media only screen and (max-width: 1600px){
+  .sign-up-form-page-container{
+    grid-template-rows: 100vh 105vh auto;
+  }
+
+  .sign-up-form > h2{
+    padding-top: 5vh;
+    margin-bottom: 0;
+  }
+}
