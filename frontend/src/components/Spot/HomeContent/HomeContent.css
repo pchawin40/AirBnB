@@ -457,7 +457,7 @@ Media Queries
 
 @media only screen and (max-width: 1500px){
 	.home-content-outer-container{
-		background-color: pink;	
+		/* background-color: pink;	 */
 
 		grid-template-columns: 80% auto;
 		width: 90%;		
