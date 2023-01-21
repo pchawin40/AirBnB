@@ -77,7 +77,7 @@ const spots = [
     name: 'MK Restaurant',
     description: "Deliciously good food with suki, noodles, roasted ducks, dim sum, single dishes and many more.",
     price: 20,
-    locationType: 'Experience',
+    locationType: 'Experiences',
     previewImage: 'https://insideretail.asia/wp-content/uploads/2020/09/MK-restaurant.jpg'
   }
 ];
