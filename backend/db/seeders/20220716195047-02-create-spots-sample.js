@@ -50,6 +50,36 @@ const spots = [
     locationType: 'Experiences',
     previewImage: "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg"
   },
+  {
+    id: 4,
+    ownerId: 3,
+    address: '3799 S Las Vegas Blvd',
+    city: 'Las Vegas',
+    state: 'Nevada',
+    country: 'United States of America',
+    lat: 36.102251,
+    lng: -115.169968,
+    name: 'MGM Grand',
+    description: "Hotel and casino located on the Las Vegas Strip in Paradise",
+    price: 40,
+    locationType: 'Stays',
+    previewImage: "https://media.istockphoto.com/id/458997485/photo/mgm-grand-las-vegas.jpg?s=612x612&w=0&k=20&c=uAbuwnbVti7S6XBCE6XX0Yg6vhz5rVIxW9e98u9L1Hk="
+  },
+  {
+    id: 5,
+    ownerId: 4,
+    address: "Terminal 21 Shopping Mall Sukhumvit and Soi 21, 4th storey",
+    city: "Bangkok",
+    state: "Sukhumvit",
+    country: "Thailand",
+    lat: 13.7563,
+    lng: 100.5018,
+    name: 'MK Restaurant',
+    description: "Deliciously good food with suki, noodles, roasted ducks, dim sum, single dishes and many more.",
+    price: 20,
+    locationType: 'Experience',
+    previewImage: 'https://insideretail.asia/wp-content/uploads/2020/09/MK-restaurant.jpg'
+  }
 ];
 
 module.exports = {

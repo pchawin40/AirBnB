@@ -38,6 +38,18 @@ const reviews = [
     stars: 5,
     userId: 2,
     spotId: 3
+  },
+  {
+    review: "Won big here",
+    stars: 5,
+    userId: 4,
+    spotId: 4
+  },
+  {
+    review: "This is my favorite restaurants. It have many in Thailand or every country. Mk restaurants is a suki restaurants. It have many people. The food is very delicious. At 6:00pm it have a the music and have personnel come to dance.The people that wait for the sit can order the food first. The Mk restaurant it have a delivery.",
+    stars: 4,
+    userId: 5,
+    spotId: 5
   }
 ];
 

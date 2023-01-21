@@ -29,11 +29,14 @@ const SpotCard = () => {
   const { spots, setSpots } = useSpot();
   const { avgReview, setAvgReview } = useReview();
   const { currentPage, setCurrentPage } = useLandingPage();
+  const { spotQuery, setSpotQuery } = useSpot();
 
   /**
    * Selector functions
    */
   const allReviews = useSelector(reviewActions.getAllReviews);
+  // get spot
+  const spotState = useSelector(spotActions.getAllSpots);
 
   // invoke dispatch
   const dispatch = useDispatch();
@@ -67,87 +70,104 @@ const SpotCard = () => {
     <>
       {/* //? Show all spots */}
       {
-        spots && spots.map((spot, index) => {
+        spots &&
+          spots.length > 0
+          ?
+          spots.map((spot, index) => {
 
-          // if review is ready to be check...
-          const currentSpotReviews =
-            // filter out all reviews by current spot id
-            allReviews
-              .filter(review => review.spotId === spot.id)
-              .map(review => review.stars)
-              .reduce((prevSum, currSum) => prevSum += currSum, 0);
+            // if review is ready to be check...
+            const currentSpotReviews =
+              // filter out all reviews by current spot id
+              allReviews
+                .filter(review => review.spotId === spot.id)
+                .map(review => review.stars)
+                .reduce((prevSum, currSum) => prevSum += currSum, 0);
 
-          // divide by length of all reviews by current spot
-          // save variable to be pass in as average spot reviews
-          const currentAvgSpotReviews = (
-            currentSpotReviews
-            /
-            allReviews
-              .filter(review => review.spotId === spot.id).length
-          );
+            // divide by length of all reviews by current spot
+            // save variable to be pass in as average spot reviews
+            const currentAvgSpotReviews = (
+              currentSpotReviews
+              /
+              allReviews
+                .filter(review => review.spotId === spot.id).length
+            );
 
-          return (
-            <div className="spot-card-content" key={spot.id} onClick={e => handleCardClick(spot.id)}>
-              {/* img: image preview url */}
-              <div className="spot-image-container">
-                {/* // TODO: Spot favorite toggle */}
-                <img className="spot-image card-info" onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} src={spot.previewImage ? spot.previewImage : "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} alt={spot.name} />
-                {/* <span><i className="fa-solid fa-heart fa-lg spot-card-heart" style={{ zIndex: 2 }}></i></span> */}
-                {/* // TODO: get average review */}
-              </div>
-
-              <div className="spot-header card-info">
-                <div className="card-info-container-1">
-                  {/* City, Country */}
-                  <span>{spot.city}</span>
-                  <span>, &nbsp;</span>
-                  <span>{spot.country.toUpperCase().includes("america".toUpperCase()) ? spot.state : spot.country}&nbsp;</span>
+            return (
+              <div className="spot-card-content" key={spot.id} onClick={e => handleCardClick(spot.id)}>
+                {/* img: image preview url */}
+                <div className="spot-image-container">
+                  {/* // TODO: Spot favorite toggle */}
+                  <img className="spot-image card-info" onError={e => e.target.src = "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} src={spot.previewImage ? spot.previewImage : "https://s1.r29static.com/bin/entry/fa2/0,0,460,552/960xbm,70/1255000/image.jpg"} alt={spot.name} />
+                  {/* <span><i className="fa-solid fa-heart fa-lg spot-card-heart" style={{ zIndex: 2 }}></i></span> */}
+                  {/* // TODO: get average review */}
                 </div>
 
-                <div className="card-info-container-2">
-                  {/* // //? Spot Review */}
-                  <span>{isNaN(currentAvgSpotReviews) ? 0 : currentAvgSpotReviews}</span>
-                  <i className="fa-solid fa-star"></i>
+                <div className="spot-header card-info">
+                  <div className="card-info-container-1">
+                    {/* City, Country */}
+                    <span>{spot.city}</span>
+                    <span>, &nbsp;</span>
+                    <span>{spot.country.toUpperCase().includes("america".toUpperCase()) ? spot.state : spot.country}&nbsp;</span>
+                  </div>
+
+                  <div className="card-info-container-2">
+                    {/* // //? Spot Review */}
+                    <span>{isNaN(currentAvgSpotReviews) ? 0 : currentAvgSpotReviews}</span>
+                    <i className="fa-solid fa-star"></i>
+                  </div>
+                </div>
+
+                <div className="spot-location card-info">
+                  {/* name */}
+                  {spot.name}
+                </div>
+
+                <div className="spot-price card-info">
+                  {
+                    spot.locationType === 'Stays'
+                      ?
+                      <>
+                        Stay
+                      </>
+                      :
+                      <>
+                        Experience
+                      </>
+                  }
+                  &nbsp;
+                  |
+                  &nbsp;
+                  <span>${spot.price}</span>&nbsp;
+                  {
+                    spot.locationType === 'Stays'
+                      ?
+                      <>
+                        night
+                      </>
+                      :
+                      <>
+                        experience
+                      </>
+                  }
                 </div>
               </div>
-
-              <div className="spot-location card-info">
-                {/* name */}
-                {spot.name}
-              </div>
-
-              <div className="spot-price card-info">
-                {
-                  spot.locationType === 'Stays'
-                    ?
-                    <>
-                      Stay
-                    </>
-                    :
-                    <>
-                      Experience
-                    </>
-                }
-                &nbsp;
-                |
-                &nbsp;
-                <span>${spot.price}</span>&nbsp;
-                {
-                  spot.locationType === 'Stays'
-                    ?
-                    <>
-                      night
-                    </>
-                    :
-                    <>
-                      experience
-                    </>
-                }
-              </div>
-            </div>
+            )
+          }
           )
-        }
-        )}
+          :
+          <p
+            className="spot-not-found"
+          >
+            Your search parameter was not found.
+            Please try searching again. Or &nbsp;
+            <span
+              onClick={_ => setSpots(spotState)}
+            >
+              Click here
+            </span>
+            &nbsp; to reset spots search.
+          </p>
+      }
     </>
   );
 };

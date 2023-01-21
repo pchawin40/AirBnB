@@ -33,6 +33,8 @@ const LowerActiveSearchBar = () => {
    * UseEffect
    */
   useEffect(() => {
+    // if spot query is empty, show text that display search not found
+
   }, [spotQuery, spots]);
 
   /**

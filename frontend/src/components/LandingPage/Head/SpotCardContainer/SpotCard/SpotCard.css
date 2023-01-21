@@ -90,3 +90,16 @@
   margin-top: .2rem;
   font-size: smaller;
 }
+
+/* Spot Not Found */
+p.spot-not-found{
+  font-size: large;
+}
+
+p.spot-not-found > span{
+  text-decoration: underline;
+}
+
+p.spot-not-found > span:hover{
+  cursor: pointer;
+}
