@@ -265,7 +265,9 @@
 /** Appointment Maker */
 .home-content-section-right {
 	overflow: auto;
+	overflow-x: hidden;
 	padding: 0;
+	min-width: 20vw;
 
 	display: flex;
 	justify-content: center;
@@ -433,8 +435,23 @@ Media Queries
 		width: 80%;		
 	}
 
+	.home-content-section-left{
+		margin-left: 1vw;
+	}
+
 	.home-content-inner-right *{
 		white-space: nowrap;
+	}
+
+	
+	.home-content-section-right{
+		margin-left: 7.5vw;
+	}
+
+	.home-content-about-info{
+		padding-bottom: 5vh;
+		padding: none;
+		margin: none;
 	}
 }
 

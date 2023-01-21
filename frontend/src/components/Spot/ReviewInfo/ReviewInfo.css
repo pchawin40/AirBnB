@@ -187,3 +187,13 @@
 .empty-div{
   margin-bottom: 5rem;
 }
+
+/***
+Media Queries
+***/
+@media only screen and (max-width: 1600px){
+  .review-caption-container{
+    width: 50%;
+    white-space: pre-wrap; 
+  }
+}
