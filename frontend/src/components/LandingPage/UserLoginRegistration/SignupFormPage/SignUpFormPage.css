@@ -1,22 +1,22 @@
 /****************************************
 *           Sign Up Header
 ****************************************/
-.sign-up-form-page-container{
+.sign-up-form-page-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100vh 105vh 100vh;
   grid-auto-rows: max-content;
 
-  grid-template-areas: 
-  "header"
-  "main"  
-  "form";
+  grid-template-areas:
+    "header"
+    "main"
+    "form";
 }
 
 /****************************************
 *           Sign Up Header
 ****************************************/
-.sign-up-header{
+.sign-up-header {
   position: absolute;
   top: 0;
   left: 0;
@@ -27,14 +27,14 @@
   grid-area: header;
 }
 
-.sign-up-logo-container{
+.sign-up-logo-container {
   position: absolute;
 
   top: 25px;
   left: 25px;
 }
 
-.sign-up-logo-container:hover{
+.sign-up-logo-container:hover {
   cursor: pointer;
 }
 
@@ -42,15 +42,15 @@
   color: white !important;
 }
 
-.sign-up-header{
+.sign-up-header {
   display: grid;
 
   grid-template-columns: repeat(2, 50%);
 }
 
-.header-left-aside-container{
+.header-left-aside-container {
   display: flex;
-  
+
   justify-content: center;
   align-items: center;
 
@@ -62,13 +62,13 @@
 }
 
 
-.header-text-section{
+.header-text-section {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.header-container > h1{
+.header-container>h1 {
   font-size: 3.5rem;
   width: 30rem;
   text-align: center;
@@ -76,13 +76,13 @@
 }
 
 
-.header-right-aside-container{
+.header-right-aside-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
 
-.sign-up-host-button{
+.sign-up-host-button {
   border-radius: 1rem;
   width: 8rem;
   height: 3rem;
@@ -91,21 +91,22 @@
   font-weight: bold;
 }
 
-.sign-up-host-button:hover, .sign-up-angle-down:hover{
+.sign-up-host-button:hover,
+.sign-up-angle-down:hover {
   cursor: pointer;
 }
 
-.sign-up-angle-down{
+.sign-up-angle-down {
   position: absolute;
   bottom: 25px;
   color: white;
 }
 
-.sign-up-welcome-video{
+.sign-up-welcome-video {
   position: absolute;
 
   width: 50%;
-  height: 100%; 
+  height: 100%;
   overflow: hidden;
 
   object-fit: fill;
@@ -114,7 +115,7 @@
 /****************************************
 *             Sign Up Main
 ****************************************/
-.sign-up-main{
+.sign-up-main {
   background-color: white;
   /* height: 100vh; */
 
@@ -128,7 +129,7 @@
   /* margin-bottom: 5rem; */
 }
 
-.main-section-header{
+.main-section-header {
   background-color: white;
   position: absolute;
   width: 40rem;
@@ -140,12 +141,12 @@
   align-items: center;
 }
 
-.main-section-header > h1 {
+.main-section-header>h1 {
   text-align: center;
   margin: 0 auto;
 }
 
-.main-pic-carousel{
+.main-pic-carousel {
   width: 100%;
   height: 40rem;
   margin-top: 10rem;
@@ -154,22 +155,22 @@
   justify-content: center;
 }
 
-.inner-main-pic-carousel{
+.inner-main-pic-carousel {
   height: 90%;
   width: 95%;
   display: flex;
   justify-content: space-between;
 }
 
-.inner-main-pic-carousel > img {
+.inner-main-pic-carousel>img {
   width: 30%;
-  height: 100%; 
+  height: 100%;
   object-fit: fill;
   border-radius: 1rem;
   transition: all .2s ease-in-out;
 }
 
-.inner-main-pic-carousel > img:hover{
+.inner-main-pic-carousel>img:hover {
   transform: scale(1.02);
   /* cursor: pointer; */
 }
@@ -177,20 +178,20 @@
 /****************************************
 *           Sign Up Form 
 ****************************************/
-.sign-up-form-container{
+.sign-up-form-container {
   background-color: #EBEBEB;
   grid-area: form;
 
   display: grid;
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: 1fr;
-  grid-template-areas: 
-  "left right";
+  grid-template-areas:
+    "left right";
 
   height: 100%;
 }
 
-.sign-up-form-left{
+.sign-up-form-left {
   grid-area: left;
   display: flex;
   justify-content: center;
@@ -198,11 +199,11 @@
 }
 
 
-.sign-up-form{
+.sign-up-form {
   padding-bottom: 5rem;
 }
 
-.sign-up-form > h2{
+.sign-up-form>h2 {
   font-size: 64px;
   display: flex;
   align-items: center;
@@ -224,10 +225,10 @@
   height: 3rem;
   padding: 1rem;
   border-radius: 1rem;
-  font-size: 24px;  
+  font-size: 24px;
 }
 
-.form-image-upload-container{
+.form-image-upload-container {
   display: flex;
   width: 100%;
   margin: 1rem;
@@ -238,16 +239,16 @@
   align-items: flex-start;
 }
 
-.form-image-upload-container > span{
+.form-image-upload-container>span {
   font-size: 24px;
   margin-bottom: 1rem;
 }
 
-#form-image-upload{
+#form-image-upload {
   font-size: 1.5rem;
 }
 
-.sign-up-form > button{
+.sign-up-form>button {
   padding: 2rem;
   width: 85%;
   font-size: 24px;
@@ -260,26 +261,26 @@
   transition: font-weight .2s;
 }
 
-.sign-up-form > button:hover{
+.sign-up-form>button:hover {
   cursor: pointer;
   font-weight: bold;
   transform: scale(1.02);
 }
 
-.sign-up-submit-button{
+.sign-up-submit-button {
   margin-top: 3vh;
 }
 
 
-.sign-up-form-right{
+.sign-up-form-right {
   grid-area: right;
-  
+
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
 
-.sign-up-form-right > img {
+.sign-up-form-right>img {
   width: 50rem;
   object-fit: fill;
   /* margin-top: 5rem; */
@@ -289,12 +290,12 @@
 /***
 Media Queries
 ***/
-@media only screen and (max-width: 1600px){
-  .sign-up-form-page-container{
+@media only screen and (max-width: 1600px) {
+  .sign-up-form-page-container {
     grid-template-rows: 100vh 105vh auto;
   }
 
-  .sign-up-form > h2{
+  .sign-up-form>h2 {
     padding-top: 5vh;
     margin-bottom: 0;
   }

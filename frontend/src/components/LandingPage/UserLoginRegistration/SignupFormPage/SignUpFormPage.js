@@ -196,13 +196,13 @@ const SignupFormPage = () => {
           <section className="inner-main-pic-carousel">
 
             {/* image 1 */}
-            <img src='https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg' alt="img 1" />
+            <img src='https://res.cloudinary.com/dfz7bzhoi/image/upload/v1680633471/ExperStays/sea_qi24ao.webp' alt="sea" />
 
             {/* image 2 */}
-            <img src='https://i.picsum.photos/id/101/2621/1747.jpg?hmac=cu15YGotS0gIYdBbR1he5NtBLZAAY6aIY5AbORRAngs' alt="img 2" />
+            <img src='https://res.cloudinary.com/dfz7bzhoi/image/upload/v1680633665/ExperStays/mountain_wsk04e.webp' alt="mountain" />
 
             {/* image 3 */}
-            <img src={`https://i.picsum.photos/id/1041/5184/2916.jpg?hmac=TW_9o6HeD7H7I7NVo-S1Fa1iAvzQ10uvmJqsXvNoi0M`} alt="img 3" />
+            <img src={`https://res.cloudinary.com/dfz7bzhoi/image/upload/v1680633558/ExperStays/castle_vkgpec.webp`} alt="castle" />
 
           </section>
         </section>
